@@ -1,0 +1,10 @@
+.report {
+  width: 945px;
+  margin: 0 auto;
+  > div > div svg {
+    height: 150px;
+  }
+  .col-span-1 svg {
+    height: 70px;
+  }
+}

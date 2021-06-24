@@ -1,0 +1,53 @@
+/* css for HorizontalList */
+.gallery {
+	display: flex;
+	margin-left: 12vw;
+	padding-right: 12vw;
+  color: white;
+}
+
+.list-item {
+  color: #7B5995;
+	margin: 3vw;
+	display: grid;
+	grid-template-areas: '... ...'
+						 '... gallery-image'
+						 '... ...' ;
+	grid-template-columns: 1rem 480px;
+	grid-template-rows: 8rem 28vmax 3rem;
+  font-size: 1rem;
+  background: transparent;
+  border-radius: 20px;
+  position: relative;
+}
+
+.gallery__item:nth-child(even) {
+	padding-top: 10vh;
+}
+.gallery__item-number {
+	grid-area: gallery-number;
+	font-size: 6rem;
+	font-size: clamp(2.5rem,9vw,6.5rem);
+	justify-self: end;
+	padding-right: 2rem;
+	color: var(--color-gallery-number);
+}
+
+.gallery__item-title {
+	grid-area: gallery-title;
+	margin: 0;
+	font-size: 4rem;
+	font-size: clamp(2rem,5vw,4rem);
+	color: var(--color-gallery-title);
+}
+
+.gallery__item-number,
+.gallery__item-title,
+.gallery__text {
+	align-self: center;
+}
+/* grid background */
+.grid-test {
+  background-image: repeating-linear-gradient(0deg,transparent,transparent 34px,#eee 34px,#eee 35px),repeating-linear-gradient(-90deg,transparent,transparent 34px,#eee 34px,#eee 35px);
+  background-size: 35px 35px;
+}

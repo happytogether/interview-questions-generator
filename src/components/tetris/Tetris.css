@@ -1,0 +1,9 @@
+.tetris-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.tetris-container > div {
+  aspect-ratio: 1;
+  border-width: 1px;
+}
