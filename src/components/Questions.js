@@ -3,10 +3,10 @@ import { useSprings, animated, to as interpolate } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
 import Arrow from './shapes/Arrow';
 import FlickHand from './shapes/FlickHand';
+import Footer from "./Footer";
 import { MouseContext } from "../context/mouse-context";
 import useMousePosition from "../hooks/useMousePosition";
-import useCookie from "../ultil/UseCookie";
-
+import useCookie from "../hooks/useCookie";
 
 export default function Questions(value) {
   let questions = value.questions;
@@ -108,7 +108,6 @@ export default function Questions(value) {
               </animated.div>
             ))}
             <div className="text-sm absolute z-0" onClick={() => redo()}>Redo Questions</div>
-
           </div>
         </div>
         <div onClick={() => {updateCookie("hidden")}} className={`${cookie} onboarding absolute w-full h-full z-10 bg-white flex flex-cols items-center justify-center`}>

@@ -1,15 +1,12 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import { LocomotiveScrollProvider } from 'react-locomotive-scroll'
 import { useSpring, animated, config } from 'react-spring';
-import Grid from './Grid';
 import Tetris from './tetris/Tetris';
 import Shapes from './shapes/Shapes';
-import Window from './Window';
 import Questions from './Questions';
 import Moon from './shapes/Moon';
 import StraightWave from './shapes/StraightWave';
 import Triangle from './shapes/Triangle';
-import './HorizontalList.css';
 
 export default function HorizontalList(props) {
   let questions;

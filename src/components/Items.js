@@ -6,7 +6,7 @@ import Square from './shapes/Square';
 import StraightWave from './shapes/StraightWave';
 import Rect from './shapes/Rect';
 import Circle from './shapes/Circle';
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import DotRing from "./DotRing/DotRing";
 import { MouseContext } from "../context/mouse-context";
 import HoverIntent from 'react-hoverintent';
@@ -27,7 +27,6 @@ export default function Items(props) {
   function handleMouseoverChange(newValue) {
       setMouseover(newValue);
   }
-
 
   return (
     <ul>

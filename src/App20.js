@@ -289,6 +289,7 @@ function App() {
             </svg>
           </div>
         <DraggableSVG />
+        <DynamicGrid />
       </div>
     </div>
   );
