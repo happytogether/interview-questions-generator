@@ -1,4 +1,3 @@
-import Starfish from './beach/Starfish';
 import Moon from './shapes/Moon';
 import Sun from './shapes/Sun';
 import Wave from './shapes/Wave';
@@ -17,7 +16,7 @@ export default function Items(props) {
   // purple with blue rect by using index number
   const rectPalette = ["bg-blue", "bg-orange", "bg-yellow", "bg-purple"];
   const randomBg = RandomBg();
-  const randomBgArr = ["dot-bg", "wave-bg", "line-bg", "box-bg", "skew-dot-bg", "cross-bg", "line-h-bg","paper-bg", "diagonal-bg", "radial-bg2","rainbow-bg"]; // do not include radial-bg in not square shape
+  const randomBgArr = ["triangle-bg", "dot-bg", "wave-bg", "line-bg", "box-bg", "skew-dot-bg", "cross-bg", "line-h-bg","paper-bg", "diagonal-bg", "radial-bg2"]; // do not include radial-bg in not square shape
   const { cursorType, cursorChangeHandler } = useContext(MouseContext);
   const categoryMainShape = ["large-rect", "large-wide-rect", "square", "hexagon"];
   const flexDirection = ["", "flex-row-reverse"];
@@ -36,7 +35,7 @@ export default function Items(props) {
             <span className={randomBgArr[Math.floor(Math.random()*11)]}></span>
           </div>
           <Square size="150" color={colorPalette[index%4]} index={index} />
-          <Moon />
+          <Moon background="transparent" />
           <Sun />
           <Wave />
           <Rect color={rectPalette[index%4]} index={index}/>
@@ -50,9 +49,9 @@ export default function Items(props) {
           >
             <figcaption className={`mx-28 ${textAlign[index%2]}`} style={{maxWidth: "250px"}}>
               <h3 className="text-5xl">{item.cat}</h3>
-              <span>Use Tinder Way to interview me and see if you like my answers.</span>
+              <div className="my-3">{item.catFigcaption}</div>
               <button onMouseEnter={() => cursorChangeHandler("hovered")}
-            onMouseLeave={() => cursorChangeHandler("")} className="text-left border rounded-sm py-3 px-6" onClick={() => { props.handleCategoryChange(item.cat); props.openHorizontalList(); props.lockBodyScrolling();props.handleRandomBg(randomBg);}}>View Questions</button>
+            onMouseLeave={() => cursorChangeHandler("")} className="text-left border rounded-sm py-3 px-6" onClick={() => { props.handleCategoryChange(item.cat); props.getCategoryIndex(item.index);props.openQuestions(); props.lockBodyScrolling();props.handleRandomBg(randomBg);}}>View Questions</button>
             </figcaption>
           </HoverIntent>
 

@@ -1,7 +1,14 @@
 export default function Smile(props) {
   const color = props.color;
+  const size = props.size;
+  const opacity = props.opacity == 1 ? "opacity-100": "opacity-50";
+
+  const styles = {
+    "width": size,
+    "opacity": opacity
+  }
   return (
-    <div>
+    <div className={`m-2 ${opacity} hover:opacity-100`} style={styles}>
       <svg viewBox="0 0 400 400" fill={color}>
         <g>
           <g>

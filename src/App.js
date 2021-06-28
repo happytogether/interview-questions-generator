@@ -2,12 +2,13 @@ import './App.scss';
 import {useRoutes} from 'hookrouter';
 import Home from './Home';
 import Report from './Report';
-
+import Credit from './Credit';
 
 function App() {
   const routes = {
     '/' :()=><Home/>,
-    '/report' :()=> <Report />
+    '/report' :()=> <Report />,
+    '/credit' :()=> <Credit />
    };
   const routeResults = useRoutes(routes);
   return (

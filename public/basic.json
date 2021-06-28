@@ -1,6 +1,9 @@
 [
   {
     "cat": "Technical Questions",
+    "index": "0",
+    "file": "tech.json",
+    "catFigcaption": "HTML, CSS, Javascript, Framework Questions and other Front End Questions are included.",
     "questions": [
       {
         "title": "Part 01. Explain Closure in Javascript.",
@@ -38,6 +41,9 @@
   },
   {
     "cat": "UX Questions",
+    "index": "1",
+    "file": "ux.json",
+    "catFigcaption": "User Experience Questions are included",
     "questions": [
       {
         "title": "Part 02. Explain Closure in Javascript.",
@@ -75,6 +81,9 @@
   },
   {
     "cat": "Experience Questions",
+    "index": "2",
+    "file": "experience.json",
+    "catFigcaption": "Team Culture, 10 year development questions are included ",
     "questions": [
       {
         "title": "Part 03. Explain Closure in Javascript.",
@@ -112,6 +121,9 @@
   },
   {
     "cat": "Personal ",
+    "index": "3",
+    "file": "personal.json",
+    "catFigcaption": "Questions to know more about Anni are included.",
     "questions": [
       {
         "title": "Part 04. Explain Closure in Javascript. ",
@@ -123,26 +135,6 @@
       },
       {
         "title": "question03",
-        "answer": "answer"
-      },
-      {
-        "title": "question04",
-        "answer": "answer"
-      },
-      {
-        "title": "question05",
-        "answer": "answer"
-      },
-      {
-        "title": "question06",
-        "answer": "answer"
-      },
-      {
-        "title": "question07",
-        "answer": "answer"
-      },
-      {
-        "title": "title",
         "answer": "answer"
       }
     ]

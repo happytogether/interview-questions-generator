@@ -4,8 +4,8 @@ import DotRing from "./DotRing/DotRing";
 import GridSvg from './shapes/GridSvg';
 import Sun from './shapes/Sun';
 import Wave from './shapes/Wave';
-import Starfish from './beach/Starfish';
-
+import Triangle from './shapes/Triangle';
+import Slash from './shapes/memphis/Slash';
 export default function HomeHead(props) {
   const { cursorType, cursorChangeHandler } = useContext(MouseContext);
   const styles = {
@@ -37,12 +37,13 @@ export default function HomeHead(props) {
         </div>
         <Wave />
         <Sun />
-        <Starfish />
+        <Triangle />
+        <Slash />
       </div>
       <div className="flex-1 text-2xl" >
         <div className={`text-left ${randomBg[Math.floor(Math.random()*6)]}`} style={styleRight}>
-          <span className="p-3 bg-white">Anni Wang is an UX Engineer, a Design Technologist. </span><br />
-          <span className="p-2 mx-4 bg-white">a designer and coder</span>
+          <span className="p-3 my-3 bg-white leading-normal">Anni Wang is an UX Engineer, a Design Technologist. </span><br />
+          <span className="p-1 mx-4 bg-white">a designer and coder</span>
           <span className="p-2 mx-4 bg-white">,a prototyper.</span><br /><br /><br />
         </div>
       </div>

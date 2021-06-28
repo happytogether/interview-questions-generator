@@ -5,7 +5,7 @@ export default function Footer() {
         <li className="my-2"><a href="#">See Interview Report</a></li>
         <li className="my-2"><a href="#">Github</a></li>
         <li className="my-2"><a href="#">About Me</a></li>
-        <li className="my-2"><a href="#">Credit</a></li>
+        <li className="my-2"><a href="/credit">Credit</a></li>
       </ul>
     </footer>
   )

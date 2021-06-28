@@ -1,6 +1,7 @@
 :root {
   /*--primary: #555BFF;
   --secondary: #22D2A0;  */
+  --main: #444cf7;
   --blue: #1343e6;
   --blue-light: #444cf7;
   --orange: #FFA500;
@@ -15,7 +16,17 @@
   --red-light: #FF5555;
   --gray: #c0ccda;
   --gray-dark: #333;
+  --background-color: #e5e5f7;
 }
+
+body.open-list {
+  --background-color: black;
+}
+
+.red-main-color {
+  --main: #fd2121;
+}
+
 /* static horizontal list open state */
 * {
   transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -32,15 +43,26 @@ svg {
     transform: scale(3);
 }
 
+html, body {
+  position: relative;
+  overflow-x: hidden;
+  width: 100%;
+  --background-color: #eee;
+
+}
+
 body.list-open {
   overflow: hidden;
+  --background-color: black;
 }
 
 .item {
   position: relative;
   padding: 10rem 5rem;
   margin-bottom: 10rem;
-  min-height: calc(100vh - 100px)
+  min-height: calc(100vh - 100px);
+  perspective: 350px;
+  perspective-origin: 50% 50%;
 }
 
 .item h3 {
@@ -80,8 +102,7 @@ div.static {
     z-index: 9;
     width: auto;
     height: 0;
-    overflow-x: scroll;
-    overflow-y: hidden;
+    overflow:hidden;
     font-size: 5em;
     transition: all .01s ease;
     transition-delay: .01s;
@@ -116,14 +137,17 @@ div.static span.close {
   display: inline-block;
   position: fixed;
   right: 10vw;
-  top: 10vh;
+  top: 3vh;
   z-index: 9;
   color: white;
 }
-
+.list-open .static {
+  height: 100vh;
+  overflow: hidden;
+}
 div.static[open] {
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
 }
 
 div.static[open="0"] {
@@ -133,18 +157,24 @@ div.static[open="0"] {
 .item-rect {
   width: 200px;
   height: 30px;
-  position: absolute;
-  transition: all 0.3s ease;
-  z-index: 1;
-  opacity: .9;
+  //transition: all .7s cubic-bezier(0.165, 0.84, 0.44, 1);
+  > div {
+    width: 200px;
+    height: 30px;
+  }
+}
+.test {
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
 }
 
 .list-open .item-rect {
-  transform-origin: center;
+  /*transform-origin: center;
   height: 200px;
   border-radius: 100% 20%;
   transform: scale(15) rotate(360deg);
-  z-index: 1;
+  z-index: 1;*/
 }
 
 .large-rect {
@@ -352,64 +382,97 @@ figcaption.hovered {
   background-size: 100% 100%;
 }
 .wave-bg {
-  background-color: #e5e5f7;
-  background-image:  linear-gradient(135deg, #444cf7 25%, transparent 25%), linear-gradient(225deg, #444cf7 25%, transparent 25%), linear-gradient(45deg, #444cf7 25%, transparent 25%), linear-gradient(315deg, #444cf7 25%, #e5e5f7 25%);
+  background-color: var(--background-color);
+  background-image:  linear-gradient(135deg, var(--main) 25%, transparent 25%), linear-gradient(225deg, var(--main) 25%, transparent 25%), linear-gradient(45deg, var(--main) 25%, transparent 25%), linear-gradient(315deg, var(--main) 25%, var(--background-color) 25%);
   background-position:  10px 0, 10px 0, 0 0, 0 0;
   background-size: 20px 20px;
   background-repeat: repeat;
 }
+.honey-comb-bg {
+  background:
+    radial-gradient(circle farthest-side at 0% 50%,var(--background-color) 23.5%,rgba(240,166,17,0) 0)21px 30px,
+    radial-gradient(circle farthest-side at 0% 50%,var(--main) 24%,rgba(240,166,17,0) 0)19px 30px,
+    linear-gradient(var(--background-color) 14%,rgba(240,166,17,0) 0, rgba(240,166,17,0) 85%,var(--background-color) 0)0 0,
+    linear-gradient(150deg,var(--background-color) 24%,var(--main) 0,var(--main) 26%,rgba(240,166,17,0) 0,rgba(240,166,17,0) 74%,var(--main) 0,var(--main) 76%,var(--background-color) 0)0 0,
+    linear-gradient(30deg,var(--background-color) 24%,var(--main) 0,var(--main) 26%,rgba(240,166,17,0) 0,rgba(240,166,17,0) 74%,var(--main) 0,var(--main) 76%,var(--background-color) 0)0 0,
+    linear-gradient(90deg,var(--main) 2%,var(--background-color) 0,var(--background-color) 98%,var(--main) 0%)0 0 var(--background-color);
+  background-size: 20px 30px;
+}
+.rect-bg {
+  background-color: var(--main);
+  background-image:  repeating-linear-gradient(45deg, var(--background-color) 25%, transparent 25%, transparent 75%, var(--background-color) 75%, var(--background-color)), repeating-linear-gradient(45deg, var(--background-color) 25%, var(--main) 25%, var(--main) 75%, var(--background-color) 75%, var(--background-color));
+  background-position: 0 0, 20px 20px;
+  background-size: 40px 40px;
+}
+.triangle-bg {
+  background-color: var(--background-color);
+  background-image:  linear-gradient(135deg, var(--main) 25%, var(--background-color) 25%), linear-gradient(225deg, var(--main) 25%, var(--background-color) 25%), linear-gradient(45deg, var(--main) 25%, var(--background-color) 25%), linear-gradient(315deg, var(--main) 25%, var(--background-color) 25%);
+  background-position:  10px 0, 10px 0, 0 0, 0 0;
+  background-size: 30px 30px;
+  background-repeat: repeat;
+}
+.equilateral-triangles-bg {
+  background-image: repeating-conic-gradient(from 30deg, var(--main) 0% 60deg, var(--background-color) 0% 120deg);
+  background-size: 37px 64px;
+  background-color: var(--background-color);
+}
+.pie-bg {
+  background-image: radial-gradient(ellipse farthest-corner at 37px 37px , var(--main), var(--main) 50%, var(--background-color) 50%);
+  background-size: 37px 37px;
+  background-color: var(--background-color);
+}
 .line-bg {
-  background-color: #e5e5f7;
-  background: repeating-linear-gradient( 90deg, #444cf7, #444cf7 5px, #e5e5f7 5px, #e5e5f7 25px );
+  background-color: var(--background-color);
+  background: repeating-linear-gradient( 90deg, var(--main), var(--main) 5px, var(--background-color) 5px, var(--background-color) 25px );
 }
 .line-h-bg {
-  background-color: #e5e5f7;
-  background-image: linear-gradient(0deg, #e5e5f7 20px, #444cf7 20px);
+  background-color: var(--background-color);
+  background-image: linear-gradient(0deg, var(--background-color) 20px, var(--main) 20px);
   background-size: 25px 25px;
   }
 .box-bg {
-  background-color: #e5e5f7;
-  background-image:  linear-gradient(#444cf7 1px, transparent 1px), linear-gradient(to right, #444cf7 1px, #e5e5f7 1px);
+  background-color: var(--background-color);
+  background-image:  linear-gradient(var(--main) 1px, transparent 1px), linear-gradient(to right, var(--main) 1px, var(--background-color) 1px);
   background-size: 20px 20px;
 }
 .skew-dot-bg {
-  background-color: #e5e5f7;
-  background-image:  radial-gradient(#444cf7 3px, transparent 3px), radial-gradient(#444cf7 3px, #e5e5f7 3px);
+  background-color: var(--background-color);
+  background-image:  radial-gradient(var(--main) 3px, transparent 3px), radial-gradient(var(--main) 3px, var(--background-color) 3px);
   background-size: 30px 30px;
   background-position: 0 0,15px 15px;
 }
 .skew-dot-transparent-bg {
   background-color: transparent;
-  background-image:  radial-gradient(transparent 3px, transparent 3px), radial-gradient(transparent 3px, #e5e5f7 3px);
+  background-image:  radial-gradient(transparent 3px, transparent 3px), radial-gradient(transparent 3px, var(--background-color) 3px);
   background-size: 30px 30px;
   background-position: 0 0,15px 15px;
 }
 .cross-bg {
-  background-color: #e5e5f7;
-  background: radial-gradient(circle, transparent 20%, #e5e5f7 20%, #e5e5f7 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #e5e5f7 20%, #e5e5f7 80%, transparent 80%, transparent) 25px 25px, linear-gradient(#444cf7 2px, transparent 2px) 0 -1px, linear-gradient(90deg, #444cf7 2px, #e5e5f7 2px) -1px 0;
+  background-color: var(--background-color);
+  background: radial-gradient(circle, transparent 20%, var(--background-color) 20%, var(--background-color) 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, var(--background-color) 20%, var(--background-color) 80%, transparent 80%, transparent) 25px 25px, linear-gradient(var(--main) 2px, transparent 2px) 0 -1px, linear-gradient(90deg, var(--main) 2px, var(--background-color) 2px) -1px 0;
   background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;
 }
 .paper-bg {
-  background-color: #e5e5f7;
-  background-image:  linear-gradient(#444cf7 2px, transparent 2px), linear-gradient(90deg, #444cf7 2px, transparent 2px), linear-gradient(#444cf7 1px, transparent 1px), linear-gradient(90deg, #444cf7 1px, #e5e5f7 1px);
+  background-color: var(--background-color);
+  background-image:  linear-gradient(var(--main) 2px, transparent 2px), linear-gradient(90deg, var(--main) 2px, transparent 2px), linear-gradient(var(--main) 1px, transparent 1px), linear-gradient(90deg, var(--main) 1px, var(--background-color) 1px);
   background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;
   background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
 }
 .diagonal-bg {
-  background-color: #e5e5f7;
+  background-color: var(--background-color);
   background-size: 25px 25px;
-  background-image: repeating-linear-gradient(45deg, #444cf7 0, #444cf7 2px, #e5e5f7 0, #e5e5f7 50%);
+  background-image: repeating-linear-gradient(45deg, var(--main) 0, var(--main) 2px, var(--background-color) 0, var(--background-color) 50%);
 }
 .radial-bg {
-  background: repeating-radial-gradient(var(--blue), var(--blue) 5px, white 5px, white 10px);
+  background: repeating-radial-gradient(var(--main), var(--main) 5px, var(--background-color) 5px, var(--background-color) 10px);
 }
 .radial-bg2 {
   background: repeating-radial-gradient(
   circle,
-  white,
-  white 10px,
-  var(--blue) 10px,
-  var(--blue) 20px)
+  var(--background-color),
+  var(--background-color) 20px,
+  var(--main) 20px,
+  var(--main) 40px)
 }
 
 .half-transparent-bg {
@@ -432,7 +495,7 @@ input:focus::-webkit-input-placeholder {
 
 /* className animation */
 .hover-rotate:hover {
-  transform: rotate(360deg);
+  //transform: rotate(360deg);
 }
 footer ul a {
   display: inline-block;
