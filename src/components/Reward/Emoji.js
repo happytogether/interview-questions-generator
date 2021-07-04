@@ -1,12 +1,7 @@
 const PI = Math.PI
 const defaultEmoji = [
-  '<img src="img/line.png" />',
-  '<img src="img/square.png" />',
-  '<img src="img/circle.png" />',
-  '<img src="img/wave.png" />',
-  '<img src="img/triangle.png" />',
-  '<img src="img/cross.png" />',
-  '<img src="img/half.png" />'
+  '<img src="img/pie.png" />',
+  '<img src="img/pipe.png" />'
 ]
 
 const createElements = (root, elementCount, elementSize, zIndex, emoji) => (
@@ -14,11 +9,12 @@ const createElements = (root, elementCount, elementSize, zIndex, emoji) => (
     .from({ length: elementCount })
     .map((_, index) => {
       const element = document.createElement('span')
-      const emojiIcon = emoji[index % emoji.length]
+      const emojiIcon = emoji[Math.floor(Math.random()*emoji.length)]
       element.innerHTML = emojiIcon
       element.style.fontSize = `${elementSize}px`
       element.style.position = 'absolute'
       element.style.zIndex = zIndex
+      element.style.width = `${elementSize}px`
       root.appendChild(element)
       return element
     })
@@ -51,7 +47,7 @@ const updateMojis = (fetti, progress, decay) => {
   const { x, y, tiltAngle } = fetti.physics
   const wobbleX = x + 0
   const wobbleY = y + 0
-  const transform = `translate3d(${wobbleX}px, ${wobbleY}px, 0) rotate(${tiltAngle/3}rad)`
+  const transform = `translate3d(${wobbleX}px, ${wobbleY}px, 0) rotate(${tiltAngle/30}rad)`
 
   fetti.element.style.transform = transform
   fetti.element.style.opacity = 1

@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useSpring, useSprings, animated, interpolate } from 'react-spring';
 import getRandomFromInterval from "../../getRandomFromInterval";
+import useSound from 'use-sound';
+import springSfx from '../spring.mp3';
 
 export default function Moon(props) {
   const styles = {
@@ -10,7 +12,6 @@ export default function Moon(props) {
     left: "15%",
     zIndex: 9
   }
-  const randomDropShadow = ["drop-shadow-left-bottom", "drop-shadow-left-top",  "drop-shadow-right-top", "drop-shadow-right-bottom"];
   const [open, setOpen] = useState(false)
   const { f, r } = useSpring({ f: open ? 0 : 1, r: open ? -3 : 3 })
   const bg = ["var(--red)", "var(--yellow)", "var(--purple)", "var(--green)", "var(--orange)"];
@@ -19,11 +20,23 @@ export default function Moon(props) {
     5,
     [0, 1, 2, 3, 4].map((i) => ({ opacity: 1, x: open? (i/5) *randomValue: 0, y: open? (i/5) *randomValue: 0, z: open ? (i / 5) * 80 : 0, background: bg[i]}))
   )
+
+  const [playSpring, { stop }] = useSound(springSfx);
+
+  function handleMouseOver() {
+    setOpen(true);
+    playSpring();
+  }
+  function handleMouseLeave() {
+    setOpen(false);
+    stop();
+  }
+
   return (
-    <div className="absolute flex items-center justify-center" style={styles} onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+    <div className="absolute flex items-center justify-center" style={styles} onMouseEnter={() => handleMouseOver()} onMouseLeave={() => handleMouseLeave()}>
       {cards.map(({ x, y, z, opacity, background }, index) => (
         <animated.div
-          style={{
+          key={index} style={{
             opacity,
             background,
             transform: interpolate(
@@ -32,7 +45,7 @@ export default function Moon(props) {
             )
           }}>
           <svg style={{"width": "100px"}} className={`absolute`} viewBox="0 0 42 39">
-            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
               <g transform="translate(-553.000000, -175.000000)" fill={bg[index]}>
                 <path
                   d="M592.066,191.098 C589.641,193.151 586.013,192.849 583.961,190.425 C580.099,185.864 573.247,185.295 568.686,189.157 C564.126,193.018 563.556,199.87 567.419,204.431 C569.47,206.856 569.17,210.484 566.745,212.536 C564.321,214.589 560.693,214.288 558.64,211.863 C550.68,202.462 551.853,188.339 561.254,180.379 C570.655,172.419 584.779,173.592 592.739,182.993 C594.792,185.417 594.49,189.046 592.066,191.098"

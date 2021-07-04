@@ -1,7 +1,7 @@
 export default function Smile(props) {
   const color = props.color;
   const size = props.size;
-  const opacity = props.opacity == 1 ? "opacity-100": "opacity-50";
+  const opacity = props.opacity === "1" ? "opacity-100": "opacity-50";
 
   const styles = {
     "width": size,

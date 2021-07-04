@@ -4,12 +4,15 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import MouseContextProvider from "./context/mouse-context";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-    <MouseContextProvider>
-      <App />
-    </MouseContextProvider>
+    <BrowserRouter>
+      <MouseContextProvider>
+        <App />
+      </MouseContextProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

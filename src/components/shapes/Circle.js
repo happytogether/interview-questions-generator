@@ -1,9 +1,8 @@
-import { useContext, useState } from "react";
-import DotRing from "../DotRing/DotRing";
+import { useContext} from "react";
 import { MouseContext } from "../../context/mouse-context";
 
 export default function Circle(props) {
-  const { cursorType, cursorChangeHandler } = useContext(MouseContext);
+  const { cursorChangeHandler } = useContext(MouseContext);
   const styles = {
     backgroundColor: "transparent",
     border: "3px solid var(--gray-dark)",
@@ -18,7 +17,7 @@ export default function Circle(props) {
   let clicked = false;
 
   return (
-    <div style={styles} onMouseEnter={() => cursorChangeHandler("hovered")}
+    <div style={styles} onMouseEnter={() => cursorChangeHandler("hand")}
   onMouseLeave={() => cursorChangeHandler("")} onClick={() => { clicked = !clicked; cursorChangeHandler( clicked + "-clicked")}}></div>
   )
 }

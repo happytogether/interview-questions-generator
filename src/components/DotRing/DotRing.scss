@@ -1,7 +1,7 @@
 .ring {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: -30px;
+  left: -30px;
   width: 30px;
   height: 30px;
   border: 2px solid blue;
@@ -36,14 +36,6 @@
   border-color: blue;
 }
 
-.ring.left, .ring.right {
-  display: none;
-}
-
-.ring.right {
-  width: 100px;
-  height: 500px;
-}
 .ring.true-clicked {
   width: 500px;
   height: 500px;
@@ -60,8 +52,8 @@
   width: 150px;
   height: 110px;
   position: fixed;
-  left: -75px;
-  top: -55px;
+  left: -150px;
+  top: -110px;
   z-index: 10000000;
   pointer-events: none;
   &__icon {

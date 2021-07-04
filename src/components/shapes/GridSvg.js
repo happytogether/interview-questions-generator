@@ -4,14 +4,12 @@ export default function GridSvg(props) {
     width: "120px",
     height: "120px",
     position: "absolute",
-    bottom: "15%",
-    left: "20%",
     zIndex: 0
   }
   return (
     <div style={styles}>
       <svg viewBox="0 0 106 106">
-        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
             <g transform="translate(-375.000000, -303.000000)" fill="var(--orange)">
                 <g transform="translate(375.383000, 303.234000)">
                     <polygon points="0 88.265 105.319 88.265 105.319 87.265 0 87.265"></polygon>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import posed from 'react-pose'
-import confetti from './Confetti'
 import emoji from './Emoji'
 
 const transition = {
@@ -11,10 +10,6 @@ const transition = {
 }
 
 const SpringAnim = posed.div({
-  confetti: {
-    y: 5,
-    transition
-  },
   emoji: {
     y: 5,
     transition
@@ -40,11 +35,6 @@ export default class Reward extends Component {
     const { type, config } = this.props
     const props = [this.container, config]
     switch (type) {
-      case 'confetti': {
-        this.handleAnimation(type)
-        confetti(...props)
-        break
-      }
       case 'emoji': {
         this.handleAnimation(type)
         emoji(...props)

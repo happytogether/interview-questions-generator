@@ -4,9 +4,7 @@ export default function HollowCircle(props) {
     borderRadius: "50%",
     width: props.size +"px",
     height: props.size + "px",
-    position: "absolute",
-    top: "70%",
-    left: "0"
+    position: "absolute"
   }
   const hollowStyle = {
     width: (props.size/ 2 - 10) + "px",

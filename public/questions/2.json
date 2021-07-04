@@ -1,0 +1,17 @@
+{
+  "title": "UX Questions",
+  "questions": [
+    {
+      "title": "Tell us through your workflow.",
+      "answer": "<h1 class='py-2'>Being as a half designer and half engineer. My workflow is different.<img class='py-10' width='100px' src='/img/gradeA/1.svg' /></h1> <p>I will mainly focus on Users' need but also think about the newly tech and animations. In order to provide users' better feelings, I focus on micro-interactions.</p> I'm a half designer and half engineer. I will mainly focus on Users' need but also think about the newly tech and animations. In order to provide users' better feelings, I focus on micro-interactions."
+    },
+    {
+      "title": "How many object types in Javascript?",
+      "answer": "answer"
+    },
+    {
+      "title": "question03",
+      "answer": "answer"
+    }
+  ]
+}
