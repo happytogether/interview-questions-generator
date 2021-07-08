@@ -12,6 +12,18 @@ export default function Sun(props) {
     top: "15%",
     right: "15%"
   }
+  const styles2 = {
+    width: "70px",
+    height: "70px",
+    position: "absolute",
+    top: "15%",
+    right: "15%",
+    transform: "translate(-500px, 0) rotate(300deg)",
+    transformOrigin: "right top",
+    transition: "all .5s ease"
+  }
+  const clicked = props.clicked;
+
   const canvasInput = useRef(null);
 
   function confetti(){
@@ -31,7 +43,7 @@ export default function Sun(props) {
   }
 
   return (
-    <div onClick={()=>handleClick()} style={styles}>
+    <div onClick={()=>handleClick()} style={clicked ? styles2: styles}>
       <svg>
           <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
               <g transform="translate(-567.000000, -448.000000)">

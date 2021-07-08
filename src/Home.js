@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext } from 'react';
-import { useHistory } from "react-router-dom";
 import { MouseContext } from "./context/mouse-context";
 import HomeHead from './components/HomeHead';
 import Questions from './pages/Questions';
@@ -9,6 +8,8 @@ import DotRing from "./components/DotRing/DotRing";
 import Arrow from "./components/shapes/Arrow";
 import RandomBg from './RandomBg';
 import getRandomDifferent from './getRandomDifferent';
+import { motion } from "framer-motion";
+import { InitialTransition } from './components/InitialTransition';
 
 function Home() {
   const [open, setOpen] = useState(false);
@@ -75,8 +76,6 @@ function Home() {
   const [bg, setBg] = useState("dot-bg");
   const bgArr = ["honey-comb-bg", "pie-bg", "equilateral-triangles-bg","rect-bg", "triangle-bg", "wave-bg", "line-bg", "box-bg", "skew-dot-bg", "cross-bg", "line-h-bg","paper-bg", "diagonal-bg"];
 
-  const history = useHistory();
-
   function handleRandomBg(newBg) {
     setBg(getRandomDifferent(bgArr, bg));
   }
@@ -86,7 +85,8 @@ function Home() {
   }, []);
 
   return (
-    <div>
+
+    <motion.div>
       {
         <DotRing />
       }
@@ -101,7 +101,7 @@ function Home() {
           open && setJsonLoaded && items.length > 0 ? <Questions data={items} questions={categoryQuestions} title={categoryTitle} category={category} categoryIndex={categoryIndex} answers={answers} />: null
         }
       </div>
-    </div>
+    </motion.div>
   );
 }
 

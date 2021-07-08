@@ -1,10 +1,31 @@
 .report {
-  width: 100%;
-  margin: 0 auto;
-  > div > div svg {
-    height: 150px;
-  }
-  .col-span-1 svg {
-    height: 70px;
-  }
+  height: 1400px;
+}
+
+.report.bg-blue {
+  background: linear-gradient(90deg, var(--gray-light) 60%, var(--blue) 40%);
+}
+
+.report.bg-pink {
+  background: linear-gradient(90deg, var(--gray-light) 60%, var(--pink) 40%);
+}
+
+.report.bg-yellow {
+  background: linear-gradient(90deg, var(--gray-light) 60%, var(--yellow) 40%);
+}
+
+.report.bg-orange {
+  background: linear-gradient(90deg, var(--gray-light) 60%, var(--orange) 40%);
+}
+
+.report.bg-green {
+  background: linear-gradient(90deg, var(--gray-light) 60%, var(--green) 40%);
+}
+
+.report.bg-red{
+  background: linear-gradient(90deg, var(--gray-light) 60%, var(--red) 40%);
+}
+
+.report.bg-purple {
+  background: linear-gradient(90deg, var(--gray-light) 60%, var(--purple) 40%);
 }

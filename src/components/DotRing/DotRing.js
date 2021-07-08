@@ -11,11 +11,11 @@ const DotRing = () => {
     <>
       <div
         style={{ left: `${x}px`, top: `${y}px` }}
-        className={"ring lg:hidden" + cursorType}
+        className={"ring-mouse lg:hidden " + cursorType}
       >
       </div>
       <div
-        className={"dot lg:hidden" + cursorType}
+        className={"dot lg:hidden " + cursorType}
         style={{ left: `${x}px`, top: `${y}px` }}
       ></div>
     </>

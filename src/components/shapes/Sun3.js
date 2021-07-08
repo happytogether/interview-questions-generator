@@ -6,6 +6,7 @@ import useSound from 'use-sound';
 import fruitnanjiSfx from '../fruitnanji.mp3';
 
 export default function Sun3(props) {
+  const clicked = props.clicked;
   const styles = {
     width: "100px",
     height: "100px",
@@ -13,7 +14,16 @@ export default function Sun3(props) {
     top: "2%",
     left: "40%"
   }
-
+  const styles2 = {
+    width: "100px",
+    height: "100px",
+    position: "absolute",
+    top: "2%",
+    left: "40%",
+    transform: "translate(500px, 0) rotate(300deg)",
+    transformOrigin: "right top",
+    transition: "all .5s ease"
+  }
   const canvasInput = useRef(null);
   function confetti(){
     canvasInput.current.rewardMe();
@@ -28,7 +38,7 @@ export default function Sun3(props) {
   /*useEffect(() => {
     const interval = setInterval(() => {
       canvasInput.current.rewardMe();
-    }, 2000);
+  }, 2000);
     return () => clearInterval(interval);
   }, []);*/
 
@@ -46,7 +56,7 @@ export default function Sun3(props) {
   const ViewportBlock = handleViewport(Block, /** options: {}, config: {} **/);
 
   return (
-    <div className="hover-rotate" onClick={()=>handleClick()} style={styles}>
+    <div className="hover-rotate" onClick={()=>handleClick()} style={clicked? styles2: styles}>
       <svg viewBox="0 0 88 48">
           <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
               <g transform="translate(-324.000000, -405.000000)">

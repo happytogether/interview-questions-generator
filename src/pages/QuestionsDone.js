@@ -21,15 +21,21 @@ export default function QuestionsDone(props) {
   }, []);
 
   useEffect(() => {
-    setGradePercentage(answers.length!==0 && ((answers.reduce(reducer)/questions.length)*100).toFixed(0)+'%');
-    setGrade(answers.length!==0 && (answers.reduce(reducer)/questions.length) > 0.6 ? "A": "F");
-
+    //console.log('length', answers.length, grade, answers);
+    if (answers.length !== 0) {
+      setGradePercentage(((answers.reduce(reducer)/questions.length)*100).toFixed(0)+'%');
+      setGrade((answers.reduce(reducer)/questions.length) > 0.6 ? "A": "F");
+    }
   }, [answers])
 
   useEffect(() => {
     const rightNum = answers.length!=0 && answers.reduce(reducer);
     props.totalRightWrongNum(rightNum, questions.length - rightNum);
   }, [answers])
+
+  useEffect(() => {
+    //console.log(grade);
+  },[grade])
 
   return (
     <div className="w-full h-full absolute flex flex-col items-center justify-center text-3xl text-white">

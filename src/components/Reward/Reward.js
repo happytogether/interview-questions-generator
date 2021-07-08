@@ -73,13 +73,13 @@ export default class Reward extends Component {
     const { springAnimation = true, containerStyle = {} } = config
     const { state } = this.state
     return (
-      <React.Fragment>
+      <div className="absolute left-0 top-0">
         <div style={containerStyle} ref={(ref) => { this.container = ref }} />
         <div style={{...containerStyle, ...lottieContainerStyles}} ref={(ref) => { this.lottieContainer = ref }} />
         <SpringAnim pose={springAnimation && state}>
           {children}
         </SpringAnim>
-      </React.Fragment>
+      </div>
     )
   }
 }

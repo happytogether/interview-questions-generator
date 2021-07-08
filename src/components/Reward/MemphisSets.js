@@ -95,4 +95,15 @@ const BallonSet = () => {
   ]
 }
 
-export { DefaultSet, MemphisSet1, MemphisSet2, TwitchSet, FruitSet, FruitSet2, IceCreamSet, DonutSet, BallonSet }
+const HeartBrokenSet = () => {
+    return [
+      '<img src="/img/heart-broken.svg" />'
+    ]
+}
+const ThunderSet = () => {
+  return [
+    '<img src="/img/thunder.svg" />'
+  ]
+}
+
+export { DefaultSet, MemphisSet1, MemphisSet2, TwitchSet, FruitSet, FruitSet2, IceCreamSet, DonutSet, BallonSet, HeartBrokenSet, ThunderSet }

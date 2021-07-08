@@ -1,10 +1,10 @@
-.ring {
+.ring-mouse {
   position: fixed;
   top: -30px;
   left: -30px;
   width: 30px;
   height: 30px;
-  border: 2px solid blue;
+  border: 3px solid var(--blue);
   border-radius: 100%;
   transform: translate(-50%, -50%);
   -webkit-transition-duration: 100ms;
@@ -14,6 +14,7 @@
   will-change: width, height, transform, border;
   z-index: 999;
   pointer-events: none;
+  transition: all .2s ease;
 }
 .dot {
   position: fixed;
@@ -26,19 +27,21 @@
   transform: translate(-50%, -50%);
   z-index: 999;
   pointer-events: none;
+  display: none;
 }
-
-
-.ring.hovered {
+.hovered {
+  //transition: all 20s;
+}
+.ring-mouse.hovered {
   width: 500px;
   height: 500px;
   border-width: 3px;
   border-color: blue;
 }
 
-.ring.true-clicked {
-  width: 500px;
-  height: 500px;
+.ring-mouse.true-clicked {
+  width: 300px;
+  height: 300px;
 }
 
 .dot.hovered {

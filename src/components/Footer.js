@@ -3,9 +3,9 @@ import ClickSoundLink from './ClickSoundLink';
 export default function Footer() {
   return (
     <footer>
-      <ul className="relative" style={{"width": "200px", "margin": "0 auto", "top": "-80px"}}>
+      <ul className="relative py-10" style={{"width": "200px", "margin": "0 auto"}}>
         <li className="my-2">
-          <ClickSoundLink text="Quick Video Chat" link="./report" />
+          <ClickSoundLink text="Quick Video Chat" link="./booking" />
         </li>
         <li className="my-2">
           <ClickSoundLink text="Github" link="https://github.com/happytogether" />
@@ -15,6 +15,9 @@ export default function Footer() {
         </li>
         <li className="my-2">
           <ClickSoundLink text="Credit" link="./credit" />
+        </li>
+        <li className="my-2">
+          <ClickSoundLink text="Report" link="./report" />
         </li>
       </ul>
     </footer>

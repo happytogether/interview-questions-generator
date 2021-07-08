@@ -8,8 +8,8 @@ export default function ClickSoundLink(props) {
   function handleRedirect() {
     playClick();
     setTimeout(() => {
-      window.location.href = props.link
-    }, 300)
+      window.location.href = props.link;
+    }, 1000)
   }
 
   return (

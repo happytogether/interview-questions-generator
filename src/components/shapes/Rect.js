@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useSpring, useSprings, animated, interpolate } from 'react-spring';
 import getRandomFromInterval from "../../getRandomFromInterval";
+import useSound from 'use-sound';
+import spring2Sfx from '../spring2.mp3';
 
 export default function Rect(props) {
   // define right left and position here with index
@@ -13,9 +15,20 @@ export default function Rect(props) {
     5,
     [0, 1, 2, 3, 4].map((i) => ({ opacity: 1, x: open? (i/5) *randomValue: 0, y: open? (i/5) *randomValue: 0, z: open ? (i / 5) * 80 : 0, background: bg[i]}))
   )
+  const [playSpring2, { stop }] = useSound(spring2Sfx);
+
+  function handleMouseOver() {
+    setOpen(true);
+    playSpring2();
+  }
+
+  function handleMouseLeave() {
+    setOpen(false);
+    stop();
+  }
 
   return (
-    <div className={`item-rect absolute ${randomPos[props.index%2]} ${props.color}`} onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+    <div className={`item-rect absolute ${randomPos[props.index%2]} ${props.color}`} onMouseEnter={() => handleMouseOver()} onMouseLeave={() => handleMouseLeave()}>
       {cards.map(({ x, y, z, opacity, background }, index) => (
         <animated.div className="absolute"
           style={{

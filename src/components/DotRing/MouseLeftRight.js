@@ -17,10 +17,10 @@ const MouseLeftRight = () => {
 			</div>
       <div className={`text-sm text-white flex items-center flex-col justify-center smile-cursor ${cursorType}`} style={{ left: `${x}px`, top: `${y}px` }}>
         {
-          cursorType == "right" ? <Smile size="100px" color="#fff" opacity="1" />: <Sad size="100px" color="#fff" opacity="1" />
+          cursorType === "right" ? <Smile size="100px" color="#fff" opacity="1" />: <Sad size="100px" color="#fff" opacity="1" />
         }
         {
-          cursorType == "right" ? <div>Not to bad!</div>: <div>Disagree</div>
+          cursorType === "right" ? <div>Not to bad!</div>: <div>Disagree</div>
         }
 
       </div>

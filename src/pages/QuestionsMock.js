@@ -7,6 +7,9 @@ import Arrow from '../components/shapes/Arrow';
 import getRandomDifferent from '../getRandomDifferent';
 import MouseLeftRight from "../components/DotRing/MouseLeftRight";
 import Logo from "../components/Logo";
+import useSound from 'use-sound';
+import clickSfx from '../components/click.mp3';
+import { motion } from "framer-motion"
 
 export default function QuestionsMock() {
   const categoryIndex = useParams().categoryIndex;
@@ -32,7 +35,7 @@ export default function QuestionsMock() {
     if (pathname == 'questions') {
       document.body.classList.add('questions-page');
     }
-  })
+  }, [])
 
   useEffect(() => {
     setBg(getRandomDifferent(bgArr, bg));
@@ -50,17 +53,27 @@ export default function QuestionsMock() {
     setBg(getRandomDifferent(bgArr, bg));
   }
 
+  const [playClick] = useSound(clickSfx);
+  function handleHistoryGoBack() {
+      playClick();
+      setTimeout(()=> {
+        history.goBack();
+      }, 300)
+  }
+
   return (
-    <div onClick={()=>handleRandomBg()} className={`static2 ${cursorType == "left" ? "red-main-color": ""} ${bg}`}>
+    <motion.div initial={{ opacity: 0.5}}
+        animate={{ opacity: 1}}
+        exit={{ opacity: 0.5}} onClick={()=>handleRandomBg()} className={`static2 ${cursorType == "left" ? "red-main-color": ""} ${bg}`}>
       <div className="text-sm">
         <Logo color="#fff" bg="black" />
       </div>
-      <span onClick={()=>history.goBack()}className="close absolute top-6	right-14 z-30">
+      <span onClick={()=>handleHistoryGoBack()} className="close absolute top-6	right-14 z-30">
         <Arrow size="100px" rotate="180deg"/>
       </span>
       {
         data && data.questions.length !=0 && <Questions categoryQuestions={data.questions} categoryTitle={data.title} categoryIndex={categoryIndex} answers={answers || []} />
       }
-    </div>
+    </motion.div>
   )
 }

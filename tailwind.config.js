@@ -66,6 +66,11 @@ module.exports = {
         light: "var(--orange-light)",
         DEFAULT: "var(--orange)"
       }
+    },
+    textColor: {
+      blue: "var(--blue)",
+      white: "#FFF",
+      black: "#000"
     }
   },
   variants: {
