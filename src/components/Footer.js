@@ -1,4 +1,5 @@
 import ClickSoundLink from './ClickSoundLink';
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -17,7 +18,7 @@ export default function Footer() {
           <ClickSoundLink text="Credit" link="./credit" />
         </li>
         <li className="my-2">
-          <ClickSoundLink text="Report" link="./report" />
+          <Link to="/report">Report</Link>
         </li>
       </ul>
     </footer>

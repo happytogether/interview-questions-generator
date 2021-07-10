@@ -20,7 +20,6 @@ export default function QuestionsMock() {
   const { x, y } = useMousePosition();
   const cursorSide = x > window.innerWidth / 2 ? "right" : "left";
   const pathname = useHistory().location.pathname.match(/.*\/([^/]+)\/[^/]+/)[1] || "";
-  const [completedSteps, setCompletedSteps] = useState([]);
 
   useEffect(() => {
     fetch(`${categoryIndex}.json`, {})
@@ -45,10 +44,6 @@ export default function QuestionsMock() {
   useEffect(()=> {
     setAnswers(JSON.parse(localStorage.getItem('category'+categoryIndex)));
   }, []);
-
-  useEffect(() => {
-    setCompletedSteps(JSON.parse(localStorage.getItem('completedSteps')));
-  }, [])
 
   const [bg, setBg] = useState("dot-bg");
   const bgArr = ["honey-comb-bg", "pie-bg", "equilateral-triangles-bg","rect-bg", "triangle-bg", "wave-bg", "line-bg", "box-bg", "skew-dot-bg", "cross-bg", "line-h-bg","paper-bg", "diagonal-bg"];
@@ -77,7 +72,7 @@ export default function QuestionsMock() {
         <Arrow size="100px" rotate="180deg"/>
       </span>
       {
-        data && data.questions.length !=0 && <Questions categoryQuestions={data.questions} categoryTitle={data.title} categoryIndex={categoryIndex} steps={data.steps} completedSteps={completedSteps} answers={answers || []} />
+        data && data.questions.length !=0 && <Questions categoryQuestions={data.questions} categoryTitle={data.title} categoryIndex={categoryIndex} answers={answers || []} />
       }
     </motion.div>
   )

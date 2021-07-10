@@ -1,72 +1,88 @@
 [
   {
-    "cat": "HTML/CSS",
+    "cat": "Technical Questions",
+    "catFigcaption": "HTML, CSS, Javascript, Framework Questions and other Front End Questions are included.",
     "questions": [
       {
-        "title": "professional question01",
+        "title": "Part 01. Explain Closure in Javascript.",
         "answer": "answer"
       },
       {
-        "title": "professional question02",
+        "title": "How many object types in Javascript?",
         "answer": "answer"
       },
       {
-        "title": "professional question03",
+        "title": "question03",
         "answer": "answer"
       },
       {
-        "title": "professional question04",
+        "title": "Tech 01",
         "answer": "answer"
       }
     ]
   },
   {
-    "cat": "Javascript",
+    "cat": "UX Questions",
+    "catFigcaption": "User Experience Questions are included",
     "questions": [
       {
-        "title": "title",
+        "title": "Part 01. Explain Closure in Javascript.",
         "answer": "answer"
       },
       {
-        "title": "title",
+        "title": "How many object types in Javascript?",
         "answer": "answer"
       },
       {
-        "title": "title",
+        "title": "question03",
+        "answer": "answer"
+      },
+      {
+        "title": "Tech 01",
         "answer": "answer"
       }
     ]
   },
   {
-    "cat": "Javascript Frameworks",
+    "cat": "Experience Questions",
+    "catFigcaption": "Team Culture, 10 year development questions are included ",
     "questions": [
       {
-        "title": "title",
+        "title": "Part 01. Explain Closure in Javascript.",
         "answer": "answer"
       },
       {
-        "title": "title",
+        "title": "How many object types in Javascript?",
         "answer": "answer"
       },
       {
-        "title": "title",
+        "title": "question03",
+        "answer": "answer"
+      },
+      {
+        "title": "Tech 01",
         "answer": "answer"
       }
     ]
   },
   {
-    "cat": "Career Goals",
+    "cat": "Personal Questions",
+    "catFigcaption": "Questions to know more about Anni are included.",
     "questions": [
       {
-        "title": "title",
+        "title": "Part 01. Explain Closure in Javascript.",
         "answer": "answer"
       },
       {
-        "title": "title",
+        "title": "How many object types in Javascript?",
         "answer": "answer"
       },
       {
-        "title": "title",
+        "title": "question03",
+        "answer": "answer"
+      },
+      {
+        "title": "Tech 01",
         "answer": "answer"
       }
     ]

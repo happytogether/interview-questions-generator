@@ -110,12 +110,12 @@ export default function Items(props) {
             </motion.div>
 
             {
-              /*<motion.div variants={downMotion}>
+              <motion.div variants={downMotion}>
               <animated.div className="sm:hidden" style={{ transform: props1.xy.interpolate(trans4) }}>
                 <Circle />
               </animated.div>
             </motion.div>
-            */
+            
           }
 
           </div>

@@ -45,6 +45,8 @@ export default function QuestionsNotDone(data) {
       setTimeout(function(){
         data.rightWrongNumReset();
         data.setDone(true);
+        localStorage.setItem('completedSteps', JSON.stringify([1, 2, 3]));
+
       }, 600);
     }
   })

@@ -109,6 +109,7 @@ export default function HomeHead(props) {
           /*<Wave />*/
         }
         {
+
         /*<animated.div style={up1}>
           <animated.div onClick={()=>playJump()} className="sm:hidden" style={{ transform: props1.xy.interpolate(trans5)}}>
             <Sun2 size="100px" />

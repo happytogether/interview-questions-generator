@@ -16,7 +16,7 @@ export default function Circle(props) {
   let clicked = false;
 
   return (
-    <div style={styles} onMouseEnter={() => cursorChangeHandler("hand")}
+    <div style={styles} onMouseEnter={() => cursorChangeHandler("hovered")}
   onMouseLeave={() => cursorChangeHandler("")} onClick={() => { clicked = !clicked; cursorChangeHandler( clicked + "-clicked")}}></div>
   )
 }

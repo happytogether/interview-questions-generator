@@ -4,15 +4,21 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import MouseContextProvider from "./context/mouse-context";
+import StepperContextProvider from "./context/stepper-context";
 import { BrowserRouter } from "react-router-dom";
+import { StoreProvider } from "./Store";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <MouseContextProvider>
-        <App />
-      </MouseContextProvider>
-    </BrowserRouter>
+      <StoreProvider>
+        <MouseContextProvider>
+          <StoreProvider>
+            <StepperContextProvider>
+              <App />
+            </StepperContextProvider>
+          </StoreProvider>
+        </MouseContextProvider>
+      </StoreProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

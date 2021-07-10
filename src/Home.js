@@ -10,8 +10,19 @@ import RandomBg from './RandomBg';
 import getRandomDifferent from './getRandomDifferent';
 import { motion } from "framer-motion";
 import { InitialTransition } from './components/InitialTransition';
+import { Store } from "./Store";
+import { fetchDataAction } from "./Actions";
 
 function Home() {
+  const { state, dispatch } = useContext(Store);
+
+  useEffect(
+    () => {
+      state.data.length === 0 && fetchDataAction(dispatch);
+    },
+    [state]
+  );
+
   const [open, setOpen] = useState(false);
   const randomBg = RandomBg();
   const { cursorType, cursorChangeHandler } = useContext(MouseContext);
@@ -90,7 +101,7 @@ function Home() {
       {
         <DotRing />
       }
-      <HomeHead getCategories={getItems} />
+      <HomeHead />
       <Items items={items} value={category} handleCategoryChange={handleCategoryChange} openQuestions={openQuestions} lockBodyScrolling={lockBodyScrolling} handleRandomBg={handleRandomBg} open={open}/>
       <Footer />
       <div onClick={()=>handleRandomBg(xBg)} className={`static ${cursorType == "left" ? "red-main-color": ""} ${bg}`} open={open}>

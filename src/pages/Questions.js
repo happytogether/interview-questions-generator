@@ -19,11 +19,14 @@ import QuestionsDone from './QuestionsDone';
 import QuestionsNotDone from './QuestionsNotDone';
 import SmileSadFace from './SmileSadFace';
 import MouseLeftRight from "../components/DotRing/MouseLeftRight";
+import Stepper from '../components/Stepper';
 
 export default function Questions(value) {
   // in question Page...
   // First step, we get data from parent component, [questions, categoryTitle, categoryIndex and answers from localstorage if questions done.]
   const answers = value.answers || [];
+  const steps = value.steps;
+  const completedSteps = value.completedSteps;
   const questions = value.categoryQuestions;
   const title = value.categoryTitle;
   const index= value.categoryIndex;
@@ -32,7 +35,6 @@ export default function Questions(value) {
   const [userAnswers, setUserAnswers] = useState(answers);
   const [rightAnswerNum, setRightAnswerNum] = useState(0);
   const [wrongAnswerNum, setWrongAnswerNum] = useState(0);
-
   const cardsPosArr = [[10, 10], [10, -10], [-10, 10], [-10, -10],[-20,20], [20,20], [-20, -20], [20, -20]];
   const [cardsPos, setCardsPos] = useState([-10, 10]); // cards initial direction
   const { cursorType, cursorChangeHandler } = useContext(MouseContext);
@@ -43,7 +45,6 @@ export default function Questions(value) {
     // This will prevent any synthetic events from firing after this one
     e.stopPropagation()
   }
-
   const titlePos = questions.length > 8 ? "inset-y-1/4": "-my-14";
 
   function addRightNum() {
@@ -76,7 +77,11 @@ export default function Questions(value) {
       {
         !done&&<MouseLeftRight />
       }
+      {
+        <Stepper steps={steps} activeStep={index} completedSteps={completedSteps} />
+      }
       <div className="absolute left-10 top-1/2 -my-14 z-30">
+
         <h1 className="text-white inset-y-1/2 text-4xl w-36 z-20">{title} / <span onClick={() => redo()} className="text-sm">Restart</span></h1>
         <Arrow size="40px" />
         <SmileSadFace questions={questions} rightAnswerNum={rightAnswerNum} wrongAnswerNum={wrongAnswerNum} />
