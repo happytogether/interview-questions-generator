@@ -30,15 +30,14 @@ export default function QuestionsDone(props) {
   },[index])
 
   useEffect(() => {
-    //console.log('length', answers.length, grade, answers);
-    if (answers.length !== 0) {
+    if (answers && answers.length !== 0) {
       setGradePercentage(((answers.reduce(reducer)/questions.length)*100).toFixed(0)+'%');
       setGrade((answers.reduce(reducer)/questions.length) > 0.6 ? "A": "F");
     }
   }, [answers])
 
   useEffect(() => {
-    const rightNum = answers.length!=0 && answers.reduce(reducer);
+    const rightNum = answers&&answers.length!==0 ? answers.reduce(reducer): 0;
     props.totalRightWrongNum(rightNum, questions.length - rightNum);
   }, [answers])
 

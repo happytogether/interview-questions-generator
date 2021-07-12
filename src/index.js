@@ -5,16 +5,18 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import MouseContextProvider from "./context/mouse-context";
 import { BrowserRouter } from "react-router-dom";
-import { StoreProvider, StepperStoreProvider } from "./Store";
+import { StoreProvider, StepperStoreProvider, StepsAnswersStoreProvider } from "./Store";
 
 ReactDOM.render(
   <React.StrictMode>
       <StoreProvider>
         <MouseContextProvider>
           <StoreProvider>
-            <StepperStoreProvider>
-              <App />
-            </StepperStoreProvider>
+            <StepsAnswersStoreProvider>
+              <StepperStoreProvider>
+                <App />
+              </StepperStoreProvider>
+            </StepsAnswersStoreProvider>
           </StoreProvider>
         </MouseContextProvider>
       </StoreProvider>

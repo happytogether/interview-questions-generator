@@ -6,7 +6,7 @@ import Sad from "../../components/shapes/Sad";
 export default function RewardAnswers(props) {
   //const answers = props.answers;
   const userAnswers = props.userAnswers;
-  const length = userAnswers.length;
+  const length = userAnswers && userAnswers.length || 0;
   const config = { mass: 5, tension: 2000, friction: 200 };
 
   const [toggle, set1] = useState(true);
@@ -19,7 +19,7 @@ export default function RewardAnswers(props) {
   });
   let gridRows;
 
-  switch(userAnswers.length) {
+  switch(length) {
     case 1:
       gridRows = "grid-rows-1";
       break;

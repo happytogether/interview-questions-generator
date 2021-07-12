@@ -1,7 +1,7 @@
 const API_URL =
   "/professional.json";
 
-export const fetchDataAction = async (dispatch, string) => {
+export const fetchDataAction = async (dispatch) => {
   const data = await fetch(API_URL);
   const dataJSON = await data.json();
   return dispatch({
@@ -17,6 +17,20 @@ export const stepDoneAction = async (state, stepperDispatch) => {
     payload: state
   });
 };
+
+export const stepsAddAnswersAction = async (state, stepsAddAnswersDispatch) => {
+  return stepsAddAnswersDispatch({
+    type: "STEP_ADD_ANSWERS",
+    payload: state
+  });
+}
+
+export const stepsResetAnswersAction = async (state, stepsResetAnswersDispatch) => {
+  return stepsResetAnswersDispatch({
+    type: "STEP_RESET_ANSWERS",
+    payload: state
+  });
+}
 
 /*export const toggleFavAction = (episode, state, dispatch) => {
   const episodeInFavourites = state.favourites.includes(episode);

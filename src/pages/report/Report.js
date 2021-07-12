@@ -14,6 +14,8 @@ import { DonutSet, IceCreamSet, TwitchSet, DefaultSet, FruitSet, FruitSet2, Ball
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Store } from "../../Store";
+import Arrow from '../../components/shapes/Arrow';
+import DelayLink from '../../ultils/DelayLink';
 
 function Report() {
   useEffect(() => {
@@ -33,7 +35,14 @@ function Report() {
 
   return (
     <div>
-    <Logo color="var(--blue)" />
+    <header style={{"height": "100px"}} className="absolute w-full left-0 top-0">
+      <Logo color="var(--blue)" />
+      <span className="close absolute right-14 z-30">
+        <DelayLink delay="600" to="./">
+          <Arrow size="100px" rotate="180deg" />
+        </DelayLink>
+      </span>
+    </header>
     <ToastContainer position="top-center" autoClose={5000} />
     <div className={`w-screen h-screen report bg-${bgColor} flex justify-center items-center`}>
       <div className="w-6/12 h-5/6 bg-white p-20">

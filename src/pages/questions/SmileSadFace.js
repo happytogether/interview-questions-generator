@@ -5,7 +5,6 @@ export default function SmileSadFace(props) {
   const questions = props.questions;
   const rightAnswerNum = props.rightAnswerNum;
   const wrongAnswerNum = props.wrongAnswerNum;
-
   return (
     <div className="flex flex-rols">
       <div>

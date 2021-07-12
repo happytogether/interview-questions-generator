@@ -7,7 +7,6 @@ import Credit from './pages/credit/Credit';
 import Booking from './pages/booking/Booking';
 import QuestionsContainer from './pages/questions/QuestionsContainer';
 import { AnimatePresence } from "framer-motion";
-import Stepper from './components/Stepper';
 
 function App() {
   return (
@@ -21,7 +20,6 @@ function App() {
               <Route path='/credit' component={Credit} />
               <Route path='/booking' component={Booking} />
               <Route path='/report' component={Report} />
-              <Route path='/interview' component={Stepper} />
             </Switch>
           </div>
         </AnimatePresence>

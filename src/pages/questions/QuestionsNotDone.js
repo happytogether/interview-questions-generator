@@ -5,13 +5,14 @@ import { useDrag } from 'react-use-gesture';
 import Restart from '../../components/shapes/Restart';
 import { DefaultSet, TwitchSet, MemphisSet1, MemphisSet2 } from "../../components/Reward/MemphisSets";
 import getRandomDifferent from '../../getRandomDifferent';
-import { stepDoneAction } from "../../Actions";
-import { Store, StepperStore } from '../../Store';
+import { stepDoneAction, stepsAddAnswersAction } from "../../Actions";
+import { Store, StepperStore, StepsAnswersStore } from '../../Store';
 
 export default function QuestionsNotDone(data) {
   let completedStepsArray = [];
   const { state, dispatch } = useContext(Store);
   const { stepperState, stepperDispatch } = useContext(StepperStore);
+  const { stepsAnswersState, stepsAnswersDispatch } = useContext(StepsAnswersStore);
   const categoryIndex = useParams().categoryIndex;
   const questions = state.data[categoryIndex].questions;
   const [userAnswers, setUserAnswers] = useState([]);
@@ -40,10 +41,14 @@ export default function QuestionsNotDone(data) {
       if (dir == -1 && isGone) {
         data.addWrongNum();
         setUserAnswers(userAnswers => [...userAnswers,0]);
+        stepsAnswersState.data[categoryIndex].push(0);
+        stepsAddAnswersAction(stepsAnswersState.data, stepsAnswersDispatch);
       }
       if (dir == 1 && isGone) {
         data.addRightNum();
         setUserAnswers(userAnswers => [...userAnswers,1]);
+        stepsAnswersState.data[categoryIndex].push(1);
+        stepsAddAnswersAction(stepsAnswersState.data, stepsAnswersDispatch);
       }
       return { x, rot, scale, delay: undefined, config: { friction: 50, tension: down ? 800 : isGone ? 200 : 500 } }
     })
@@ -52,7 +57,9 @@ export default function QuestionsNotDone(data) {
         data.rightWrongNumReset();
         data.setDone(true);
         completedStepsArray = [...completedStepsArray, categoryIndex];
+
         //stepDoneAction([...stepperState.data, parseInt(categoryIndex)], stepperDispatch);
+
         localStorage.setItem('completedSteps', JSON.stringify([1,2,3]));
       }, 600);
     }

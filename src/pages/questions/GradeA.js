@@ -14,7 +14,7 @@ export default function GradeA(props) {
   useEffect(()=> {
     setTimeout(() => {
       canvasInput.current.rewardMe();
-    }, 500)
+    }, 300)
   }, [])
   const fadeIn = useSpring({ to: { opacity: 1, scale: 1}, from: { opacity: 0, scale: 0 } });
   return (
@@ -34,7 +34,7 @@ export default function GradeA(props) {
         <animated.div style={fadeIn}>
           <img className="m-6" width="200px" src={imgSrc} />
         </animated.div>
-        <div class="absolute left-1/2 top-0">
+        <div className="absolute left-1/2 top-0">
           <Reward ref={canvasInput} type='emoji' pos='center' config = {{"emoji": DefaultSet(), "elementCount": 15, "elementSize": 100}}></Reward>
         </div>
       </div>

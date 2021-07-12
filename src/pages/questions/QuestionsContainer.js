@@ -46,11 +46,6 @@ export default function QuestionsContainer() {
     setAnswers(JSON.parse(localStorage.getItem('category'+categoryIndex)));
   }, [categoryIndex]);
 
-  useEffect(()=> {
-    //console.log(categoryIndex);
-    //console.log(answers);
-  }, [categoryIndex])
-
   useEffect(() => {
     setCompletedSteps(JSON.parse(localStorage.getItem('completedSteps')));
   }, [])

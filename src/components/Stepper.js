@@ -1,6 +1,7 @@
 import { Store, StepperStore } from "../Store";
 import { useEffect, useContext } from 'react';
 import { Link } from "react-router-dom";
+import DelayLink from '../ultils/DelayLink';
 
 export default function Stepper(props) {
   const { state, dispatch } = useContext(Store);
@@ -23,7 +24,7 @@ export default function Stepper(props) {
                   <span className="flex-col flex items-center">
                     <span className="flex flex-shrink-0">
                       <div className={`flex items-center stepper-dot-container ${completedSteps.indexOf(index) > -1 ? "completed": ""} ${index == activeStep? " active": ""}`} style={{"color": "#784af4", "height": "22px"}}>
-                        <Link to={`./${index}`}><div className="stepper-dot"></div></Link>
+                        <DelayLink delay="300" to={`./${index}`}><div className="stepper-dot"></div></DelayLink>
                         <Link to={`./${index}`}><svg focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path></svg></Link>
                       </div>
                     </span>
@@ -37,8 +38,8 @@ export default function Stepper(props) {
                   <span className="flex-col flex items-center">
                     <span className="flex flex-shrink-0">
                       <div className={`flex items-center stepper-dot-container ${completedSteps.indexOf(index) > -1 ? "completed": ""} ${index == activeStep? " active": ""}`} style={{"color": "#784af4", "height": "22px"}}>
-                        <Link to={`./${index}`}><div className="stepper-dot"></div></Link>
-                        <Link to={`./${index}`}><svg focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path></svg></Link>
+                        <DelayLink delay="300" to={`./${index}`}><div className="stepper-dot"></div></DelayLink>
+                        <DelayLink delay="300" to={`./${index}`}><svg focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path></svg></DelayLink>
                       </div>
                     </span>
                   </span>

@@ -10,7 +10,6 @@ import useMousePosition from "../../hooks/useMousePosition";
 import useCookie from "../../hooks/useCookie";
 import getRandomDifferent from '../../getRandomDifferent';
 import Reward from '../../components/Reward/Reward';
-import RewardAnswers from './RewardAnswers';
 import { DefaultSet, TwitchSet, MemphisSet1, MemphisSet2 } from "../../components/Reward/MemphisSets";
 import Restart from '../../components/shapes/Restart';
 import ReactRain from 'react-rain-animation';
@@ -22,6 +21,8 @@ import MouseLeftRight from "../../components/DotRing/MouseLeftRight";
 import Stepper from '../../components/Stepper';
 import { Store } from '../../Store';
 import { useParams, useHistory, Link } from 'react-router-dom';
+import { StepsAnswersStore } from '../../Store';
+import { stepsResetAnswersAction } from "../../Actions";
 
 export default function Questions(value) {
   const index= parseInt(useParams().categoryIndex);
@@ -29,7 +30,7 @@ export default function Questions(value) {
   const questions = state.data.length!==0 && state.data[index].questions;
   const [answers, setAnswers] = useState(JSON.parse(localStorage.getItem('category'+index)));
   const [done, setDone] = useState(answers && answers.length === questions.length ? true: false);// check if user finished interview for this category
-
+  const { stepsAnswersState, stepsAnswersDispatch } = useContext(StepsAnswersStore);
   useEffect(() => {
     setAnswers(JSON.parse(localStorage.getItem('category'+index)));
   },[index])
@@ -37,7 +38,7 @@ export default function Questions(value) {
   useEffect(()=>{
     setDone(answers && answers.length === questions.length ? true: false);
   },[answers])
-
+  console.log(stepsAnswersState.data);
   const steps = value.steps;
   const completedSteps = value.completedSteps;
   const title = state.data.length!==0 && state.data[index].cat;
@@ -79,6 +80,8 @@ export default function Questions(value) {
 
   function redo() {
     setDone(false);
+    stepsAnswersState.data[index].length = 0;
+    stepsResetAnswersAction(stepsAnswersState.data, stepsAnswersDispatch);
   }
 
   return (
