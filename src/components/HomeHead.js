@@ -15,7 +15,7 @@ import cannonSfx from './cannon.mp3';
 import jumpSfx from './jump.mp3';
 import cuteSfx from './cute.mp3';
 import clickSfx from './click.mp3';
-import ClickSoundLink from './ClickSoundLink';
+import DelayLink from '../ultils/DelayLink';
 
 export default function HomeHead(props) {
   const { cursorType, cursorChangeHandler } = useContext(MouseContext);
@@ -37,7 +37,6 @@ export default function HomeHead(props) {
   const [play] = useSound(cannonSfx);
   const [playJump] = useSound(jumpSfx);
   const [playCute] = useSound(cuteSfx);
-  const [playClick] = useSound(clickSfx);
 
   const canvasInput = useRef(null);
   function confetti(){
@@ -68,13 +67,6 @@ export default function HomeHead(props) {
     }, 400)
   }
 
-  function handleRedirect() {
-    playClick();
-    setTimeout(() => {
-      window.location.href = "./report"
-    }, 200)
-  }
-
   const up1 = useSpring({ to: { y: 0, opacity: 1}, from: { opacity: 0, y:50 } });
   const down1 = useSpring({ to: { y: 0, opacity: 1}, from: { opacity: 0, y:-50 }});
 
@@ -101,7 +93,7 @@ export default function HomeHead(props) {
           <h4></h4>
           <div className="flex mt-2 space-x-4">
             <div className="border rounded-sm py-3 px-6">
-              <ClickSoundLink text="Start Interview Process" link="./report" />
+              <DelayLink to="./questions/0" delay="300">Start Interview Process</DelayLink>
             </div>
           </div>
         </div>

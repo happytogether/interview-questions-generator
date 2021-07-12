@@ -1,23 +1,24 @@
-import React, { Component, useEffect  } from 'react'
+import React, { useEffect } from 'react'
 import ReactStoreIndicator from 'react-score-indicator'
 import "./Report.scss";
-import Logo from "./components/Logo";
-import Footer from './components/Footer';
+import Logo from "../../components/Logo";
+import Footer from '../../components/Footer';
 import { useSpring, animated } from 'react-spring';
 import { useContext } from 'react';
 import { motion } from "framer-motion";
 import * as easings from 'd3-ease';
-import Smile from './components/shapes/Smile';
-import Sun from './components/shapes/Sun';
-import Triangle from './components/shapes/memphis/Triangle';
-import { DonutSet, IceCreamSet, TwitchSet, DefaultSet, FruitSet, FruitSet2, BallonSet } from "./components/Reward/MemphisSets";
+import Smile from '../../components/shapes/Smile';
+import Sun from '../../components/shapes/Sun';
+import Triangle from '../../components/shapes/memphis/Triangle';
+import { DonutSet, IceCreamSet, TwitchSet, DefaultSet, FruitSet, FruitSet2, BallonSet } from "../../components/Reward/MemphisSets";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Store } from "./Store";
+import { Store } from "../../Store";
 
 function Report() {
-  const { state, dispatch } = useContext(Store);
-  console.log(state);
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   //const fadeIn = useSpring({ to: { y: 0, opacity: 1}, from: { opacity: 0, y:1000 }, config: { duration: 3000, easing: easings.easeCubic } });
   const setArray = [DonutSet(), IceCreamSet(), TwitchSet(), DefaultSet(), FruitSet(), FruitSet2(), BallonSet()];
   const set = setArray[Math.floor(Math.random()*setArray.length)];
@@ -54,6 +55,7 @@ function Report() {
           <div className="w-6/12">
             <Sun />
             <ul>
+              <li className="border-3 py-6"><p className="block my-3">From the statistics, Anni Wang might be a good fit</p><p> if you are looking for an UX Enginner, Design Technoligist or a prototyper who loves animation. Book a quick online chat here.</p></li>
               <li className="py-10 flex flex-row relative" >
                 {
                   set.map((item, index) =><div className="mx-1" dangerouslySetInnerHTML={ {__html: item} }></div>)

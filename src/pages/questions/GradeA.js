@@ -1,8 +1,8 @@
 import React, { useState, useContext, useRef, useEffect } from 'react';
-import Reward from '../components/Reward/Reward';
+import Reward from '../../components/Reward/Reward';
 import RewardAnswers from './RewardAnswers';
-import { DefaultSet, TwitchSet, MemphisSet1, MemphisSet2, IceCreamSet, HeartBrokenSet } from "../components/Reward/MemphisSets";
-import {GradeASet} from './GradeASet';
+import { DefaultSet, TwitchSet, MemphisSet1, MemphisSet2, IceCreamSet, HeartBrokenSet } from "../../components/Reward/MemphisSets";
+import {GradeASet} from '../confettiSet/GradeASet';
 import { useSpring, animated } from 'react-spring';
 const imgSrc = GradeASet()[0];
 

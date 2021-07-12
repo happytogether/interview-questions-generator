@@ -1,9 +1,9 @@
 import React, { useState, useContext, useRef, useEffect } from 'react';
 import ReactRain from 'react-rain-animation';
 import "react-rain-animation/lib/style.css";
-import {GradeFSet} from './GradeFSet';
-import Reward from '../components/Reward/Reward';
-import { HeartBrokenSet, ThunderSet } from "../components/Reward/MemphisSets";
+import {GradeFSet} from '../confettiSet/GradeFSet';
+import Reward from '../../components/Reward/Reward';
+import { HeartBrokenSet, ThunderSet } from "../../components/Reward/MemphisSets";
 const imgSrc = GradeFSet()[0];
 
 export default function GradeA(props) {

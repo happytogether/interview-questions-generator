@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import MondrianArt from './components/MondrianArt';
-import Footer from './components/Footer';
-import Logo from './components/Logo';
-import Arrow from './components/shapes/Arrow';
+import MondrianArt from '../../components/MondrianArt';
+import Footer from '../../components/Footer';
+import Logo from '../../components/Logo';
+import Arrow from '../../components/shapes/Arrow';
 import useSound from 'use-sound';
-import clickSfx from './components/click.mp3';
+import clickSfx from '../../components/click.mp3';
 import { useHistory } from 'react-router-dom';
 import { motion } from "framer-motion"
 

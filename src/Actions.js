@@ -1,12 +1,20 @@
 const API_URL =
   "/professional.json";
 
-export const fetchDataAction = async dispatch => {
+export const fetchDataAction = async (dispatch, string) => {
   const data = await fetch(API_URL);
   const dataJSON = await data.json();
   return dispatch({
     type: "FETCH_DATA",
     payload: dataJSON
+  });
+};
+
+export const stepDoneAction = async (state, stepperDispatch) => {
+  //const stepDoneInStepper = state.stepper.includes(stepIndex);
+  return stepperDispatch({
+    type: "STEP_DONE",
+    payload: state
   });
 };
 

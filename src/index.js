@@ -4,18 +4,17 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import MouseContextProvider from "./context/mouse-context";
-import StepperContextProvider from "./context/stepper-context";
 import { BrowserRouter } from "react-router-dom";
-import { StoreProvider } from "./Store";
+import { StoreProvider, StepperStoreProvider } from "./Store";
 
 ReactDOM.render(
   <React.StrictMode>
       <StoreProvider>
         <MouseContextProvider>
           <StoreProvider>
-            <StepperContextProvider>
+            <StepperStoreProvider>
               <App />
-            </StepperContextProvider>
+            </StepperStoreProvider>
           </StoreProvider>
         </MouseContextProvider>
       </StoreProvider>

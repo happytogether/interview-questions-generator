@@ -17,6 +17,9 @@ import handleViewport from 'react-in-viewport';
 import ClickSoundLink from './ClickSoundLink';
 import { motion } from "framer-motion";
 import * as easings from 'd3-ease'
+import { Store } from '../Store';
+import { Link } from 'react-router-dom';
+import DelayLink from '../ultils/DelayLink';
 
 const calc = (x, y) => [x - window.innerWidth / 2, y - window.innerHeight / 2]
 const piePosX = window.innerWidth - 100;
@@ -115,7 +118,7 @@ export default function Items(props) {
                 <Circle />
               </animated.div>
             </motion.div>
-            
+
           }
 
           </div>
@@ -146,7 +149,12 @@ export default function Items(props) {
               <h3 className="text-5xl">{item.cat}</h3>
               <div className="my-3">{item.catFigcaption}</div>
               <button onClick={() => { setClicked(!clicked); cursorChangeHandler( clicked + "-clicked")}} className="text-left border rounded-sm py-3 px-6">
-                <ClickSoundLink text="View Questions" link={`/questions/${index+1}`} />
+                {
+                  /*
+                    <ClickSoundLink text="View Questions" link={`/questions/${index+1}`} />
+                  */
+                }
+                <DelayLink delay="600" to={`/questions/${index}`}>View Questions</DelayLink>
               </button>
             </figcaption>
           </animated.div>

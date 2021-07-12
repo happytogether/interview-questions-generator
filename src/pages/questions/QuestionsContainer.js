@@ -1,36 +1,36 @@
 import React, { useState, useContext, useRef, useEffect } from 'react';
-import { useParams, useHistory, Link } from 'react-router-dom';
-import { MouseContext } from "../context/mouse-context";
-import useMousePosition from "../hooks/useMousePosition";
+import { useParams, useHistory } from 'react-router-dom';
+import { MouseContext } from "../../context/mouse-context";
+import useMousePosition from "../../hooks/useMousePosition";
 import Questions from './Questions';
-import Arrow from '../components/shapes/Arrow';
-import getRandomDifferent from '../getRandomDifferent';
-import MouseLeftRight from "../components/DotRing/MouseLeftRight";
-import Logo from "../components/Logo";
+import Arrow from '../../components/shapes/Arrow';
+import getRandomDifferent from '../../getRandomDifferent';
+import MouseLeftRight from "../../components/DotRing/MouseLeftRight";
+import Logo from "../../components/Logo";
 import useSound from 'use-sound';
-import clickSfx from '../components/click.mp3';
+import clickSfx from '../../components/click.mp3';
 import { motion } from "framer-motion"
+import { Store } from '../../Store';
+import { fetchDataAction } from '../../Actions';
+import DelayLink from '../../ultils/DelayLink';
 
-export default function QuestionsMock() {
+export default function QuestionsContainer() {
+  const { state, dispatch } = useContext(Store);
+  useEffect(
+    () => {
+      state.data.length === 0 && fetchDataAction(dispatch);
+    },
+    [state]
+  );
   const categoryIndex = useParams().categoryIndex;
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState();
-  const [answers, setAnswers] = useState([]);
+  const [answers, setAnswers] = useState(JSON.parse(localStorage.getItem('category'+categoryIndex)));
   const { cursorType, cursorChangeHandler } = useContext(MouseContext);
   const { x, y } = useMousePosition();
   const cursorSide = x > window.innerWidth / 2 ? "right" : "left";
   const pathname = useHistory().location.pathname.match(/.*\/([^/]+)\/[^/]+/)[1] || "";
   const [completedSteps, setCompletedSteps] = useState([]);
-
-  useEffect(() => {
-    fetch(`${categoryIndex}.json`, {})
-      .then((res) => res.json())
-      .then((response) => {
-        setData(response);
-        setIsLoading(false);
-      })
-      .catch((error) => console.log(error));
-  }, [categoryIndex]);
 
   useEffect(() => {
     if (pathname == 'questions') {
@@ -44,7 +44,12 @@ export default function QuestionsMock() {
 
   useEffect(()=> {
     setAnswers(JSON.parse(localStorage.getItem('category'+categoryIndex)));
-  }, []);
+  }, [categoryIndex]);
+
+  useEffect(()=> {
+    //console.log(categoryIndex);
+    //console.log(answers);
+  }, [categoryIndex])
 
   useEffect(() => {
     setCompletedSteps(JSON.parse(localStorage.getItem('completedSteps')));
@@ -73,11 +78,13 @@ export default function QuestionsMock() {
       <div className="text-sm">
         <Logo color="#fff" bg="black" />
       </div>
-      <span onClick={()=>handleHistoryGoBack()} className="close absolute top-6	right-14 z-30">
-        <Arrow size="100px" rotate="180deg"/>
+      <span className="close absolute top-6	right-14 z-30">
+        <DelayLink to="/" delay="300">
+          <Arrow size="100px" rotate="180deg"/>
+        </DelayLink>
       </span>
       {
-        data && data.questions.length !=0 && <Questions categoryQuestions={data.questions} categoryTitle={data.title} categoryIndex={categoryIndex} steps={data.steps} completedSteps={completedSteps} answers={answers || []} />
+        state.data.length && <Questions categoryIndex={categoryIndex} steps={state.data.length} completedSteps={completedSteps} answers={answers || []} />
       }
     </motion.div>
   )

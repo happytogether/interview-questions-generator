@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { MouseContext } from "./context/mouse-context";
 import HomeHead from './components/HomeHead';
-import Questions from './pages/Questions';
 import Items from './components/Items';
 import Footer from './components/Footer';
 import DotRing from "./components/DotRing/DotRing";
@@ -10,29 +9,24 @@ import RandomBg from './RandomBg';
 import getRandomDifferent from './getRandomDifferent';
 import { motion } from "framer-motion";
 import { InitialTransition } from './components/InitialTransition';
-import { Store } from "./Store";
-import { fetchDataAction } from "./Actions";
+import { Store, StepperStore } from "./Store";
+import { fetchDataAction, stepDoneAction } from "./Actions";
 
 function Home() {
   const { state, dispatch } = useContext(Store);
+  const { stepperState, stepperDispatch} = useContext(StepperStore);
 
-  useEffect(
-    () => {
-      state.data.length === 0 && fetchDataAction(dispatch);
-    },
-    [state]
-  );
+  useEffect(() => {
+    state.data.length === 0 && fetchDataAction(dispatch);
+  },[state]);
+
+  useEffect(() => {
+    //stepDoneAction(0, stepperDispatch);
+  },[])
 
   const [open, setOpen] = useState(false);
   const randomBg = RandomBg();
   const { cursorType, cursorChangeHandler } = useContext(MouseContext);
-
-  const openQuestions = () => {
-    return setOpen(true);
-  }
-  const closeQuestions = () => {
-    return setOpen(false);
-  }
 
   const releaseBodyScrolling = () => {
     document.body.classList.remove('list-open');
@@ -102,15 +96,12 @@ function Home() {
         <DotRing />
       }
       <HomeHead />
-      <Items items={items} value={category} handleCategoryChange={handleCategoryChange} openQuestions={openQuestions} lockBodyScrolling={lockBodyScrolling} handleRandomBg={handleRandomBg} open={open}/>
+      <Items items={state.data} lockBodyScrolling={lockBodyScrolling} handleRandomBg={handleRandomBg} open={open}/>
       <Footer />
       <div onClick={()=>handleRandomBg(xBg)} className={`static ${cursorType == "left" ? "red-main-color": ""} ${bg}`} open={open}>
-        <span className="close" onClick={()=> {closeQuestions(); releaseBodyScrolling();}}>
+        <span className="close" onClick={()=> {releaseBodyScrolling();}}>
           {open&&<Arrow size="100px" rotate="180deg"/>}
         </span>
-        {
-          open && setJsonLoaded && items.length > 0 ? <Questions data={items} questions={categoryQuestions} title={categoryTitle} category={category} categoryIndex={categoryIndex} answers={answers} />: null
-        }
       </div>
     </motion.div>
   );

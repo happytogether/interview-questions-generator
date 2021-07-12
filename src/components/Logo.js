@@ -1,4 +1,4 @@
-import ClickSoundLink from './ClickSoundLink';
+import DelayLink from '../ultils/DelayLink';
 
 export default function Logo(props) {
   const color = props.color;
@@ -8,7 +8,7 @@ export default function Logo(props) {
   }
   return (
     <div style={styles} className="text-base p-2 m-4 z-30 logo flex absolute items-center justify-center">
-      <ClickSoundLink text="/// Anni Wang ///" link="/"/>
+      <DelayLink delay="600" to="/">/// Anni Wang ///</DelayLink>
     </div>
   )
 }

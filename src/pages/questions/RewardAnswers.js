@@ -1,7 +1,7 @@
 import React, { useState, useContext, useRef, useEffect } from 'react';
 import { useSpring, useSprings, useTrail, animated, to as interpolate } from 'react-spring';
-import Smile from "../components/shapes/Smile";
-import Sad from "../components/shapes/Sad";
+import Smile from "../../components/shapes/Smile";
+import Sad from "../../components/shapes/Sad";
 
 export default function RewardAnswers(props) {
   //const answers = props.answers;

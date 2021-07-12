@@ -1,4 +1,4 @@
-import ClickSoundLink from './ClickSoundLink';
+import DelayLink from '../ultils/DelayLink';
 import { Link } from "react-router-dom";
 
 export default function Footer() {
@@ -6,19 +6,16 @@ export default function Footer() {
     <footer>
       <ul className="relative py-10" style={{"width": "200px", "margin": "0 auto"}}>
         <li className="my-2">
-          <ClickSoundLink text="Quick Video Chat" link="./booking" />
+          <DelayLink delay="300" to="./booking">Quick Video Chat</DelayLink>
         </li>
         <li className="my-2">
-          <ClickSoundLink text="Github" link="https://github.com/happytogether" />
+          <DelayLink delay="300" to="https://github.com/happytogether">Github</DelayLink>
         </li>
         <li className="my-2">
-          <ClickSoundLink text="About" link="./aboutme" />
+          <DelayLink delay="300" to="/credit">Credit</DelayLink>
         </li>
         <li className="my-2">
-          <ClickSoundLink text="Credit" link="./credit" />
-        </li>
-        <li className="my-2">
-          <Link to="/report">Report</Link>
+          <DelayLink delay="300" to="/report">Report</DelayLink>
         </li>
       </ul>
     </footer>

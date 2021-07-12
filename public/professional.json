@@ -1,22 +1,10 @@
 [
   {
-    "cat": "Technical Questions",
-    "catFigcaption": "HTML, CSS, Javascript, Framework Questions and other Front End Questions are included.",
+    "cat": "Tech Questions",
+    "catFigcaption": "User Experience Questions are included",
     "questions": [
       {
         "title": "Part 01. Explain Closure in Javascript.",
-        "answer": "answer"
-      },
-      {
-        "title": "How many object types in Javascript?",
-        "answer": "answer"
-      },
-      {
-        "title": "question03",
-        "answer": "answer"
-      },
-      {
-        "title": "Tech 01",
         "answer": "answer"
       }
     ]
@@ -31,14 +19,6 @@
       },
       {
         "title": "How many object types in Javascript?",
-        "answer": "answer"
-      },
-      {
-        "title": "question03",
-        "answer": "answer"
-      },
-      {
-        "title": "Tech 01",
         "answer": "answer"
       }
     ]
@@ -57,10 +37,6 @@
       },
       {
         "title": "question03",
-        "answer": "answer"
-      },
-      {
-        "title": "Tech 01",
         "answer": "answer"
       }
     ]
@@ -82,7 +58,7 @@
         "answer": "answer"
       },
       {
-        "title": "Tech 01",
+        "title": "Personal Questions",
         "answer": "answer"
       }
     ]

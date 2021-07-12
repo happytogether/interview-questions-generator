@@ -638,17 +638,15 @@ iframe {height: calc(100vh - 4px);width: calc(100vw - 4px);box-sizing: border-bo
   color: blue;
   width: 100%;
 }
-.stepper-dot {
-
-}
 .stepper-dot-container {
-  > div {
+  transition: all .8s easeOut;
+  .stepper-dot {
     width: 8px;
     height: 8px;
     border-radius: 50%;
     background-color: var(--gray-light);
   }
-  > svg {
+  svg {
     display: none;
     fill: currentColor;
     width: 1em;
@@ -662,18 +660,24 @@ iframe {height: calc(100vh - 4px);width: calc(100vw - 4px);box-sizing: border-bo
     font-size: 24px;
   }
   &.active {
-    > div {
+    .stepper-dot {
       background-color: var(--green);
       width: 12px;
       height: 12px;
     }
   }
   &.completed {
-    > div {
+    .stepper-dot  {
       display: none;
     }
-    > svg {
+    svg {
       display: inline-block;
+    }
+  }
+  &.completed.active {
+    svg {
+      border: 1px solid;
+      border-radius: 50%;
     }
   }
 }
