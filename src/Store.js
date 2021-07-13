@@ -48,7 +48,7 @@ export function StepperStoreProvider(props) {
 export const StepsAnswersStore = createContext("");
 
 let create2dArray =  Array.from(Array(CategoryLength), () => {
-  return new Array(CategoryLength).fill("")
+  return new Array;
 })
 const stepsAnswersInitialState = {
   data: create2dArray

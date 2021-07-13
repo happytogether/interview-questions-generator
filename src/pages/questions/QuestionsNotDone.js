@@ -39,13 +39,11 @@ export default function QuestionsNotDone(data) {
       const rot = mx / 100 + (isGone ? dir * 10 * velocity : 0) // How much the card tilts, flicking it harder makes it rotate faster
       const scale = down ? 1.1 : 1 // Active cards lift up a bit
       if (dir == -1 && isGone) {
-        data.addWrongNum();
         setUserAnswers(userAnswers => [...userAnswers,0]);
         stepsAnswersState.data[categoryIndex].push(0);
         stepsAddAnswersAction(stepsAnswersState.data, stepsAnswersDispatch);
       }
       if (dir == 1 && isGone) {
-        data.addRightNum();
         setUserAnswers(userAnswers => [...userAnswers,1]);
         stepsAnswersState.data[categoryIndex].push(1);
         stepsAddAnswersAction(stepsAnswersState.data, stepsAnswersDispatch);
@@ -54,11 +52,11 @@ export default function QuestionsNotDone(data) {
     })
     if (!down && gone.size === questions.length) {
       setTimeout(function(){
-        data.rightWrongNumReset();
+        //data.rightWrongNumReset();
         data.setDone(true);
         completedStepsArray = [...completedStepsArray, categoryIndex];
 
-        //stepDoneAction([...stepperState.data, parseInt(categoryIndex)], stepperDispatch);
+        stepDoneAction([...stepperState.data, parseInt(categoryIndex)], stepperDispatch);
 
         localStorage.setItem('completedSteps', JSON.stringify([1,2,3]));
       }, 600);

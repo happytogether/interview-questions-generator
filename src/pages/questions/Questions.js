@@ -21,8 +21,8 @@ import MouseLeftRight from "../../components/DotRing/MouseLeftRight";
 import Stepper from '../../components/Stepper';
 import { Store } from '../../Store';
 import { useParams, useHistory, Link } from 'react-router-dom';
-import { StepsAnswersStore } from '../../Store';
-import { stepsResetAnswersAction } from "../../Actions";
+import { StepperStore, StepsAnswersStore } from '../../Store';
+import { stepDoneAction, stepsResetAnswersAction } from "../../Actions";
 
 export default function Questions(value) {
   const index= parseInt(useParams().categoryIndex);
@@ -31,14 +31,15 @@ export default function Questions(value) {
   const [answers, setAnswers] = useState(JSON.parse(localStorage.getItem('category'+index)));
   const [done, setDone] = useState(answers && answers.length === questions.length ? true: false);// check if user finished interview for this category
   const { stepsAnswersState, stepsAnswersDispatch } = useContext(StepsAnswersStore);
+
   useEffect(() => {
     setAnswers(JSON.parse(localStorage.getItem('category'+index)));
   },[index])
 
-  useEffect(()=>{
+  /*useEffect(()=>{
     setDone(answers && answers.length === questions.length ? true: false);
-  },[answers])
-  console.log(stepsAnswersState.data);
+  },[answers])*/
+
   const steps = value.steps;
   const completedSteps = value.completedSteps;
   const title = state.data.length!==0 && state.data[index].cat;
@@ -49,27 +50,33 @@ export default function Questions(value) {
   const { cursorType, cursorChangeHandler } = useContext(MouseContext);
   const { x, y } = useMousePosition();
   const cursorSide = x > window.innerWidth / 2 ? "right" : "left";
+  const { stepperState, stepperDoneDispatch } = useContext(StepperStore);
 
+  useEffect(()=>{
+    setDone(stepsAnswersState.data[index].length === questions.length ? true: false);
+  },[stepsAnswersState.data[index].length])
+
+  useEffect(()=>{
+    rightWrongNumReset();
+    stepsAnswersState.data[index].forEach((item, i) => {
+      if (item === 1) {
+        setRightAnswerNum(prevRightAnswerNum => prevRightAnswerNum+1)
+      } else if (item === 0) {
+        setWrongAnswerNum(prevWrongAnswerNum => prevWrongAnswerNum+1)
+      }
+    })
+  },[stepsAnswersState.data[index].length])
 
   function handleClick(e) {
     // This will prevent any synthetic events from firing after this one
     e.stopPropagation()
   }
   const titlePos = questions.length > 8 ? "inset-y-1/4": "-my-14";
-
-  function addRightNum() {
-    setRightAnswerNum(rightAnswerNum+1);
-  }
-
-  function addWrongNum() {
-    setWrongAnswerNum(wrongAnswerNum+1);
-  }
-
   const [gradeFBg, setGradeFBg] = useState();
 
   function totalRightWrongNum(right, wrong) {
-    setRightAnswerNum(right);
-    setWrongAnswerNum(wrong);
+    //setRightAnswerNum(right);
+    //setWrongAnswerNum(wrong);
     setGradeFBg(wrong > right ? "left": "right");
   }
 
@@ -95,11 +102,11 @@ export default function Questions(value) {
       <div className="absolute left-10 top-1/2 -my-14 z-30">
 
         <h1 className="text-white inset-y-1/2 text-4xl w-36 z-20">0{parseInt(index)+1}.{title} / <span onClick={() => redo()} className="text-sm">Restart</span></h1>
-        <Arrow size="40px" />
-        <SmileSadFace questions={questions} rightAnswerNum={rightAnswerNum} wrongAnswerNum={wrongAnswerNum} />
+        <Arrow size="40px" color="#fff" />
+        <SmileSadFace questions={questions} rightWrongNum={stepsAnswersState.data[index]} rightAnswerNum={rightAnswerNum} wrongAnswerNum={wrongAnswerNum} />
       </div>
         {
-          !done && <QuestionsNotDone questions={questions || []} index={index} redo={redo} steps={steps} setDone={setDone} addRightNum={addRightNum} addWrongNum={addWrongNum} rightWrongNumReset={rightWrongNumReset}/>
+          !done && <QuestionsNotDone questions={questions || []} index={index} redo={redo} steps={steps} setDone={setDone} rightWrongNumReset={rightWrongNumReset}/>
         }
         {
           done && <QuestionsDone questions={questions || []} index={index} redo={redo} steps={steps} questions={questions} answers={answers} totalRightWrongNum={totalRightWrongNum} rightWrongNumReset={rightWrongNumReset} />

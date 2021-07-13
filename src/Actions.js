@@ -10,6 +10,13 @@ export const fetchDataAction = async (dispatch) => {
   });
 };
 
+export const fetchStepsDoneLocalStorageAction = async (dispatch, categoryIndex) => {
+  const data = JSON.parse(localStorage.getItem('category'+categoryIndex));
+  return dispatch({
+    type: "FETCH_STEPS_DONE_DATA",
+    payload: data
+  });
+};
 export const stepDoneAction = async (state, stepperDispatch) => {
   //const stepDoneInStepper = state.stepper.includes(stepIndex);
   return stepperDispatch({

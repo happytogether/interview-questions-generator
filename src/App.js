@@ -7,22 +7,25 @@ import Credit from './pages/credit/Credit';
 import Booking from './pages/booking/Booking';
 import QuestionsContainer from './pages/questions/QuestionsContainer';
 import { AnimatePresence } from "framer-motion";
+import { LastLocationProvider } from 'react-router-last-location';
 
 function App() {
   return (
 
       <Router>
-        <AnimatePresence exitBeforeEnter>
-          <div className="App">
-            <Switch>
-              <Route exact path='/' component={Home} />
-              <Route path='/questions/:categoryIndex' component={QuestionsContainer} />
-              <Route path='/credit' component={Credit} />
-              <Route path='/booking' component={Booking} />
-              <Route path='/report' component={Report} />
-            </Switch>
-          </div>
-        </AnimatePresence>
+        <LastLocationProvider>
+          <AnimatePresence exitBeforeEnter>
+            <div className="App">
+              <Switch>
+                <Route exact path='/' component={Home} />
+                <Route path='/questions/:categoryIndex' component={QuestionsContainer} />
+                <Route path='/credit' component={Credit} />
+                <Route path='/booking' component={Booking} />
+                <Route path='/report' component={Report} />
+              </Switch>
+            </div>
+          </AnimatePresence>
+        </LastLocationProvider>
       </Router>
 
   );

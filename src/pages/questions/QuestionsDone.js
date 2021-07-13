@@ -90,7 +90,7 @@ export default function QuestionsDone(props) {
         <div className="flex items-center flex-row z-30 relative">
           <motion.div className={`mx-5`} variants={upMotion}>
             <DelayLink to={`./${prePageIndex}`}>
-              <Arrow rotate="180deg" size="80px" />
+              <Arrow rotate="180deg" size="80px" color="#fff" />
             </DelayLink>
           </motion.div>
           <motion.div className="mx-5" variants={upMotion2} onClick={() => redo()}>
@@ -98,7 +98,7 @@ export default function QuestionsDone(props) {
           </motion.div>
           <motion.div className={`mx-5`} variants={upMotion}>
             <DelayLink to={`./${nextPageIndex}`}>
-              <Arrow size="80px" />
+              <Arrow size="80px" color="#fff" />
             </DelayLink>
           </motion.div>
         </div>

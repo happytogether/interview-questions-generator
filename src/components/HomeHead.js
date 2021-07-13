@@ -45,7 +45,7 @@ export default function HomeHead(props) {
 
   useEffect(() => {
     setTimeout(() => {
-      confetti();
+      //confetti();
     }, 1000)
   }, [])
 

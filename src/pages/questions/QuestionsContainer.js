@@ -16,6 +16,7 @@ import DelayLink from '../../ultils/DelayLink';
 
 export default function QuestionsContainer() {
   const { state, dispatch } = useContext(Store);
+  // fetch data from json file
   useEffect(
     () => {
       state.data.length === 0 && fetchDataAction(dispatch);
@@ -58,14 +59,6 @@ export default function QuestionsContainer() {
     setBg(getRandomDifferent(bgArr, bg));
   }
 
-  const [playClick] = useSound(clickSfx);
-  function handleHistoryGoBack() {
-      playClick();
-      setTimeout(()=> {
-        history.goBack();
-      }, 300)
-  }
-
   return (
     <motion.div initial={{ opacity: 0.5}}
         animate={{ opacity: 1}}
@@ -74,8 +67,8 @@ export default function QuestionsContainer() {
         <Logo color="#fff" bg="black" />
       </div>
       <span className="close absolute top-6	right-14 z-30">
-        <DelayLink to="/" delay="300">
-          <Arrow size="100px" rotate="180deg"/>
+        <DelayLink to="/" delay="300" goBackHome="true">
+          <Arrow size="100px" rotate="180deg" color="#fff" />
         </DelayLink>
       </span>
       {

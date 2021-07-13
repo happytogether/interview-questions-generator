@@ -1,3 +1,4 @@
+
 :root {
   /*--primary: #555BFF;
   --secondary: #22D2A0;  */
@@ -417,9 +418,11 @@ figcaption.hovered {
   background-color: var(--background-color);
 }
 .pie-bg {
-  background-image: radial-gradient(ellipse farthest-corner at 37px 37px , var(--main), var(--main) 50%, var(--background-color) 50%);
-  background-size: 37px 37px;
+  //background-image: radial-gradient(ellipse farthest-corner at 37px 37px , var(--main), var(--main) 50%, var(--background-color) 50%);
+  background-image: url('/bg.svg');
+  background-size: 3000px auto;
   background-color: var(--background-color);
+  opacity: .5;
 }
 .line-bg {
   background-color: var(--background-color);

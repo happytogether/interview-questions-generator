@@ -38,8 +38,8 @@ function Report() {
     <header style={{"height": "100px"}} className="absolute w-full left-0 top-0">
       <Logo color="var(--blue)" />
       <span className="close absolute right-14 z-30">
-        <DelayLink delay="600" to="./">
-          <Arrow size="100px" rotate="180deg" />
+        <DelayLink delay="600" to="./" goBackHome="true">
+          <Arrow size="100px" rotate="180deg" color="#fff" />
         </DelayLink>
       </span>
     </header>

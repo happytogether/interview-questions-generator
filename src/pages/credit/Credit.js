@@ -2,21 +2,11 @@ import { useState, useEffect } from 'react';
 import MondrianArt from '../../components/MondrianArt';
 import Footer from '../../components/Footer';
 import Logo from '../../components/Logo';
-import Arrow from '../../components/shapes/Arrow';
-import useSound from 'use-sound';
-import clickSfx from '../../components/click.mp3';
-import { useHistory } from 'react-router-dom';
 import { motion } from "framer-motion"
+import DelayLink from '../../ultils/DelayLink';
+import Arrow from '../../components/shapes/Arrow';
 
 function Credit() {
-  const [playClick] = useSound(clickSfx);
-  const history = useHistory();
-  function handleHistoryGoBack() {
-      playClick();
-      setTimeout(()=> {
-        history.goBack();
-      }, 300)
-  }
   const [items,setItems]=useState([]);
   const [jsonLoaded, setJsonLoaded] = useState(false);
 
@@ -49,8 +39,10 @@ function Credit() {
       <div>
         <header style={{"height": "100px", "background": "#000"}}>
           <Logo size="100px" color="#fff"/>
-          <span onClick={()=>handleHistoryGoBack()} className="close absolute right-14 z-30">
-            <Arrow size="100px" rotate="180deg"/>
+          <span className="close absolute right-14 z-30">
+            <DelayLink delay="600" to="./" goBackHome="true">
+              <Arrow size="100px" rotate="180deg" color="#fff" />
+            </DelayLink>
           </span>
         </header>
         {
