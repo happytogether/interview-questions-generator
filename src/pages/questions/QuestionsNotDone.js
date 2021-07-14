@@ -82,7 +82,7 @@ export default function QuestionsNotDone(data) {
         {props.map(({ x, y, rot, scale }, i) => (
           <animated.div key={i} style={{ x, y }} className="flex items-center justify-center absolute w-full h-full">
             {/* This is the card itself, we're binding our gesture to it (and inject its index so we know which is which) */}
-            <animated.div {...bind(i)} className="rainbow-bg text-center" onClick={handleClick}  style={{ transform: interpolate([rot, scale], trans) }}>
+            <animated.div {...bind(i)} className="sm:w-full sm:mx-3 w-60vw rainbow-bg text-center" onClick={handleClick}  style={{ transform: interpolate([rot, scale], trans) }}>
               <span className="p-5 text-xl bg-white"><span className="text-5xl">{props.length - i < 10 ? "0"+ (props.length - i): props.length - i}</span>.{questions[i].title}</span>
               <span style={{"height": "300px"}} className="p-5 text-lg overflow-y-scroll bg-white" dangerouslySetInnerHTML={ {__html: questions[i].answer} } />
             </animated.div>

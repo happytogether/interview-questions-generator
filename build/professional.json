@@ -1,72 +1,52 @@
 [
   {
-    "cat": "HTML/CSS",
+    "cat": "Tech Questions",
+    "catFigcaption": "User Experience Questions are included",
     "questions": [
       {
-        "title": "professional question01",
-        "answer": "answer"
-      },
-      {
-        "title": "professional question02",
-        "answer": "answer"
-      },
-      {
-        "title": "professional question03",
-        "answer": "answer"
-      },
-      {
-        "title": "professional question04",
+        "title": "Part 01. Explain Closure in Javascript.",
         "answer": "answer"
       }
     ]
   },
   {
-    "cat": "Javascript",
+    "cat": "UX Questions",
+    "catFigcaption": "User Experience Questions are included",
     "questions": [
       {
-        "title": "title",
+        "title": "Part 01. Explain Closure in Javascript.",
         "answer": "answer"
       },
       {
-        "title": "title",
+        "title": "What do you think will be the next big thing in UX design?",
+        "answer": "In 2015, people talked about Product Design Thinking would be the next big thing for UX."
+      }
+    ]
+  },
+  {
+    "cat": "Experience Questions",
+    "catFigcaption": "Team Culture, 10 year development questions are included ",
+    "questions": [
+      {
+        "title": "Part 01. Explain Closure in Javascript.",
         "answer": "answer"
       },
       {
-        "title": "title",
+        "title": "How many object types in Javascript?",
+        "answer": "answer"
+      },
+      {
+        "title": "question03",
         "answer": "answer"
       }
     ]
   },
   {
-    "cat": "Javascript Frameworks",
+    "cat": "Personal Questions",
+    "catFigcaption": "Questions to know more about Anni are included.",
     "questions": [
       {
-        "title": "title",
-        "answer": "answer"
-      },
-      {
-        "title": "title",
-        "answer": "answer"
-      },
-      {
-        "title": "title",
-        "answer": "answer"
-      }
-    ]
-  },
-  {
-    "cat": "Career Goals",
-    "questions": [
-      {
-        "title": "title",
-        "answer": "answer"
-      },
-      {
-        "title": "title",
-        "answer": "answer"
-      },
-      {
-        "title": "title",
+        "title": "Part 01. Explain Closure in Javascript.",
         "answer": "answer"
       }
     ]

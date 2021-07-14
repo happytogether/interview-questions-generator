@@ -98,6 +98,7 @@ export default function QuestionsDone(props) {
           </motion.div>
           <motion.div className={`mx-5`} variants={upMotion}>
             <DelayLink to={`./${nextPageIndex}`}>
+              <span className="text-sm">Step 2</span>
               <Arrow size="80px" color="#fff" />
             </DelayLink>
           </motion.div>

@@ -19,6 +19,7 @@
     "locomotive-scroll": "^4.1.1",
     "node-sass": "^6.0.0",
     "react": "^17.0.2",
+    "react-device-detect": "^1.17.0",
     "react-dom": "^17.0.2",
     "react-hoverintent": "0.0.10",
     "react-in-viewport": "^1.0.0-alpha.17",

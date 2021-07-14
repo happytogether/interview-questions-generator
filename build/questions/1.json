@@ -1,5 +1,6 @@
 {
   "title": "Tech Questions",
+  "steps": 4,
   "questions": [
     {
       "title": "Part 01. Explain Closure in Javascript.",
@@ -11,6 +12,10 @@
     },
     {
       "title": "question03",
+      "answer": "answer"
+    },
+    {
+      "title": "Tech 01",
       "answer": "answer"
     }
   ]

@@ -116,6 +116,8 @@ div.static, div.static2 {
     overflow:hidden;
     transition: all .01s ease;
     transition-delay: .01s;
+    perspective: 350px;
+    perspective-origin: 50% 50%;
     .question-window {
       > div {
         will-change: transform;
@@ -126,7 +128,6 @@ div.static, div.static2 {
       background-size: auto 85%;
       background-repeat: no-repeat;
       background-position: center center;
-      width: 60vw;
       max-width: 500px;
       height: 85vh;
       max-height: 570px;
@@ -419,10 +420,9 @@ figcaption.hovered {
 }
 .pie-bg {
   //background-image: radial-gradient(ellipse farthest-corner at 37px 37px , var(--main), var(--main) 50%, var(--background-color) 50%);
-  background-image: url('/bg.svg');
-  background-size: 3000px auto;
+  //background-image: url('/bg.svg');
+  background-size: 1000px auto;
   background-color: var(--background-color);
-  opacity: .5;
 }
 .line-bg {
   background-color: var(--background-color);
@@ -542,11 +542,6 @@ footer ul .link {
   grid-template-rows: repeat(4, 1fr);
   grid-auto-flow: column;
   gap: 10px;
-}
-
-.drop {
-  width: 2px!important;
-  background: -webkit-gradient(linear,0 0,0 100%,from(#0d343a),to(hsla(0,0%,100%,.5)))
 }
 .bang {
   display: block;

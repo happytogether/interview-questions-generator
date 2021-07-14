@@ -14,8 +14,8 @@ export default function Stepper(props) {
   stepsArray = stepsArray.fill("");
 
   return (
-    <div className="w-full flex items-center justify-center absolute z-10">
-      <div className="w-4/12 p-1 mt-4" style={{"background": "rgba(0,0,0,.8)"}}>
+    <div className="w-full flex items-center justify-center absolute z-10 sm:relative">
+      <div className="sm:w-screen w-4/12 p-1 mt-4" style={{"background": "rgba(0,0,0,.8)"}}>
         <div className="flex flex-row items-start">
           {
             stepsArray.map((item, index) => (

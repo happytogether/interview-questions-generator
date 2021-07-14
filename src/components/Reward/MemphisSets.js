@@ -97,7 +97,9 @@ const BallonSet = () => {
 
 const HeartBrokenSet = () => {
     return [
-      '<img src="/img/heart-broken.svg" />'
+      '<img src="/img/heart-broken.svg" />',
+      '<img src="/img/heart-broken-left.svg" />',
+      '<img src="/img/heart-broken-right.svg" />'
     ]
 }
 const ThunderSet = () => {

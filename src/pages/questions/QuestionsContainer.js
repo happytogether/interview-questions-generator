@@ -6,7 +6,6 @@ import Questions from './Questions';
 import Arrow from '../../components/shapes/Arrow';
 import getRandomDifferent from '../../getRandomDifferent';
 import MouseLeftRight from "../../components/DotRing/MouseLeftRight";
-import Logo from "../../components/Logo";
 import useSound from 'use-sound';
 import clickSfx from '../../components/click.mp3';
 import { motion } from "framer-motion"
@@ -58,15 +57,12 @@ export default function QuestionsContainer() {
   function handleRandomBg() {
     setBg(getRandomDifferent(bgArr, bg));
   }
-
+  const randomIndex = Math.random() > .5 ? 0: 1;
   return (
     <motion.div initial={{ opacity: 0.5}}
         animate={{ opacity: 1}}
-        exit={{ opacity: 0.5}} onClick={()=>handleRandomBg()} className={`static2 ${cursorType == "left" ? "red-main-color": ""} ${bg}`}>
-      <div className="text-sm">
-        <Logo color="#fff" bg="black" />
-      </div>
-      <span className="close absolute top-6	right-14 z-30">
+        exit={{ opacity: 0.5}} onClick={()=>handleRandomBg()} className={`static2 ${cursorType == "left" ? "red-main-color": ""} pie-bg`}>
+      <span className="close absolute top-6	right-14 z-30 sm:hidden">
         <DelayLink to="/" delay="300" goBackHome="true">
           <Arrow size="100px" rotate="180deg" color="#fff" />
         </DelayLink>

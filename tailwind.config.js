@@ -4,9 +4,15 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
-    zIndex: {
+      zIndex: {
        '-10': '-10',
-      }
+     },
+     opacity: {
+       '13': '13.33%'
+     },
+     width: {
+       '60vw': '60vw',
+     }
     },
     screens: {
       '2xl': {'max': '1535px'},

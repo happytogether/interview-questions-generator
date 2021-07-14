@@ -92,7 +92,7 @@ export default function HomeHead(props) {
         <div className="text-left">
           <h4></h4>
           <div className="flex mt-2 space-x-4">
-            <div className="border rounded-sm py-3 px-6">
+            <div className="border rounded-sm py-3 px-6 mt-10">
               <DelayLink to="./questions/0" delay="300">Start Interview Process</DelayLink>
             </div>
           </div>

@@ -1,7 +1,6 @@
 import React, { createContext, useState, useReducer } from "react";
 
 const CategoryLength = 4;
-
 export const Store = createContext("");
 
 const initialState = {

@@ -24,7 +24,8 @@ const GradeFSet = () => {
     '/img/gradeF/5.svg',
     '/img/gradeF/6.svg',
     '/img/gradeF/7.svg',
-    '/img/gradeF/8.svg'
+    '/img/gradeF/8.svg',
+    '/img/gradeF/9.svg'
   ]
   return shuffle(arr);
 };

@@ -1,5 +1,6 @@
 {
   "title": "Experience Questions",
+  "steps": 4,
   "questions": [
     {
       "title": "Part 01. Explain Closure in Javascript.",
