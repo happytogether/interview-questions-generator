@@ -116,7 +116,7 @@ export default function Items(props) {
                     <ClickSoundLink text="View Questions" link={`/questions/${index+1}`} />
                   */
                 }
-                <DelayLink delay="600" to={`/interview/${index}`}>Questions Gallery</DelayLink>
+                <DelayLink delay="600" to={`/gallery/${index}`}>Questions Gallery</DelayLink>
               </button>
             </figcaption>
           </animated.div>

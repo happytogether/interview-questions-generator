@@ -22,6 +22,7 @@ function Home() {
 
   useEffect(() => {
     //stepDoneAction(0, stepperDispatch);
+    document.body.classList = "";
   },[])
 
   const [open, setOpen] = useState(false);
@@ -30,6 +31,8 @@ function Home() {
 
   const releaseBodyScrolling = () => {
     document.body.classList.remove('list-open');
+    document.body.classList.remove('gallery-page');
+
   }
 
   const lockBodyScrolling = () => {

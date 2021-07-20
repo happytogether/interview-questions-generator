@@ -51,7 +51,7 @@ html, body {
 
 }
 
-body.list-open, body.new-interview {
+body.list-open, body.new-interview, body.gallery-page {
   overflow: hidden;
   --background-color: var(--blue)
 }
@@ -410,7 +410,7 @@ figcaption.hovered {
   background-color: var(--background-color);
 }
 .pie-bg {
-  //background-image: radial-gradient(ellipse farthest-corner at 37px 37px , var(--main), var(--main) 50%, var(--background-color) 50%);
+  background-image: radial-gradient(ellipse farthest-corner at 37px 37px , var(--main), var(--main) 50%, var(--background-color) 50%);
   //background-image: url('/bg.svg');
   background-size: 1000px auto;
   background-color: var(--background-color);

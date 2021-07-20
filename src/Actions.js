@@ -2,6 +2,8 @@ const API_URL =
   "/home.json";
 const QUESTIONS_API_URL =
   "/questions.json";
+const QUESTIONS_GALLERY_API_URL =
+  "/questions/1.json";
 
 export const defaultQuestionsNum = () => {
   return [5,3,3,2];
@@ -17,6 +19,15 @@ export const fetchDataAction = async (dispatch) => {
     payload: dataJSON
   });
 };
+
+/*export const fetchQuestionsGalleryDataAction = async (dispatch, index) => {
+  const data = await fetch(QUESTIONS_GALLERY_API_URL+'/'+index+'.json');
+  const dataJSON = await data.json();
+  return dispatch({
+    type: "FETCH_QUESTIONS_GALLERY_DATA",
+    payload: dataJSON
+  });
+};*/
 
 /* new interview -
   1. data for category

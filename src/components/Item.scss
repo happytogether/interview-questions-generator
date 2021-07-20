@@ -24,5 +24,10 @@
     > div:last-child {
       flex: 2;
     }
+    .item-rect {
+      position: absolute;
+      bottom: 100px;
+      right: 0;
+    }
   }
 }

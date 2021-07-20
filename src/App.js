@@ -7,6 +7,7 @@ import Credit from './pages/credit/Credit';
 import Booking from './pages/booking/Booking';
 import InterviewContainer from './pages/interview/InterviewContainer';
 import NewInterview from './pages/interview/NewInterview';
+import Gallery from './pages/gallery/Gallery';
 import { AnimatePresence } from "framer-motion";
 import { LastLocationProvider } from 'react-router-last-location';
 
@@ -21,6 +22,7 @@ function App() {
                 <Route exact path='/' component={Home} />
                 <Route path='/interview/:categoryIndex' component={InterviewContainer} />
                 <Route path='/newInterview' component={NewInterview} />
+                <Route path='/gallery/:categoryIndex' component={Gallery} />
                 <Route path='/credit' component={Credit} />
                 <Route path='/booking' component={Booking} />
                 <Route path='/report' component={Report} />

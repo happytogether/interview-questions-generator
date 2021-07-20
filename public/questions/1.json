@@ -1,22 +1,51 @@
-{
-  "title": "Tech Questions",
-  "steps": 4,
-  "questions": [
-    {
-      "title": "Part 01. Explain Closure in Javascript.",
-      "answer": "answer"
-    },
-    {
-      "title": "How many object types in Javascript?",
-      "answer": "answer"
-    },
-    {
-      "title": "question03",
-      "answer": "answer"
-    },
-    {
-      "title": "Tech 01",
-      "answer": "answer"
-    }
-  ]
-}
+[
+  {
+    "title": "What are the possible ways to create objects in JavaScript"
+  },
+  {
+    "title": "What are the possible ways to create objects in JavaScript"
+
+  },
+  {
+    "title": "What are the possible ways to create objects in JavaScript"
+  },
+  {
+    "title": "What are the possible ways to create objects in JavaScript"
+  },
+  {
+    "title": "What are the possible ways to create objects in JavaScript"
+  },
+  {
+    "title": "What are the possible ways to create objects in JavaScript"
+  },
+  {
+    "title": "What are the possible ways to create objects in JavaScript"
+  },
+  {
+    "title": "What are the possible ways to create objects in JavaScript"
+  },
+  {
+    "title": "What are the possible ways to create objects in JavaScript"
+  },
+  {
+    "title": "What are the possible ways to create objects in JavaScript"
+  },
+  {
+    "title": "What are the possible ways to create objects in JavaScript"
+  },
+  {
+    "title": "What are the possible ways to create objects in JavaScript"
+  },
+  {
+    "title": "What are the possible ways to create objects in JavaScript"
+  },
+  {
+    "title": "What are the possible ways to create objects in JavaScript"
+  },
+  {
+    "title": "What are the possible ways to create objects in JavaScript"
+  },
+  {
+    "title": "What are the possible ways to create objects in JavaScript"
+  }
+]

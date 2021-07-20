@@ -135,12 +135,12 @@ export default function NewInterview() {
           <Logo color="var(--blue)" />
           <span className="close absolute right-14 z-30">
             <DelayLink delay="600" to="./" goBackHome="true">
-              <Arrow size="100px" rotate="180deg" color="var(--blue)" />
+              <Arrow size="100px" rotate="180deg" color="#fff" />
             </DelayLink>
           </span>
         </header>
         <div className={`bg-blue interview-start text-blue flex justify-center items-center`}>
-          <div className="options-container xl:w-11/12 lg:mt-20 lg:p-10 lg:w-full w-6/12 h-5/6 bg-white m-20 p-20">
+          <div className="options-container xl:w-11/12 lg:mt-20 lg:p-10 lg:w-full w-6/12 h-5/6 bg-white m-20 p-20 mt-32">
             <div>
               <p className="text-3xl mb-7">Pick Your Preference:</p>
               <ul className="chips flex flex-row flex-wrap gap-2 mb-10 clear-both text-sm">
@@ -158,7 +158,7 @@ export default function NewInterview() {
             </div>
             <div className="flex flex-row w-full h-full lg:flex-col">
               <div className="lg:w-screen w-6/12 h-full">
-                <div className="bg-cover w-11/12 bg-cover bg-center bg-no-repeat" style={{"backgroundImage": `url("/img/interview.svg")`, "height": "300px"}}></div>
+                <div className="bg-cover w-11/12 bg-cover bg-center bg-no-repeat" style={{"backgroundImage": `url("/img/interview.svg")`, "height": "400px"}}></div>
               </div>
               <div className="lg:w-full w-8/12 pl-10 lg:pl-0">
                 <ul>
@@ -187,7 +187,7 @@ export default function NewInterview() {
                 </ul>
               </div>
             </div>
-            <div className="flex justify-center mt-20 bg-white">
+            <div className="flex justify-center mt-10 bg-white">
               <button onClick={dispatchQuestionsNum} className="border p-3 rounded-sm">
                 <DelayLink to={{
                   pathname: "/interview/0",
@@ -195,7 +195,7 @@ export default function NewInterview() {
                 }}>
                 <div className="flex flex-row justify-center items-center">
                   <span>Gernerate Interview Questions</span>
-                  <span className="pl-3"><Arrow size="25px" /></span>
+                  <span className="pl-3"><Arrow size="25px" color="var(--blue)" /></span>
                 </div>
                 </DelayLink>
               </button>
