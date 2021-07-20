@@ -2,25 +2,26 @@ import React, { useState, useContext, useRef, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { MouseContext } from "../../context/mouse-context";
 import useMousePosition from "../../hooks/useMousePosition";
-import Questions from './Questions';
+import InterviewQuestions from './InterviewQuestions';
 import Arrow from '../../components/shapes/Arrow';
 import getRandomDifferent from '../../getRandomDifferent';
 import MouseLeftRight from "../../components/DotRing/MouseLeftRight";
 import useSound from 'use-sound';
 import clickSfx from '../../components/click.mp3';
 import { motion } from "framer-motion"
-import { Store } from '../../Store';
-import { fetchDataAction } from '../../Actions';
+import { QuestionsStore } from '../../Store';
+import { fetchQuestionsDataAction } from '../../Actions';
 import DelayLink from '../../ultils/DelayLink';
+import { defaultQuestionsNum } from '../../Actions';
 
-export default function QuestionsContainer() {
-  const { state, dispatch } = useContext(Store);
-  // fetch data from json file
+export default function InterviewContainer(props) {
+  //console.log(123, props.location.state);
+  const { questionsState, dispatch } = useContext(QuestionsStore);
   useEffect(
     () => {
-      state.data.length === 0 && fetchDataAction(dispatch);
+      fetchQuestionsDataAction(dispatch, props.location.state && props.location.state.questionsNum || defaultQuestionsNum());
     },
-    [state]
+    []
   );
   const categoryIndex = useParams().categoryIndex;
   const [isLoading, setIsLoading] = useState(true);
@@ -33,8 +34,8 @@ export default function QuestionsContainer() {
   const [completedSteps, setCompletedSteps] = useState([]);
 
   useEffect(() => {
-    if (pathname == 'questions') {
-      document.body.classList.add('questions-page');
+    if (pathname == 'interview') {
+      document.body.classList.add('new-interview');
     }
   }, [])
 
@@ -61,14 +62,14 @@ export default function QuestionsContainer() {
   return (
     <motion.div initial={{ opacity: 0.5}}
         animate={{ opacity: 1}}
-        exit={{ opacity: 0.5}} onClick={()=>handleRandomBg()} className={`static2 ${cursorType == "left" ? "red-main-color": ""} pie-bg`}>
+        exit={{ opacity: 0.5}} onClick={()=>handleRandomBg()} className={`static2 box-bg`}>
       <span className="close absolute top-6	right-14 z-30 sm:hidden">
         <DelayLink to="/" delay="300" goBackHome="true">
           <Arrow size="100px" rotate="180deg" color="#fff" />
         </DelayLink>
       </span>
       {
-        state.data.length && <Questions categoryIndex={categoryIndex} steps={state.data.length} completedSteps={completedSteps} answers={answers || []} />
+        questionsState.data.length && <InterviewQuestions categoryIndex={categoryIndex} steps={questionsState.data.length} completedSteps={completedSteps} answers={answers || []} />
       }
     </motion.div>
   )

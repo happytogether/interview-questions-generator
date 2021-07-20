@@ -26,7 +26,10 @@ export default function Sun3(props) {
   }
   const canvasInput = useRef(null);
   function confetti(){
-    canvasInput.current.rewardMe();
+    const interval = setTimeout(() => {
+      canvasInput.current.rewardMe();
+    }, 10);
+    return () => clearTimeout(interval);
   }
 
   const [playFoam] = useSound(fruitnanjiSfx);

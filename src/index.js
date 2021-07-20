@@ -5,21 +5,23 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import MouseContextProvider from "./context/mouse-context";
 import { BrowserRouter } from "react-router-dom";
-import { StoreProvider, StepperStoreProvider, StepsAnswersStoreProvider } from "./Store";
+import { HomeStoreProvider, QuestionsStoreProvider, QuestionsNumStoreProvider, StepperStoreProvider, UserAnswersStoreProvider } from "./Store";
 
 ReactDOM.render(
   <React.StrictMode>
-      <StoreProvider>
-        <MouseContextProvider>
-          <StoreProvider>
-            <StepsAnswersStoreProvider>
-              <StepperStoreProvider>
-                <App />
-              </StepperStoreProvider>
-            </StepsAnswersStoreProvider>
-          </StoreProvider>
-        </MouseContextProvider>
-      </StoreProvider>
+      <MouseContextProvider>
+        <HomeStoreProvider>
+          <QuestionsNumStoreProvider>
+            <QuestionsStoreProvider>
+              <UserAnswersStoreProvider>
+                <StepperStoreProvider>
+                  <App />
+                </StepperStoreProvider>
+              </UserAnswersStoreProvider>
+            </QuestionsStoreProvider>
+          </QuestionsNumStoreProvider>
+        </HomeStoreProvider>
+      </MouseContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

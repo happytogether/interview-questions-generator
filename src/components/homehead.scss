@@ -1,0 +1,10 @@
+.homehead-left, .homehead-right {
+  box-shadow: 10px -10px 0 -3px white, 10px -10px var(--green), 20px -20px 0 -3px white, 20px -20px var(--yellow), 30px -30px 0 -3px white, 30px -30px var(--orange), 40px -40px 0 -3px white, 40px -40px var(--red)
+}
+.homehead-left {
+  padding: 40px;
+  border: 1px solid;
+  background-color: #fdee21;
+  color: blue;
+  width: 100%;
+}

@@ -33,7 +33,7 @@ export default function GradeA(props) {
           }
         </div>
         <div className="w-96 sm:text-base sm:w-screen sm:px-12 my-6">
-          <div>Nice done. Seems like you like Anni's answers pretty much.</div>
+          <div>Nice Pick. Seems like you like Anni's answers pretty much.</div>
         </div>
       </div>
       <div className="flex flex-rows relative">

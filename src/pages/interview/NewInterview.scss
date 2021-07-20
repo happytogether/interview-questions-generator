@@ -1,0 +1,49 @@
+
+.options-container {
+  box-shadow: 10px -10px 0 -3px white, 10px -10px var(--green),
+        20px -20px 0 -3px white, 20px -20px var(--yellow),
+        30px -30px 0 -3px white, 30px -30px var(--orange),
+        40px -40px 0 -3px white, 40px -40px var(--red);
+        height: auto;
+
+}
+
+.interview-start.bg-blue {
+  background: linear-gradient(90deg, var(--gray-light) 60%, var(--blue) 40%);
+}
+
+.interview-start.bg-pink {
+  background: linear-gradient(90deg, var(--gray-light) 60%, var(--pink) 40%);
+}
+
+.interview-start.bg-yellow {
+  background: linear-gradient(90deg, var(--gray-light) 60%, var(--yellow) 40%);
+}
+
+.interview-start.bg-orange {
+  background: linear-gradient(90deg, var(--gray-light) 60%, var(--orange) 40%);
+}
+
+.interview-start.bg-green {
+  background: linear-gradient(90deg, var(--gray-light) 60%, var(--green) 40%);
+}
+
+.interview-start.bg-red{
+  background: linear-gradient(90deg, var(--gray-light) 60%, var(--red) 40%);
+}
+
+.new-interview.bg-purple {
+  background: linear-gradient(90deg, var(--gray-light) 60%, var(--purple) 40%);
+}
+.chips li {
+  span.selected {
+    background: var(--purple);
+    color: white;
+
+    &:after {
+      display: inline-block;
+      content: "\2713";
+      padding-left: 10px;
+    }
+  }
+}

@@ -8,10 +8,16 @@ module.exports = {
        '-10': '-10',
      },
      opacity: {
-       '13': '13.33%'
+       '15': '15%'
      },
      width: {
        '60vw': '60vw',
+     },
+     scale: {
+       '80': '.8'
+     },
+     backgroundColor: {
+       'black': '#000'
      }
     },
     screens: {
@@ -80,6 +86,7 @@ module.exports = {
     textColor: {
       blue: "var(--blue)",
       white: "#FFF",
+      gray: "var(--gray)",
       black: "#000"
     }
   },

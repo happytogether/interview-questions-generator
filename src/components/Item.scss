@@ -1,0 +1,28 @@
+.item {
+  flex-direction: row;
+  position: relative;
+  height: calc(100vh - 100px);
+  perspective: 350px;
+  perspective-origin: 50% 50%;
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+  &:nth-of-type(2n) {
+    flex-direction: row-reverse;
+    > div:first-child {
+      flex: 2;
+    }
+    > div:last-child {
+      flex: 3;
+    }
+  }
+  &:nth-of-type(2n-1) {
+    flex-direction: row;
+    > div:first-child {
+      flex: 3;
+    }
+    > div:last-child {
+      flex: 2;
+    }
+  }
+}

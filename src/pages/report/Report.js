@@ -8,15 +8,17 @@ import { useSpring, animated } from 'react-spring';
 import { motion } from "framer-motion";
 import * as easings from 'd3-ease';
 import Smile from '../../components/shapes/Smile';
-import Sun from '../../components/shapes/Sun';
+import Sad from '../../components/shapes/Sad';
 import Triangle from '../../components/shapes/memphis/Triangle';
 import { DonutSet, IceCreamSet, TwitchSet, DefaultSet, FruitSet, FruitSet2, BallonSet } from "../../components/Reward/MemphisSets";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Store } from "../../Store";
 import Arrow from '../../components/shapes/Arrow';
+import Sun from '../../components/shapes/Sun';
 import DelayLink from '../../ultils/DelayLink';
 import { GradeASet } from '../confettiSet/GradeASet';
+import { fetchQuestionsDataAction,  fetchQuestionsNumDataAction, stepDoneAction, stepsAddAnswersAction, defaultQuestionsNum } from '../../Actions';
+import { QuestionsStore, QuestionsNumStore, StepperStore, UserAnswersStore } from '../../Store';
 import {
   BrowserView,
   MobileView,
@@ -25,11 +27,35 @@ import {
 } from "react-device-detect";
 
 function Report() {
-  const index= parseInt(useParams().categoryIndex);
 
-  useEffect(() => {
-    window.scrollTo(0, 0)
+  window.scrollTo(0, 0);
+
+  const { questionsState, dispatch } = useContext(QuestionsStore);
+  // fetch data from json file
+  useEffect(
+    () => {
+      questionsState.data.length === 0 && fetchQuestionsDataAction(dispatch, defaultQuestionsNum());
+    },
+    []
+  );
+  const { questionsNumState, questionsNumDispatch } = useContext(QuestionsNumStore);
+  const { stepperState, stepperDispatch } = useContext(StepperStore);
+  const { userAnswersState, userAnswersDispatch } = useContext(UserAnswersStore);
+  const [rightAnswerSum, setRightAnswerSum] = useState(0);
+
+  useEffect(()=>{
+    setRightAnswerSum(userAnswersState.data.reduce(function(a,b) { return a.concat(b) }) // flatten array
+     .reduce(function(a,b) { return a + b }, 0))
+  }, [userAnswersState.data])
+
+
+  const [questionsSum, setQuestionsSum] = useState(0);
+
+  useEffect(()=>{
+    const temp = questionsNumState.data.reduce((a, b) => a + b, 0);
+    setQuestionsSum(temp);
   }, [])
+
   //const fadeIn = useSpring({ to: { y: 0, opacity: 1}, from: { opacity: 0, y:1000 }, config: { duration: 3000, easing: easings.easeCubic } });
   const setArray = [DonutSet(), IceCreamSet(), TwitchSet(), DefaultSet(), FruitSet(), FruitSet2(), BallonSet()];
   const set = setArray[Math.floor(Math.random()*setArray.length)];
@@ -59,13 +85,13 @@ function Report() {
       </header>
       <ToastContainer position="top-center" autoClose={5000} />
       <div className={`w-screen h-screen report bg-${bgColor} flex justify-center items-center py-10`}>
-        <div className="sm:w-11/12 sm:mt-20 sm:p-10 w-6/12 h-5/6 bg-white p-20">
-          <div className="flex flex-row w-full h-full sm:flex-col">
-            <div className="sm:w-screen w-6/12 h-full">
+        <div className="xl:w-11/12 lg:mt-20 lg:p-10 w-6/12 h-5/6 bg-white p-20 default-window mt-20">
+          <div className="flex flex-row w-full h-full lg:flex-col">
+            <div className="lg:w-screen w-6/12 h-full">
               <div className="w-6/12 bg-cover bg-center bg-no-repeat" style={{"backgroundImage": `url(${imgSrc})`, "backgroundColor": "var(--purple)", "backgroundSize": "120px auto", "height": "300px"}}></div>
               <div className="text-black lowercase font-semibold text-4xl py-5">statistics<br />report</div>
               <div class="float-left">
-                <ReactStoreIndicator width={150} value={66} maxValue={100} />
+                <ReactStoreIndicator width={150} value={(rightAnswerSum/questionsSum).toFixed(2)*100} maxValue={100} />
               </div>
               <div className="clear-both"></div>
               {
@@ -75,7 +101,7 @@ function Report() {
               }
 
             </div>
-            <div className="sm:w-full w-6/12">
+            <div className="lg:w-full w-6/12">
               <Sun />
               <ul>
                 <li className="border-3 py-6"><p className="block my-3">From the statistics, Anni Wang might be a good fit</p><p> if you are looking for an UX Enginner, Design Technoligist or a prototyper who loves animation. Book a quick online chat here.</p></li>
@@ -86,91 +112,26 @@ function Report() {
                 </li>
                 <li className="py-10">
                   <ul>
-                    <li>
-                      Tech Questions
-                      <BrowserView>
-                      <ul className="flex flex-row">
-                        <li><Smile size="40px" /></li>
-                        <li><Smile size="40px" /></li>
-                        <li><Smile size="40px" /></li>
-                        <li><Smile size="40px" /></li>
-                        <li><Smile size="40px" /></li>
-                      </ul>
-                      </BrowserView>
-                      <MobileView>
-                        <ul className="flex flex-row">
-                          <li><Smile size="30px" /></li>
-                          <li><Smile size="30px" /></li>
-                          <li><Smile size="30px" /></li>
-                          <li><Smile size="30px" /></li>
-                          <li><Smile size="30px" /></li>
-                        </ul>
-                      </MobileView>
-                    </li>
-                    <li>
-                      UX Questions
-                      <BrowserView>
-                        <ul className="flex flex-row">
-                          <li><Smile size="40px" /></li>
-                          <li><Smile size="40px" /></li>
-                          <li><Smile size="40px" /></li>
-                          <li><Smile size="40px" /></li>
-                          <li><Smile size="40px" /></li>
-                        </ul>
-                      </BrowserView>
-                      <MobileView>
-                        <ul className="flex flex-row">
-                          <li><Smile size="30px" /></li>
-                          <li><Smile size="30px" /></li>
-                          <li><Smile size="30px" /></li>
-                          <li><Smile size="30px" /></li>
-                          <li><Smile size="30px" /></li>
-                        </ul>
-                      </MobileView>
-                    </li>
-                    <li>
-                      Experience Questions
-                      <BrowserView>
-                        <ul className="flex flex-row">
-                          <li><Smile size="40px" /></li>
-                          <li><Smile size="40px" /></li>
-                          <li><Smile size="40px" /></li>
-                          <li><Smile size="40px" /></li>
-                          <li><Smile size="40px" /></li>
-                        </ul>
-                      </BrowserView>
-                      <MobileView>
-                        <ul className="flex flex-row">
-                          <li><Smile size="30px" /></li>
-                          <li><Smile size="30px" /></li>
-                          <li><Smile size="30px" /></li>
-                          <li><Smile size="30px" /></li>
-                          <li><Smile size="30px" /></li>
-                        </ul>
-                      </MobileView>
-                    </li>
-                    <li>
-                      Personal Questions
-                      <BrowserView>
-                        <ul className="flex flex-row">
-                          <li><Smile size="40px" /></li>
-                          <li><Smile size="40px" /></li>
-                          <li><Smile size="40px" /></li>
-                          <li><Smile size="40px" /></li>
-                          <li><Smile size="40px" /></li>
-                        </ul>
-                      </BrowserView>
-                      <MobileView>
-                        <ul className="flex flex-row">
-                          <li><Smile size="30px" /></li>
-                          <li><Smile size="30px" /></li>
-                          <li><Smile size="30px" /></li>
-                          <li><Smile size="30px" /></li>
-                          <li><Smile size="30px" /></li>
-                        </ul>
-                      </MobileView>
-                    </li>
-                    <li></li>
+                    {
+                      questionsState.data.map((item, index) => (
+                        <li>
+                            <DelayLink to={`./interview/${index}`} delay="1000">{item.cat} </DelayLink>
+
+                            <span className="text-xs text-gray">/ checkmark</span>
+                            <ul className="flex flex-row">
+                              {
+                                item.questions.map((q, i) => (
+                                  <li>
+                                    {
+                                      userAnswersState.data[index][i] === 1 ? <Smile size="32px" opacity="1"  />: <Sad size="32px" opacity=".3" />
+                                    }
+                                  </li>
+                                ))
+                              }
+                            </ul>
+                        </li>
+                      ))
+                    }
                   </ul>
                 </li>
               </ul>

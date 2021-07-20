@@ -20,6 +20,7 @@ import * as easings from 'd3-ease'
 import { Store } from '../Store';
 import { Link } from 'react-router-dom';
 import DelayLink from '../ultils/DelayLink';
+import './Item.scss';
 
 const calc = (x, y) => [x - window.innerWidth / 2, y - window.innerHeight / 2]
 const piePosX = window.innerWidth - 100;
@@ -85,65 +86,26 @@ export default function Items(props) {
           animate="animate"
           initial="initial" onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })}>
       {
-        props.items && props.items.length>0 && props.items.map((item, index)=><li key={index} value={props.value}  className={`item flex items-center justify-center md:flex-col ${flexDirection[index%2]} ${colorPalette[index%4]}`}>
+        props.items && props.items.length>0 && props.items.map((item, index)=><li key={index} value={props.value}  className={`item flex flex-row items-center justify-center md:flex-col ${flexDirection[index%2]}`}>
 
-          <motion.div variants={upMotion}>
-            <animated.div style={{ transform: props1.xy.interpolate(trans5) }}>
-              <div className={`flex items-center justify-center ${randomBgArr[Math.floor(Math.random()*11)]} ${categoryMainShape[index%4]}`}>
-                <span className={randomBgArr[Math.floor(Math.random()*11)]}></span>
-              </div>
-            </animated.div>
-          </motion.div>
-
-
-          <animated.div className="hover-rotate sm:hidden" style={{ transform: props1.xy.interpolate(trans2) }}>
-            <Sun2 clicked={clicked} />
-          </animated.div>
-
-          <Moon background="transparent" />
-          <div className="absolute w-full" style={{"right": "10vw", "top": "50%"}}>
-            <animated.div className="sm:hidden" style={{ transform: props1.xy.interpolate(trans1) }}>
-              <Sun clicked={clicked} />
-            </animated.div>
-
+          <div className={`h-full ${colorPalette[index%4]} flex items-center justify-center`}>
+            <div className="sm:hidden">
+              <Rect color={rectPalette[index%4]} index={index}/>
+            </div>
+            <motion.div variants={upMotion}>
+              <animated.div style={{ transform: props1.xy.interpolate(trans5) }}>
+                <div className={`rect flex items-center justify-center sm:transform-gpu sm:scale-80 ${randomBgArr[Math.floor(Math.random()*11)]} ${categoryMainShape[index%4]}`}>
+                  <span className={randomBgArr[Math.floor(Math.random()*11)]}></span>
+                </div>
+              </animated.div>
+            </motion.div>
             <motion.div variants={downMotion}>
               <animated.div className="sm:hidden" style={{ transform: props1.xy.interpolate(trans3) }}>
                 <Sun3 clicked={clicked} />
               </animated.div>
             </motion.div>
-
-            {
-              <motion.div variants={downMotion}>
-              <animated.div className="sm:hidden" style={{ transform: props1.xy.interpolate(trans4) }}>
-                <Circle />
-              </animated.div>
-            </motion.div>
-
-          }
-
           </div>
-
-          {
-            /*<div className="sm:hidden">
-            <Square size="150" color={colorPalette[index%4]} index={index} />
-          </div>*/
-          }
-          <div className="sm:hidden">
-            <Rect color={rectPalette[index%4]} index={index}/>
-          </div>
-          {
-            /*
-            <Circle />
-            */
-          }
-          <HoverIntent
-            onMouseOver={() => handleMouseoverChange("hovered")}
-            onMouseOut={() => handleMouseoverChange("")}
-            sensitivity={10}
-            interval={200}
-            timeout={0}
-          >
-
+          <div className="flex justify-center items-center h-full" style={{"backgroundColor": "var(--gray-light)"}}>
           <animated.div style={up1}>
             <figcaption className={`md:py-14 mx-28 ${textAlign[index%2]}`} style={{maxWidth: "250px"}}>
               <h3 className="text-5xl">{item.cat}</h3>
@@ -154,12 +116,11 @@ export default function Items(props) {
                     <ClickSoundLink text="View Questions" link={`/questions/${index+1}`} />
                   */
                 }
-                <DelayLink delay="600" to={`/questions/${index}`}>View Questions</DelayLink>
+                <DelayLink delay="600" to={`/interview/${index}`}>Questions Gallery</DelayLink>
               </button>
             </figcaption>
           </animated.div>
-          </HoverIntent>
-
+          </div>
         </li>)
       }
     </motion.ul>

@@ -1,7 +1,8 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import { MouseContext } from "./../context/mouse-context";
+import MainLeft from './MainLeft';
 import Reward from './Reward/Reward.js';
-import { DonutSet, IceCreamSet, TwitchSet, DefaultSet, FruitSet2, BallonSet } from "./Reward/MemphisSets";
+import { DonutSet, IceCreamSet, TwitchSet, DefaultSet, FruitSet, FruitSet2, BallonSet } from "./Reward/MemphisSets";
 import DotRing from "./DotRing/DotRing";
 import Sun2 from './shapes/Sun2';
 import Wave from './shapes/Wave';
@@ -16,13 +17,13 @@ import jumpSfx from './jump.mp3';
 import cuteSfx from './cute.mp3';
 import clickSfx from './click.mp3';
 import DelayLink from '../ultils/DelayLink';
+import './homehead.scss';
 
 export default function HomeHead(props) {
   const { cursorType, cursorChangeHandler } = useContext(MouseContext);
   const styles = {
     padding: "40px",
     border: "1px solid",
-    boxShadow: "-10px 10px blue",
     backgroundColor: "#fdee21",
     color: "blue",
     width: "100%"
@@ -69,9 +70,13 @@ export default function HomeHead(props) {
 
   const up1 = useSpring({ to: { y: 0, opacity: 1}, from: { opacity: 0, y:50 } });
   const down1 = useSpring({ to: { y: 0, opacity: 1}, from: { opacity: 0, y:-50 }});
+  const styles2 ={
+    "perspective": "350px",
+    "perspectiveOrigin": "50% 50%"
+  }
 
   return (
-    <main onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })} className="h-screen w-screen p-8 flex justify-items-center items-center md:flex-col md:h-auto md:my-10">
+    <main style={styles2} onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })} className="h-screen w-screen p-20 flex justify-items-center items-center md:flex-col md:h-auto md:my-10">
 
       <Logo color="var(--blue)" />
       {
@@ -83,17 +88,14 @@ export default function HomeHead(props) {
       </animated.div>
 
 
-
-      <div className="flex-1" style={styles}>
+      <div className="flex-1 homehead-left" style={styles}>
         <h2 className="text-3xl border-b-2 pb-2">Interview<br /><input type="text" placeholder="Anni Wang" />and get some FUN.</h2>
-
-        <p>*Questions will be randomly gernerated.</p>
+        <p className="my-5">*Questions will be randomly gernerated.</p>
 
         <div className="text-left">
-          <h4></h4>
           <div className="flex mt-2 space-x-4">
-            <div className="border rounded-sm py-3 px-6 mt-10">
-              <DelayLink to="./questions/0" delay="300">Start Interview Process</DelayLink>
+            <div className="border rounded-sm py-3 px-6 mt-3">
+              <DelayLink to="./newInterview" delay="1000">Start Interview Process</DelayLink>
             </div>
           </div>
         </div>
@@ -114,7 +116,7 @@ export default function HomeHead(props) {
         </animated.div>*/
       }
       </div>
-      <div className="flex-1 mt-10 text-2xl md:text-xl" >
+      <div className="flex-1 mt-10 text-2xl md:text-xl homehead-right ml-20 md:ml-0 md:mt-20" >
         <div className={`text-left ${randomBg[Math.floor(Math.random()*6)]}`} style={styleRight}>
           <span className="p-3 my-3 bg-white leading-normal">Anni Wang is an UX Engineer, a Design Technologist. </span><br />
           <span className="p-1 mx-4 bg-white">a designer and coder</span>

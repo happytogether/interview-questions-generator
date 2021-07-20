@@ -1,10 +1,10 @@
-import { Store, StepperStore } from "../Store";
+import { HomeStore, StepperStore } from "../Store";
 import { useEffect, useContext } from 'react';
 import { Link } from "react-router-dom";
 import DelayLink from '../ultils/DelayLink';
 
 export default function Stepper(props) {
-  const { state, dispatch } = useContext(Store);
+  const { state, dispatch } = useContext(HomeStore);
   const { stepperState, stepperDispatch } = useContext(StepperStore);
   const steps = state.data.length;
   const activeStep = props.activeStep; // index is 0 based

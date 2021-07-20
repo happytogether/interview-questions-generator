@@ -9,11 +9,11 @@ import RandomBg from './RandomBg';
 import getRandomDifferent from './getRandomDifferent';
 import { motion } from "framer-motion";
 import { InitialTransition } from './components/InitialTransition';
-import { Store, StepperStore } from "./Store";
+import { HomeStore, StepperStore } from "./Store";
 import { fetchDataAction, stepDoneAction } from "./Actions";
 
 function Home() {
-  const { state, dispatch } = useContext(Store);
+  const { state, dispatch } = useContext(HomeStore);
   const { stepperState, stepperDispatch} = useContext(StepperStore);
 
   useEffect(() => {
@@ -86,7 +86,7 @@ function Home() {
   }
 
   useEffect(()=> {
-    document.body.classList.remove('questions-page');
+    document.body.classList.remove('new-interview');
   }, []);
 
   return (

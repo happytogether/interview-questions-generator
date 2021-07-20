@@ -51,31 +51,13 @@ html, body {
 
 }
 
-body.list-open, body.questions-page {
+body.list-open, body.new-interview {
   overflow: hidden;
-  --background-color: black;
+  --background-color: var(--blue)
 }
 
 body.credit-page {
   --background-color: var(--yellow);
-}
-
-.item {
-  position: relative;
-  padding: 10rem 5rem;
-  margin-bottom: 10rem;
-  min-height: calc(100vh - 100px);
-  perspective: 350px;
-  perspective-origin: 50% 50%;
-  &:last-of-type {
-  margin-bottom: 0;
-  }
-}
-
-.item h3 {
-  position: relative;
-  left: -5%;
-  top: 30%;
 }
 
 .shake {
@@ -178,17 +160,22 @@ div.static[open="0"] {
   transform: scale(15) rotate(360deg);
   z-index: 1;*/
 }
-
+.default-window {
+  box-shadow: 10px -10px 0 -3px white, 10px -10px var(--green),
+        20px -20px 0 -3px white, 20px -20px var(--yellow),
+        30px -30px 0 -3px white, 30px -30px var(--orange),
+        40px -40px 0 -3px white, 40px -40px var(--red);
+}
 .large-rect {
   width: 350px;
   height: 450px;
   border: 1px solid var(--purple-gray);
   z-index: 0;
   transition: all .3s ease-out;
-  box-shadow: 10px -10px 0 -3px white, 10px -10px var(--green),
-        20px -20px 0 -3px white, 20px -20px var(--yellow),
-        30px -30px 0 -3px white, 30px -30px var(--orange),
-        40px -40px 0 -3px white, 40px -40px var(--red);
+box-shadow: 10px -10px 0 -3px white, 10px -10px var(--green),
+      20px -20px 0 -3px white, 20px -20px var(--yellow),
+      30px -30px 0 -3px white, 30px -30px var(--orange),
+      40px -40px 0 -3px white, 40px -40px var(--red);
 }
 
 .large-rect:hover {
@@ -261,10 +248,10 @@ figcaption.hovered {
   width: 300px;
   height: 300px;
   border: 10px solid var(--blue);
-  box-shadow: 10px -10px var(--green),
-        20px -20px var(--yellow),
-        30px -30px var(--orange),
-        40px -40px var(--red);
+  box-shadow: 10px -10px 0 -3px white, 10px -10px var(--green),
+        20px -20px 0 -3px white, 20px -20px var(--yellow),
+        30px -30px 0 -3px white, 30px -30px var(--orange),
+        40px -40px 0 -3px white, 40px -40px var(--red);
   > span {
     width: 100px;
     height: 100px;
@@ -390,6 +377,10 @@ figcaption.hovered {
   background-size: 20px 20px;
   background-repeat: repeat;
 }
+.memphis-bg1 {
+  background-image: url('/memphis-bg1.svg');
+  background-size: 1000px auto;
+}
 .honey-comb-bg {
   background:
     radial-gradient(circle farthest-side at 0% 50%,var(--background-color) 23.5%,rgba(240,166,17,0) 0)21px 30px,
@@ -435,7 +426,7 @@ figcaption.hovered {
   }
 .box-bg {
   background-color: var(--background-color);
-  background-image:  linear-gradient(var(--main) 1px, transparent 1px), linear-gradient(to right, var(--main) 1px, var(--background-color) 1px);
+  background-image:  linear-gradient(var(--main) 1px, transparent 1px), linear-gradient(to right, var(--main) 1px, transparent 1px);
   background-size: 20px 20px;
 }
 .skew-dot-bg {
@@ -500,32 +491,6 @@ input:focus::-webkit-input-placeholder {
 .hover-rotate:hover {
   //transform: rotate(90deg);
   //transition: all .2s ease;
-}
-footer ul .link {
-  display: inline-block;
-  vertical-align: middle;
-  -webkit-transform: perspective(1px) translateZ(0);
-  transform: perspective(1px) translateZ(0);
-  box-shadow: none;
-  position: relative;
-  overflow: hidden;
-  padding-bottom: 5px;
-  &:after{
-    content: "";
-    position: absolute;
-    z-index: -1;
-    left: 100%;
-    right: 0;
-    bottom: 0;
-    background: var(--purple);
-    height: 2px;
-    transition-property: left;
-    transition-duration: 0.3s;
-    transition-timing-function: ease-out;
-  }
-  &:hover:after {
-    left: 0;
-  }
 }
 
 @keyframes rotation {

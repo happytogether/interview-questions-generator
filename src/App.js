@@ -5,7 +5,8 @@ import Home from './Home';
 import Report from './pages/report/Report';
 import Credit from './pages/credit/Credit';
 import Booking from './pages/booking/Booking';
-import QuestionsContainer from './pages/questions/QuestionsContainer';
+import InterviewContainer from './pages/interview/InterviewContainer';
+import NewInterview from './pages/interview/NewInterview';
 import { AnimatePresence } from "framer-motion";
 import { LastLocationProvider } from 'react-router-last-location';
 
@@ -18,7 +19,8 @@ function App() {
             <div className="App">
               <Switch>
                 <Route exact path='/' component={Home} />
-                <Route path='/questions/:categoryIndex' component={QuestionsContainer} />
+                <Route path='/interview/:categoryIndex' component={InterviewContainer} />
+                <Route path='/newInterview' component={NewInterview} />
                 <Route path='/credit' component={Credit} />
                 <Route path='/booking' component={Booking} />
                 <Route path='/report' component={Report} />

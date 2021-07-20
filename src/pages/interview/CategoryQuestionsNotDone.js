@@ -6,15 +6,15 @@ import Restart from '../../components/shapes/Restart';
 import { DefaultSet, TwitchSet, MemphisSet1, MemphisSet2 } from "../../components/Reward/MemphisSets";
 import getRandomDifferent from '../../getRandomDifferent';
 import { stepDoneAction, stepsAddAnswersAction } from "../../Actions";
-import { Store, StepperStore, StepsAnswersStore } from '../../Store';
+import { Store, QuestionsStore, StepperStore, UserAnswersStore } from '../../Store';
 
 export default function QuestionsNotDone(data) {
   let completedStepsArray = [];
-  const { state, dispatch } = useContext(Store);
+  const { questionsState, dispatch } = useContext(QuestionsStore);
   const { stepperState, stepperDispatch } = useContext(StepperStore);
-  const { stepsAnswersState, stepsAnswersDispatch } = useContext(StepsAnswersStore);
+  const { userAnswersState, userAnswersDispatch } = useContext(UserAnswersStore);
   const categoryIndex = useParams().categoryIndex;
-  const questions = state.data[categoryIndex].questions;
+  const questions = questionsState.data[categoryIndex].questions;
   const [userAnswers, setUserAnswers] = useState([]);
   const [rightAnswerNum, setRightAnswerNum] = useState(0);
   const [wrongAnswerNum, setWrongAnswerNum] = useState(0);
@@ -40,13 +40,13 @@ export default function QuestionsNotDone(data) {
       const scale = down ? 1.1 : 1 // Active cards lift up a bit
       if (dir == -1 && isGone) {
         setUserAnswers(userAnswers => [...userAnswers,0]);
-        stepsAnswersState.data[categoryIndex].push(0);
-        stepsAddAnswersAction(stepsAnswersState.data, stepsAnswersDispatch);
+        userAnswersState.data[categoryIndex].push(0);
+        stepsAddAnswersAction(userAnswersState.data, userAnswersDispatch);
       }
       if (dir == 1 && isGone) {
         setUserAnswers(userAnswers => [...userAnswers,1]);
-        stepsAnswersState.data[categoryIndex].push(1);
-        stepsAddAnswersAction(stepsAnswersState.data, stepsAnswersDispatch);
+        userAnswersState.data[categoryIndex].push(1);
+        stepsAddAnswersAction(userAnswersState.data, userAnswersDispatch);
       }
       return { x, rot, scale, delay: undefined, config: { friction: 50, tension: down ? 800 : isGone ? 200 : 500 } }
     })

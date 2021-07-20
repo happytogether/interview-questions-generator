@@ -24,6 +24,7 @@ export default function GradeF(props) {
   const randomIndex = Math.random() > .5 ? 0: 1;
   return (
     <div className="flex items-center justify-center flex-col">
+      <Rain numDrops="25" />
       <div className="flex flex-rows items-center">
         <div className="sm:hidden text-8xl mx-4">
           {
@@ -42,9 +43,6 @@ export default function GradeF(props) {
           <Reward ref={canvasInputF} type='emoji' config = {{"emoji": randomIndex ?HeartBrokenSet():ThunderSet(), "elementCount": randomIndex?10:5, "elementSize": randomIndex?100: 50, "spread": 150}}></Reward>
         </div>
       </div>
-
-      <Rain numDrops="100" />
-
     </div>
   )
 }

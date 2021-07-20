@@ -7,6 +7,8 @@ import GradeF from './GradeF';
 import Arrow from '../../components/shapes/Arrow';
 import { Link } from 'react-router-dom';
 import DelayLink from '../../ultils/DelayLink';
+import { StepperStore, UserAnswersStore } from '../../Store';
+import { stepResetAction } from "../../Actions";
 
 export default function QuestionsDone(props) {
   const questions = props.questions;
@@ -19,10 +21,17 @@ export default function QuestionsDone(props) {
   const [gradePercentage, setGradePercentage] = useState();
   const [grade, setGrade] = useState();
   const reducer = (accumulator, currentValue) => accumulator + currentValue;
+  const { stepperState, stepperDispatch } = useContext(StepperStore);
+
 
   function redo() {
     props.redo();
     props.rightWrongNumReset();
+    //stepsResetAnswersAction([], stepperDispatch);
+    const temp = stepperState.data.filter(function(item) {
+      return item!==index;
+    })
+    stepResetAction(temp, stepperDispatch);
   }
 
   useEffect(() => {
@@ -76,7 +85,7 @@ export default function QuestionsDone(props) {
   };
 
   return (
-      <motion.div variants={content} animate="animate" initial="initial" className="w-full h-full absolute flex flex-col items-center justify-center text-3xl text-white">
+      <motion.div variants={content} animate="animate" initial="initial" className="w-full h-full absolute flex flex-col items-center justify-center sm:justify-start sm:mt-10 text-3xl text-white">
         <div className="flex flex-rows">
           <motion.div variants={upMotion}>
             {
@@ -88,19 +97,21 @@ export default function QuestionsDone(props) {
           </motion.div>
         </div>
         <div className="flex items-center flex-row z-30 relative">
-          <motion.div className={`mx-5`} variants={upMotion}>
+          <motion.div className={`mx-5 flex flex-col items-center ${index==0?' hidden':''}`} variants={upMotion}>
             <DelayLink to={`./${prePageIndex}`}>
-              <Arrow rotate="180deg" size="80px" color="#fff" />
+              <Arrow rotate="180deg" size="60px" color="#fff" />
             </DelayLink>
+            <span className="text-sm">Step {index}</span>
           </motion.div>
           <motion.div className="mx-5" variants={upMotion2} onClick={() => redo()}>
-            <Restart size="80px" />
+            <Restart size="60px" />
           </motion.div>
-          <motion.div className={`mx-5`} variants={upMotion}>
-            <DelayLink to={`./${nextPageIndex}`}>
-              <span className="text-sm">Step 2</span>
-              <Arrow size="80px" color="#fff" />
+          <motion.div className={`mx-5 flex flex-col items-center`} variants={upMotion}>
+            <DelayLink to={`${nextPageIndex===0? '/report': './'+nextPageIndex}`}>
+              <Arrow size="60px" color="#fff" />
             </DelayLink>
+            <span className={`text-sm ${index === (props.steps-1)?' hidden':''}`}>Step {index+2}</span>
+            <span className={`text-sm ${index === (props.steps-1)?'':'hidden'}`}>see report</span>
           </motion.div>
         </div>
       </motion.div>
