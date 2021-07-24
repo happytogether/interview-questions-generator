@@ -1,11 +1,41 @@
-import { useSpring, animated } from 'react-spring';
-import * as easings from 'd3-ease';
+const content = {
+  animate: {
+    transition: { staggerChildren: 0.1 },
+  },
+};
 
-export function Up() {
-  const { up } = useSpring({ to: { y: 0, opacity: 1}, from: { opacity: 0, y:50 }, config: { duration: 800, easing: easings.easeCubic } })
-  return <animated.div style={{ up }} />
-}
+const downMotion = {
+  initial: { y: -20, opacity: 0 },
+  animate: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.7,
+      ease: [0.6, -0.05, 0.01, 0.99],
+    },
+  },
+};
+const upMotion = {
+  initial: { y: 50, opacity: 0 },
+  animate: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: .8,
+      ease: [0.6, -0.05, 0.01, 0.99],
+    },
+  },
+};
+const upMotionSlow = {
+  initial: { y: 50, opacity: 0 },
+  animate: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 1.2,
+      ease: [0.6, -0.05, 0.01, 0.99],
+    },
+  },
+};
 
-export function Down() {
-  return useSpring({ to: { y: 0, opacity: 1}, from: { opacity: 0, y:-50 }, config: { duration: 800, easing: easings.easeCubic } });
-}
+export { content, downMotion, upMotion, upMotionSlow }

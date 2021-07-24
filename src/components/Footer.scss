@@ -8,7 +8,7 @@ footer {
     background-size: 20px 20px;
   }
 }
-footer ul .link a {
+footer ul .link a, a.link {
   display: inline-block;
   vertical-align: middle;
   -webkit-transform: perspective(1px) translateZ(0);
@@ -24,7 +24,7 @@ footer ul .link a {
     left: 100%;
     right: 0;
     bottom: 0;
-    background: var(--purple);
+    background: white;
     height: 2px;
     transition-property: left;
     transition-duration: 0.3s;
@@ -33,29 +33,6 @@ footer ul .link a {
   &:hover:after {
     left: 0;
   }
-}
-footer.bg-blue {
-  background: linear-gradient(90deg, var(--blue) 60%, var(--gray-light) 40%);
-}
-
-footer.bg-pink {
-  background: linear-gradient(90deg, var(--pink) 60%, var(--gray-light) 40%);
-}
-
-footer.bg-yellow {
-  background: linear-gradient(90deg, var(--yellow) 60%, var(--gray-light) 40%);
-}
-
-footer.bg-orange {
-  background: linear-gradient(90deg, var(--orange) 60%, var(--gray-light) 40%);
-}
-
-footer.bg-green {
-  background: linear-gradient(90deg, var(--green) 60%, var(--gray-light) 40%);
-}
-
-footer.bg-red{
-  background: linear-gradient(90deg, var(--red) 60%, var(--gray-light) 40%);
 }
 
 footer.bg-purple {

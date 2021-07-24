@@ -87,6 +87,7 @@ module.exports = {
       blue: "var(--blue)",
       white: "#FFF",
       gray: "var(--gray)",
+      graydark: "var(--gray-dark)",
       black: "#000"
     }
   },

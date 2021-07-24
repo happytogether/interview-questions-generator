@@ -1,14 +1,13 @@
 .item {
-  flex-direction: row;
-  position: relative;
-  height: calc(100vh - 100px);
   perspective: 350px;
   perspective-origin: 50% 50%;
+  @media (min-width: 1024px) {
+    height: calc(100vh - 100px);
+  }
   &:last-of-type {
     margin-bottom: 0;
   }
   &:nth-of-type(2n) {
-    flex-direction: row-reverse;
     > div:first-child {
       flex: 2;
     }
@@ -17,7 +16,6 @@
     }
   }
   &:nth-of-type(2n-1) {
-    flex-direction: row;
     > div:first-child {
       flex: 3;
     }

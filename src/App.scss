@@ -56,10 +56,17 @@ body.list-open, body.new-interview, body.gallery-page {
   --background-color: var(--blue)
 }
 
+body.gallery-page {
+  background: var(--purple);
+}
+
 body.credit-page {
   --background-color: var(--yellow);
 }
 
+.box-shadow {
+  box-shadow: 10px -10px 0 -3px white, 10px -10px var(--green), 20px -20px 0 -3px white, 20px -20px var(--yellow), 30px -30px 0 -3px white, 30px -30px var(--orange), 40px -40px 0 -3px white, 40px -40px var(--red)
+}
 .shake {
   animation: swipe-x 2.25s ease-in-out backwards;
 	animation-iteration-count:infinite;
@@ -147,19 +154,8 @@ div.static[open="0"] {
 .item-rect {
   width: 200px;
   height: 30px;
-  //transition: all .7s cubic-bezier(0.165, 0.84, 0.44, 1);
-  > div {
-    width: 200px;
-    height: 30px;
-  }
 }
-.list-open .item-rect {
-  /*transform-origin: center;
-  height: 200px;
-  border-radius: 100% 20%;
-  transform: scale(15) rotate(360deg);
-  z-index: 1;*/
-}
+
 .default-window {
   box-shadow: 10px -10px 0 -3px white, 10px -10px var(--green),
         20px -20px 0 -3px white, 20px -20px var(--yellow),
@@ -171,17 +167,18 @@ div.static[open="0"] {
   height: 450px;
   border: 1px solid var(--purple-gray);
   z-index: 0;
-  transition: all .3s ease-out;
-box-shadow: 10px -10px 0 -3px white, 10px -10px var(--green),
+  box-shadow: 10px -10px 0 -3px white, 10px -10px var(--green),
       20px -20px 0 -3px white, 20px -20px var(--yellow),
       30px -30px 0 -3px white, 30px -30px var(--orange),
       40px -40px 0 -3px white, 40px -40px var(--red);
 }
-
-.large-rect:hover {
-  box-shadow: none;
-  border: 10px solid var(--blue);
-  transform: translateX(-10px);
+.rect {
+  transition: all .3s ease-out;
+  &:hover {
+    box-shadow: none;
+    border: 10px solid var(--blue);
+    transform: translateX(-10px);
+  }
 }
 
 .large-rect > span {
@@ -526,7 +523,7 @@ input:focus::-webkit-input-placeholder {
     width: 80px;
   }
 }
-iframe {height: calc(100vh - 4px);width: calc(100vw - 4px);box-sizing: border-box;}
+iframe {height: 90vh; width: 60%; box-sizing: border-box;}
 
 
 @keyframes scaleIn {

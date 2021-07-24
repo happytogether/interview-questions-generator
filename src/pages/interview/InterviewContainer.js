@@ -6,6 +6,7 @@ import InterviewQuestions from './InterviewQuestions';
 import Arrow from '../../components/shapes/Arrow';
 import getRandomDifferent from '../../getRandomDifferent';
 import MouseLeftRight from "../../components/DotRing/MouseLeftRight";
+import Logo from '../../components/Logo';
 import useSound from 'use-sound';
 import clickSfx from '../../components/click.mp3';
 import { motion } from "framer-motion"
@@ -63,11 +64,7 @@ export default function InterviewContainer(props) {
     <motion.div initial={{ opacity: 0.5}}
         animate={{ opacity: 1}}
         exit={{ opacity: 0.5}} onClick={()=>handleRandomBg()} className={`static2 box-bg`}>
-      <span className="close absolute top-6	right-14 z-30 sm:hidden">
-        <DelayLink to="/" delay="300" goBackHome="true">
-          <Arrow size="100px" rotate="180deg" color="#fff" />
-        </DelayLink>
-      </span>
+      <Logo backArrow backArrowColor="white" menuColor="white" color="#fff" bg="black" />
       {
         questionsState.data.length && <InterviewQuestions categoryIndex={categoryIndex} steps={questionsState.data.length} completedSteps={completedSteps} answers={answers || []} />
       }

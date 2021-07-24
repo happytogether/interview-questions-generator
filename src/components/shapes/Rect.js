@@ -9,7 +9,7 @@ export default function Rect(props) {
   const randomPos = ["right-0", "left-0"];
   const [open, setOpen] = useState(false)
   const { f, r } = useSpring({ f: open ? 0 : 1, r: open ? -3 : 3 })
-  const bg = ["var(--red)", "var(--yellow)", "var(--purple)", "var(--green)", "var(--orange)"];
+  const bg = [ "var(--green)", "var(--pink)", "var(--yellow)", "var(--purple)", "var(--orange)"];
   const randomValue = getRandomFromInterval(-200, 200);
   const cards = useSprings(
     5,
@@ -30,7 +30,7 @@ export default function Rect(props) {
   return (
     <div className={`item-rect absolute ${randomPos[props.index%2]} ${props.color}`} onMouseEnter={() => handleMouseOver()} onMouseLeave={() => handleMouseLeave()}>
       {cards.map(({ x, y, z, opacity, background }, index) => (
-        <animated.div className="absolute"
+        <animated.div className="absolute w-full h-full"
           style={{
             opacity,
             background,

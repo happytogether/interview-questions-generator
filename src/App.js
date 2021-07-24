@@ -10,10 +10,10 @@ import NewInterview from './pages/interview/NewInterview';
 import Gallery from './pages/gallery/Gallery';
 import { AnimatePresence } from "framer-motion";
 import { LastLocationProvider } from 'react-router-last-location';
+import HamburgerMenu from "./components/HamburgerMenu/HamburgerMenu.js";
 
 function App() {
   return (
-
       <Router>
         <LastLocationProvider>
           <AnimatePresence exitBeforeEnter>

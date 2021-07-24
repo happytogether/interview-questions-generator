@@ -133,9 +133,6 @@ export default function Questions(value) {
             !done&&<MouseLeftRight />
           }
         </div>
-        <div className="text-sm">
-          <Logo color="#fff" bg="black" />
-        </div>
         {
           <Stepper steps={steps} activeStep={index} />
         }

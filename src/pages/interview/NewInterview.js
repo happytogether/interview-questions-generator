@@ -13,6 +13,7 @@ import Arrow from '../../components/shapes/Arrow';
 import Sun from '../../components/shapes/Sun';
 import { GradeASet } from '../confettiSet/GradeASet';
 import { StepperStore, UserAnswersStore, QuestionsNumStore } from '../../Store';
+import HamburgerMenu from '../../components/HamburgerMenu/HamburgerMenu';
 import Memphis16_1 from '../../components/shapes/memphis16/Memphis16_1';
 import Memphis16_2 from '../../components/shapes/memphis16/Memphis16_2';
 import Memphis16_3 from '../../components/shapes/memphis16/Memphis16_3';
@@ -129,83 +130,77 @@ export default function NewInterview() {
   }
 
   return (
-      <div>
-        <div className="absolute right-0 top-0 h-full" style={{"width": "40%"}}></div>
-        <header style={{"height": "100px"}} className="absolute w-full left-0 top-0">
-          <Logo color="var(--blue)" />
-          <span className="close absolute right-14 z-30">
-            <DelayLink delay="600" to="./" goBackHome="true">
-              <Arrow size="100px" rotate="180deg" color="#fff" />
-            </DelayLink>
-          </span>
-        </header>
-        <div className={`bg-blue interview-start text-blue flex justify-center items-center`}>
-          <div className="options-container xl:w-11/12 lg:mt-20 lg:p-10 lg:w-full w-6/12 h-5/6 bg-white m-20 p-20 mt-32">
-            <div>
-              <p className="text-3xl mb-7">Pick Your Preference:</p>
-              <ul className="chips flex flex-row flex-wrap gap-2 mb-10 clear-both text-sm">
-                {
-                  chips.map((chip, i) => {
-                    const isToggled = i === toggledChipId;
-                    return (
-                      <li key={chip.id} onClick={()=> {handleChipsValue(chip.default_questions); toggleChip(i)}} className={`text-sm flex-2 mb-3`}>
-                        <span className={`p-2 border ${isToggled ? "selected" : ""}`} style={{"color": `${isToggled ? '#fff': 'var(--blue)'}`, "border": `2px solid`, "backgroundColor": `${isToggled ? 'var(--blue)': ''}`}}>{chip.text}</span>
-                      </li>
-                    )
-                  })
-                }
-              </ul>
-            </div>
-            <div className="flex flex-row w-full h-full lg:flex-col">
-              <div className="lg:w-screen w-6/12 h-full">
-                <div className="bg-cover w-11/12 bg-cover bg-center bg-no-repeat" style={{"backgroundImage": `url("/img/interview.svg")`, "height": "400px"}}></div>
-              </div>
-              <div className="lg:w-full w-8/12 pl-10 lg:pl-0">
-                <ul>
-                  <li className="border-3 py-2 font-semibold text-3xl"></li>
-                  <li>
-                  <div className="flex flex-col">
-                    <ul className="flex flex-col">
-                      {
-                        state.data.map((item, index) => (
-                          <li className="mb-10 flex flex-row">
-                            <div className="flex-1 text-right pr-6 text-sm">{item.cat}</div>
-                            <div className="flex-2">
-                              <Slider key={`categoryIndex`+index} color={bgColorArray[4]} categoryIndex={index} handleQuestionsNum={handleQuestionsNum} defaultValue={questionsNum[index]} />
-                            </div>
-                          </li>
-                        ))
-                      }
-                    </ul>
-                    <hr />
-                    <div className="flex flex-row justify-between text-sm mt-5">
-                      <span className="text-left">Total</span>
-                      <span className="text-right">/ {questionsSum} Questions</span>
-                    </div>
-                  </div>
-                  </li>
+      <div id="outer-container">
+        <Logo backArrow backArrowColor="white" color="var(--blue)" menuColor="white" />
+        <div id="page-wrap">
+          <div className={`bg-blue interview-start text-blue flex justify-center items-center`}>
+            <div className="options-container xl:w-11/12 lg:mt-20 lg:p-10 lg:w-full w-6/12 h-5/6 bg-white m-20 p-20 mt-32">
+              <div>
+                <p className="text-3xl mb-7">Pick Your Preference:</p>
+                <ul className="chips flex flex-row flex-wrap gap-2 mb-10 clear-both text-sm">
+                  {
+                    chips.map((chip, i) => {
+                      const isToggled = i === toggledChipId;
+                      return (
+                        <li key={chip.id} onClick={()=> {handleChipsValue(chip.default_questions); toggleChip(i)}} className={`text-sm flex-2 mb-3`}>
+                          <span className={`p-2 border ${isToggled ? "selected" : ""}`} style={{"color": `${isToggled ? '#fff': 'var(--blue)'}`, "border": `2px solid`, "backgroundColor": `${isToggled ? 'var(--blue)': ''}`}}>{chip.text}</span>
+                        </li>
+                      )
+                    })
+                  }
                 </ul>
               </div>
-            </div>
-            <div className="flex justify-center mt-10 bg-white">
-              <button onClick={dispatchQuestionsNum} className="border p-3 rounded-sm">
-                <DelayLink to={{
-                  pathname: "/interview/0",
-                  state: {questionsNum: questionsNum}
-                }}>
-                <div className="flex flex-row justify-center items-center">
-                  <span>Gernerate Interview Questions</span>
-                  <span className="pl-3"><Arrow size="25px" color="var(--blue)" /></span>
+              <div className="flex flex-row w-full h-full lg:flex-col">
+                <div className="lg:w-screen w-6/12 h-full">
+                  <div className="bg-cover w-11/12 bg-cover bg-center bg-no-repeat" style={{"backgroundImage": `url("/img/interview.svg")`, "height": "400px"}}></div>
                 </div>
-                </DelayLink>
-              </button>
+                <div className="lg:w-full w-8/12 pl-10 lg:pl-0">
+                  <ul>
+                    <li className="border-3 py-2 font-semibold text-3xl"></li>
+                    <li>
+                    <div className="flex flex-col">
+                      <ul className="flex flex-col">
+                        {
+                          state.data.map((item, index) => (
+                            <li className="mb-10 flex flex-row">
+                              <div className="flex-1 text-right pr-6 text-sm">{item.cat}</div>
+                              <div className="flex-2">
+                                <Slider key={`categoryIndex`+index} color={bgColorArray[4]} categoryIndex={index} handleQuestionsNum={handleQuestionsNum} defaultValue={questionsNum[index]} />
+                              </div>
+                            </li>
+                          ))
+                        }
+                      </ul>
+                      <hr />
+                      <div className="flex flex-row justify-between text-sm mt-5">
+                        <span className="text-left">Total</span>
+                        <span className="text-right">/ {questionsSum} Questions</span>
+                      </div>
+                    </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div className="flex justify-center mt-10 bg-white">
+                <button onClick={dispatchQuestionsNum} className="border p-3 rounded-sm">
+                  <DelayLink to={{
+                    pathname: "/interview/0",
+                    state: {questionsNum: questionsNum}
+                  }}>
+                  <div className="flex flex-row justify-center items-center">
+                    <span>Gernerate Interview Questions</span>
+                    <span className="pl-3"><Arrow size="25px" color="var(--blue)" /></span>
+                  </div>
+                  </DelayLink>
+                </button>
+              </div>
             </div>
           </div>
+          <div className="absolute left-0 top-0">
+            <Memphis16_1 />
+          </div>
+          <Footer />
         </div>
-        <div className="absolute left-0 top-0">
-          <Memphis16_1 />
-        </div>
-        <Footer />
       </div>
   )
 }

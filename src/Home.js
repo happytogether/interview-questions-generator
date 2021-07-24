@@ -5,6 +5,8 @@ import Items from './components/Items';
 import Footer from './components/Footer';
 import DotRing from "./components/DotRing/DotRing";
 import Arrow from "./components/shapes/Arrow";
+import Logo from "./components/Logo";
+import HamburgerMenu from "./components/HamburgerMenu/HamburgerMenu.js";
 import RandomBg from './RandomBg';
 import getRandomDifferent from './getRandomDifferent';
 import { motion } from "framer-motion";
@@ -93,20 +95,24 @@ function Home() {
   }, []);
 
   return (
-
-    <motion.div>
+    <div>
       {
         <DotRing />
       }
-      <HomeHead />
-      <Items items={state.data} lockBodyScrolling={lockBodyScrolling} handleRandomBg={handleRandomBg} open={open}/>
-      <Footer />
-      <div onClick={()=>handleRandomBg(xBg)} className={`static ${cursorType == "left" ? "red-main-color": ""} ${bg}`} open={open}>
-        <span className="close" onClick={()=> {releaseBodyScrolling();}}>
-          {open&&<Arrow size="100px" rotate="180deg"/>}
-        </span>
+      <div id="outer-container">
+        <Logo menuColor="var(--blue)" color="var(--blue)" />
+        <div id="page-wrap">
+          <HomeHead />
+          <Items items={state.data} lockBodyScrolling={lockBodyScrolling} handleRandomBg={handleRandomBg} open={open}/>
+          <Footer />
+          <div onClick={()=>handleRandomBg(xBg)} className={`static ${cursorType == "left" ? "red-main-color": ""} ${bg}`} open={open}>
+            <span className="close" onClick={()=> {releaseBodyScrolling();}}>
+              {open&&<Arrow size="100px" rotate="180deg"/>}
+            </span>
+          </div>
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 

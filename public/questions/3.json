@@ -1,38 +1,58 @@
-{
-  "title": "Experience Questions",
-  "steps": 4,
-  "questions": [
-    {
-      "title": "Part 01. Explain Closure in Javascript.",
-      "answer": "answer"
-    },
-    {
-      "title": "How many object types in Javascript?",
-      "answer": "answer"
-    },
-    {
-      "title": "question03",
-      "answer": "answer"
-    },
-    {
-      "title": "question04",
-      "answer": "answer"
-    },
-    {
-      "title": "Give an example for the team culture you dislik.",
-      "answer": "Hello, everyone! This is the LONGEST TEXT EVER! I was inspired by the various other 'longest texts ever' on the internet, and I wanted to make my own. So here it is! This is going to be a WORLD RECORD! This is actually my third attempt at doing this. The first time, I didn't save it. The second time, the Neocities editor crashed. Now I'm writing this in Notepad, then copying it into the Neocities editor instead of typing it directly in the Neocities editor to avoid crashing. It sucks that my past two attempts are gone now. Those actually got pretty long. Not the longest, but still pretty long. I hope this one won't get lost somehow. Anyways, let's talk about WAFFLES! I like waffles."
-    },
-    {
-      "title": "Give an example for the team culture you dislik.",
-      "answer": "Hello, everyone! This is the LONGEST TEXT EVER! I was inspired by the various other 'longest texts ever' on the internet, and I wanted to make my own. So here it is! This is going to be a WORLD RECORD! This is actually my third attempt at doing this. The first time, I didn't save it. The second time, the Neocities editor crashed. Now I'm writing this in Notepad, then copying it into the Neocities editor instead of typing it directly in the Neocities editor to avoid crashing. It sucks that my past two attempts are gone now. Those actually got pretty long. Not the longest, but still pretty long. I hope this one won't get lost somehow. Anyways, let's talk about WAFFLES! I like waffles."
-    },
-    {
-      "title": "Give an example for the team culture you dislik.",
-      "answer": "Hello, everyone! This is the LONGEST TEXT EVER! I was inspired by the various other 'longest texts ever' on the internet, let's talk about WAFFLES! I like waffles."
-    },
-    {
-      "title": "How do you love pizza and team work.",
-      "answer": "Anni's Answer"
-    }
-  ]
-}
+[
+  {
+    "title": "If you were an animal, which one would you want to be?",
+    "answer": "<p class='mb-5'>While this question seems inconsequential, it demonstrates your ability to think on your feet. There's no wrong answer here. The employer is looking for creativity and relevance so choose a response that represents your strengths and personality.</p>",
+    "example": "console.log('I would probably be a deer - loyal and kind.')"
+  },
+  {
+    "title": "What are some of your strengths and weaknesses?",
+    "answer": "A closure is the combination of a function and the lexical environment within which that function was declared. i.e, It is an inner function that has access to the outer or enclosing function’s variables. The closure has three scope chains. <p class='my-10'>Own scope where variables defined between its curly brackets Outer function’s variables Global variables Let's take an example of closure concept</p>",
+    "example": "function Welcome(name){\n var greetingInfo = function(message){ \n  console.log(message+' '+name);\n }\n return greetingInfo;\n}\nvar myFunction = Welcome('John');\nmyFunction('Welcome '); //Output: Welcome John\nmyFunction('Hello Mr.'); //output: Hello Mr.John"
+  },
+  {
+    "title": "Why did you leave your last job?",
+    "answer": "Scope is the accessibility of variables, functions, and objects in some particular part of your code during runtime. In other words, scope determines the visibility of variables and other resources in areas of your code.",
+    "error": "TypeError: can't answer such personal questions."
+  },
+  {
+    "title": "Do you work better alone or as part of a team?",
+    "answer": "<p>Depending on the industry and company values, they could be looking for a specific answer. However, the ability to collaborate and compromise are always desirable traits in an employee. If you're unsure, say that you prefer a mixture of the two.</p>"
+  },
+  {
+    "title": "How do you handle stressful situations?",
+    "answer": "<p class='my-10'>You want to highlight your ability to face stressful situations in a manner that is both productive and positive. Try mentioning some of your stress-relieving tactics, and then provide an anecdote about a time that you effectively handled a particularly stressful situation.</p>"
+  },
+  {
+    "title": "Change one thing about your personality, what would it be?"
+  },
+  {
+    "title": "What makes you unique?"
+  },
+  {
+    "title": "Can you tell me about a time when you went above and beyond in your job?"
+  },
+  {
+    "title": "What drives you in your professional life?"
+  },
+  {
+    "title": "Describe a time when you dealt with change."
+  },
+  {
+    "title": "What are you passionate about?"
+  },
+  {
+    "title": "Are you easy to talk to? "
+  },
+  {
+    "title": "What motivates you?"
+  },
+  {
+    "title": "When was the last time you were angry? What happened?"
+  },
+  {
+    "title": "What do you find are the most difficult decisions to make?"
+  },
+  {
+    "title": "What is Closure?"
+  }
+]

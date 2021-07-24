@@ -74,17 +74,10 @@ function Report() {
   },[])
 
   return (
-    <div>
-      <header style={{"height": "100px"}} className="absolute w-full left-0 top-0">
-        <Logo color="var(--blue)" />
-        <span className="close absolute right-14 z-30">
-          <DelayLink delay="600" to="./" goBackHome="true">
-            <Arrow size="100px" rotate="180deg" color="#fff" />
-          </DelayLink>
-        </span>
-      </header>
+    <div id="outer-container">
+      <Logo backArrow backArrowColor="white" menuColor="white" color="var(--blue)" />
       <ToastContainer position="top-center" autoClose={5000} />
-      <div className={`w-screen h-screen report bg-${bgColor} flex justify-center items-center py-10`}>
+      <div id="page-wrap" className={`w-screen h-screen report bg-${bgColor} flex justify-center items-center py-10`}>
         <div className="xl:w-11/12 lg:mt-20 lg:p-10 w-6/12 h-5/6 bg-white p-20 default-window mt-20">
           <div className="flex flex-row w-full h-full lg:flex-col">
             <div className="lg:w-screen w-6/12 h-full">
