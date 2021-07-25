@@ -22,8 +22,15 @@ import Memphis16_5 from '../../components/shapes/memphis16/Memphis16_5';
 import MouseLeftRight from "../../components/DotRing/MouseLeftRight";
 import './NewInterview.scss';
 
-function NewInterview() {
+const calc = (x, y) => [x - window.innerWidth / 2, y - window.innerHeight / 2]
+const piePosX = window.innerWidth - 100;
+const piePosY = window.innerHeight + 50;
+const trans5 = (x, y) => `translate3d(${-x / 60}px,${y / 60}px,0)`
 
+const bgColorArray = ["orange", "blue", "yellow", "green", "purple", "blue"];
+const randomIndex = Math.floor(Math.random()*bgColorArray.length);
+
+export default function NewInterview() {
   const defaultValueArray = initialQuestionsNum();
   const defaultQuestionsSum = defaultValueArray.reduce((a, b) => a + b, 0);
   const { state, dispatch } = useContext(HomeStore);
@@ -76,6 +83,7 @@ function NewInterview() {
     setQuestionsNum(arr);
     setQuestionsSum(sumQuestionsNum(arr));
   }
+  const bgColor = bgColorArray[randomIndex];
   const [imgSrc, setImgSrc] = useState('');
 
   useEffect(() => {
@@ -125,80 +133,78 @@ function NewInterview() {
     setToggledChipId(id);
   }
 
-  const bgColorArray = ["orange", "yellow", "green", "green", "purple", "pink", "blue"];
-  const bgColor = bgColorArray[Math.floor(Math.random()*bgColorArray.length)];
-
   return (
-    <div id="outer-container">
-      <Logo backArrow backArrowColor="white" menuColor="white" color="var(--blue)" />
-      <div id="page-wrap" className={`w-screen h-screen report bg-gray-${bgColor} flex justify-center items-center py-10`}>
-        <div className="xl:w-8/12 lg:w-11/12 lg:mt-20 lg:p-10 w-6/12 h-5/6 bg-white p-20 default-window mt-20">
-          <div className="flex flex-row w-full h-full lg:flex-col">
-            <div className="lg:w-screen w-6/12 h-full">
-              <div className="w-9/12 bg-cover bg-center bg-no-repeat" style={{"backgroundImage": `url("/img/interview.svg")`, "backgroundColor": "var(--purple)", "backgroundSize": "150px auto", "height": "300px"}}></div>
-              <div className="text-black lowercase font-semibold text-4xl py-5">start a<br />interview</div>
-              <div class="float-left">
-                123
-              </div>
-              <div className="clear-both"></div>
-            </div>
-            <div className="lg:w-full w-7/12">
-              <ul>
-                <li className="border-3 py-6"><p className="block my-3">Pick your interview prefernces, you can ask min 4 questions or max 36 questions here. Move the slider or click on the chips.</p></li>
-                <li className="flex flex-row flex-wrap mb-20">
+      <div id="outer-container">
+        <Logo backArrow backArrowColor="white" color="var(--blue)" menuColor="white" />
+        <div id="page-wrap">
+          <div className={`bg-blue interview-start text-blue flex justify-center items-center`}>
+            <div className="options-container default-window xl:w-8/12  lg:w-11/12 lg:mt-20 lg:p-10 w-6/12 h-5/6 bg-white m-20 p-20 mt-32">
+              <div>
+                <p className="text-3xl mb-7">Pick Your Preference:</p>
+                <ul className="chips flex flex-row flex-wrap gap-2 mb-10 clear-both text-sm">
                   {
                     chips.map((chip, i) => {
                       const isToggled = i === toggledChipId;
                       return (
-                        <li key={chip.id} onClick={()=> {handleChipsValue(chip.default_questions); toggleChip(i)}} className={`text-xs flex-2 m-2 mb-3`}>
-                          <span className={`p-2 border rounded-sm ${isToggled ? "selected" : ""}`} style={{"color": `${isToggled ? '#fff': 'var(--blue)'}`, "border": `2px solid`, "backgroundColor": `${isToggled ? 'var(--blue)': ''}`}}>{chip.text}</span>
+                        <li key={chip.id} onClick={()=> {handleChipsValue(chip.default_questions); toggleChip(i)}} className={`text-sm flex-2 mb-3`}>
+                          <span className={`p-2 border ${isToggled ? "selected" : ""}`} style={{"color": `${isToggled ? '#fff': 'var(--blue)'}`, "border": `2px solid`, "backgroundColor": `${isToggled ? 'var(--blue)': ''}`}}>{chip.text}</span>
                         </li>
                       )
                     })
                   }
-                </li>
-                <li>
-                  <ul className="flex flex-col text-blue">
-                    <div className="-ml-10">
-                      {
-                        state.data.map((item, index) => (
-                          <li className="material-slider mb-10 flex flex-row">
-                            <div className="w-4/12 pr-6 text-right text-sm">{item.cat}</div>
-                            <div className="w-8/12">
-                              <Slider key={`categoryIndex`+index} color={bgColorArray[4]} categoryIndex={index} handleQuestionsNum={handleQuestionsNum} defaultValue={questionsNum[index]} />
-                            </div>
-                          </li>
-                        ))
-                      }
+                </ul>
+              </div>
+              <div className="flex flex-row w-full h-full lg:flex-col">
+                <div className="lg:w-screen w-6/12 h-full lg:hidden">
+                  <div className="bg-cover w-11/12 bg-cover bg-center bg-no-repeat" style={{"backgroundImage": `url("/img/interview.svg")`, "height": "400px"}}></div>
+                </div>
+                <div className="lg:w-full w-8/12 pl-10 lg:pl-0">
+                  <ul>
+                    <li className="border-3 py-2 font-semibold text-3xl"></li>
+                    <li>
+                    <div className="flex flex-col">
+                      <ul className="flex flex-col">
+                        {
+                          state.data.map((item, index) => (
+                            <li className="mb-10 flex flex-row">
+                              <div className="flex-1 text-right pr-6 text-sm">{item.cat}</div>
+                              <div className="flex-2">
+                                <Slider key={`categoryIndex`+index} color={bgColorArray[4]} categoryIndex={index} handleQuestionsNum={handleQuestionsNum} defaultValue={questionsNum[index]} />
+                              </div>
+                            </li>
+                          ))
+                        }
+                      </ul>
+                      <hr />
+                      <div className="flex flex-row justify-between text-sm mt-5">
+                        <span className="text-left">Total</span>
+                        <span className="text-right">/ {questionsSum} Questions</span>
+                      </div>
                     </div>
-                    <hr />
-                    <div className="flex flex-row justify-between text-sm mt-5">
-                      <span className="text-left">Total</span>
-                      <span className="text-right">/ {questionsSum} Questions</span>
-                    </div>
+                    </li>
                   </ul>
-                </li>
-              </ul>
-
+                </div>
+              </div>
+              <div className="flex justify-center mt-10 bg-white">
+                <button onClick={dispatchQuestionsNum} className="border p-3 rounded-sm">
+                  <DelayLink to={{
+                    pathname: "/interview/0",
+                    state: {questionsNum: questionsNum}
+                  }}>
+                  <div className="flex flex-row justify-center items-center">
+                    <span>Generate Interview Questions</span>
+                    <span className="pl-3"><Arrow size="25px" color="var(--blue)" /></span>
+                  </div>
+                  </DelayLink>
+                </button>
+              </div>
             </div>
           </div>
-          <div className="flex justify-center mt-10 bg-white">
-            <button onClick={dispatchQuestionsNum} className="border p-3 rounded-sm">
-              <DelayLink to={{
-                pathname: "/interview/0",
-                state: {questionsNum: questionsNum}
-              }}>
-              <div className="flex flex-row justify-center items-center">
-                <span>Generate Interview Questions</span>
-              </div>
-              </DelayLink>
-            </button>
+          <div className="absolute left-0 top-0">
+            <Memphis16_1 />
           </div>
+          <Footer bgColor="yellow" textColor="graydark" />
         </div>
       </div>
-      <Footer />
-    </div>
-  );
+  )
 }
-
-export default NewInterview;

@@ -13,14 +13,20 @@ import { motion } from "framer-motion"
 import { QuestionsStore } from '../../Store';
 import { fetchQuestionsDataAction } from '../../Actions';
 import DelayLink from '../../ultils/DelayLink';
-import { defaultQuestionsNum } from '../../Actions';
+import { initialQuestionsNum } from '../../Actions';
+import FlickHand from '../../components/shapes/FlickHand';
+import useCookie from "../../hooks/useCookie";
+import Smile from "../../components/shapes/Smile";
+import Sad from "../../components/shapes/Sad";
 
 export default function InterviewContainer(props) {
   //console.log(123, props.location.state);
   const { questionsState, dispatch } = useContext(QuestionsStore);
   useEffect(
     () => {
-      fetchQuestionsDataAction(dispatch, props.location.state && props.location.state.questionsNum || defaultQuestionsNum());
+      fetchQuestionsDataAction(dispatch, props.location.state && props.location.state.questionsNum || JSON.parse(localStorage.getItem('questionsNum'))
+        ? JSON.parse(localStorage.getItem('questionsNum'))
+        : initialQuestionsNum());
     },
     []
   );
@@ -33,6 +39,7 @@ export default function InterviewContainer(props) {
   const cursorSide = x > window.innerWidth / 2 ? "right" : "left";
   const pathname = useHistory().location.pathname.match(/.*\/([^/]+)\/[^/]+/)[1] || "";
   const [completedSteps, setCompletedSteps] = useState([]);
+  const [cookie, updateCookie] = useCookie("onboarding", "false"); // make sure onboarding panel only show once.
 
   useEffect(() => {
     if (pathname == 'interview') {
@@ -61,13 +68,28 @@ export default function InterviewContainer(props) {
   }
   const randomIndex = Math.random() > .5 ? 0: 1;
   return (
-    <motion.div initial={{ opacity: 0.5}}
-        animate={{ opacity: 1}}
-        exit={{ opacity: 0.5}} onClick={()=>handleRandomBg()} className={`static2 box-bg`}>
+    <div onClick={()=>handleRandomBg()} className={`static2 box-bg`}>
       <Logo backArrow backArrowColor="white" menuColor="white" color="#fff" bg="black" />
+      {
+        cookie && <div onClick={() => {updateCookie("hidden")}} className={`${cookie} onboarding absolute w-full h-full z-50 bg-white flex flex-col items-center justify-center`}>
+
+            <ul className="flex flex-row items-center">
+              <li className="flex flex-col justify-center items-center">
+                <Sad size="50px" color="#fff" opacity="1" />
+              </li>
+              <li><FlickHand size="200px" color="#fff" /></li>
+              <li className="flex flex-col justify-center items-center">
+                <Smile size="50px" color="#fff" opacity="1" />
+              </li>
+            </ul>
+            <div className="text-2xl mb-5 text-white">Flick right - like the answer. </div>
+            <div className="text-2xl text-white">Flick left - dislike the answer. </div>
+        </div>
+      }
       {
         questionsState.data.length && <InterviewQuestions categoryIndex={categoryIndex} steps={questionsState.data.length} completedSteps={completedSteps} answers={answers || []} />
       }
-    </motion.div>
+
+    </div>
   )
 }

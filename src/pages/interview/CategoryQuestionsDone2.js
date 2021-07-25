@@ -13,8 +13,7 @@ import { stepResetAction } from "../../Actions";
 export default function QuestionsDone(props) {
   const questions = props.questions;
   const index = props.index;
-  const answersLocalStroage = JSON.parse(localStorage.getItem('stepsAnswers'))[index];
-  const [answers, setAnswers] = useState(answersLocalStroage);
+  const [answers, setAnswers] = useState(JSON.parse(localStorage.getItem('category'+index)));
   const nextArrow = (index === (props.steps-1)) ? false: true; // if in last step, show no arrow
   const preArrow = (index === 0) ? false: true;
   const nextPageIndex = (index === (props.steps-1)) ? 0: (index+1);
@@ -36,7 +35,7 @@ export default function QuestionsDone(props) {
   }
 
   useEffect(() => {
-    setAnswers(answersLocalStroage);
+    setAnswers(JSON.parse(localStorage.getItem('category'+index)));
   },[index])
 
   useEffect(() => {

@@ -13,7 +13,7 @@ export default function Logo(props) {
   }
   return (
     <div className="fixed w-full z-30">
-      <div style={styles} className="text-base p-2 m-4 z-30 logo flex absolute items-center justify-center">
+      <div style={styles} className="text-base p-2 m-4 z-30 logo absolute sm:hidden">
         <DelayLink delay="600" to="/">
           <span className="sm:hidden">/// Anni Wang ///</span>
         </DelayLink>

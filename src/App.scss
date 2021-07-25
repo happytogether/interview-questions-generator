@@ -161,6 +161,9 @@ div.static[open="0"] {
         20px -20px 0 -3px white, 20px -20px var(--yellow),
         30px -30px 0 -3px white, 30px -30px var(--orange),
         40px -40px 0 -3px white, 40px -40px var(--red);
+  @media (max-width: 1024px) {
+    box-shadow: none;
+  }
 }
 .large-rect {
   width: 350px;
@@ -654,4 +657,32 @@ iframe {height: 90vh; width: 60%; box-sizing: border-box;}
   &.completed {
     border-color: var(--green)
   }
+}
+
+.bg-gray-blue {
+  background: linear-gradient(90deg, var(--gray-light) 60%, var(--blue) 40%);
+}
+
+.bg-gray-pink {
+  background: linear-gradient(90deg, var(--gray-light) 60%, var(--pink) 40%);
+}
+
+.bg-gray-yellow {
+  background: linear-gradient(90deg, var(--gray-light) 60%, var(--yellow) 40%);
+}
+
+.bg-gray-orange {
+  background: linear-gradient(90deg, var(--gray-light) 60%, var(--orange) 40%);
+}
+
+.bg-gray-green {
+  background: linear-gradient(90deg, var(--gray-light) 60%, var(--green) 40%);
+}
+
+.bg-gray-red{
+  background: linear-gradient(90deg, var(--gray-light) 60%, var(--red) 40%);
+}
+
+.bg-gray-purple {
+  background: linear-gradient(90deg, var(--gray-light) 60%, var(--purple) 40%);
 }

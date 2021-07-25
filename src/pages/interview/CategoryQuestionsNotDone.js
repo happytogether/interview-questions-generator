@@ -42,11 +42,13 @@ export default function QuestionsNotDone(data) {
         setUserAnswers(userAnswers => [...userAnswers,0]);
         userAnswersState.data[categoryIndex].push(0);
         stepsAddAnswersAction(userAnswersState.data, userAnswersDispatch);
+        localStorage.setItem('stepsAnswers', JSON.stringify(userAnswersState.data));
       }
       if (dir == 1 && isGone) {
         setUserAnswers(userAnswers => [...userAnswers,1]);
         userAnswersState.data[categoryIndex].push(1);
         stepsAddAnswersAction(userAnswersState.data, userAnswersDispatch);
+        localStorage.setItem('stepsAnswers', JSON.stringify(userAnswersState.data));
       }
       return { x, rot, scale, delay: undefined, config: { friction: 50, tension: down ? 800 : isGone ? 200 : 500 } }
     })
@@ -55,10 +57,8 @@ export default function QuestionsNotDone(data) {
         //data.rightWrongNumReset();
         data.setDone(true);
         completedStepsArray = [...completedStepsArray, categoryIndex];
-
         stepDoneAction([...stepperState.data, parseInt(categoryIndex)], stepperDispatch);
-
-        localStorage.setItem('completedSteps', JSON.stringify([1,2,3]));
+        localStorage.setItem('completedSteps', JSON.stringify([...stepperState.data, parseInt(categoryIndex)]));
       }, 600);
     }
   })
@@ -78,9 +78,9 @@ export default function QuestionsNotDone(data) {
 
   return (
     <div>
-      <div className="question-window">
+      <div className="question-window h-screen flex items-center">
         {props.map(({ x, y, rot, scale }, i) => (
-          <animated.div key={i} style={{ x, y }} className="flex items-center justify-center absolute w-full h-full">
+          <animated.div key={i} style={{ x, y }} className="flex items-center justify-center absolute w-full">
             {/* This is the card itself, we're binding our gesture to it (and inject its index so we know which is which) */}
             <animated.div {...bind(i)} className="sm:w-full sm:mx-3 w-60vw rainbow-bg text-center" onClick={handleClick}  style={{ transform: interpolate([rot, scale], trans) }}>
               <span className="p-5 text-xl bg-white"><span className="text-5xl">{props.length - i < 10 ? "0"+ (props.length - i): props.length - i}</span>.{questions[i].title}</span>

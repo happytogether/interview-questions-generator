@@ -43,7 +43,7 @@ function Credit() {
               jsonLoaded && <MondrianArt items={items}/>
           }
         </div>
-        <Footer />
+        <Footer bgColor="purple" textColor="white" />
       </motion.div>
     </div>
 

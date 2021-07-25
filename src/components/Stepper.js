@@ -6,16 +6,18 @@ import DelayLink from '../ultils/DelayLink';
 export default function Stepper(props) {
   const { state, dispatch } = useContext(HomeStore);
   const { stepperState, stepperDispatch } = useContext(StepperStore);
-  const steps = state.data.length;
+  const steps = props.steps;
   const activeStep = props.activeStep; // index is 0 based
-  const completedSteps = stepperState.data || [];
+  const completedSteps = stepperState.data.length!==0 ? stepperState.data : JSON.parse(localStorage.getItem('completedSteps'))
+    ? JSON.parse(localStorage.getItem('completedSteps'))
+    : [];
   let stepsArray = [];
   stepsArray.length = steps;
   stepsArray = stepsArray.fill("");
 
   return (
     <div className="w-full flex items-center justify-center absolute z-10 sm:relative">
-      <div className="sm:w-screen w-4/12 p-1 mt-4" style={{"background": "rgba(0,0,0,.8)"}}>
+      <div className="sm:w-11/12 sm:mt-20 w-4/12 p-1 mt-4" style={{"background": "rgba(0,0,0,.8)"}}>
         <div className="flex flex-row items-start">
           {
             stepsArray.map((item, index) => (

@@ -5,7 +5,7 @@ const QUESTIONS_API_URL =
 const QUESTIONS_GALLERY_API_URL =
   "/questions/1.json";
 
-export const defaultQuestionsNum = () => {
+export const initialQuestionsNum = () => {
   return [5,3,3,2];
 }
 
@@ -38,8 +38,10 @@ export const fetchDataAction = async (dispatch) => {
 export const fetchQuestionsDataAction = async (dispatch, userCustomizedQuestionsNumArray) => {
   const data = await fetch(QUESTIONS_API_URL);
   const dataJSON = await data.json();
+  console.log(222);
+  console.log(userCustomizedQuestionsNumArray);
   dataJSON.filter((item, index) => {
-    item.questions.length = userCustomizedQuestionsNumArray[index] || defaultQuestionsNum()[index];
+    item.questions.length = userCustomizedQuestionsNumArray[index] || initialQuestionsNum()[index];
   })
   return dispatch({
     type: "FETCH_QUESTIONS_DATA",

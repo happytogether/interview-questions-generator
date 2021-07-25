@@ -2,6 +2,9 @@ footer {
   position: relative;
   z-index: 100;
   background: linear-gradient(90deg, var(--green) 60%, var(--gray-light) 40%);
+  @media (max-width: 1024px) {
+    background: var(--green);
+  }
   .box-bg {
     background-color: transparent;
     background-image:  linear-gradient(#6f6f6f12 1px, transparent 1px), linear-gradient(to right, #6f6f6f12 1px, transparent 1px);
@@ -37,4 +40,14 @@ footer ul .link a, a.link {
 
 footer.bg-purple {
   background: linear-gradient(90deg, var(--purple) 60%, var(--gray-light) 40%);
+  @media (max-width: 1024px) {
+    background: var(--purple);
+  }
+}
+
+footer.bg-yellow {
+  background: linear-gradient(90deg, var(--yellow) 60%, var(--gray-light) 40%);
+  @media (max-width: 1024px) {
+    background: var(--yellow);
+  }
 }

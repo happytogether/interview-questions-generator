@@ -17,7 +17,7 @@ import Arrow from '../../components/shapes/Arrow';
 import Sun from '../../components/shapes/Sun';
 import DelayLink from '../../ultils/DelayLink';
 import { GradeASet } from '../confettiSet/GradeASet';
-import { fetchQuestionsDataAction,  fetchQuestionsNumDataAction, stepDoneAction, stepsAddAnswersAction, defaultQuestionsNum } from '../../Actions';
+import { fetchQuestionsDataAction,  fetchQuestionsNumDataAction, stepDoneAction, stepsAddAnswersAction, initialQuestionsNum } from '../../Actions';
 import { QuestionsStore, QuestionsNumStore, StepperStore, UserAnswersStore } from '../../Store';
 import {
   BrowserView,
@@ -34,7 +34,7 @@ function Report() {
   // fetch data from json file
   useEffect(
     () => {
-      questionsState.data.length === 0 && fetchQuestionsDataAction(dispatch, defaultQuestionsNum());
+      questionsState.data.length === 0 && fetchQuestionsDataAction(dispatch, initialQuestionsNum());
     },
     []
   );
@@ -77,8 +77,8 @@ function Report() {
     <div id="outer-container">
       <Logo backArrow backArrowColor="white" menuColor="white" color="var(--blue)" />
       <ToastContainer position="top-center" autoClose={5000} />
-      <div id="page-wrap" className={`w-screen h-screen report bg-${bgColor} flex justify-center items-center py-10`}>
-        <div className="xl:w-11/12 lg:mt-20 lg:p-10 w-6/12 h-5/6 bg-white p-20 default-window mt-20">
+      <div id="page-wrap" className={`w-screen h-screen report bg-gray-${bgColor} flex justify-center items-center py-10`}>
+        <div className="xl:w-8/12 lg:w-11/12 lg:mt-20 lg:p-10 w-6/12 h-5/6 bg-white p-20 default-window mt-20">
           <div className="flex flex-row w-full h-full lg:flex-col">
             <div className="lg:w-screen w-6/12 h-full">
               <div className="w-6/12 bg-cover bg-center bg-no-repeat" style={{"backgroundImage": `url(${imgSrc})`, "backgroundColor": "var(--purple)", "backgroundSize": "120px auto", "height": "300px"}}></div>

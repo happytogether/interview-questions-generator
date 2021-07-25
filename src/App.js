@@ -21,7 +21,7 @@ function App() {
               <Switch>
                 <Route exact path='/' component={Home} />
                 <Route path='/interview/:categoryIndex' component={InterviewContainer} />
-                <Route path='/newInterview' component={NewInterview} />
+                <Route path='/interview' component={NewInterview} />
                 <Route path='/gallery/:categoryIndex' component={Gallery} />
                 <Route path='/credit' component={Credit} />
                 <Route path='/booking' component={Booking} />

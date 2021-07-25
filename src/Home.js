@@ -104,7 +104,7 @@ function Home() {
         <div id="page-wrap">
           <HomeHead />
           <Items items={state.data} lockBodyScrolling={lockBodyScrolling} handleRandomBg={handleRandomBg} open={open}/>
-          <Footer />
+          <Footer bgColor="purple" textColor="white" />
           <div onClick={()=>handleRandomBg(xBg)} className={`static ${cursorType == "left" ? "red-main-color": ""} ${bg}`} open={open}>
             <span className="close" onClick={()=> {releaseBodyScrolling();}}>
               {open&&<Arrow size="100px" rotate="180deg"/>}
