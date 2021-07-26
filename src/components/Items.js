@@ -18,7 +18,6 @@ import ClickSoundLink from './ClickSoundLink';
 import { motion } from "framer-motion";
 import * as easings from 'd3-ease'
 import { Store } from '../Store';
-import { Link } from 'react-router-dom';
 import DelayLink from '../ultils/DelayLink';
 import './Item.scss';
 import { content, upMotion, downMotion, upMotionSlow } from './AnimationSet';
@@ -73,6 +72,11 @@ export default function Items(props) {
               <animated.div className="lg:hidden" style={{ transform: props1.xy.interpolate(trans3) }}>
                 <Sun3 clicked={clicked} />
               </animated.div>
+              <motion.div variants={downMotion}>
+                <animated.div className="lg:hidden" style={{ transform: props1.xy.interpolate(trans5) }}>
+                  <Moon />
+                </animated.div>
+              </motion.div>
             </motion.div>
           </div>
           <div className="flex justify-center items-center h-full lg:w-full lg:py-20" style={{"backgroundColor": "var(--gray-light)"}}>

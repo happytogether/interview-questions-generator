@@ -1,7 +1,7 @@
 [
   {
     "cat": "Tech Questions",
-    "catFigcaption": "User Experience Questions are included",
+    "catFigcaption": "HTML, CSS, Javascript, Framework Questions and other Front End Questions are included.",
     "questions": [
       {
         "title": "Part 01. Explain Closure in Javascript.",

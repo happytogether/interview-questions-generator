@@ -19,7 +19,11 @@ import Memphis16_2 from '../../components/shapes/memphis16/Memphis16_2';
 import Memphis16_3 from '../../components/shapes/memphis16/Memphis16_3';
 import Memphis16_4 from '../../components/shapes/memphis16/Memphis16_4';
 import Memphis16_5 from '../../components/shapes/memphis16/Memphis16_5';
+import Wave from '../../components/shapes/Wave';
 import MouseLeftRight from "../../components/DotRing/MouseLeftRight";
+import { DefaultSet } from "../../components/Reward/MemphisSets";
+import { motion } from "framer-motion";
+import { content, upMotion} from '../../components/AnimationSet';
 import './NewInterview.scss';
 
 function NewInterview() {
@@ -125,20 +129,21 @@ function NewInterview() {
     setToggledChipId(id);
   }
 
-  const bgColorArray = ["orange", "yellow", "green", "green", "purple", "pink", "blue"];
-  const bgColor = bgColorArray[Math.floor(Math.random()*bgColorArray.length)];
-
   return (
-    <div id="outer-container">
+    <motion.div id="outer-container" variants={content}
+    animate="animate"
+    initial="initial">
       <Logo backArrow backArrowColor="white" menuColor="white" color="var(--blue)" />
-      <div id="page-wrap" className={`w-screen h-screen report bg-gray-${bgColor} flex justify-center items-center py-10`}>
-        <div className="xl:w-8/12 lg:w-11/12 lg:mt-20 lg:p-10 w-6/12 h-5/6 bg-white p-20 default-window mt-20">
+      <div id="page-wrap" className={`w-screen h-screen report bg-gray-purple flex justify-center items-center py-10`}>
+        <motion.div variants={upMotion} className="xl:w-8/12 lg:w-11/12 lg:mt-20 lg:p-10 w-6/12 h-5/6 bg-white p-20 default-window mt-20">
           <div className="flex flex-row w-full h-full lg:flex-col">
             <div className="lg:w-screen w-6/12 h-full">
               <div className="w-9/12 bg-cover bg-center bg-no-repeat" style={{"backgroundImage": `url("/img/interview.svg")`, "backgroundColor": "var(--purple)", "backgroundSize": "150px auto", "height": "300px"}}></div>
-              <div className="text-black lowercase font-semibold text-4xl py-5">start a<br />interview</div>
-              <div class="float-left">
-                123
+              <div className="text-black lowercase font-semibold text-4xl my-10">start to<br />interview <br />Anni</div>
+              <div class="float-left w-9/12 flex flex-row">
+                {
+                  DefaultSet().map((item, index) =><div className="mx-1" dangerouslySetInnerHTML={ {__html: item} }></div>)
+                }
               </div>
               <div className="clear-both"></div>
             </div>
@@ -165,7 +170,7 @@ function NewInterview() {
                           <li className="material-slider mb-10 flex flex-row">
                             <div className="w-4/12 pr-6 text-right text-sm">{item.cat}</div>
                             <div className="w-8/12">
-                              <Slider key={`categoryIndex`+index} color={bgColorArray[4]} categoryIndex={index} handleQuestionsNum={handleQuestionsNum} defaultValue={questionsNum[index]} />
+                              <Slider key={`categoryIndex`+index} categoryIndex={index} handleQuestionsNum={handleQuestionsNum} defaultValue={questionsNum[index]} />
                             </div>
                           </li>
                         ))
@@ -194,10 +199,10 @@ function NewInterview() {
               </DelayLink>
             </button>
           </div>
-        </div>
+        </motion.div>
       </div>
       <Footer />
-    </div>
+    </motion.div>
   );
 }
 

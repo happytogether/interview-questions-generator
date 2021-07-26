@@ -20,7 +20,8 @@ const GradeASet = () => {
     '/img/gradeA/1.svg',
     '/img/gradeA/2.svg',
     '/img/gradeA/3.svg',
-    '/img/gradeA/4.svg'
+    '/img/gradeA/4.svg',
+    '/img/gradeA/5.svg'
   ]
   return shuffle(arr);
 };

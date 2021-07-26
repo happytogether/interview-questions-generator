@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import React, { useState, useContext, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import ReactStoreIndicator from 'react-score-indicator'
 import "./Report.scss";
 import Logo from "../../components/Logo";
@@ -59,14 +60,21 @@ function Report() {
   //const fadeIn = useSpring({ to: { y: 0, opacity: 1}, from: { opacity: 0, y:1000 }, config: { duration: 3000, easing: easings.easeCubic } });
   const setArray = [DonutSet(), IceCreamSet(), TwitchSet(), DefaultSet(), FruitSet(), FruitSet2(), BallonSet()];
   const set = setArray[Math.floor(Math.random()*setArray.length)];
-  const notify = () => toast("You haven't finished - Tech Section, UX Section");
+  const CustomToastWithLink = () => (
+    <div>
+      <Link to="/interview">You havn't finished the interview. <br />Go back to the 4 steps interview.</Link>
+    </div>
+  );
+
+    const notify = () => toast(CustomToastWithLink);
   useEffect(() => {
     setTimeout(() => {
       notify();
     }, 1000)
   }, [])
   const bgColorArray = ["orange", "yellow", "green", "green", "purple", "pink", "blue", "red"];
-  const bgColor = bgColorArray[Math.floor(Math.random()*bgColorArray.length)];
+  const textColorArray = ["white", "var(--gray-dark)", "var(--gray-dark)", "var(--gray-dark)", "white", "var(--gray-dark)", "white", "white"];
+  const randomIndex = Math.floor(Math.random()*bgColorArray.length);
   const [imgSrc, setImgSrc] = useState('');
 
   useEffect(() => {
@@ -75,9 +83,9 @@ function Report() {
 
   return (
     <div id="outer-container">
-      <Logo backArrow backArrowColor="white" menuColor="white" color="var(--blue)" />
-      <ToastContainer position="top-center" autoClose={5000} />
-      <div id="page-wrap" className={`w-screen h-screen report bg-gray-${bgColor} flex justify-center items-center py-10`}>
+      <Logo backArrow backArrowColor={textColorArray[randomIndex]} menuColor={textColorArray[randomIndex]} color="var(--gray-dark)" />
+      <ToastContainer position="top-center" autoClose={10000} />
+      <div id="page-wrap" className={`w-screen h-screen report bg-gray-${bgColorArray[randomIndex]} flex justify-center items-center py-10`}>
         <div className="xl:w-8/12 lg:w-11/12 lg:mt-20 lg:p-10 w-6/12 h-5/6 bg-white p-20 default-window mt-20">
           <div className="flex flex-row w-full h-full lg:flex-col">
             <div className="lg:w-screen w-6/12 h-full">

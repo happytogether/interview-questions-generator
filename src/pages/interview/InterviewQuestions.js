@@ -68,7 +68,7 @@ export default function Questions(value) {
         setWrongAnswerNumLocalStorage(prevRightAnswerNumLocalStorage => prevRightAnswerNumLocalStorage+1)
       }
     })
-  },[index])
+  },[index, done])
 
   useEffect(()=>{
     rightWrongNumReset();

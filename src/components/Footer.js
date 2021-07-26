@@ -21,7 +21,7 @@ export default function Footer(props) {
           <DelayLink delay="300" to="/report">- Report</DelayLink>
         </li>
       </ul>
-      <div className="mt-10 -ml-10">
+      <div className="mt-5 -ml-10">
         /// @Anni Wang 2021 ///
       </div>
 

@@ -18,7 +18,7 @@ export default function QuestionsNotDone(data) {
   const [userAnswers, setUserAnswers] = useState([]);
   const [rightAnswerNum, setRightAnswerNum] = useState(0);
   const [wrongAnswerNum, setWrongAnswerNum] = useState(0);
-  const cardsPosArr = [[10, 10], [10, -10], [-10, 10], [-10, -10],[-20,20], [20,20], [-20, -20], [20, -20]];
+  const cardsPosArr = [[10, 10], [10, -10], [-10, 10], [-10, -10]];
   const [cardsPos, setCardsPos] = useState(cardsPosArr[Math.floor(Math.random()*cardsPosArr.length)]); // cards initial direction
   // These two are just helpers, they curate spring data, propss that are later being interpolated into css
   const to = (i) => ({ x: i *cardsPos[0], y: i*cardsPos[1], scale: 1, rot: -10 + Math.random() * 20, delay: i * 100 })

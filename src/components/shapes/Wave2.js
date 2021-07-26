@@ -1,16 +1,14 @@
 import { useContext, useRef } from "react";
 import Reward from '../Reward/Reward.js';
 import { MouseContext } from "../../context/mouse-context";
+import { DonutSet, IceCreamSet, TwitchSet, DefaultSet, FruitSet, FruitSet2, BallonSet } from "../Reward/MemphisSets";
 
 export default function Wave2(props) {
   const { cursorChangeHandler } = useContext(MouseContext);
   const size = props.size;
   const styles = {
     width: size,
-    height: size,
-    position: "absolute",
-    top: "5%",
-    right: "15%"
+    height: size
   }
   const canvasInput = useRef(null);
   function confetti(){
@@ -30,7 +28,7 @@ export default function Wave2(props) {
           </g>
       </g>
   </svg>
-      <Reward ref={canvasInput} type='emoji' config = {{"elementCount": 5, "elementSize": 50}}></Reward>
+      <Reward ref={canvasInput} type='emoji' config = {{"emoji": DefaultSet(),"elementCount": 5, "elementSize": 50}}></Reward>
     </div>
   )
 }

@@ -41,6 +41,89 @@
       "imgSrc": "",
       "link": "https://fkhadra.github.io/react-toastify",
       "confetti": "FruitSet"
+    },
+    {
+      "title": "Freepick",
+      "imgSrc": "/img/logo/freepik.svg",
+      "link": "https://www.freepik.com/",
+      "confetti": "DefaultSet"
+    },
+    {
+      "title": "Jen [Layout Land]",
+      "imgSrc": "/img/logo/layoutland.jpeg",
+      "link": "https://www.youtube.com/channel/UC7TizprGknbDalbHplROtag",
+      "confetti": "FruitSet"
+    },
+    {
+      "title": "Joshua Comeau [Use Sound in React]",
+      "imgSrc": "/img/logo/joshwcomeau.webp",
+      "link": "https://www.joshwcomeau.com/react/announcing-use-sound-react-hook/",
+      "confetti": "FruitSet"
+    },
+    {
+      "title": "Vecteezy",
+      "imgSrc": "/img/logo/vecteezy.svg",
+      "link": "https://www.vecteezy.com/",
+      "confetti": "FruitSet"
+    },
+    {
+      "title": "Framer Motion for React",
+      "imgSrc": "/img/logo/vecteezy.svg",
+      "link": "https://www.epidemicsound.com/",
+      "confetti": "FruitSet"
+    },
+    {
+      "title": "Calendso",
+      "imgSrc": "/img/logo/calendso-white.svg",
+      "link": "https://calendso.com/",
+      "confetti": "FruitSet"
+    },
+    {
+      "title": "Fadi Khadra [React Toastify]",
+      "imgSrc": "",
+      "link": "https://fkhadra.github.io/react-toastify",
+      "confetti": "FruitSet"
+    },{
+      "title": "Freepick",
+      "imgSrc": "/img/logo/freepik.svg",
+      "link": "https://www.freepik.com/",
+      "confetti": "DefaultSet"
+    },
+    {
+      "title": "Jen [Layout Land]",
+      "imgSrc": "/img/logo/layoutland.jpeg",
+      "link": "https://www.youtube.com/channel/UC7TizprGknbDalbHplROtag",
+      "confetti": "FruitSet"
+    },
+    {
+      "title": "Joshua Comeau [Use Sound in React]",
+      "imgSrc": "/img/logo/joshwcomeau.webp",
+      "link": "https://www.joshwcomeau.com/react/announcing-use-sound-react-hook/",
+      "confetti": "FruitSet"
+    },
+    {
+      "title": "Vecteezy",
+      "imgSrc": "/img/logo/vecteezy.svg",
+      "link": "https://www.vecteezy.com/",
+      "confetti": "FruitSet"
+    },
+    {
+      "title": "Framer Motion for React",
+      "imgSrc": "/img/logo/vecteezy.svg",
+      "link": "https://www.epidemicsound.com/",
+      "confetti": "FruitSet"
+    },
+    {
+      "title": "Calendso",
+      "imgSrc": "/img/logo/calendso-white.svg",
+      "link": "https://calendso.com/",
+      "confetti": "FruitSet"
+    },
+    {
+      "title": "Fadi Khadra [React Toastify]",
+      "imgSrc": "",
+      "link": "https://fkhadra.github.io/react-toastify",
+      "confetti": "FruitSet"
     }
   ]
 }

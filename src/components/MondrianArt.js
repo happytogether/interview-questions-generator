@@ -1,12 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import Reward from './Reward/Reward.js';
 import { DonutSet, IceCreamSet, TwitchSet, DefaultSet, FruitSet, FruitSet2, ThunderSet } from "./Reward/MemphisSets";
+import Radium, { StyleRoot } from 'radium';
 
 function MondrianArt(props) {
   const items = props.items;
   const colorMap = {
-    0: "var(--purple)",
-    1: "var(--red)",
+    0: "var(--pink)",
+    1: "var(--purple)",
     2: "var(--green)",
     3: "var(--yellow)",
     4: "var(--orange)"
@@ -47,13 +48,13 @@ function MondrianArt(props) {
         key={`blocks-${i}`} onClick={()=>confetti(i)}
         className={`relative text-black leading-4 p-4 flex justify-center flex-col items-center credit-block-${i}`}
         style={{
-          animation: "scaleIn 0.25s ease 0s",
-          animationDelay: `${i * 0.15}s`,
-          transform: "scale(0)",
-          animationFillMode: "forwards",
           gridColumn: `span ${Math.floor(Math.random() * 3 + 1)}`,
           gridRow: `span ${Math.floor(Math.random() * 3 + 1)}`,
-          backgroundColor: colorMap[Math.floor(Math.random() * 5)]
+          backgroundColor: colorMap[Math.floor(Math.random() * 5)],
+          '@media (max-width: 640px)': {
+            gridColumn: 'span 3',
+            gridRow: 'span 1'
+          },
         }}
       >
         <div className="z-0 credit-logo" style={{"background-image": `url(${item.imgSrc})`}}></div>
@@ -68,25 +69,26 @@ function MondrianArt(props) {
   };
 
   return (
-    <div>
-      <div className="MondrianArt p-20 md:p-0"
-        style={{
-          background: "#070908",
-          display: "grid",
-          gridAutoColumns: "150px",
-          gridAutoRows: "150px",
-          gridAutoFlow: "dense",
-          gridGap: "10px",
-          gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-          gridTemplateRows: "repeat(auto-fit, minmax(200px, 1fr))",
-          overflow: "hidden",
-          width: "100vw",
-          height: "auto"
-        }}
-      >
-        {generateBlocks(props.items.credit)}
+    <StyleRoot>
+      <div>
+          <div className="MondrianArt mt-10 lg:mt-0"
+          style={{
+            display: "grid",
+            gridAutoColumns: "150px",
+            gridAutoRows: "150px",
+            gridAutoFlow: "dense",
+            gridGap: "5px",
+            gridTemplateColumns: "repeat(auto-fit, minmax(30%, 1fr))",
+            gridTemplateRows: "repeat(auto-fit, minmax(200px, 1fr))",
+            overflow: "hidden",
+            width: "100%",
+            height: "auto"
+          }}
+        >
+          {generateBlocks(props.items.credit)}
+        </div>
       </div>
-    </div>
+    </StyleRoot>
   );
 
 }
