@@ -59,7 +59,7 @@ export default function Sun3(props) {
   const ViewportBlock = handleViewport(Block, /** options: {}, config: {} **/);
 
   return (
-    <div className="hover-rotate" onClick={()=>handleClick()} style={clicked? styles2: styles}>
+    <div className="hover-rotate" onClick={()=>handleClick()} style={styles}>
       <svg viewBox="0 0 88 48">
           <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
               <g transform="translate(-324.000000, -405.000000)">

@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useMemo } from 'react';
 import { MouseContext } from "./context/mouse-context";
 import HomeHead from './components/HomeHead';
 import Items from './components/Items';
@@ -6,18 +6,24 @@ import Footer from './components/Footer';
 import DotRing from "./components/DotRing/DotRing";
 import Arrow from "./components/shapes/Arrow";
 import Logo from "./components/Logo";
-import HamburgerMenu from "./components/HamburgerMenu/HamburgerMenu.js";
 import RandomBg from './RandomBg';
 import getRandomDifferent from './getRandomDifferent';
 import { motion } from "framer-motion";
 import { InitialTransition } from './components/InitialTransition';
 import { HomeStore, StepperStore } from "./Store";
 import { fetchDataAction, stepDoneAction } from "./Actions";
+import { downMotion } from './components/AnimationSet';
+import GetRandomFromArray from './ultils/GetRandomFromArray';
+import HamburgerMenu from './components/HamburgerMenu/HamburgerMenu';
 
 function Home() {
   const { state, dispatch } = useContext(HomeStore);
   const { stepperState, stepperDispatch} = useContext(StepperStore);
-
+  const bgTextColorArray = [['orange', 'var(--gray-dark)'], ['red', 'white'], ['green', 'var(--gray-dark)'], ['purple', 'white'], ['pink', 'var(--gray-dark)'], ['blue', 'white']]; // first element - bg, 2nd - text color
+  const bgColorValue = useMemo(
+    () => GetRandomFromArray(bgTextColorArray),
+    []
+  );
   useEffect(() => {
     state.data.length === 0 && fetchDataAction(dispatch);
   },[state]);
@@ -26,6 +32,14 @@ function Home() {
     //stepDoneAction(0, stepperDispatch);
     document.body.classList = "";
   },[])
+
+  useEffect(() => {
+    //stepDoneAction(0, stepperDispatch);
+    document.body.classList.add(`${bgColorValue[0][0]}-primary-color`);
+    document.body.classList.add(`${bgColorValue[1][0]}-secondary-color`);
+  },[])
+
+
 
   const [open, setOpen] = useState(false);
   const randomBg = RandomBg();
@@ -94,25 +108,65 @@ function Home() {
     document.body.classList.remove('new-interview');
   }, []);
 
+  const pageVariants = {
+  initial: {
+    x: "-100vw"
+  },
+  leftInitial: {
+    x: '-100vw'
+  },
+  rightInitial: {
+    x: '100vw'
+  },
+  in: {
+    x: 0
+  },
+  leftOut: {
+    x: "0"
+  },
+  rightOut: {
+    x: "0"
+  },
+  down: {
+    y: 300
+  }
+};
+
+const pageTransition = {
+  type: "tween",
+  ease: "anticipate",
+  duration: 1.2
+};
+
   return (
-    <div>
+    <motion.div>
       {
         <DotRing />
       }
+      <motion.div initial='leftInitial' exit='leftOut' variants={pageVariants} transition={pageTransition} className={`panel left bg-${bgColorValue[0][0]} w-3/5 h-full absolute z-9999`}></motion.div>
+      <motion.div initial='rightInitial' exit='rightOut' variants={pageVariants} transition={pageTransition} className={`panel right bg-${bgColorValue[1][0]} w-2/5 right-0 h-full absolute z-9999`}></motion.div>
+
       <div id="outer-container">
-        <Logo menuColor="var(--blue)" color="var(--blue)" />
-        <div id="page-wrap">
+        <Logo logoTextColor='var(--blue)' arrowHamburgerColor='var(--blue)' primaryColor={bgColorValue[0][0]} secondaryColor={bgColorValue[1][0]} primaryTextColor={bgColorValue[0][1]} secondaryTextColor={bgColorValue[1][1]} thirdColor={bgColorValue[2][0]} thirdTextColor={bgColorValue[2][1]} />
+        {
+          <HamburgerMenu color='var(--blue)' primaryColor={bgColorValue[0][0]} secondaryColor={bgColorValue[1][0]} primaryTextColor={bgColorValue[0][1]} secondaryTextColor={bgColorValue[1][1]} thirdColor={bgColorValue[2][0]} thirdTextColor={bgColorValue[2][1]} />
+        }
+        <motion.div variants={pageVariants} transition={pageTransition} exit='down' id="page-wrap">
           <HomeHead />
           <Items items={state.data} lockBodyScrolling={lockBodyScrolling} handleRandomBg={handleRandomBg} open={open}/>
-          <Footer bgColor="purple" textColor="white" />
-          <div onClick={()=>handleRandomBg(xBg)} className={`static ${cursorType == "left" ? "red-main-color": ""} ${bg}`} open={open}>
-            <span className="close" onClick={()=> {releaseBodyScrolling();}}>
-              {open&&<Arrow size="100px" rotate="180deg"/>}
-            </span>
-          </div>
-        </div>
+          <Footer primaryColor={bgColorValue[0][0]} secondaryColor={bgColorValue[1][0]} primaryTextColor={bgColorValue[0][1]} secondaryTextColor={bgColorValue[1][1]} thirdColor={bgColorValue[2][0]} thirdTextColor={bgColorValue[2][1]} />
+          {
+            /*
+              <div onClick={()=>handleRandomBg(xBg)} className={`static ${cursorType == "left" ? "red-main-color": ""} ${bg}`} open={open}>
+                <span className="close" onClick={()=> {releaseBodyScrolling();}}>
+                  {open&&<Arrow size="100px" rotate="180deg"/>}
+                </span>
+              </div>
+            */
+          }
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

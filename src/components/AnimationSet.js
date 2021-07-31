@@ -26,6 +26,17 @@ const upMotion = {
     },
   },
 };
+const largeUpMotion = {
+  initial: { y: '100vh', opacity: 0 },
+  animate: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 1.2,
+      ease: [0.6, -0.05, 0.01, 0.99],
+    },
+  },
+};
 const upMotionSlow = {
   initial: { y: 50, opacity: 0 },
   animate: {
@@ -38,4 +49,4 @@ const upMotionSlow = {
   },
 };
 
-export { content, downMotion, upMotion, upMotionSlow }
+export { content, downMotion, upMotion, largeUpMotion, upMotionSlow }

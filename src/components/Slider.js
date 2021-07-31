@@ -68,12 +68,12 @@ export default function DiscreteSlider(props) {
     <div className={`${classes.root} flex flex-row`}>
       <Slider getAriaValueText={valuetext}
       aria-labelledby="discrete-slider"
-      valueLabelDisplay="on"
+      valueLabelDisplay="off"
       onChange={handleChange} value={defaultValue} step={1}
       marks
       min={1}
       max={6} />
-      <span className="text-white mx-10">{sliderValue}</span>
+      <span className="text-blue ml-10">{defaultValue}</span>
     </div>
   );
 }

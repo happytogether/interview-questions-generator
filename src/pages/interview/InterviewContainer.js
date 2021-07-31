@@ -37,14 +37,15 @@ export default function InterviewContainer(props) {
   const { cursorType, cursorChangeHandler } = useContext(MouseContext);
   const { x, y } = useMousePosition();
   const cursorSide = x > window.innerWidth / 2 ? "right" : "left";
-  const pathname = useHistory().location.pathname.match(/.*\/([^/]+)\/[^/]+/)[1] || "";
+  //const pathname = useHistory().location.pathname.match(/.*\/([^/]+)\/[^/]+/)[1] || "";
   const [completedSteps, setCompletedSteps] = useState([]);
   const [cookie, updateCookie] = useCookie("onboarding", "false"); // make sure onboarding panel only show once.
 
   useEffect(() => {
-    if (pathname == 'interview') {
+    /*if (pathname == 'interview') {
       document.body.classList.add('new-interview');
-    }
+    }*/
+    document.body.classList.add('new-interview');
   }, [])
 
   useEffect(() => {
@@ -68,28 +69,30 @@ export default function InterviewContainer(props) {
   }
   const randomIndex = Math.random() > .5 ? 0: 1;
   return (
-    <div onClick={()=>handleRandomBg()} className={`static2 box-bg`}>
+    <div id="outer-container">
       <Logo backArrow backArrowColor="white" menuColor="white" color="#fff" bg="black" />
-      {
-        cookie && <div onClick={() => {updateCookie("hidden")}} className={`${cookie} onboarding absolute w-full h-full z-50 bg-white flex flex-col items-center justify-center`}>
+      <div id="page-wrap" onClick={()=>handleRandomBg()} className={`static2 ${bg}`}>
+        {
+          cookie && <div onClick={() => {updateCookie("hidden")}} className={`${cookie} onboarding absolute w-full h-full z-50 bg-white flex flex-col items-center justify-center`}>
 
-            <ul className="flex flex-row items-center">
-              <li className="flex flex-col justify-center items-center">
-                <Sad size="50px" color="#fff" opacity="1" />
-              </li>
-              <li><FlickHand size="200px" color="#fff" /></li>
-              <li className="flex flex-col justify-center items-center">
-                <Smile size="50px" color="#fff" opacity="1" />
-              </li>
-            </ul>
-            <div className="text-2xl mb-5 text-white">Flick right - like the answer. </div>
-            <div className="text-2xl text-white">Flick left - dislike the answer. </div>
-        </div>
-      }
-      {
-        questionsState.data.length && <InterviewQuestions categoryIndex={categoryIndex} steps={questionsState.data.length} completedSteps={completedSteps} answers={answers || []} />
-      }
+              <ul className="flex flex-row items-center">
+                <li className="flex flex-col justify-center items-center">
+                  <Sad size="50px" color="#fff" opacity="1" />
+                </li>
+                <li><FlickHand size="200px" color="#fff" /></li>
+                <li className="flex flex-col justify-center items-center">
+                  <Smile size="50px" color="#fff" opacity="1" />
+                </li>
+              </ul>
+              <div className="text-2xl mb-5 text-white">Flick right - like the answer. </div>
+              <div className="text-2xl text-white">Flick left - dislike the answer. </div>
+          </div>
+        }
+        {
+          questionsState.data.length && <InterviewQuestions categoryIndex={categoryIndex} steps={questionsState.data.length} completedSteps={completedSteps} answers={answers || []} />
+        }
 
+      </div>
     </div>
   )
 }

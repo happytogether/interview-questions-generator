@@ -48,6 +48,17 @@
   }
 }
 /* react material css override */
+.material-slider {
+  > div:last-of-type {
+    height: 40px;
+  }
+}
+.MuiSlider-root {
+  width: 100%!important;
+  @media (max-width: 480px) {
+    width: 80%!important;
+  }
+}
 .MuiSlider-thumb, .MuiSlider-track {
   background-color: var(--blue)!important;
 }

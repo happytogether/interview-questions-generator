@@ -6,19 +6,20 @@ import { useSpring, animated } from 'react-spring';
 import { motion } from "framer-motion";
 import * as easings from 'd3-ease'
 import DelayLink from '../../ultils/DelayLink';
-import Arrow from '../../components/shapes/Arrow';
+import GoToTop from '../../ultils/GoToTop';
+import GetRandomFromArray from '../../ultils/GetRandomFromArray';
 
 function Booking() {
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+  const bgTextColorArray = [['orange', 'var(--gray-dark)'], ['yellow', 'var(--gray-dark)'], ['green', 'var(--gray-dark)'], ['purple', 'white'], ['pink', 'var(--gray-dark)'], ['blue', 'white']]; // first element - bg, 2nd - text color
+  const bgTextColor = GetRandomFromArray(bgTextColorArray);
   return (
     <div id="outer-container" className="booking">
-      <Logo backArrow backArrowColor="var(--blue)" menuColor="var(--blue)" color="var(--blue)"/>
-      <div id="page-wrap">
+      <Logo backArrow backArrowColor={bgTextColor[0][1]} menuColor={bgTextColor[0][1]} color="var(--gray-dark)" />
+      <div id="page-wrap" className={`bg-gray-${bgTextColor[0][0]}`}>
         <iframe className="w-9/12" src="https://react-calendso-interview-production.up.railway.app/anni/30mins" frameborder="0" allowfullscreen></iframe>
-        <Footer />
+        <Footer bgColor={bgTextColorArray[1][0]} textColor={bgTextColorArray[1][1]} />
       </div>
+      <GoToTop />
     </div>
   );
 }

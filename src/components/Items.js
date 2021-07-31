@@ -19,6 +19,7 @@ import { motion } from "framer-motion";
 import * as easings from 'd3-ease'
 import { Store } from '../Store';
 import DelayLink from '../ultils/DelayLink';
+import { Link } from "react-router-dom";
 import './Item.scss';
 import { content, upMotion, downMotion, upMotionSlow } from './AnimationSet';
 
@@ -49,11 +50,9 @@ export default function Items(props) {
   }
   const [clicked, setClicked] = useState(false);
   const [props1, set] = useSpring(() => ({ xy: [0, 0], config: { mass: 10, tension: 550, friction: 140 } }))
+
   return (
-    <motion.ul
-          variants={content}
-          animate="animate"
-          initial="initial" onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })}>
+    <motion.ul onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })}>
       {
         props.items && props.items.length>0 && props.items.map((item, index)=><li key={index} value={props.value}  className={`item relative flex flex-row items-center justify-center lg:h-auto lg:flex-col lg:flex-col-reverse ${flexDirection[index%2]}`}>
 
@@ -63,7 +62,7 @@ export default function Items(props) {
             </div>
             <motion.div variants={upMotion}>
               <animated.div style={{ transform: props1.xy.interpolate(trans5) }}>
-                <div className={`rect flex items-center justify-center sm:transform-gpu sm:scale-80 ${randomBgArr[Math.floor(Math.random()*11)]} ${categoryMainShape[index%4]}`}>
+                <div className={`default-window flex items-center justify-center sm:transform-gpu sm:scale-80 ${randomBgArr[Math.floor(Math.random()*11)]} ${categoryMainShape[index%4]}`}>
                   <span className={randomBgArr[Math.floor(Math.random()*11)]}></span>
                 </div>
               </animated.div>
@@ -85,7 +84,7 @@ export default function Items(props) {
               <h3 className="text-5xl">{item.cat}</h3>
               <div className="my-3">{item.catFigcaption}</div>
               <button onClick={() => { setClicked(!clicked); cursorChangeHandler( clicked + "-clicked")}} className="text-left border rounded-sm py-3 px-6">
-                <DelayLink delay="600" to={`/gallery/${index}`}>Questions Gallery</DelayLink>
+                <Link delay="600" to={`/gallery/${index}`}>Questions Gallery</Link>
               </button>
             </figcaption>
           </motion.div>

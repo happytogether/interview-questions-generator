@@ -47,7 +47,7 @@ export default function HomeHead(props) {
 
   return (
     <motion.main variants={content} animate="animate"
-    initial="initial" style={styles} onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })} className="h-screen w-screen p-20 lg:pt-40 flex justify-items-center items-center lg:flex-col lg:h-auto">
+    initial="initial" style={styles} onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })} className="homehead h-screen w-screen p-20 lg:p-5 lg:pt-40 flex justify-items-center items-center lg:flex-col lg:h-auto">
       {
         showBang && <span className="absolute bang">Bang!</span>
       }
@@ -57,8 +57,8 @@ export default function HomeHead(props) {
         <Reward ref={canvasInput} type='emoji' config = {{"emoji": BallonSet(), "elementCount": 5, "spread": 1200, "decay": 0.6, "elementSize": 180, "lifetime": 500}}></Reward>
       </animated.div>
 
-      <motion.div variants={upMotion} className="flex-1 bg-yellow text-blue p-10 box-shadow rect border">
-        <h2 className="text-3xl border-b-2 pb-2">Interview<br /><input type="text" placeholder="Anni Wang" />and get some FUN.</h2>
+      <motion.div variants={upMotion} className="flex-1 sm:w-11/12 md:w-9/12 bg-yellow text-blue p-10 default-window border">
+        <h2 className="text-3xl border-b-2 pb-2">Interview<br /><input className="w-6/12 sm:w-full" type="text" placeholder="Anni Wang" />and get some FUN.</h2>
         <p className="my-5">*Questions will be randomly gernerated.</p>
         <div className="text-left">
           <div className="flex mt-2 space-x-4">
@@ -68,7 +68,7 @@ export default function HomeHead(props) {
           </div>
         </div>
       </motion.div>
-      <motion.div variants={downMotion} className="rect box-shadow flex-1 mt-10 text-2xl lg:text-xl homehead-right ml-20 lg:ml-0 lg:mt-20" >
+      <motion.div variants={downMotion} className="default-window flex-1 sm:w-11/12 md:w-9/12 mt-10 text-2xl lg:text-xl homehead-right ml-20 lg:ml-0 lg:mt-20" >
         <div className={`text-left p-8 ${randomBg[Math.floor(Math.random()*6)]}`}>
           <span className="p-3 my-3 bg-white leading-normal">Anni Wang is an UX Engineer, a Design Technologist. </span><br />
           <span className="p-1 mx-4 bg-white">a designer and coder</span>

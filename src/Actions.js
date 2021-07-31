@@ -38,8 +38,6 @@ export const fetchDataAction = async (dispatch) => {
 export const fetchQuestionsDataAction = async (dispatch, userCustomizedQuestionsNumArray) => {
   const data = await fetch(QUESTIONS_API_URL);
   const dataJSON = await data.json();
-  console.log(222);
-  console.log(userCustomizedQuestionsNumArray);
   dataJSON.filter((item, index) => {
     item.questions.length = userCustomizedQuestionsNumArray[index] || initialQuestionsNum()[index];
   })
@@ -86,6 +84,12 @@ export const stepsResetAnswersAction = async (state, dispatch) => {
   });
 }
 
+export const pageTransitionColorsAction = async (state, dispatch) => {
+  return dispatch({
+    type: "DEFINE_COLORS",
+    payload: state
+  });
+}
 /*export const fetchStepsDoneLocalStorageAction = async (dispatch, categoryIndex) => {
   const data = JSON.parse(localStorage.getItem('category'+categoryIndex));
   return dispatch({

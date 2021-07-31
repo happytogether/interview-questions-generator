@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useMemo } from 'react';
 import { useSpring, animated } from 'react-spring';
 import { useParams, useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -24,9 +24,17 @@ import MouseLeftRight from "../../components/DotRing/MouseLeftRight";
 import { DefaultSet } from "../../components/Reward/MemphisSets";
 import { motion } from "framer-motion";
 import { content, upMotion} from '../../components/AnimationSet';
+import GoToTop from '../../ultils/GoToTop';
+import GetRandomFromArray from '../../ultils/GetRandomFromArray';
 import './NewInterview.scss';
 
-function NewInterview() {
+function NewInterview(props) {
+  const primaryColor = props.location.state ? props.location.state.bgTextColor[0]: 'blue';
+  const secondaryColor = props.location.state ? props.location.state.bgTextColor[1]: 'purple';
+  const primaryTextColor = props.location.state ? props.location.state.bgTextColor[2]: 'white';
+  const secondaryTextColor = props.location.state ? props.location.state.bgTextColor[3]: 'white';
+  const thirdColor = props.location.state ? props.location.state.bgTextColor[4]: '';
+  const thirdTextColor = props.location.state ? props.location.state.bgTextColor[5]: '';
 
   const defaultValueArray = initialQuestionsNum();
   const defaultQuestionsSum = defaultValueArray.reduce((a, b) => a + b, 0);
@@ -36,20 +44,24 @@ function NewInterview() {
   const { questionsNumState, questionsNumDispatch } = useContext(QuestionsNumStore);
 
   const pathname = useHistory().location.pathname;
+  const [footer, setFooter] = useState(false);
+
+  useEffect(() => {
+    document.body.classList = "";
+    document.body.classList.add(`${primaryColor?primaryColor:'yellow'}-primary-color`);
+    document.body.classList.add(`${secondaryColor?secondaryColor:'blue'}-secondary-color`);
+  },[])
 
   useEffect(() => {
     if (pathname == '/newInterview') {
       document.body.classList.add('new-interview');
     }
-  }, [])
-
-  useEffect(() => {
-    window.scrollTo(0, 0)
+    setFooter(true);
   }, [])
 
   useEffect(
     () => {
-      state.data.length === 0 && fetchDataAction(dispatch);
+      state.data.length === 0 && fetchDataAction(dispatch); // fetch basic json if not loaded in home
     },[state])
 
   const [questionsNum, setQuestionsNum] = useState(defaultValueArray);
@@ -93,14 +105,14 @@ function NewInterview() {
       "color": "var(--blue)"
     },
     {
-      "text": "UX Focus",
-      "default_questions": [3,5,3,2],
-      "color": "var(--pink)"
-    },
-    {
       "text": "Leadership Focus",
       "default_questions": [2,2,5,3],
       "color": "var(--purple)"
+    },
+    {
+      "text": "UX Focus",
+      "default_questions": [3,5,3,2],
+      "color": "var(--pink)"
     },
     {
       "text": "Experience Focus",
@@ -128,17 +140,24 @@ function NewInterview() {
   function toggleChip(id) {
     setToggledChipId(id);
   }
-
-  return (
-    <motion.div id="outer-container" variants={content}
+  const bgTextColorArray = [['orange', 'var(--gray-dark)'], ['red', 'white'], ['green', 'var(--gray-dark)'], ['purple', 'white'], ['pink', 'var(--gray-dark)'], ['blue', 'white'], ['yellow', 'var(--gray-dark)']]; // first element - bg, 2nd - text color
+  const bgColorValue = useMemo(
+    () => GetRandomFromArray(bgTextColorArray),
+    []
+  );
+return (
+    <motion.div variants={content}
     animate="animate"
-    initial="initial">
-      <Logo backArrow backArrowColor="white" menuColor="white" color="var(--blue)" />
-      <div id="page-wrap" className={`w-screen h-screen report bg-gray-purple flex justify-center items-center py-10`}>
-        <motion.div variants={upMotion} className="xl:w-8/12 lg:w-11/12 lg:mt-20 lg:p-10 w-6/12 h-5/6 bg-white p-20 default-window mt-20">
+    initial="initial" id="outer-container" >
+      <Logo backArrow primaryColor={primaryTextColor} secondaryColor={secondaryTextColor} primaryTextColor={primaryTextColor} secondaryTextColor={secondaryTextColor} thirdColor={thirdColor} thirdTextColor={thirdTextColor} />
+      {
+        <HamburgerMenu color={secondaryTextColor} primaryColor={bgColorValue[0][0]} secondaryColor={bgColorValue[1][0]} primaryTextColor={bgColorValue[0][1]} secondaryTextColor={bgColorValue[1][1]} thirdColor={bgColorValue[2][0]} thirdTextColor={bgColorValue[2][1]} />
+      }
+      <div id="page-wrap" className={`w-screen min-h-screen bg-primary-secondary flex justify-center items-center py-10`}>
+        <motion.div variants={upMotion} className="2xl:w-8/12 xl:w-9/12 lg:w-11/12 lg:mt-20 lg:p-10 w-6/12 h-5/6 bg-white p-20 sm:p-5 default-window mt-20">
           <div className="flex flex-row w-full h-full lg:flex-col">
-            <div className="lg:w-screen w-6/12 h-full">
-              <div className="w-9/12 bg-cover bg-center bg-no-repeat" style={{"backgroundImage": `url("/img/interview.svg")`, "backgroundColor": "var(--purple)", "backgroundSize": "150px auto", "height": "300px"}}></div>
+            <div className="lg:w-full w-6/12 h-full">
+              <div className={`w-9/12 lg:w-full bg-cover bg-center bg-no-repeat bg-${secondaryColor}`} style={{"backgroundImage": `url("/img/interview.svg")`, "backgroundSize": "150px auto", "height": "300px"}}></div>
               <div className="text-black lowercase font-semibold text-4xl my-10">start to<br />interview <br />Anni</div>
               <div class="float-left w-9/12 flex flex-row">
                 {
@@ -150,13 +169,13 @@ function NewInterview() {
             <div className="lg:w-full w-7/12">
               <ul>
                 <li className="border-3 py-6"><p className="block my-3">Pick your interview prefernces, you can ask min 4 questions or max 36 questions here. Move the slider or click on the chips.</p></li>
-                <li className="flex flex-row flex-wrap mb-20">
+                <li className="flex flex-row flex-wrap gap-2 w-full relative mb-10">
                   {
                     chips.map((chip, i) => {
                       const isToggled = i === toggledChipId;
                       return (
-                        <li key={chip.id} onClick={()=> {handleChipsValue(chip.default_questions); toggleChip(i)}} className={`text-xs flex-2 m-2 mb-3`}>
-                          <span className={`p-2 border rounded-sm ${isToggled ? "selected" : ""}`} style={{"color": `${isToggled ? '#fff': 'var(--blue)'}`, "border": `2px solid`, "backgroundColor": `${isToggled ? 'var(--blue)': ''}`}}>{chip.text}</span>
+                        <li key={chip.id} onClick={()=> {handleChipsValue(chip.default_questions); toggleChip(i)}} className={`text-xs`}>
+                          <div className={`p-2 mb-3 border ${isToggled ? "selected" : ""}`} style={{"color": `${isToggled ? '#fff': 'var(--blue)'}`, "backgroundColor": `${isToggled ? 'var(--purple)': ''}`}}>{chip.text}</div>
                         </li>
                       )
                     })
@@ -164,12 +183,12 @@ function NewInterview() {
                 </li>
                 <li>
                   <ul className="flex flex-col text-blue">
-                    <div className="-ml-10">
+                    <div>
                       {
                         state.data.map((item, index) => (
-                          <li className="material-slider mb-10 flex flex-row">
-                            <div className="w-4/12 pr-6 text-right text-sm">{item.cat}</div>
-                            <div className="w-8/12">
+                          <li className="material-slider mb-5">
+                            <div className="text-xs">{item.cat}</div>
+                            <div>
                               <Slider key={`categoryIndex`+index} categoryIndex={index} handleQuestionsNum={handleQuestionsNum} defaultValue={questionsNum[index]} />
                             </div>
                           </li>
@@ -193,7 +212,7 @@ function NewInterview() {
                 pathname: "/interview/0",
                 state: {questionsNum: questionsNum}
               }}>
-              <div className="flex flex-row justify-center items-center">
+              <div className="flex flex-row justify-center items-center lg:text-sm">
                 <span>Generate Interview Questions</span>
               </div>
               </DelayLink>
@@ -201,7 +220,10 @@ function NewInterview() {
           </div>
         </motion.div>
       </div>
-      <Footer />
+      {
+        footer && <Footer primaryColor={bgColorValue[0][0]} secondaryColor={bgColorValue[1][0]} primaryTextColor={bgColorValue[0][1]} secondaryTextColor={bgColorValue[1][1]} thirdColor={thirdColor} thirdTextColor={thirdTextColor} />
+      }
+      <GoToTop />
     </motion.div>
   );
 }

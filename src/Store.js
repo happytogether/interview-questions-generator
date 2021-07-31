@@ -114,3 +114,23 @@ export function UserAnswersStoreProvider(props) {
   const value = { userAnswersState, userAnswersDispatch };
   return <UserAnswersStore.Provider value={value}>{props.children}</UserAnswersStore.Provider>;
 }
+
+export const PageTransitionColorsStore = createContext("");
+const pageTransitionColorsInitialState = {
+  data: ['yellow', 'blue', 'white']
+};
+
+function pageTransitionColorsReducer(pageTransitionColorsState, action) {
+  switch (action.type) {
+    case 'DEFINE_COLORS':
+      return {...pageTransitionColorsState, data:action.payload};
+    default:
+      return pageTransitionColorsState
+  }
+}
+
+export function PageTransitionColorsStoreProvider(props) {
+  const [pageTransitionColorsState, pageTransitionColorsDispatch] = useReducer(pageTransitionColorsReducer, pageTransitionColorsInitialState);
+  const value = { pageTransitionColorsState, pageTransitionColorsDispatch };
+  return <PageTransitionColorsStore.Provider value={value}>{props.children}</PageTransitionColorsStore.Provider>;
+}

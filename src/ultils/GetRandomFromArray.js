@@ -15,17 +15,6 @@ function shuffle(array) {
   return array;
 }
 
-const GradeASet = () => {
-  const arr = [
-    '/img/gradeA/1.svg',
-    '/img/gradeA/2.svg',
-    '/img/gradeA/3.svg',
-    '/img/gradeA/4.svg',
-    '/img/gradeA/5.svg',
-    '/img/gradeA/6.svg',
-    '/img/gradeA/7.svg'
-  ]
+export default function getRandomFromArray(arr) {
   return shuffle(arr);
-};
-
-export { GradeASet }
+}

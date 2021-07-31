@@ -6,6 +6,7 @@ module.exports = {
     extend: {
       zIndex: {
        '-10': '-10',
+       '9999': '9999'
      },
      opacity: {
        '15': '15%'
@@ -30,11 +31,13 @@ module.exports = {
       'lg': {'max': '1023px'},
       // => @media (max-width: 1023px) { ... }
 
-      'md': {'max': '767px'},
+      'md': {'max': '768px'},
       // => @media (max-width: 767px) { ... }
 
       'sm': {'max': '639px'},
       // => @media (max-width: 639px) { ... }
+
+      'smup': {'min': '640px'}
     },
     borderWidth: {
       DEFAULT: '1px',
@@ -58,6 +61,7 @@ module.exports = {
       gray: {
         darkest: '#1f2d3d',
         dark: "var(--gray-dark)",
+        light: "var(--gray-light)",
         DEFAULT: "var(--gray)",
         light: '#e0e6ed',
         lightest: '#f9fafc'
