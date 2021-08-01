@@ -39,6 +39,7 @@ export default function Questions(value) {
 
   useEffect(() => {
     setAnswers(answersLocalStroage);
+    console.log(answersLocalStroage);
   },[index])
 
   /*useEffect(()=>{
@@ -108,7 +109,7 @@ export default function Questions(value) {
     setDone(false);
     userAnswersState.data[index].length = 0;
     stepsResetAnswersAction(userAnswersState.data, userAnswersDispatch);
-    //localStorage.setItem('stepsAnswers', JSON.stringify(userAnswersState.data));
+    localStorage.setItem('stepsAnswers', JSON.stringify(userAnswersState.data));
   }
   const calc = (x, y) => [x - window.innerWidth / 2, y - window.innerHeight / 2]
   const piePosX = window.innerWidth - 100;
@@ -164,7 +165,7 @@ export default function Questions(value) {
           <motion.div variants={rotateMotion}>
             <Sun3 />
           </motion.div>
-          <h1 className="text-white inset-y-1/2 text-4xl w-36 z-20">0{parseInt(index)+1}.{title} / <span className="text-sm">Restart</span></h1>
+          <h1 className="text-white inset-y-1/2 text-4xl w-36 z-20">0{parseInt(index)+1}.{title} / <span className="text-sm">Scores</span></h1>
           <Arrow size="40px" color="#fff" />
           {
             !done && <SmileSadFace questions={questions} rightWrongNum={userAnswersState.data[index]} rightAnswerNum={rightAnswerNum} wrongAnswerNum={wrongAnswerNum} />
