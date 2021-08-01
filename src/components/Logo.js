@@ -1,9 +1,6 @@
 import DelayLink from '../ultils/DelayLink';
-import HamburgerMenu from './HamburgerMenu/HamburgerMenu';
 import Arrow from './shapes/Arrow';
-import {
-  isMobile
-} from "react-device-detect";
+import { isMobile } from "react-device-detect";
 
 export default function Logo(props) {
   const color = props.color;
@@ -26,7 +23,7 @@ export default function Logo(props) {
   }
   return (
     <div className="fixed w-full z-10">
-      <div style={styles} className="fixed text-base px-2 py-5 ml-4 z-30 logo">
+      <div style={styles} className="fixed text-base px-2 my-5 ml-4 z-30 logo">
         <DelayLink delay="600" to="/">
           <span className="sm:hidden">/// Anni Wang ///</span>
         </DelayLink>
@@ -40,11 +37,6 @@ export default function Logo(props) {
             <Arrow size={isMobile?'40px': '60px'} rotate="180deg" color={arrowHamburgerColor? arrowHamburgerColor: secondaryTextColor} />
           </DelayLink>
         </span>
-      }
-      {
-        /*
-        !noMenu && <HamburgerMenu color={arrowHamburgerColor?arrowHamburgerColor:secondaryTextColor} primaryColor={primaryColor} secondaryColor={secondaryColor} primaryTextColor={primaryTextColor} secondaryTextColor={secondaryTextColor} thirdColor={thirdColor} thirdTextColor={thirdTextColor} />
-        */
       }
     </div>
   )

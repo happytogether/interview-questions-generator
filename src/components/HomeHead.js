@@ -13,6 +13,12 @@ import { motion } from "framer-motion";
 import { content, upMotion, downMotion } from './AnimationSet';
 
 export default function HomeHead(props) {
+  const primaryColor = props.primaryColor ? props.primaryColor:'green';
+  const primaryTextColor = props.primaryTextColor ? props.primaryTextColor:'var(--gray-dark)';;
+  const secondaryColor = props.secondaryColor ? props.secondaryColor:'gray';
+  const secondaryTextColor = props.secondaryTextColor?props.secondaryTextColor:'var(--gray-dark)';
+  const thirdColor = props.thirdColor?props.thirdColor:'purple';
+  const thirdTextColor = props.thirdTextColor?props.thirdTextColor:'white';
   const { cursorType, cursorChangeHandler } = useContext(MouseContext);
   const randomBg = ["dot-bg", "line-bg", "box-bg", "skew-dot-bg", "cross-bg", "line-h-bg"];
   const [play] = useSound(cannonSfx);
@@ -63,7 +69,10 @@ export default function HomeHead(props) {
         <div className="text-left">
           <div className="flex mt-2 space-x-4">
             <div className="border rounded-sm py-3 px-6 mt-3">
-              <DelayLink to="./interview" delay="1000">Start Interview Process</DelayLink>
+            <DelayLink delay="600" to={{
+              pathname: "/interview",
+              state: {bgTextColor: [primaryColor, secondaryColor, primaryTextColor, secondaryTextColor, thirdColor, thirdTextColor]}
+            }}> Start Interview Process</DelayLink>
             </div>
           </div>
         </div>

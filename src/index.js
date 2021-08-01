@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import MouseContextProvider from "./context/mouse-context";
 import { BrowserRouter } from "react-router-dom";
-import { HomeStoreProvider, QuestionsStoreProvider, QuestionsNumStoreProvider, StepperStoreProvider, UserAnswersStoreProvider, PageTransitionColorsStoreProvider } from "./Store";
+import { HomeStoreProvider, QuestionsStoreProvider, QuestionsNumStoreProvider, StepperStoreProvider, UserAnswersStoreProvider } from "./Store";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -16,9 +16,7 @@ ReactDOM.render(
               <QuestionsStoreProvider>
                 <UserAnswersStoreProvider>
                   <StepperStoreProvider>
-                    <PageTransitionColorsStoreProvider>
-                      <App />
-                    </PageTransitionColorsStoreProvider>
+                    <App />
                   </StepperStoreProvider>
                 </UserAnswersStoreProvider>
               </QuestionsStoreProvider>

@@ -11,6 +11,8 @@ import Arrow from '../../components/shapes/Arrow';
 import HamburgerMenu from '../../components/HamburgerMenu/HamburgerMenu';
 import { DonutSet, IceCreamSet, TwitchSet, DefaultSet, FruitSet, FruitSet2 } from "../../components/Reward/MemphisSets";
 import GoToTop from '../../ultils/GoToTop';
+import { ColorSet } from '../../components/ColorSet';
+
 
 function Credit(props) {
   const primaryColor = props.location.state ? props.location.state.bgTextColor[0]: 'green';
@@ -27,8 +29,8 @@ console.log(props.location.state);
 
   useEffect(() => {
     document.body.classList = "";
-    document.body.classList.add(`${primaryColor?primaryColor:'yellow'}-primary-color`);
-    document.body.classList.add(`${secondaryColor?secondaryColor:'blue'}-secondary-color`);
+    //document.body.classList.add(`${primaryColor?primaryColor:'yellow'}-primary-color`);
+    //document.body.classList.add(`${secondaryColor?secondaryColor:'blue'}-secondary-color`);
   },[])
 
   useEffect(() => {
@@ -59,23 +61,57 @@ console.log(props.location.state);
   const setArray = [DonutSet(), IceCreamSet(), TwitchSet(), DefaultSet(), FruitSet(), FruitSet2()];
   const set = GetRandomFromArray(setArray)[0];
 
-  const bgTextColorArray = [['orange', 'var(--gray-dark)'], ['red', 'white'], ['green', 'var(--gray-dark)'], ['purple', 'white'], ['pink', 'var(--gray-dark)'], ['blue', 'white'], ['yellow', 'var(--gray-dark)']]; // first element - bg, 2nd - text color
   const bgColorValue = useMemo(
-    () => GetRandomFromArray(bgTextColorArray),
+    () => GetRandomFromArray(ColorSet),
     []
   );
+  const pageVariants = {
+  initial: {
+    y: 50,
+    opacity:0
+  },
+  leftInitial: {
+    x: '-100vw'
+  },
+  rightInitial: {
+    x: '100vw'
+  },
+  in: {
+    y: 0,
+    opacity: 1
+  },
+  leftOut: {
+    x: "0"
+  },
+  rightOut: {
+    x: "0"
+  },
+  up: {
+    y: -300
+  },
+  down: {
+    y: 300
+  }
+};
 
+const pageTransition = {
+  type: "tween",
+  ease: "anticipate",
+  duration: 1.2
+};
 
   return (
     <motion.div variants={content}
     animate="animate"
-    initial="initial" id="outer-container">
+    initial="initial" id="outer-container" className={`${primaryColor?primaryColor:'yellow'}-primary-color ${secondaryColor?secondaryColor:'blue'}-secondary-color`}>
+      <motion.div initial='leftInitial' exit='leftOut' variants={pageVariants} transition={pageTransition} className={`panel left bg-${bgColorValue[0][0]} w-3/5 h-full absolute z-9999`}></motion.div>
+      <motion.div initial='rightInitial' exit='rightOut' variants={pageVariants} transition={pageTransition} className={`panel right bg-${bgColorValue[1][0]} w-2/5 right-0 h-full absolute z-9999`}></motion.div>
       <Logo backArrow primaryColor={primaryTextColor} secondaryColor={secondaryTextColor} primaryTextColor={primaryTextColor} secondaryTextColor={secondaryTextColor} thirdColor={thirdColor} thirdTextColor={thirdTextColor} />
       {
-        <HamburgerMenu color={secondaryTextColor} primaryColor={bgColorValue[0][0]} secondaryColor={bgColorValue[1][0]} primaryTextColor={bgColorValue[0][1]} secondaryTextColor={bgColorValue[1][1]} thirdColor={bgColorValue[2][0]} thirdTextColor={bgColorValue[2][1]} />
+        <HamburgerMenu color={secondaryTextColor?secondaryTextColor:'white'} bgColor={thirdColor?thirdColor:'yellow'} bgTextColor={thirdTextColor?thirdTextColor:'var(--gray-dark)'} primaryColor={bgColorValue[0][0]} secondaryColor={bgColorValue[1][0]} primaryTextColor={bgColorValue[0][1]} secondaryTextColor={bgColorValue[1][1]} thirdColor={bgColorValue[2][0]} thirdTextColor={bgColorValue[2][1]} />
       }
       <div id="page-wrap" className={`w-screen min-h-screen bg-primary-secondary py-10`}>
-        <motion.div variants={largeUpMotion} className="flex flex-row justify-center items-center ">
+        <motion.div variants={pageVariants} initial='initial' transition={pageTransition} exit='down' animate="in" className="flex flex-row justify-center items-center ">
           <div className="absolute right-40 top-40 sm:hidden">
             <Wave2 size="150px" />
           </div>
@@ -99,10 +135,11 @@ console.log(props.location.state);
           </div>
         </motion.div>
       </div>
-      {
-        footer && <Footer primaryColor={bgColorValue[0][0]} secondaryColor={bgColorValue[1][0]} primaryTextColor={bgColorValue[0][1]} secondaryTextColor={bgColorValue[1][1]} thirdColor={thirdColor} thirdTextColor={thirdTextColor} />
-      }
-
+      <motion.div variants={pageVariants} initial='initial' transition={pageTransition} exit='leftInitial' animate='in'>
+        {
+          footer && <Footer primaryColor={bgColorValue[0][0]} secondaryColor={bgColorValue[1][0]} primaryTextColor={bgColorValue[0][1]} secondaryTextColor={bgColorValue[1][1]} thirdColor={thirdColor} thirdTextColor={thirdTextColor} />
+        }
+      </motion.div>
       <GoToTop />
     </motion.div>
 

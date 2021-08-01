@@ -14,14 +14,14 @@ import { HomeStore, StepperStore } from "./Store";
 import { fetchDataAction, stepDoneAction } from "./Actions";
 import { downMotion } from './components/AnimationSet';
 import GetRandomFromArray from './ultils/GetRandomFromArray';
+import { ColorSet } from './components/ColorSet';
 import HamburgerMenu from './components/HamburgerMenu/HamburgerMenu';
 
 function Home() {
   const { state, dispatch } = useContext(HomeStore);
   const { stepperState, stepperDispatch} = useContext(StepperStore);
-  const bgTextColorArray = [['orange', 'var(--gray-dark)'], ['red', 'white'], ['green', 'var(--gray-dark)'], ['purple', 'white'], ['pink', 'var(--gray-dark)'], ['blue', 'white']]; // first element - bg, 2nd - text color
   const bgColorValue = useMemo(
-    () => GetRandomFromArray(bgTextColorArray),
+    () => GetRandomFromArray(ColorSet),
     []
   );
   useEffect(() => {
@@ -149,10 +149,10 @@ const pageTransition = {
       <div id="outer-container">
         <Logo logoTextColor='var(--blue)' arrowHamburgerColor='var(--blue)' primaryColor={bgColorValue[0][0]} secondaryColor={bgColorValue[1][0]} primaryTextColor={bgColorValue[0][1]} secondaryTextColor={bgColorValue[1][1]} thirdColor={bgColorValue[2][0]} thirdTextColor={bgColorValue[2][1]} />
         {
-          <HamburgerMenu color='var(--blue)' primaryColor={bgColorValue[0][0]} secondaryColor={bgColorValue[1][0]} primaryTextColor={bgColorValue[0][1]} secondaryTextColor={bgColorValue[1][1]} thirdColor={bgColorValue[2][0]} thirdTextColor={bgColorValue[2][1]} />
+          <HamburgerMenu color='blue' bgColor={bgColorValue[2][0]} bgTextColor={bgColorValue[2][1]} primaryColor={bgColorValue[0][0]} secondaryColor={bgColorValue[1][0]} primaryTextColor={bgColorValue[0][1]} secondaryTextColor={bgColorValue[1][1]} thirdColor={bgColorValue[2][0]} thirdTextColor={bgColorValue[2][1]} />
         }
         <motion.div variants={pageVariants} transition={pageTransition} exit='down' id="page-wrap">
-          <HomeHead />
+          <HomeHead primaryColor={bgColorValue[0][0]} secondaryColor={bgColorValue[1][0]} primaryTextColor={bgColorValue[0][1]} secondaryTextColor={bgColorValue[1][1]} thirdColor={bgColorValue[2][0]} thirdTextColor={bgColorValue[2][1]} />
           <Items items={state.data} lockBodyScrolling={lockBodyScrolling} handleRandomBg={handleRandomBg} open={open}/>
           <Footer primaryColor={bgColorValue[0][0]} secondaryColor={bgColorValue[1][0]} primaryTextColor={bgColorValue[0][1]} secondaryTextColor={bgColorValue[1][1]} thirdColor={bgColorValue[2][0]} thirdTextColor={bgColorValue[2][1]} />
           {
