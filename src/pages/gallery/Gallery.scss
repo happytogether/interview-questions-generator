@@ -1,38 +1,22 @@
 .gallery {
-  --main: var(--green);
-  --secondary: var(--pink);
-  --third: var(--purple);
-  --fourth: var(--yellow);
-  --fifth: var(--red);
-  --sixth: var(--blue);
   .section > div {
     // tablecell div got inserted dynamically
     display: flex;
     flex-direction: rows;
   }
+  .text-black {
+    transform: rotate(90deg);
+    transform-origin: top left;
+    position: absolute;
+    left: 0;
+    top: 0;
+    &:nth-of-type(2n) {
+      left: 4.5rem;
+    }
+  }
 }
-.gallery-2 {
-  --main: var(--pink);
-  --secondary: var(--purple);
-  --third: var(--yellow);
-  --fourth: var(--green);
-}
-
-.gallery-3 {
-  --main: var(--purple);
-  --secondary: var(--yellow);
-  --third: var(--green);
-  --fourth: var(--pink);
-}
-
-.gallery-4 {
-  --main: var(--yellow);
-  --secondary: var(--green);
-  --third: var(--pink);
-  --fourth: var(--purple);
-}
-
 .section {
+  /*
   &:nth-of-type(4n) {
     background: linear-gradient(90deg, var(--fourth) 60%, var(--gray-light) 40%);
     .list-right::before {
@@ -74,7 +58,7 @@
     .list-right::after {
       background: var(--secondary);
     }
-  }
+  }*/
   .list {
     text-align: right;
   }
@@ -109,7 +93,8 @@
 }
 pre {
   position: relative;
-  left: -100px;
+  white-space: pre-wrap;
+  margin-left: -10rem;
 }
 .question-set {
   transition: all .3s ease-out;

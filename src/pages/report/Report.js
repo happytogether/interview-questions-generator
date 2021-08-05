@@ -16,137 +16,164 @@ import 'react-toastify/dist/ReactToastify.css';
 import Arrow from '../../components/shapes/Arrow';
 import Sun from '../../components/shapes/Sun';
 import DelayLink from '../../ultils/DelayLink';
-import { GradeASet } from '../confettiSet/GradeASet';
-import { fetchQuestionsDataAction,  fetchQuestionsNumDataAction, stepDoneAction, stepsAddAnswersAction, initialQuestionsNum } from '../../Actions';
-import { QuestionsStore, QuestionsNumStore, StepperStore, UserAnswersStore } from '../../Store';
+import { GradeASet } from '../../components/confettiSet/GradeASet';
+import { GradeFSet } from '../../components/confettiSet/GradeFSet';
+import { fetchInterviewCategoryQuestionsJsonAction, fetchInterviewCategoryQuestionsCountAction, stepDoneAction, stepsAddAnswersAction, initialInterviewCategoryQuestionsCount } from '../../Actions';
+import { HomeStore, QuestionsStore, QuestionsNumStore, StepperStore, UserAnswersStore } from '../../Store';
 import { motion } from "framer-motion";
 import { content, upMotion} from '../../components/AnimationSet';
 import HamburgerMenu from '../../components/HamburgerMenu/HamburgerMenu';
 import GoToTop from '../../ultils/GoToTop';
+import TransitionPanels from '../../components/TransitionPanels';
+import { pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageVariants } from '../../ultils/TransitionSet';
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
 import { ColorSet } from '../../components/ColorSet';
+import Checkbox from '@material-ui/core/Checkbox';
+import { withStyles } from '@material-ui/core/styles';
+import { fetchHomepageJsonAction } from "../../Actions";
+import { isMobile } from "react-device-detect";
 
 function Report(props) {
-  const primaryColor = props.location.state ? props.location.state.bgTextColor[0]: 'yellow';
-  const secondaryColor = props.location.state ? props.location.state.bgTextColor[1]: 'blue';
-  const primaryTextColor = props.location.state ? props.location.state.bgTextColor[2]: 'var(--gray-dark)';
-  const secondaryTextColor = props.location.state ? props.location.state.bgTextColor[3]: 'white';
-  const thirdColor = props.location.state ? props.location.state.bgTextColor[4]: '';
-  const thirdTextColor = props.location.state ? props.location.state.bgTextColor[5]: '';
-  const { questionsState, dispatch } = useContext(QuestionsStore);
-  // fetch data from json file
-  useEffect(
-    () => {
-      questionsState.data.length === 0 && fetchQuestionsDataAction(dispatch, initialQuestionsNum());
-    },
-    []
-  );
 
-  const [footer, setFooter] = useState(false);
+  const primaryColor = props.location.state ? props.location.state.bgColor[0]: 'pink';
+  const secondaryColor = props.location.state ? props.location.state.bgColor[1]: 'green';
+  const thirdColor = props.location.state ? props.location.state.bgColor[2]: 'yellow';
+  const primaryTextColor = props.location.state ? props.location.state.textColor[0]: 'var(--gray-dark)';
+  const secondaryTextColor = props.location.state ? props.location.state.textColor[1]: 'var(--gray-dark)';
+  const thirdTextColor = props.location.state ? props.location.state.textColor[2]: 'var(--gray-dark)';
+  const fourthColor = props.location.state ? props.location.state.bgColor[3]: 'purple';
+  const fourthTextColor = props.location.state ? props.location.state.textColor[3]: 'white';
+  // get homepage json if not in store
+  const { state, homeDispatch } = useContext(HomeStore);
+
   useEffect(() => {
-    setFooter(true);
-  }, [])
+    state.data.length === 0 && fetchHomepageJsonAction(homeDispatch);
+  },[state.data]);
+
+  const { questionsState, dispatch } = useContext(QuestionsStore);
+  const { questionsNumState, questionsNumDispatch } = useContext(QuestionsNumStore);
+  const { stepperState, stepperDispatch } = useContext(StepperStore);
+  const { userAnswersState, userAnswersDispatch } = useContext(UserAnswersStore);
+  const [interviewDone, setInterviewDone] = useState(false);
+  const [footer, setFooter] = useState(false);
+
+  // fetch data from json file if no data from store
+
+  const [questionsNumData, setQuestionsNumData] = useState(questionsNumState.data);
 
   useEffect(() => {
     //stepDoneAction(0, stepperDispatch);
     document.body.classList = "";
-    //document.body.classList.add(`${primaryColor?primaryColor:'yellow'}-primary-color`);
-    //document.body.classList.add(`${secondaryColor?secondaryColor:'blue'}-secondary-color`);
+    document.body.classList.add(`bg-${thirdColor}`);
+    setFooter(true);
   },[])
 
+  const stepperData = stepperState.data;
+  const [ rightAnswerSum, setRightAnswerSum ] = useState(0);
+  const [questionsData, setQuestionsData] = useState([]);
 
-  const { questionsNumState, questionsNumDispatch } = useContext(QuestionsNumStore);
-  const { stepperState, stepperDispatch } = useContext(StepperStore);
-  const { userAnswersState, userAnswersDispatch } = useContext(UserAnswersStore);
-  const [rightAnswerSum, setRightAnswerSum] = useState(0);
 
   useEffect(()=>{
-    setRightAnswerSum(userAnswersState.data.reduce(function(a,b) { return a.concat(b) }) // flatten array
+    setRightAnswerSum(userAnswersState.data && userAnswersState.data.length!==0 && userAnswersState.data.reduce(function(a,b) { return a.concat(b) }) // flatten array
      .reduce(function(a,b) { return a + b }, 0))
-  }, [userAnswersState.data])
+  }, [userAnswersState.data]);
 
 
-  const [questionsSum, setQuestionsSum] = useState(0);
+  const [questionsSum, setQuestionsSum] = useState();
 
   useEffect(()=>{
-    const temp = questionsNumState.data.reduce((a, b) => a + b, 0);
-    setQuestionsSum(temp);
-  }, [])
+    setQuestionsSum((questionsNumState.data && questionsNumState.data.length!==0) ? questionsNumState.data.reduce(function(a,b) { return a + b }, 0): 0);
+  }, [questionsNumState.data])
+
+  useEffect(() => {
+    stepperState.data.length === 4 ? setInterviewDone(true): setInterviewDone(false);
+  },[stepperState.data])
+
+    useEffect(() => {
+      !interviewDone && toast(CustomToastWithLink)
+    },[interviewDone])
 
   //const fadeIn = useSpring({ to: { y: 0, opacity: 1}, from: { opacity: 0, y:1000 }, config: { duration: 3000, easing: easings.easeCubic } });
   const setArray = [DonutSet(), IceCreamSet(), TwitchSet(), DefaultSet(), FruitSet(), FruitSet2()];
-  const set = GetRandomFromArray(setArray)[0];
+  const set = useMemo(
+    () => GetRandomFromArray(setArray)[0],[]);
+
   const CustomToastWithLink = () => (
     <div>
-      <Link to="/interview">You havn't finished the interview. <br />Go back to the 4 steps interview.</Link>
+      <Link to="/interview">You havn't finished the whole interview process. <br /><span className="link">Click to finish the interview.</span></Link>
     </div>
   );
 
-    const notify = () => toast(CustomToastWithLink);
+  const notify = () => toast(CustomToastWithLink);
   useEffect(() => {
     setTimeout(() => {
-      notify();
+      //notify();
     }, 1000)
   }, [])
 
   const [imgSrc, setImgSrc] = useState('');
 
   useEffect(() => {
-    setImgSrc(GradeASet()[0]); // already randomize in gradeASet
-  },[])
+    if (!interviewDone) {
+      setImgSrc('/img/hardworking.svg');
+    } else {
+      (rightAnswerSum/questionsSum).toFixed(2)*100 >= 66 ? setImgSrc(GradeASet()[0]): setImgSrc(GradeFSet()[0]);
+    }
+  },[interviewDone])
 
 
   const bgColorValue = useMemo(
     () => GetRandomFromArray(ColorSet),
     []
   );
-  const pageVariants = {
-    initial: {
-      y: 50,
-      opacity:0
-    },
-    leftInitial: {
-      x: '-100vw'
-    },
-    rightInitial: {
-      x: '100vw'
-    },
-    in: {
-      y: 0,
-      opacity: 1
-    },
-    leftOut: {
-      x: "0"
-    },
-    rightOut: {
-      x: "0"
-    },
-    down: {
-      y: 300
-    }
-  };
 
-  const pageTransition = {
-    type: "tween",
-    ease: "anticipate",
-    duration: 1.2
-  };
+  const GreenCheckbox = withStyles({
+    root: {
+      color: 'var(--purple)',
+      '&$checked': {
+        color: 'var(--pruple)',
+      },
+    },
+    checked: {},
+  })((props) => <Checkbox color="default" {...props} />);
+
+  function reportDialog() {
+      if (interviewDone) {
+        const dialog = (rightAnswerSum/questionsSum).toFixed(2)*100 >=66 ? <p className="block my-3"><span className="link">Click here</span> to redo the interview here.</p>: <p className="block my-3">Based on the statistics, it seems like /// Anni Wang /// might not be a good fit. <p className="block my-3">If you're looking for a UX Engineer, Deisgn Technologist or a prototyper. Feel free not to contact me.</p></p>
+        return dialog;
+      } else {
+        switch(stepperState.data.length) {
+          case 0:
+            return <p className="block my-3">You haven't started the interview process. <p className="block my-3">You'll need to finish the 4 steps interview process to see the final report. <span className="link">Click here</span></p></p>
+            break;
+          case 1:
+            return <p className="block my-3">You haven't finished the whole interview process.</p>
+            break;
+          case 2:
+            return <div><p className="block my-3">You haven't finished the whole interview process.</p> <p><span className="link">Click here</span> to finish the interview process and see the final report.</p></div>
+            break;
+          case 3:
+            return <p className="block my-3">You haven't finished the whole interview process. Go back to the interview process to see the final report.</p>
+            break;
+          default:
+            return <p>You haven't started the interview process.</p>
+      }
+    }
+  }
+
   return (
     <motion.div variants={content}
     animate="animate"
     initial="initial" id="outer-container" className={`${primaryColor?primaryColor:'yellow'}-primary-color ${secondaryColor?secondaryColor:'blue'}-secondary-color`}>
-      <motion.div initial='leftInitial' exit='leftOut' variants={pageVariants} transition={pageTransition} className={`panel left bg-${bgColorValue[0][0]} w-3/5 h-full absolute z-9999`}></motion.div>
-      <motion.div initial='rightInitial' exit='rightOut' variants={pageVariants} transition={pageTransition} className={`panel right bg-${bgColorValue[1][0]} w-2/5 right-0 h-full absolute z-9999`}></motion.div>
-      <Logo backArrow primaryColor={primaryTextColor} secondaryColor={secondaryTextColor} primaryTextColor={primaryTextColor} secondaryTextColor={secondaryTextColor} thirdColor={thirdColor} thirdTextColor={thirdTextColor} />
-      {
-        <HamburgerMenu color={secondaryTextColor?secondaryTextColor:'white'} bgColor={thirdColor?thirdColor:'yellow'} bgTextColor={thirdTextColor?thirdTextColor:'var(--gray-dark)'} primaryColor={bgColorValue[0][0]} secondaryColor={bgColorValue[1][0]} primaryTextColor={bgColorValue[0][1]} secondaryTextColor={bgColorValue[1][1]} thirdColor={bgColorValue[2][0]} thirdTextColor={bgColorValue[2][1]} />
-      }
+      <TransitionPanels bgColorValue={bgColorValue}/>
+      <Logo logoTextColor={primaryTextColor} arrowColor={secondaryTextColor} />
+      <HamburgerMenu barColor={secondaryTextColor} panelBgColor={thirdColor} panelTextColor={thirdTextColor} crossColor={thirdTextColor} bgColorValue={bgColorValue} />
       <ToastContainer position="top-center" draggable={true} draggablePercent={25} autoClose={10000} />
       <div id="page-wrap" className={`w-screen min-h-screen report bg-primary-secondary flex justify-center items-center py-10`}>
-        <motion.div variants={pageVariants} initial='initial' transition={pageTransition} exit='down' animate="in" className="xl:w-8/12 lg:w-11/12 lg:mt-20 p-20 lg:p-10 w-6/12 h-5/6 bg-white default-window mt-20">
+        <motion.div variants={pageVariants} initial='initial' transition={pageTransitionShort} exit='down' animate="in" className="xl:w-8/12 lg:w-11/12 lg:mt-20 p-20 lg:p-10 w-6/12 h-5/6 bg-white default-window mt-20">
           <div className="flex flex-row w-full h-full lg:flex-col">
             <div className="lg:w-screen w-6/12 h-full">
-              <div className="w-6/12 bg-cover bg-center bg-no-repeat" style={{"backgroundImage": `url(${imgSrc})`, "backgroundColor": `var(--${secondaryColor})`, "backgroundSize": "120px auto", "height": "300px"}}></div>
+              <div className="w-6/12 bg-cover bg-center bg-no-repeat" style={{"backgroundImage": `url(${imgSrc})`, "backgroundColor": `var(--${secondaryColor?secondaryColor:'blue'})`, "backgroundSize": "120px auto", "height": "300px"}}></div>
               <div className="text-black lowercase font-semibold text-4xl py-5">statistics<br />report</div>
               <div class="float-left">
                 <ReactStoreIndicator width={150} value={(rightAnswerSum/questionsSum).toFixed(2)*100} maxValue={100} />
@@ -160,9 +187,13 @@ function Report(props) {
 
             </div>
             <div className="lg:w-full w-6/12">
-              <Sun />
+              <div className="absolute -right-40 lg:right-10 top-20">
+                <Sun />
+              </div>
               <ul>
-                <li className="border-3 py-6"><p className="block my-3">From the statistics, Anni Wang might be a good fit</p><p> if you are looking for an UX Enginner, Design Technoligist or a prototyper who loves animation. Book a quick online chat here.</p></li>
+                <li className="border-3 py-6">
+                  {reportDialog()}
+                </li>
                 <li className="py-10 flex flex-row relative" >
                   {
                     set.map((item, index) =><div className="mx-1" dangerouslySetInnerHTML={ {__html: item} }></div>)
@@ -171,22 +202,28 @@ function Report(props) {
                 <li className="py-10">
                   <ul>
                     {
-                      questionsState.data.map((item, index) => (
-                        <li>
-                            <DelayLink to={`./interview/${index}`} delay="1000">{item.cat} </DelayLink>
-
-                            <span className="text-xs text-gray">/ checkmark</span>
+                      questionsNumState.data && questionsNumState.data.map((item, index) => (
+                        <li className="my-5 flex flex-row items-start">
+                          {
+                            stepperData.includes(index) ? <GreenCheckbox checked='checked' name="checked" />: <GreenCheckbox disabled name="checkbox" />
+                          }
+                          <div>
+                            <div>
+                              <DelayLink to={`./interview/${index}`}>{state.data && state.data.length!==0 && state.data[index].cat} </DelayLink>
+                              <span className="text-xs text-gray"> / {stepperData.includes(index)? <span>Done</span>: null}</span>
+                            </div>
                             <ul className="flex flex-row">
                               {
-                                item.questions.map((q, i) => (
+                                [...Array(parseInt(item)).keys()].map((q, i) => (
                                   <li>
                                     {
-                                      userAnswersState.data[index][i] === 1 ? <Smile size="32px" opacity="1"  />: <Sad size="32px" opacity=".3" />
+                                      userAnswersState.data && userAnswersState.data[index][i] === 1 ? <Smile size="32px" opacity="1"  />: <Sad size="32px" opacity=".3" />
                                     }
                                   </li>
                                 ))
                               }
                             </ul>
+                          </div>
                         </li>
                       ))
                     }
@@ -198,9 +235,9 @@ function Report(props) {
         </motion.div>
       </div>
 
-      <motion.div variants={pageVariants} initial='initial' transition={pageTransition} exit='leftInitial' animate='in'>
+      <motion.div variants={pageVariants} transition={pageTransition} exit={`${isMobile?'down': 'leftInitial500'}`}>
         {
-          footer && <Footer primaryColor={bgColorValue[0][0]} secondaryColor={bgColorValue[1][0]} primaryTextColor={bgColorValue[0][1]} secondaryTextColor={bgColorValue[1][1]} thirdColor={thirdColor} thirdTextColor={thirdTextColor} />
+          footer && <Footer bgColor={fourthColor} textColor={fourthTextColor} bgColorValue={bgColorValue} />
         }
       </motion.div>
 

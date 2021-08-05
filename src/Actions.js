@@ -1,59 +1,76 @@
-const API_URL =
+const HOMEPAGE_API_URL =
   "/home.json";
-const QUESTIONS_API_URL =
-  "/questions.json";
+const INTERVIEW_QUESTIONS_API_URL =
+  "/interview_questions.json";
 const QUESTIONS_GALLERY_API_URL =
   "/questions/1.json";
 
-export const initialQuestionsNum = () => {
+/* three initial data,
+   also use this data in local storage */
+
+export const initialInterviewCategoryQuestionsCount = () => {
+  //localStorage.setItem('test', JSON.stringify([1,2,3,4]));
   return [5,3,3,2];
 }
 
+export const initialInterviewCategoryQuestionsAnswers = () => {
+  return [[],[],[],[]];
+}
 
-/* Home pages - one action */
-export const fetchDataAction = async (dispatch) => {
-  const data = await fetch(API_URL);
+export const initialInterviewCategroyStepsCompleted = () => {
+  return [];
+}
+
+/* homepage.json we need to fetch
+   including section title & section description */
+export const fetchHomepageJsonAction = async (dispatch) => {
+  const data = await fetch(HOMEPAGE_API_URL);
   const dataJSON = await data.json();
   return dispatch({
-    type: "FETCH_DATA",
+    type: "FETCH_HOMEPAGE_DATA",
     payload: dataJSON
   });
 };
 
-/*export const fetchQuestionsGalleryDataAction = async (dispatch, index) => {
-  const data = await fetch(QUESTIONS_GALLERY_API_URL+'/'+index+'.json');
-  const dataJSON = await data.json();
-  return dispatch({
-    type: "FETCH_QUESTIONS_GALLERY_DATA",
-    payload: dataJSON
-  });
-};*/
-
-/* new interview -
-  1. data for category
-  2. Interview Questions Num Array
-*/
-
-// init questions data or fetch questions data
-export const fetchQuestionsDataAction = async (dispatch, userCustomizedQuestionsNumArray) => {
-  const data = await fetch(QUESTIONS_API_URL);
+/* we need to fetch interview category questions data
+   in interview_questions.json file */
+export const fetchInterviewCategoryQuestionsJsonAction = async (dispatch, userPickedInterviewCategoryQuestionsCount) => {
+  const data = await fetch(INTERVIEW_QUESTIONS_API_URL);
   const dataJSON = await data.json();
   dataJSON.filter((item, index) => {
-    item.questions.length = userCustomizedQuestionsNumArray[index] || initialQuestionsNum()[index];
+    // filter out unused questions here and dispatch to store
+    item.questions.length = userPickedInterviewCategoryQuestionsCount[index] || initialInterviewCategoryQuestionsCount()[index];
   })
   return dispatch({
-    type: "FETCH_QUESTIONS_DATA",
+    type: "FETCH_INTERVIEW_CATEGORY_QUESTIONS_DATA",
     payload: dataJSON
   });
 };
 
-export const fetchQuestionsNumDataAction = async (questionsNumState, questionsNumDispatch) => {
-  return questionsNumDispatch({
-    type: "FETCH_QUESTIONS_NUM_DATA",
-    payload: questionsNumState
+export const fetchInterviewCategoryQuestionsCountAction = async (countState, countDispatch) => {
+  //const temp = JSON.parse(localStorage.getItem('questionsNum'));
+  localStorage.setItem('questionsNumState', JSON.stringify(countState));
+  return countDispatch ({
+    type: "FETCH_INTERVIEW_CATEGORY_QUESTIONS_COUNT_DATA",
+    payload: countState
   })
 };
 
+export const fetchInterviewCategoryStepDoneAction = async (stepState, stepDispatch) => {
+  return stepDispatch({
+    type: "FETCH_INTERVIEW_CATEGORY_STEP_DONE_DATA",
+    payload: stepState
+  })
+}
+
+export const fetchInterviewCategoryUserAnswers = async (userAnswersState, userAnswersDispatch) => {
+  return userAnswersDispatch({
+    type: "FETCH_INTERVIEW_CATEGORY_USER_ANSWERS",
+    payload: userAnswersState
+  })
+}
+
+// interactive actions here
 export const stepDoneAction = async (state, dispatch) => {
   //const stepDoneInStepper = state.stepper.includes(stepIndex);
   return dispatch({
@@ -64,6 +81,7 @@ export const stepDoneAction = async (state, dispatch) => {
 
 export const stepResetAction = async (state, dispatch) => {
   //const stepDoneInStepper = state.stepper.includes(stepIndex);
+  localStorage.setItem('stepperState', JSON.stringify(state));
   return dispatch({
     type: "STEP_RESET",
     payload: state
@@ -78,18 +96,22 @@ export const stepsAddAnswersAction = async (state, dispatch) => {
 }
 
 export const stepsResetAnswersAction = async (state, dispatch) => {
+  localStorage.setItem('userAnswersState', JSON.stringify(state));
   return dispatch({
     type: "STEP_RESET_ANSWERS",
     payload: state
   });
 }
 
-export const pageTransitionColorsAction = async (state, dispatch) => {
+/*export const fetchQuestionsGalleryDataAction = async (dispatch, index) => {
+  const data = await fetch(QUESTIONS_GALLERY_API_URL+'/'+index+'.json');
+  const dataJSON = await data.json();
   return dispatch({
-    type: "DEFINE_COLORS",
-    payload: state
+    type: "FETCH_QUESTIONS_GALLERY_DATA",
+    payload: dataJSON
   });
-}
+};*/
+
 /*export const fetchStepsDoneLocalStorageAction = async (dispatch, categoryIndex) => {
   const data = JSON.parse(localStorage.getItem('category'+categoryIndex));
   return dispatch({

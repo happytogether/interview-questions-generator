@@ -1,7 +1,7 @@
 import React, { useState, useContext, useRef, useEffect } from 'react';
 import Rain from '../../components/Rain';
 import '../../components/Rain/style.css';
-import {GradeFSet} from '../confettiSet/GradeFSet';
+import {GradeFSet} from '../../components/confettiSet/GradeFSet';
 import Reward from '../../components/Reward/Reward';
 import { HeartBrokenSet, ThunderSet } from "../../components/Reward/MemphisSets";
 import { useParams } from 'react-router-dom';

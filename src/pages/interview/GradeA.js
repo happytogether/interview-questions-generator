@@ -2,7 +2,7 @@ import React, { useState, useContext, useRef, useEffect } from 'react';
 import Reward from '../../components/Reward/Reward';
 import RewardAnswers from './RewardAnswers';
 import { DefaultSet, TwitchSet, MemphisSet1, MemphisSet2, IceCreamSet, HeartBrokenSet } from "../../components/Reward/MemphisSets";
-import {GradeASet} from '../confettiSet/GradeASet';
+import {GradeASet} from '../../components/confettiSet/GradeASet';
 import { useSpring, animated } from 'react-spring';
 import { useParams } from 'react-router-dom';
 

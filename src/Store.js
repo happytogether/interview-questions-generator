@@ -1,6 +1,6 @@
 import React, { createContext, useState, useReducer } from "react";
+const CategoryCounts = 4;
 
-const CategoryLength = 4;
 export const HomeStore = createContext("");
 
 const initialState = {
@@ -9,7 +9,7 @@ const initialState = {
 
 function homeReducer(state, action) {
   switch (action.type) {
-    case "FETCH_DATA":
+    case "FETCH_HOMEPAGE_DATA":
       return { ...state, data: action.payload };
     default:
       return state;
@@ -17,17 +17,18 @@ function homeReducer(state, action) {
 }
 
 export function HomeStoreProvider(props) {
-  const [state, dispatch] = useReducer(homeReducer, initialState);
-  const value = { state, dispatch };
+  const [state, homeDispatch] = useReducer(homeReducer, initialState);
+  const value = { state, homeDispatch };
   return <HomeStore.Provider value={value}>{props.children}</HomeStore.Provider>;
 }
 
 export const QuestionsStore = createContext("");
 
+
+
 function questionsReducer(questionsState, action) {
   switch (action.type) {
-    case "FETCH_QUESTIONS_DATA":
-      console.log('got questions data');
+    case "FETCH_INTERVIEW_CATEGORY_QUESTIONS_DATA":
       return { ...questionsState, data: action.payload };
     default:
       return questionsState;
@@ -43,19 +44,22 @@ export function QuestionsStoreProvider(props) {
   return <QuestionsStore.Provider value={value}>{props.children}</QuestionsStore.Provider>;
 }
 
+
+
 export const QuestionsNumStore = createContext("");
 
 function questionsNumReducer(questionsNumState, action) {
   switch (action.type) {
-    case "FETCH_QUESTIONS_NUM_DATA": //[5,3,2,2]
+    case "FETCH_INTERVIEW_CATEGORY_QUESTIONS_COUNT_DATA": //[5,3,2,2]
       return { ...questionsNumState, data: action.payload };
     default:
       return questionsNumState;
   }
 }
 
+const questionsStoreLocalStorage = JSON.parse(localStorage.getItem('questionsNumState'));
 const questionsNumInitialState = {
-  data: [],
+  data: questionsStoreLocalStorage ? questionsStoreLocalStorage : [5,3,3,2]
 };
 
 export function QuestionsNumStoreProvider(props) {
@@ -66,8 +70,10 @@ export function QuestionsNumStoreProvider(props) {
 
 export const StepperStore = createContext("");
 
+
+const stepperStoreLocalStorage = JSON.parse(localStorage.getItem('stepperState'));
 const stepperInitialState = {
-  data: [],
+  data: stepperStoreLocalStorage ? stepperStoreLocalStorage : []
 };
 
 function stepperReducer(stepperState, action) {
@@ -91,11 +97,13 @@ export function StepperStoreProvider(props) {
 
 export const UserAnswersStore = createContext("");
 
-let create2dArray =  Array.from(Array(CategoryLength), () => {
+let create2dArray =  Array.from(Array(CategoryCounts), () => {
   return new Array;
 })
+
+const userAnswersLocalStorage = JSON.parse(localStorage.getItem('userAnswersState'));
 const userAnswersInitialState = {
-  data: create2dArray
+  data: userAnswersLocalStorage ? userAnswersLocalStorage : create2dArray
 };
 
 function userAnswersReducer(userAnswersState, action) {
@@ -113,24 +121,4 @@ export function UserAnswersStoreProvider(props) {
   const [userAnswersState, userAnswersDispatch] = useReducer(userAnswersReducer, userAnswersInitialState);
   const value = { userAnswersState, userAnswersDispatch };
   return <UserAnswersStore.Provider value={value}>{props.children}</UserAnswersStore.Provider>;
-}
-
-export const PageTransitionColorsStore = createContext("");
-const pageTransitionColorsInitialState = {
-  data: ['yellow', 'blue', 'white']
-};
-
-function pageTransitionColorsReducer(pageTransitionColorsState, action) {
-  switch (action.type) {
-    case 'DEFINE_COLORS':
-      return {...pageTransitionColorsState, data:action.payload};
-    default:
-      return pageTransitionColorsState
-  }
-}
-
-export function PageTransitionColorsStoreProvider(props) {
-  const [pageTransitionColorsState, pageTransitionColorsDispatch] = useReducer(pageTransitionColorsReducer, pageTransitionColorsInitialState);
-  const value = { pageTransitionColorsState, pageTransitionColorsDispatch };
-  return <PageTransitionColorsStore.Provider value={value}>{props.children}</PageTransitionColorsStore.Provider>;
 }

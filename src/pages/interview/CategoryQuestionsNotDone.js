@@ -45,13 +45,13 @@ export default function QuestionsNotDone(data) {
         setUserAnswers(userAnswers => [...userAnswers,0]);
         userAnswersState.data[categoryIndex].push(0);
         stepsAddAnswersAction(userAnswersState.data, userAnswersDispatch);
-        localStorage.setItem('stepsAnswers', JSON.stringify(userAnswersState.data));
+        localStorage.setItem('userAnswersState', JSON.stringify(userAnswersState.data));
       }
       if (dir == 1 && isGone) {
         setUserAnswers(userAnswers => [...userAnswers,1]);
         userAnswersState.data[categoryIndex].push(1);
         stepsAddAnswersAction(userAnswersState.data, userAnswersDispatch);
-        localStorage.setItem('stepsAnswers', JSON.stringify(userAnswersState.data));
+        localStorage.setItem('userAnswersState', JSON.stringify(userAnswersState.data));
       }
       return { x, rot, scale, delay: undefined, config: { friction: 50, tension: down ? 800 : isGone ? 200 : 500 } }
     })
@@ -61,14 +61,10 @@ export default function QuestionsNotDone(data) {
         data.setDone(true);
         completedStepsArray = [...completedStepsArray, categoryIndex];
         stepDoneAction([...stepperState.data, parseInt(categoryIndex)], stepperDispatch);
-        localStorage.setItem('completedSteps', JSON.stringify([...stepperState.data, parseInt(categoryIndex)]));
+        localStorage.setItem('stepperState', JSON.stringify([...stepperState.data, parseInt(categoryIndex)]));
       }, 600);
     }
   })
-
-  useEffect(() => {
-    localStorage.setItem('category' + categoryIndex, JSON.stringify(userAnswers))
-  }, [userAnswers]);
 
   useEffect(() => {
     gone.clear() || set((i) => to(i));

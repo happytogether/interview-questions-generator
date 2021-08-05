@@ -31,23 +31,22 @@ import { stepDoneAction, stepsResetAnswersAction } from "../../Actions";
 export default function Questions(value) {
   const index= parseInt(useParams().categoryIndex);
   const { questionsState, dispatch } = useContext(QuestionsStore);
-  const questions = questionsState.data[index].questions;
-  const answersLocalStroage = JSON.parse(localStorage.getItem('stepsAnswers'))[index];
-  const [answers, setAnswers] = useState(answersLocalStroage);
-  const [done, setDone] = useState(answers && answers.length === questions.length ? true: false);// check if user finished interview for this category
   const { userAnswersState, userAnswersDispatch } = useContext(UserAnswersStore);
+  const { stepperState, stepperDoneDispatch } = useContext(StepperStore);
+  const questions = questionsState.data[index].questions;
+  const [answers, setAnswers] = useState(userAnswersState.data[index]);
+  const [done, setDone] = useState(answers && answers.length === questions.length ? true: false);// check if user finished interview for this category
 
   useEffect(() => {
-    setAnswers(answersLocalStroage);
-    console.log(answersLocalStroage);
+    setAnswers(userAnswersState.data[index]);
   },[index])
 
   /*useEffect(()=>{
     setDone(answers && answers.length === questions.length ? true: false);
   },[answers])*/
 
-  const steps = value.steps || JSON.parse(localStorage.getItem('steps'));
-  const completedSteps = value.completedSteps || JSON.parse(localStorage.getItem('completedSteps'));
+  const steps = value.steps;
+  const completedSteps = stepperState.data;
   const title = questionsState.data.length!==0 && questionsState.data[index].cat;
   const [userAnswers, setUserAnswers] = useState(answers);
   const [rightAnswerNum, setRightAnswerNum] = useState(0);
@@ -57,12 +56,11 @@ export default function Questions(value) {
   const { cursorType, cursorChangeHandler } = useContext(MouseContext);
   const { x, y } = useMousePosition();
   const cursorSide = x > window.innerWidth / 2 ? "right" : "left";
-  const { stepperState, stepperDoneDispatch } = useContext(StepperStore);
 
   useEffect(()=> {
-    setDone(userAnswersState.data[index].length!==0? userAnswersState.data[index].length === questions.length ? true: false: answersLocalStroage.length === questions.length ? true: false);
+    setDone(userAnswersState.data[index].length!==0? userAnswersState.data[index].length === questions.length ? true: false: userAnswersState.data[index].length === questions.length ? true: false);
     rightAnswerNumLocalStorageReset();
-    answersLocalStroage.forEach((item, i) => {
+    userAnswersState.data[index].forEach((item, i) => {
       if (item === 1) {
         setRightAnswerNumLocalStorage(prevRightAnswerNumLocalStorage => prevRightAnswerNumLocalStorage+1)
       } else if (item === 0) {
@@ -109,7 +107,12 @@ export default function Questions(value) {
     setDone(false);
     userAnswersState.data[index].length = 0;
     stepsResetAnswersAction(userAnswersState.data, userAnswersDispatch);
-    localStorage.setItem('stepsAnswers', JSON.stringify(userAnswersState.data));
+    const stepperData = stepperState.data.filter((item, i) => {
+      return item != index;
+    })
+    localStorage.setItem('userAnswersState', JSON.stringify(userAnswersState.data));
+    localStorage.setItem('stepperState', JSON.stringify(stepperData));
+    //remove completed steps here
   }
   const calc = (x, y) => [x - window.innerWidth / 2, y - window.innerHeight / 2]
   const piePosX = window.innerWidth - 100;
@@ -171,7 +174,7 @@ export default function Questions(value) {
             !done && <SmileSadFace questions={questions} rightWrongNum={userAnswersState.data[index]} rightAnswerNum={rightAnswerNum} wrongAnswerNum={wrongAnswerNum} />
           }
           {
-            done && <SmileSadFace questions={questions} rightWrongNum={answersLocalStroage} rightAnswerNum={rightAnswerNumLocalStorage} wrongAnswerNum={wrongAnswerNumLocalStorage} />
+            done && <SmileSadFace questions={questions} rightWrongNum={userAnswersState.data[index]} rightAnswerNum={rightAnswerNumLocalStorage} wrongAnswerNum={wrongAnswerNumLocalStorage} />
           }
         </div>
           {

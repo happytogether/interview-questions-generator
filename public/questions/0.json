@@ -21,38 +21,5 @@
   {
     "title": "console.log('🙂' === '🙂');",
     "answer": "<p class='my-10'>True, Emojis are unicodes and the unicode for smile symbol is 'U+1F642'. The unicode comparision of same emojies is equivalent to string comparison. Hence, the output is always true.</p>"
-  },
-  {
-    "title": "What is Closure?"
-  },
-  {
-    "title": "What is Closure?"
-  },
-  {
-    "title": "What is Closure?"
-  },
-  {
-    "title": "What is Closure?"
-  },
-  {
-    "title": "What is Closure?"
-  },
-  {
-    "title": "What is Closure?"
-  },
-  {
-    "title": "What is Closure?"
-  },
-  {
-    "title": "What is Closure?"
-  },
-  {
-    "title": "What is Closure?"
-  },
-  {
-    "title": "What is Closure?"
-  },
-  {
-    "title": "What is Closure?"
   }
 ]

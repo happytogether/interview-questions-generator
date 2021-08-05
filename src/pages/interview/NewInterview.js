@@ -5,13 +5,13 @@ import { Link } from 'react-router-dom';
 import Slider from '../../components/Slider';
 import Logo from '../../components/Logo';
 import Chip from '@material-ui/core/Chip';
-import { fetchDataAction, fetchQuestionsDataAction, fetchQuestionsNumDataAction, initialQuestionsNum, stepResetAction, stepsResetAnswersAction } from '../../Actions';
+import { fetchHomepageJsonAction, fetchInterviewCategoryQuestionsJsonAction, fetchInterviewCategoryQuestionsCountAction, initialInterviewCategoryQuestionsCount, stepResetAction, stepsResetAnswersAction } from '../../Actions';
 import { HomeStore } from '../../Store';
 import DelayLink from '../../ultils/DelayLink';
 import Footer from '../../components/Footer';
 import Arrow from '../../components/shapes/Arrow';
 import Sun from '../../components/shapes/Sun';
-import { GradeASet } from '../confettiSet/GradeASet';
+import { GradeASet } from '../../components/confettiSet/GradeASet';
 import { StepperStore, UserAnswersStore, QuestionsNumStore } from '../../Store';
 import HamburgerMenu from '../../components/HamburgerMenu/HamburgerMenu';
 import Memphis16_1 from '../../components/shapes/memphis16/Memphis16_1';
@@ -25,20 +25,27 @@ import { DefaultSet } from "../../components/Reward/MemphisSets";
 import { motion } from "framer-motion";
 import { content, upMotion} from '../../components/AnimationSet';
 import GoToTop from '../../ultils/GoToTop';
+import { pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageVariants } from '../../ultils/TransitionSet';
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
+import TransitionPanels from '../../components/TransitionPanels';
+import { isMobile } from "react-device-detect";
 import { ColorSet } from '../../components/ColorSet';
 import './NewInterview.scss';
 
 function NewInterview(props) {
-  const primaryColor = props.location.state ? props.location.state.bgTextColor[0]: 'blue';
-  const secondaryColor = props.location.state ? props.location.state.bgTextColor[1]: 'purple';
-  const primaryTextColor = props.location.state ? props.location.state.bgTextColor[2]: 'white';
-  const secondaryTextColor = props.location.state ? props.location.state.bgTextColor[3]: 'white';
-  const thirdColor = props.location.state ? props.location.state.bgTextColor[4]: '';
-  const thirdTextColor = props.location.state ? props.location.state.bgTextColor[5]: '';
-  const defaultValueArray = initialQuestionsNum();
+
+  const primaryColor = props.location.state ? props.location.state.bgColor[0]: 'blue';
+  const secondaryColor = props.location.state ? props.location.state.bgColor[1]: 'yellow';
+  const thirdColor = props.location.state ? props.location.state.bgColor[2]: 'purple';
+  const primaryTextColor = props.location.state ? props.location.state.textColor[0]: 'white';
+  const secondaryTextColor = props.location.state ? props.location.state.textColor[1]: 'var(--gray-dark)';
+  const thirdTextColor = props.location.state ? props.location.state.textColor[2]: 'white';
+  const fourthColor = props.location.state ? props.location.state.bgColor[3]: 'green';
+  const fourthTextColor = props.location.state ? props.location.state.textColor[3]: 'var(--gray-dark)';
+
+  const defaultValueArray = initialInterviewCategoryQuestionsCount();
   const defaultQuestionsSum = defaultValueArray.reduce((a, b) => a + b, 0);
-  const { state, dispatch } = useContext(HomeStore);
+  const { state, homeDispatch } = useContext(HomeStore);
   const { stepperState, stepperDispatch } = useContext(StepperStore);
   const { userAnswersState, userAnswersDispatch } = useContext(UserAnswersStore);
   const { questionsNumState, questionsNumDispatch } = useContext(QuestionsNumStore);
@@ -47,21 +54,17 @@ function NewInterview(props) {
   const [footer, setFooter] = useState(false);
 
   useEffect(() => {
-    document.body.classList = "";
-    //document.body.classList.add(`${primaryColor?primaryColor:'yellow'}-primary-color`);
-    //document.body.classList.add(`${secondaryColor?secondaryColor:'blue'}-secondary-color`);
-  },[])
-
-  useEffect(() => {
+    document.body.classList = ""; // remove classes from other pages
+    document.body.classList.add(`bg-${thirdColor}`); // to cover the white space when open hamburger menu
     if (pathname == '/newInterview') {
       document.body.classList.add('new-interview');
     }
     setFooter(true);
-  }, [])
+  },[])
 
   useEffect(
     () => {
-      state.data.length === 0 && fetchDataAction(dispatch); // fetch basic json if not loaded in home
+      state.data.length === 0 && fetchHomepageJsonAction(homeDispatch); // fetch basic json if not loaded in home
     },[state])
 
   const [questionsNum, setQuestionsNum] = useState(defaultValueArray);
@@ -77,15 +80,11 @@ function NewInterview(props) {
     setQuestionsSum(sumQuestionsNum(newArray));
   }
 
-  function dispatchQuestionsNum(){
-    fetchQuestionsDataAction(dispatch, questionsNum);
-    fetchQuestionsNumDataAction(questionsNum, questionsNumDispatch); // dispatch questions num
+  function handleDispatchInterviewQuestions() {
+    fetchInterviewCategoryQuestionsJsonAction(homeDispatch, questionsNum);
+    fetchInterviewCategoryQuestionsCountAction(questionsNum, questionsNumDispatch); // dispatch questions num
     stepResetAction([], stepperDispatch); // start new steps
     stepsResetAnswersAction([[],[],[],[]], userAnswersDispatch);
-    localStorage.setItem('questionsNum', JSON.stringify(questionsNum));
-    localStorage.setItem('steps', JSON.stringify([]));
-    localStorage.setItem('completedSteps', JSON.stringify([]));
-    localStorage.setItem('stepsAnswers', JSON.stringify([[],[],[],[]]));
   }
 
   function handleChipsValue(arr){
@@ -144,54 +143,15 @@ function NewInterview(props) {
     () => GetRandomFromArray(ColorSet),
     []
   );
-  const pageVariants = {
-  initial: {
-    y: 50,
-    opacity:0
-  },
-  leftInitial: {
-    x: '-100vw'
-  },
-  rightInitial: {
-    x: '100vw'
-  },
-  in: {
-    y: 0,
-    opacity: 1
-  },
-  leftOut: {
-    x: "0"
-  },
-  rightOut: {
-    x: "0"
-  },
-  up: {
-    y: -300
-  },
-  down: {
-    y: 300
-  }
-};
-
-const pageTransition = {
-  type: "tween",
-  ease: "anticipate",
-  duration: 1.2
-};
 return (
     <motion.div variants={content}
     animate="animate"
-    initial="initial" id="outer-container" className={`${primaryColor?primaryColor:'yellow'}-primary-color ${secondaryColor?secondaryColor:'blue'}-secondary-color`}>
-
-      <motion.div initial='leftInitial' exit='leftOut' variants={pageVariants} transition={pageTransition} className={`panel left bg-${bgColorValue[0][0]} w-3/5 h-full absolute z-9999`}></motion.div>
-      <motion.div initial='rightInitial' exit='rightOut' variants={pageVariants} transition={pageTransition} className={`panel right bg-${bgColorValue[1][0]} w-2/5 right-0 h-full absolute z-9999`}></motion.div>
-
-      <Logo backArrow primaryColor={primaryTextColor} secondaryColor={secondaryTextColor} primaryTextColor={primaryTextColor} secondaryTextColor={secondaryTextColor} thirdColor={thirdColor} thirdTextColor={thirdTextColor} />
-      {
-        <HamburgerMenu color={secondaryTextColor?secondaryTextColor:'white'} bgColor={thirdColor?thirdColor:'yellow'} bgTextColor={thirdTextColor?thirdTextColor:'var(--gray-dark)'} primaryColor={bgColorValue[0][0]} secondaryColor={bgColorValue[1][0]} primaryTextColor={bgColorValue[0][1]} secondaryTextColor={bgColorValue[1][1]} thirdColor={bgColorValue[2][0]} thirdTextColor={bgColorValue[2][1]} />
-      }
+    initial="initial" id="outer-container" className={`${primaryColor}-primary-color ${secondaryColor}-secondary-color`}>
+      <TransitionPanels bgColorValue={bgColorValue}/>
+      <Logo logoTextColor={primaryTextColor} arrowColor={secondaryTextColor} />
+      <HamburgerMenu barColor={secondaryTextColor} panelBgColor={thirdColor} panelTextColor={thirdTextColor} crossColor={thirdTextColor} bgColorValue={bgColorValue} />
       <div id="page-wrap" className={`w-screen min-h-screen bg-primary-secondary flex justify-center items-center py-10`}>
-        <motion.div variants={pageVariants} initial='initial' transition={pageTransition} exit='down' animate="in" className="2xl:w-8/12 xl:w-9/12 lg:w-11/12 lg:mt-20 lg:p-10 w-6/12 h-5/6 bg-white p-20 sm:p-5 default-window mt-20">
+        <motion.div variants={pageVariants} initial='initial' transition={pageTransitionShort} exit='down' animate="in" className="2xl:w-8/12 xl:w-9/12 lg:w-11/12 lg:mt-20 lg:p-10 w-6/12 h-5/6 bg-white p-20 sm:p-5 default-window mt-20">
           <div className="flex flex-row w-full h-full lg:flex-col">
             <div className="lg:w-full w-6/12 h-full">
               <div className={`w-9/12 lg:w-full bg-cover bg-center bg-no-repeat bg-${secondaryColor}`} style={{"backgroundImage": `url("/img/interview.svg")`, "backgroundSize": "150px auto", "height": "300px"}}></div>
@@ -205,7 +165,7 @@ return (
             </div>
             <div className="lg:w-full w-7/12">
               <ul>
-                <li className="border-3 py-6"><p className="block my-3">Pick your interview prefernces, you can ask min 4 questions or max 36 questions here. Move the slider or click on the chips.</p></li>
+                <li className="border-3 py-6"><p className="block my-3">Pick your interview prefernces, you can ask min 4 questions or max 36 questions here. Drag the slider or click on the chips.</p></li>
                 <li className="flex flex-row flex-wrap gap-2 w-full relative mb-10">
                   {
                     chips.map((chip, i) => {
@@ -244,25 +204,27 @@ return (
             </div>
           </div>
           <div className="flex justify-center mt-10 bg-white">
-            <button onClick={dispatchQuestionsNum} className="border p-3 rounded-sm">
+            <button onClick={handleDispatchInterviewQuestions} className="border p-3 rounded-sm">
               <DelayLink to={{
                 pathname: "/interview/0",
-                state: {questionsNum: questionsNum}
-              }}>
-              <div className="flex flex-row justify-center items-center lg:text-sm">
-                <span>Generate Interview Questions</span>
-              </div>
+                state: {
+                  bgColor: [primaryColor, secondaryColor, thirdColor, fourthColor],
+                  textColor: [primaryTextColor, secondaryTextColor, thirdTextColor, fourthTextColor]
+                }}}>
+                <div className="flex flex-row justify-center items-center lg:text-sm">
+                  <span>Generate Interview Questions</span>
+                </div>
               </DelayLink>
             </button>
           </div>
         </motion.div>
       </div>
 
-        <motion.div variants={pageVariants} initial='initial' transition={pageTransition} exit='leftInitial' animate='in'>
-          {
-            footer && <Footer primaryColor={bgColorValue[0][0]} secondaryColor={bgColorValue[1][0]} primaryTextColor={bgColorValue[0][1]} secondaryTextColor={bgColorValue[1][1]} thirdColor={thirdColor} thirdTextColor={thirdTextColor} />
-          }
-        </motion.div>
+      <motion.div variants={pageVariants} transition={pageTransition} exit={`${isMobile?'down': 'leftInitial500'}`}>
+        {
+          footer && <Footer bgColor={fourthColor} textColor={fourthTextColor} bgColorValue={bgColorValue} />
+        }
+      </motion.div>
 
       <GoToTop />
     </motion.div>

@@ -2,7 +2,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url("https://fonts.googleapis.com/css2?family=B612&display=swap");
+//@import url("https://fonts.googleapis.com/css2?family=B612&display=swap");
 
 * {
   /*cursor: none;*/
@@ -12,18 +12,7 @@
   user-select: none; /* Standard */
 }
 
-
-
 .App {
-  color: #8341f1;
+  color: var(--purple);
   font-family: 'courier';
-}
-
-.container {
-  background-color: #fff;
-  border-radius: 16px;
-  height: 464px;
-  overflow: hidden;
-  position: relative;
-  width: 256px;
 }

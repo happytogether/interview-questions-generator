@@ -11,10 +11,13 @@ import { StepperStore, UserAnswersStore } from '../../Store';
 import { stepResetAction } from "../../Actions";
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
 import { ColorSet } from '../../components/ColorSet';
+
 export default function QuestionsDone(props) {
   const questions = props.questions;
   const index = props.index;
-  const answersLocalStroage = JSON.parse(localStorage.getItem('stepsAnswers'))[index];
+  const { userAnswersState, userAnswersDispatch } = useContext(UserAnswersStore);
+  const { stepperState, stepperDispatch } = useContext(StepperStore);
+  const answersLocalStroage = userAnswersState.data[index];
   const [answers, setAnswers] = useState(answersLocalStroage);
   const lastStep = (index === (props.steps-1))? true: false;
   const preArrow = (index === 0) ? false: true;
@@ -23,7 +26,7 @@ export default function QuestionsDone(props) {
   const [gradePercentage, setGradePercentage] = useState();
   const [grade, setGrade] = useState();
   const reducer = (accumulator, currentValue) => accumulator + currentValue;
-  const { stepperState, stepperDispatch } = useContext(StepperStore);
+
 
 
   function redo() {
@@ -90,6 +93,14 @@ export default function QuestionsDone(props) {
     () => GetRandomFromArray(ColorSet),
     []
   );
+  const primaryColor = bgColorValue[0][0];
+  const primaryTextColor = bgColorValue[0][1];
+  const secondaryColor = bgColorValue[1][0];
+  const secondaryTextColor = bgColorValue[1][1];
+  const thirdColor = bgColorValue[2][0];
+  const thirdTextColor = bgColorValue[2][1];
+  const fourthColor = bgColorValue[3][0];
+  const fourthTextColor = bgColorValue[3][1];
   const pageVariants = {
   initial: {
     x: "-100vw"
@@ -152,8 +163,10 @@ const pageTransition = {
           <motion.div className={`mx-5 flex flex-col items-center`} variants={upMotion}>
             <DelayLink to={{
               pathname: nextPageIndex===0? '/report': './'+nextPageIndex,
-              state: {bgTextColor: [bgColorValue[0][0], bgColorValue[1][0], bgColorValue[0][1], bgColorValue[1][1], bgColorValue[2][0], bgColorValue[2][1]]}
-            }}>
+              state: {
+                bgColor: [primaryColor, secondaryColor, thirdColor, fourthColor],
+                textColor: [primaryTextColor, secondaryTextColor, thirdTextColor, fourthTextColor]
+              }}}>
               <Arrow size="60px" color="#fff" />
             </DelayLink>
             <span className={`text-sm ${index === (props.steps-1)?' hidden':''}`}>Step {index+2}</span>

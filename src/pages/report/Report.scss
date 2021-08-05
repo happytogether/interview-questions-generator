@@ -1,3 +1,23 @@
 .report {
   height: auto;
 }
+.checkbox {
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--purple);
+  background: transparent;
+  position: relative;
+  &.checked:after {
+    width: 18px;
+    height: 18px;
+    content: '\2713';
+    position: absolute;
+    left: -5px;
+    top: -30px;
+    font-size: 3rem;
+  }
+}
+.items-start > span:first-child {
+  padding-top: 2px!important;
+  padding-right: 9px!important;
+}

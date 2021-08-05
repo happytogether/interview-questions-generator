@@ -13,12 +13,15 @@ import { motion } from "framer-motion";
 import { content, upMotion, downMotion } from './AnimationSet';
 
 export default function HomeHead(props) {
-  const primaryColor = props.primaryColor ? props.primaryColor:'green';
-  const primaryTextColor = props.primaryTextColor ? props.primaryTextColor:'var(--gray-dark)';;
-  const secondaryColor = props.secondaryColor ? props.secondaryColor:'gray';
-  const secondaryTextColor = props.secondaryTextColor?props.secondaryTextColor:'var(--gray-dark)';
-  const thirdColor = props.thirdColor?props.thirdColor:'purple';
-  const thirdTextColor = props.thirdTextColor?props.thirdTextColor:'white';
+  const bgColorValue = props.bgColorValue;
+  const primaryColor = bgColorValue[0][0];
+  const primaryTextColor = bgColorValue[0][1];
+  const secondaryColor = bgColorValue[1][0];
+  const secondaryTextColor = bgColorValue[1][1];
+  const thirdColor = bgColorValue[2][0];
+  const thirdTextColor = bgColorValue[2][1];
+  const fourthColor = bgColorValue[3][0];
+  const fourthTextColor = bgColorValue[3][1];
   const { cursorType, cursorChangeHandler } = useContext(MouseContext);
   const randomBg = ["dot-bg", "line-bg", "box-bg", "skew-dot-bg", "cross-bg", "line-h-bg"];
   const [play] = useSound(cannonSfx);
@@ -54,10 +57,9 @@ export default function HomeHead(props) {
   return (
     <motion.main variants={content} animate="animate"
     initial="initial" style={styles} onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })} className="homehead h-screen w-screen p-20 lg:p-5 lg:pt-40 flex justify-items-center items-center lg:flex-col lg:h-auto">
-      {
-        showBang && <span className="absolute bang">Bang!</span>
-      }
-
+      <span className="absolute bang">
+        {showBang ? 'Bang!': 'Hi!'}
+      </span>
       <animated.div onClick={()=>handleCannonClick()} style={{ transform: props1.xy.interpolate(trans1) }} className="cannon absolute z-20 w-screen">
         <img src="/img/cannon.svg" />
         <Reward ref={canvasInput} type='emoji' config = {{"emoji": BallonSet(), "elementCount": 5, "spread": 1200, "decay": 0.6, "elementSize": 180, "lifetime": 500}}></Reward>
@@ -69,10 +71,12 @@ export default function HomeHead(props) {
         <div className="text-left">
           <div className="flex mt-2 space-x-4">
             <div className="border rounded-sm py-3 px-6 mt-3">
-            <DelayLink delay="600" to={{
+            <DelayLink to={{
               pathname: "/interview",
-              state: {bgTextColor: [primaryColor, secondaryColor, primaryTextColor, secondaryTextColor, thirdColor, thirdTextColor]}
-            }}> Start Interview Process</DelayLink>
+              state: {
+                bgColor: [primaryColor, secondaryColor, thirdColor, fourthColor],
+                textColor: [primaryTextColor, secondaryTextColor, thirdTextColor, fourthTextColor]
+              }}}> Start Interview Process</DelayLink>
             </div>
           </div>
         </div>

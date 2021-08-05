@@ -1,8 +1,8 @@
 [
   {
     "title": "If you were an animal, which one would you want to be?",
-    "answer": "<p class='mb-5'>While this question seems inconsequential, it demonstrates your ability to think on your feet. There's no wrong answer here. The employer is looking for creativity and relevance so choose a response that represents your strengths and personality.</p>",
-    "example": "console.log('I would probably be a deer - loyal and kind.')"
+    "answer": "<p class='mb-5'><img width='50%' src='/img/octopus.svg'></p>",
+    "example": "console.log('I would probably be a octopus - with more than 2 hands.')"
   },
   {
     "title": "What are some of your strengths and weaknesses?",
@@ -51,8 +51,5 @@
   },
   {
     "title": "What do you find are the most difficult decisions to make?"
-  },
-  {
-    "title": "What is Closure?"
   }
 ]

@@ -25,10 +25,14 @@
   --textColor: white;
 }
 
+@import 'bg.scss';
+
 body.open-list {
   --background-color: black;
 }
-
+body.new-interview {
+  --background-color: var(--blue);
+}
 .red-primary-color {
   --primary: var(--red);
   --textColor: white;
@@ -110,15 +114,6 @@ html, body {
 
 }
 
-body.list-open, body.new-interview, body.gallery-page {
-  overflow: hidden;
-  --background-color: var(--blue)
-}
-
-body.gallery-page {
-  background: var(--purple);
-}
-
 body.credit-page {
   --background-color: var(--yellow);
 }
@@ -152,6 +147,7 @@ body.credit-page {
 div.static2 {
   width: 100vw!important;
   height: 100vh!important;
+  --primary: var(--red);
 }
 
 div.static, div.static2 {
@@ -215,6 +211,9 @@ div.static[open="0"] {
   height: 30px;
 }
 
+span.link {
+  text-decoration: underline;
+}
 .default-window {
   transition: all .3s ease-out;
   box-shadow: 10px -10px 0 -3px white, 10px -10px var(--green),
@@ -416,113 +415,6 @@ figcaption.hovered {
     border-radius: 50%;
   }
 }
-.rainbow-bg {
-  background-image: linear-gradient(to right, var(--red), var(--red) 14.3%, var(--orange) 14.3%, var(--orange) 28.6%, var(--yellow) 28.6%, var(--yellow) 42.9%, var(--green) 42.9%, var(--green) 57.2%, var(--blue) 57.2%, var(--blue) 71.5%, var(--purple) 71.5%, var(--purple) 85.8%, var(--gray) 85.8%, var(--gray));
-  background-size: 100% 100%;
-}
-.wave-bg {
-  background-color: var(--background-color);
-  background-image:  linear-gradient(135deg, var(--main) 25%, transparent 25%), linear-gradient(225deg, var(--main) 25%, transparent 25%), linear-gradient(45deg, var(--main) 25%, transparent 25%), linear-gradient(315deg, var(--main) 25%, var(--background-color) 25%);
-  background-position:  10px 0, 10px 0, 0 0, 0 0;
-  background-size: 20px 20px;
-  background-repeat: repeat;
-}
-.memphis-bg1 {
-  background-image: url('/memphis-bg1.svg');
-  background-size: 1000px auto;
-}
-.honey-comb-bg {
-  background:
-    radial-gradient(circle farthest-side at 0% 50%,var(--background-color) 23.5%,rgba(240,166,17,0) 0)21px 30px,
-    radial-gradient(circle farthest-side at 0% 50%,var(--main) 24%,rgba(240,166,17,0) 0)19px 30px,
-    linear-gradient(var(--background-color) 14%,rgba(240,166,17,0) 0, rgba(240,166,17,0) 85%,var(--background-color) 0)0 0,
-    linear-gradient(150deg,var(--background-color) 24%,var(--main) 0,var(--main) 26%,rgba(240,166,17,0) 0,rgba(240,166,17,0) 74%,var(--main) 0,var(--main) 76%,var(--background-color) 0)0 0,
-    linear-gradient(30deg,var(--background-color) 24%,var(--main) 0,var(--main) 26%,rgba(240,166,17,0) 0,rgba(240,166,17,0) 74%,var(--main) 0,var(--main) 76%,var(--background-color) 0)0 0,
-    linear-gradient(90deg,var(--main) 2%,var(--background-color) 0,var(--background-color) 98%,var(--main) 0%)0 0 var(--background-color);
-  background-size: 20px 30px;
-}
-.rect-bg {
-  background-color: var(--main);
-  background-image:  repeating-linear-gradient(45deg, var(--background-color) 25%, transparent 25%, transparent 75%, var(--background-color) 75%, var(--background-color)), repeating-linear-gradient(45deg, var(--background-color) 25%, var(--main) 25%, var(--main) 75%, var(--background-color) 75%, var(--background-color));
-  background-position: 0 0, 20px 20px;
-  background-size: 40px 40px;
-}
-.triangle-bg {
-  background-color: var(--background-color);
-  background-image:  linear-gradient(135deg, var(--main) 25%, var(--background-color) 25%), linear-gradient(225deg, var(--main) 25%, var(--background-color) 25%), linear-gradient(45deg, var(--main) 25%, var(--background-color) 25%), linear-gradient(315deg, var(--main) 25%, var(--background-color) 25%);
-  background-position:  10px 0, 10px 0, 0 0, 0 0;
-  background-size: 30px 30px;
-  background-repeat: repeat;
-}
-.equilateral-triangles-bg {
-  background-image: repeating-conic-gradient(from 30deg, var(--main) 0% 60deg, var(--background-color) 0% 120deg);
-  background-size: 37px 64px;
-  background-color: var(--background-color);
-}
-.pie-bg {
-  background-image: radial-gradient(ellipse farthest-corner at 37px 37px , var(--main), var(--main) 50%, var(--background-color) 50%);
-  //background-image: url('/bg.svg');
-  background-size: 1000px auto;
-  background-color: var(--background-color);
-}
-.line-bg {
-  background-color: var(--background-color);
-  background: repeating-linear-gradient( 90deg, var(--main), var(--main) 5px, var(--background-color) 5px, var(--background-color) 25px );
-}
-.line-h-bg {
-  background-color: var(--background-color);
-  background-image: linear-gradient(0deg, var(--background-color) 20px, var(--main) 20px);
-  background-size: 25px 25px;
-  }
-.box-bg {
-  background-color: var(--background-color);
-  background-image:  linear-gradient(var(--main) 1px, transparent 1px), linear-gradient(to right, var(--main) 1px, transparent 1px);
-  background-size: 20px 20px;
-}
-.skew-dot-bg {
-  background-color: var(--background-color);
-  background-image:  radial-gradient(var(--main) 3px, transparent 3px), radial-gradient(var(--main) 3px, var(--background-color) 3px);
-  background-size: 30px 30px;
-  background-position: 0 0,15px 15px;
-}
-.skew-dot-transparent-bg {
-  background-color: transparent;
-  background-image:  radial-gradient(transparent 3px, transparent 3px), radial-gradient(transparent 3px, var(--background-color) 3px);
-  background-size: 30px 30px;
-  background-position: 0 0,15px 15px;
-}
-.cross-bg {
-  background-color: var(--background-color);
-  background: radial-gradient(circle, transparent 20%, var(--background-color) 20%, var(--background-color) 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, var(--background-color) 20%, var(--background-color) 80%, transparent 80%, transparent) 25px 25px, linear-gradient(var(--main) 2px, transparent 2px) 0 -1px, linear-gradient(90deg, var(--main) 2px, var(--background-color) 2px) -1px 0;
-  background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;
-}
-.paper-bg {
-  background-color: var(--background-color);
-  background-image:  linear-gradient(var(--main) 2px, transparent 2px), linear-gradient(90deg, var(--main) 2px, transparent 2px), linear-gradient(var(--main) 1px, transparent 1px), linear-gradient(90deg, var(--main) 1px, var(--background-color) 1px);
-  background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;
-  background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
-}
-.diagonal-bg {
-  background-color: var(--background-color);
-  background-size: 25px 25px;
-  background-image: repeating-linear-gradient(45deg, var(--main) 0, var(--main) 2px, var(--background-color) 0, var(--background-color) 50%);
-}
-.radial-bg {
-  background: repeating-radial-gradient(var(--main), var(--main) 5px, var(--background-color) 5px, var(--background-color) 10px);
-}
-.radial-bg2 {
-  background: repeating-radial-gradient(
-  circle,
-  var(--background-color),
-  var(--background-color) 20px,
-  var(--main) 20px,
-  var(--main) 40px)
-}
-
-.half-transparent-bg {
-  background: rgba(0,0,0,.85);
-}
-
 ::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
   color: var(--blue)!important;

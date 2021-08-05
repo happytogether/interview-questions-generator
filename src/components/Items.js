@@ -34,6 +34,7 @@ const trans5 = (x, y) => `translate3d(${-x / 60}px,${y / 60}px,0)`
 const trans6 = (x, y) => `translate3d(${piePosX}px,${piePosY}px,0)`
 
 export default function Items(props) {
+  const bgColorValue = props.bgColorValue;
   const colorPalette =["bg-green", "bg-pink", "bg-purple text-white", "bg-yellow"];
   // purple with blue rect by using index number
   const rectPalette = ["bg-blue", "bg-orange", "bg-yellow", "bg-purple"];
@@ -84,7 +85,13 @@ export default function Items(props) {
               <h3 className="text-5xl">{item.cat}</h3>
               <div className="my-3">{item.catFigcaption}</div>
               <button onClick={() => { setClicked(!clicked); cursorChangeHandler( clicked + "-clicked")}} className="text-left border rounded-sm py-3 px-6">
-                <Link delay="600" to={`/gallery/${index}`}>Questions Gallery</Link>
+                <DelayLink to={{
+                  pathname: `/gallery/${index}`,
+                  state: {
+                    bgColor: [bgColorValue[0][0], bgColorValue[1][0], bgColorValue[2][0], bgColorValue[3][0], bgColorValue[4][0], bgColorValue[5][0], bgColorValue[6][0]],
+                    textColor: [bgColorValue[0][1], bgColorValue[1][1], bgColorValue[2][1], bgColorValue[3][1], bgColorValue[4][1], bgColorValue[5][1], bgColorValue[6][1]],
+                  }
+                }}>Questions Gallery</DelayLink>
               </button>
             </figcaption>
           </motion.div>

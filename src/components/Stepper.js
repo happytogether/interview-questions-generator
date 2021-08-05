@@ -8,19 +8,14 @@ export default function Stepper(props) {
   const { stepperState, stepperDispatch } = useContext(StepperStore);
   const steps = props.steps;
   const activeStep = props.activeStep; // index is 0 based
-  const completedSteps = stepperState.data.length!==0 ? stepperState.data : JSON.parse(localStorage.getItem('completedSteps'))
-    ? JSON.parse(localStorage.getItem('completedSteps'))
-    : [];
-  let stepsArray = [];
-  stepsArray.length = steps;
-  stepsArray = stepsArray.fill("");
+  const completedSteps = stepperState.data;
 
   return (
     <div className="w-full flex items-center absolute justify-center z-50 sm:relative">
       <div className="sm:w-auto w-4/12 p-1 mt-4 sm:mt-0" style={{"background": "rgba(0,0,0,.8)"}}>
         <div className="flex flex-row items-start">
           {
-            stepsArray.map((item, index) => (
+            [...Array(steps).keys()].map((item, index) => (
               index==0 ? (
                 <div className="flex-1 relative sm:px-1">
                   <span className="flex-col flex items-center">
