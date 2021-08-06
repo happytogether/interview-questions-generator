@@ -11,7 +11,7 @@ import Logo from '../../components/Logo';
 import useSound from 'use-sound';
 import clickSfx from '../../components/click.mp3';
 import { motion } from "framer-motion"
-import { QuestionsStore, QuestionsNumStore, UserAnswersStore } from '../../Store';
+import { QuestionsStore, QuestionsNumStore, UserAnswersStore, PageTransitionColorsStore } from '../../Store';
 import { fetchInterviewCategoryQuestionsJsonAction } from '../../Actions';
 import DelayLink from '../../ultils/DelayLink';
 import { initialInterviewCategoryQuestionsCount } from '../../Actions';
@@ -23,8 +23,17 @@ import GetRandomFromArray from '../../ultils/GetRandomFromArray';
 import { ColorSet } from '../../components/ColorSet';
 import { content, upMotion} from '../../components/AnimationSet';
 
-
 export default function InterviewContainer(props) {
+  const { pageTransitionColorsState, pageTransitionColorsDispatch} = useContext(PageTransitionColorsStore);
+  const primaryColor = pageTransitionColorsState.data[0][0];
+  const primaryTextColor = pageTransitionColorsState.data[0][1];
+  const secondaryColor = pageTransitionColorsState.data[1][0];
+  const secondaryTextColor = pageTransitionColorsState.data[1][1];
+  const thirdColor = pageTransitionColorsState.data[2][0];
+  const thirdTextColor =  pageTransitionColorsState.data[2][1];
+  const fourthColor =  pageTransitionColorsState.data[3][0];
+  const fourthTextColor =  pageTransitionColorsState.data[3][1];
+
   const { questionsState, dispatch } = useContext(QuestionsStore);
   const { questionsNumState, questionsNumDispatch} = useContext(QuestionsNumStore);
   const { userAnswersState, userAnswersDispatch} = useContext(UserAnswersStore);
@@ -96,10 +105,10 @@ const pageTransition = {
     <motion.div>
       <motion.div variants={content}
       animate="animate"
-      initial="initial" id="outer-container">
-      <Logo logoTextColor='white' arrowColor='white' />
-      <HamburgerMenu barColor='white' panelBgColor='green' panelTextColor='var(--gray-dark)' crossColor='var(--gray-dark)' bgColorValue={bgColorValue} />
-        <div id="page-wrap" onClick={()=>handleRandomBg()} className={`static2 ${bg}`}>
+      initial="initial" id="outer-container" className={`${primaryColor?primaryColor:'yellow'}-primary-color ${secondaryColor?secondaryColor:'blue'}-secondary-color`}>
+      <Logo logoTextColor={primaryTextColor} arrowColor={secondaryTextColor} />
+      <HamburgerMenu barColor={secondaryTextColor} panelBgColor={thirdColor} panelTextColor={thirdTextColor} crossColor={thirdTextColor} bgColorValue={bgColorValue} />
+        <div id="page-wrap" onClick={()=>handleRandomBg()} className={`static2 bg-primary-secondary`}>
           {
             cookie && <div onClick={() => {updateCookie("hidden")}} className={`${cookie} onboarding absolute w-full h-full z-50 bg-white flex flex-col items-center justify-center`}>
 
@@ -117,7 +126,7 @@ const pageTransition = {
             </div>
           }
           {
-            questionsState.data.length!==0 && <InterviewQuestions categoryIndex={categoryIndex} steps={questionsState.data.length} />
+            questionsState.data.length!==0 && <InterviewQuestions categoryIndex={categoryIndex} steps={questionsState.data.length} primaryColor={primaryColor} primaryTextColor={primaryTextColor} />
           }
         </div>
       </motion.div>

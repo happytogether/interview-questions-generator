@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef, useEffect } from 'react';
+import React, { useState, useContext, useRef, useEffect, useMemo } from 'react';
 import { useSpring, useSprings, useTrail, animated, to as interpolate } from 'react-spring';
 import { useParams } from 'react-router-dom';
 import { useDrag } from 'react-use-gesture';
@@ -6,7 +6,9 @@ import Restart from '../../components/shapes/Restart';
 import { DefaultSet, TwitchSet, MemphisSet1, MemphisSet2 } from "../../components/Reward/MemphisSets";
 import getRandomDifferent from '../../getRandomDifferent';
 import { stepDoneAction, stepsAddAnswersAction } from "../../Actions";
-import { Store, QuestionsStore, StepperStore, UserAnswersStore } from '../../Store';
+import { Store, QuestionsStore, StepperStore, UserAnswersStore, PageTransitionColorsStore } from '../../Store';
+import GetRandomFromArray from '../../ultils/GetRandomFromArray';
+import { ColorSet, ColorSetWhiteText, ColorSetDarkText } from '../../components/ColorSet';
 import {
   isMobile
 } from "react-device-detect";
@@ -16,12 +18,13 @@ export default function QuestionsNotDone(data) {
   const { questionsState, dispatch } = useContext(QuestionsStore);
   const { stepperState, stepperDispatch } = useContext(StepperStore);
   const { userAnswersState, userAnswersDispatch } = useContext(UserAnswersStore);
+  const { pageTransitionColorsState, pageTransitionColorsDispatch} = useContext(PageTransitionColorsStore);
   const categoryIndex = useParams().categoryIndex;
   const questions = questionsState.data[categoryIndex].questions;
   const [userAnswers, setUserAnswers] = useState([]);
   const [rightAnswerNum, setRightAnswerNum] = useState(0);
   const [wrongAnswerNum, setWrongAnswerNum] = useState(0);
-  const cardsPosArr = isMobile ? [[0, 15]]: [[10, 10], [10, -10], [-10, 10], [-10, -10]];
+  const cardsPosArr = isMobile ? [[0, 15]]: [[-15, 15]];
   const [cardsPos, setCardsPos] = useState(cardsPosArr[Math.floor(Math.random()*cardsPosArr.length)]); // cards initial direction
   // These two are just helpers, they curate spring data, propss that are later being interpolated into css
   const to = (i) => ({ x: i *cardsPos[0], y: i*cardsPos[1], scale: 1, rot: -10 + Math.random() * 20, delay: i * 100 })
@@ -45,13 +48,11 @@ export default function QuestionsNotDone(data) {
         setUserAnswers(userAnswers => [...userAnswers,0]);
         userAnswersState.data[categoryIndex].push(0);
         stepsAddAnswersAction(userAnswersState.data, userAnswersDispatch);
-        localStorage.setItem('userAnswersState', JSON.stringify(userAnswersState.data));
       }
       if (dir == 1 && isGone) {
         setUserAnswers(userAnswers => [...userAnswers,1]);
         userAnswersState.data[categoryIndex].push(1);
         stepsAddAnswersAction(userAnswersState.data, userAnswersDispatch);
-        localStorage.setItem('userAnswersState', JSON.stringify(userAnswersState.data));
       }
       return { x, rot, scale, delay: undefined, config: { friction: 50, tension: down ? 800 : isGone ? 200 : 500 } }
     })
@@ -62,6 +63,7 @@ export default function QuestionsNotDone(data) {
         completedStepsArray = [...completedStepsArray, categoryIndex];
         stepDoneAction([...stepperState.data, parseInt(categoryIndex)], stepperDispatch);
         localStorage.setItem('stepperState', JSON.stringify([...stepperState.data, parseInt(categoryIndex)]));
+        localStorage.setItem('userAnswersState', JSON.stringify(userAnswersState.data));
       }, 600);
     }
   })
@@ -74,16 +76,20 @@ export default function QuestionsNotDone(data) {
     e.stopPropagation()
   }
 
+  const bgColorValue = useMemo(
+    () => GetRandomFromArray(ColorSet),
+    []
+  );
 
   return (
     <div>
-      <div className="question-window h-screen flex items-center sm:items-start">
+      <div className={`question-window h-screen flex items-center sm:items-start`}>
         {props.map(({ x, y, rot, scale }, i) => (
           <animated.div key={i} style={{ x, y }} className="flex items-center justify-center absolute w-full">
             {/* This is the card itself, we're binding our gesture to it (and inject its index so we know which is which) */}
-            <animated.div {...bind(i)} className="sm:w-full sm:mx-3 w-60vw rainbow-bg text-center" onClick={handleClick}  style={{ transform: interpolate([rot, scale], trans) }}>
-              <span className="p-5 text-xl bg-white"><span className="text-5xl">{props.length - i < 10 ? "0"+ (props.length - i): props.length - i}</span>.{questions[i].title}</span>
-              <span style={{"height": "300px"}} className="p-5 text-lg overflow-y-scroll bg-white" dangerouslySetInnerHTML={ {__html: questions[i].answer} } />
+            <animated.div {...bind(i)} className={`bg-${bgColorValue[i][0]} sm:w-full sm:mx-3 w-60vw`} onClick={handleClick}  style={{ transform: interpolate([rot, scale], trans) }}>
+              <span style={{"color": bgColorValue[i][1]}} className="p-5 text-xl"><span className="text-5xl">{props.length - i < 10 ? "0"+ (props.length - i): props.length - i}</span>.{questions[i].title}</span>
+              <span style={{"height": "350px", "color": bgColorValue[i][1]}} className="p-5 text-lg overflow-y-scroll" dangerouslySetInnerHTML={ {__html: questions[i].answer} } />
             </animated.div>
           </animated.div>
         ))}

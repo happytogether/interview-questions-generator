@@ -57,7 +57,7 @@ export default function Items(props) {
       {
         props.items && props.items.length>0 && props.items.map((item, index)=><li key={index} value={props.value}  className={`item relative flex flex-row items-center justify-center lg:h-auto lg:flex-col lg:flex-col-reverse ${flexDirection[index%2]}`}>
 
-          <div className={`h-full ${colorPalette[index%4]} flex items-center justify-center lg:w-full lg:py-20`}>
+          <div className={`h-full bg-${bgColorValue[index+1][0]} flex items-center justify-center lg:w-full lg:py-20`}>
             <div className="lg:hidden">
               <Rect color={rectPalette[index%4]} index={index}/>
             </div>
@@ -88,8 +88,8 @@ export default function Items(props) {
                 <DelayLink to={{
                   pathname: `/gallery/${index}`,
                   state: {
-                    bgColor: [bgColorValue[0][0], bgColorValue[1][0], bgColorValue[2][0], bgColorValue[3][0], bgColorValue[4][0], bgColorValue[5][0], bgColorValue[6][0]],
-                    textColor: [bgColorValue[0][1], bgColorValue[1][1], bgColorValue[2][1], bgColorValue[3][1], bgColorValue[4][1], bgColorValue[5][1], bgColorValue[6][1]],
+                    bgColor: [bgColorValue[0][0], bgColorValue[1][0], bgColorValue[2][0], bgColorValue[3][0], bgColorValue[4][0], bgColorValue[5][0]],
+                    textColor: [bgColorValue[0][1], bgColorValue[1][1], bgColorValue[2][1], bgColorValue[3][1], bgColorValue[4][1], bgColorValue[5][1]],
                   }
                 }}>Questions Gallery</DelayLink>
               </button>

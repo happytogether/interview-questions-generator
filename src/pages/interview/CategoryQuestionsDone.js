@@ -7,7 +7,7 @@ import GradeF from './GradeF';
 import Arrow from '../../components/shapes/Arrow';
 import { Link } from 'react-router-dom';
 import DelayLink from '../../ultils/DelayLink';
-import { StepperStore, UserAnswersStore } from '../../Store';
+import { StepperStore, UserAnswersStore, PageTransitionColorsStore } from '../../Store';
 import { stepResetAction } from "../../Actions";
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
 import { ColorSet } from '../../components/ColorSet';
@@ -17,6 +17,7 @@ export default function QuestionsDone(props) {
   const index = props.index;
   const { userAnswersState, userAnswersDispatch } = useContext(UserAnswersStore);
   const { stepperState, stepperDispatch } = useContext(StepperStore);
+  const { pageTransitionColorsState, pageTransitionColorsDispatch } = useContext(PageTransitionColorsStore);
   const answersLocalStroage = userAnswersState.data[index];
   const [answers, setAnswers] = useState(answersLocalStroage);
   const lastStep = (index === (props.steps-1))? true: false;
@@ -26,8 +27,6 @@ export default function QuestionsDone(props) {
   const [gradePercentage, setGradePercentage] = useState();
   const [grade, setGrade] = useState();
   const reducer = (accumulator, currentValue) => accumulator + currentValue;
-
-
 
   function redo() {
     props.redo();
@@ -89,18 +88,15 @@ export default function QuestionsDone(props) {
     },
   };
 
-  const bgColorValue = useMemo(
-    () => GetRandomFromArray(ColorSet),
-    []
-  );
-  const primaryColor = bgColorValue[0][0];
-  const primaryTextColor = bgColorValue[0][1];
-  const secondaryColor = bgColorValue[1][0];
-  const secondaryTextColor = bgColorValue[1][1];
-  const thirdColor = bgColorValue[2][0];
-  const thirdTextColor = bgColorValue[2][1];
-  const fourthColor = bgColorValue[3][0];
-  const fourthTextColor = bgColorValue[3][1];
+  const primaryColor = pageTransitionColorsState.data[0][0];
+  const primaryTextColor = pageTransitionColorsState.data[0][1];
+  const secondaryColor = pageTransitionColorsState.data[1][0];
+  const secondaryTextColor = pageTransitionColorsState.data[1][1];
+  const thirdColor = pageTransitionColorsState.data[2][0];
+  const thirdTextColor = pageTransitionColorsState.data[2][1];
+  const fourthColor = pageTransitionColorsState.data[3][0];
+  const fourthTextColor = pageTransitionColorsState.data[3][1];
+
   const pageVariants = {
   initial: {
     x: "-100vw"
@@ -134,40 +130,39 @@ const pageTransition = {
   return (
     <div>
       {
-        lastStep && <>
-          <motion.div initial='leftInitial' exit='leftOut' variants={pageVariants} transition={pageTransition} className={`panel left bg-${bgColorValue[0][0]} w-3/5 h-screen absolute z-9999`}></motion.div>
-          <motion.div initial='rightInitial' exit='rightOut' variants={pageVariants} transition={pageTransition} className={`panel right bg-${bgColorValue[1][0]} w-2/5 right-0 h-screen absolute z-9999`}></motion.div>
+        /*
+        <>
+          <motion.div initial='leftInitial' exit='leftOut' variants={pageVariants} transition={pageTransition} className={`panel left bg-${primaryColor} w-3/5 h-screen absolute z-9999`}></motion.div>
+          <motion.div initial='rightInitial' exit='rightOut' variants={pageVariants} transition={pageTransition} className={`panel right bg-${secondaryColor} w-2/5 right-0 h-screen absolute z-9999`}></motion.div>
         </>
+        */
       }
-      <motion.div variants={content} animate="animate" initial="initial" className="w-full h-full absolute flex flex-col items-center justify-center sm:justify-start sm:mt-10 text-3xl text-white">
+      <motion.div style={{"color": props.primaryTextColor}} variants={content} animate="animate" initial="initial" className="w-full h-full absolute flex flex-col items-center justify-center sm:justify-start sm:mt-10 text-3xl">
         <div className="flex flex-rows">
           <motion.div variants={upMotion}>
             {
-              grade === "A" && <GradeA userAnswers={answers} gradePercentage={gradePercentage} />
+              grade === "A" && <GradeA primaryTextColor={primaryTextColor} userAnswers={answers} gradePercentage={gradePercentage} />
             }
             {
               grade === "F" && <GradeF userAnswers={answers} gradePercentage={gradePercentage} />
             }
           </motion.div>
         </div>
-        <div className="flex items-center flex-row z-30 relative">
+        <div style={{"color": pageTransitionColorsState.data[0][1]}} className="flex items-center flex-row z-30 relative">
           <motion.div className={`mx-5 flex flex-col items-center ${index==0?' hidden':''}`} variants={upMotion}>
             <DelayLink to={`./${prePageIndex}`}>
-              <Arrow rotate="180deg" size="60px" color="#fff" />
+              <Arrow rotate="180deg" size="60px" color={pageTransitionColorsState.data[0][1]} />
             </DelayLink>
             <span className="text-sm">Step {index}</span>
           </motion.div>
           <motion.div className="mx-5" variants={upMotion2} onClick={() => redo()}>
-            <Restart size="60px" />
+            <Restart size="60px" color={pageTransitionColorsState.data[0][1]} />
           </motion.div>
           <motion.div className={`mx-5 flex flex-col items-center`} variants={upMotion}>
             <DelayLink to={{
-              pathname: nextPageIndex===0? '/report': './'+nextPageIndex,
-              state: {
-                bgColor: [primaryColor, secondaryColor, thirdColor, fourthColor],
-                textColor: [primaryTextColor, secondaryTextColor, thirdTextColor, fourthTextColor]
-              }}}>
-              <Arrow size="60px" color="#fff" />
+              pathname: nextPageIndex===0? '/report': './'+nextPageIndex
+            }}>
+              <Arrow size="60px" color={pageTransitionColorsState.data[0][1]} />
             </DelayLink>
             <span className={`text-sm ${index === (props.steps-1)?' hidden':''}`}>Step {index+2}</span>
             <span className={`text-sm ${index === (props.steps-1)?'':'hidden'}`}>see report</span>

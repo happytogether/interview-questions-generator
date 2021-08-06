@@ -29,11 +29,12 @@ import { pageTransition, pageTransition2, pageTransition3, pageTransitionShort, 
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
 import TransitionPanels from '../../components/TransitionPanels';
 import { isMobile } from "react-device-detect";
-import { ColorSet } from '../../components/ColorSet';
+import { ColorSet, ColorSetWhiteText, ColorSetDarkText } from '../../components/ColorSet';
 import './NewInterview.scss';
+import { pageTransitionColorsAction } from "../../Actions";
+import { PageTransitionColorsStore } from '../../Store';
 
 function NewInterview(props) {
-
   const primaryColor = props.location.state ? props.location.state.bgColor[0]: 'blue';
   const secondaryColor = props.location.state ? props.location.state.bgColor[1]: 'yellow';
   const thirdColor = props.location.state ? props.location.state.bgColor[2]: 'purple';
@@ -49,9 +50,15 @@ function NewInterview(props) {
   const { stepperState, stepperDispatch } = useContext(StepperStore);
   const { userAnswersState, userAnswersDispatch } = useContext(UserAnswersStore);
   const { questionsNumState, questionsNumDispatch } = useContext(QuestionsNumStore);
+  const { pageTransitionColorsState, pageTransitionColorsDispatch } = useContext(PageTransitionColorsStore);
 
   const pathname = useHistory().location.pathname;
   const [footer, setFooter] = useState(false);
+
+  const bgColorValue = useMemo(
+    () => GetRandomFromArray(Math.random() > .5 ? ColorSetDarkText: ColorSetWhiteText),
+    []
+  );
 
   useEffect(() => {
     document.body.classList = ""; // remove classes from other pages
@@ -85,6 +92,7 @@ function NewInterview(props) {
     fetchInterviewCategoryQuestionsCountAction(questionsNum, questionsNumDispatch); // dispatch questions num
     stepResetAction([], stepperDispatch); // start new steps
     stepsResetAnswersAction([[],[],[],[]], userAnswersDispatch);
+    pageTransitionColorsAction(bgColorValue, pageTransitionColorsDispatch);
   }
 
   function handleChipsValue(arr){
@@ -139,10 +147,7 @@ function NewInterview(props) {
   function toggleChip(id) {
     setToggledChipId(id);
   }
-  const bgColorValue = useMemo(
-    () => GetRandomFromArray(ColorSet),
-    []
-  );
+
 return (
     <motion.div variants={content}
     animate="animate"
@@ -208,8 +213,8 @@ return (
               <DelayLink to={{
                 pathname: "/interview/0",
                 state: {
-                  bgColor: [primaryColor, secondaryColor, thirdColor, fourthColor],
-                  textColor: [primaryTextColor, secondaryTextColor, thirdTextColor, fourthTextColor]
+                  bgColor: [bgColorValue[0][0], bgColorValue[1][0], bgColorValue[2][0], bgColorValue[3][0]],
+                  textColor: [bgColorValue[0][1], bgColorValue[1][1], bgColorValue[2][1], bgColorValue[3][1]]
                 }}}>
                 <div className="flex flex-row justify-center items-center lg:text-sm">
                   <span>Generate Interview Questions</span>
@@ -220,7 +225,7 @@ return (
         </motion.div>
       </div>
 
-      <motion.div variants={pageVariants} transition={pageTransition} exit={`${isMobile?'down': 'leftInitial500'}`}>
+      <motion.div variants={pageVariants} transition={pageTransitionShort} exit='down'>
         {
           footer && <Footer bgColor={fourthColor} textColor={fourthTextColor} bgColorValue={bgColorValue} />
         }

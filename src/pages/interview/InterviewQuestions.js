@@ -24,7 +24,7 @@ import Memphis16_5 from '../../components/shapes/memphis16/Memphis16_5';
 import Sun3 from '../../components/shapes/Sun3';
 import MouseLeftRight from "../../components/DotRing/MouseLeftRight";
 import Stepper from '../../components/Stepper';
-import { QuestionsStore, StepperStore, UserAnswersStore } from '../../Store';
+import { QuestionsStore, StepperStore, UserAnswersStore, PageTransitionColorsStore } from '../../Store';
 import { useParams, useHistory, Link } from 'react-router-dom';
 import { stepDoneAction, stepsResetAnswersAction } from "../../Actions";
 
@@ -33,10 +33,12 @@ export default function Questions(value) {
   const { questionsState, dispatch } = useContext(QuestionsStore);
   const { userAnswersState, userAnswersDispatch } = useContext(UserAnswersStore);
   const { stepperState, stepperDoneDispatch } = useContext(StepperStore);
+  const { pageTransitionColorsState, pageTransitionColorsDispatch} = useContext(PageTransitionColorsStore);
   const questions = questionsState.data[index].questions;
   const [answers, setAnswers] = useState(userAnswersState.data[index]);
   const [done, setDone] = useState(answers && answers.length === questions.length ? true: false);// check if user finished interview for this category
 
+  const primaryTextColor = pageTransitionColorsState.data[0][1];
   useEffect(() => {
     setAnswers(userAnswersState.data[index]);
   },[index])
@@ -154,22 +156,27 @@ export default function Questions(value) {
         {
           <Stepper steps={steps} activeStep={index} completedSteps={completedSteps} />
         }
-        <animated.div className={`absolute left-10 top-3/4 xl:hidden ${ done?'opacity-15': 'opacity-50' }`} style={{ transform: props1.xy.interpolate(trans5) }}>
-          <Memphis16_1 size="200px" />
-        </animated.div>
-        <animated.div className={`absolute left-60 top-1/2 xl:hidden ${ done?'opacity-15': 'opacity-50' }`} style={{ transform: props1.xy.interpolate(trans5) }}>
-          <Memphis16_3 size="600px" />
-        </animated.div>
-        <animated.div className={`absolute right-1/4 bottom-0 xl:hidden ${ done?'opacity-15': 'opacity-50' }`} style={{ transform: props1.xy.interpolate(trans1) }}>
-          <Memphis16_4 size="400px" />
-        </animated.div>
+
+        {
+          /*<animated.div className={`absolute left-10 top-3/4 xl:hidden ${ done?'opacity-15': 'opacity-50' }`} style={{ transform: props1.xy.interpolate(trans5) }}>
+            <Memphis16_1 size="200px" />
+          </animated.div>
+          <animated.div className={`absolute left-60 top-1/2 xl:hidden ${ done?'opacity-15': 'opacity-50' }`} style={{ transform: props1.xy.interpolate(trans5) }}>
+            <Memphis16_3 size="600px" />
+          </animated.div>
+          <animated.div className={`absolute right-1/4 bottom-0 xl:hidden ${ done?'opacity-15': 'opacity-50' }`} style={{ transform: props1.xy.interpolate(trans1) }}>
+            <Memphis16_4 size="400px" />
+          </animated.div>
+          */
+
+        }
+
+
+
 
         <div className="absolute left-10 top-1/2 -my-14 z-30 xl:hidden">
-          <motion.div variants={rotateMotion}>
-            <Sun3 />
-          </motion.div>
-          <h1 className="text-white inset-y-1/2 text-4xl w-36 z-20">0{parseInt(index)+1}.{title} / <span className="text-sm">Scores</span></h1>
-          <Arrow size="40px" color="#fff" />
+          <h1 style={{"color": primaryTextColor}} className="inset-y-1/2 text-4xl w-36 z-20">0{parseInt(index)+1}.{title} / <span className="text-sm">Scores</span></h1>
+          <Arrow size="40px" color={primaryTextColor} />
           {
             !done && <SmileSadFace questions={questions} rightWrongNum={userAnswersState.data[index]} rightAnswerNum={rightAnswerNum} wrongAnswerNum={wrongAnswerNum} />
           }

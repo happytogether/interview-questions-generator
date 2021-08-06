@@ -2,6 +2,7 @@ import React, { useState, useContext, useRef, useEffect } from 'react';
 import { useSpring, useSprings, useTrail, animated, to as interpolate } from 'react-spring';
 import Smile from "../../components/shapes/Smile";
 import Sad from "../../components/shapes/Sad";
+import { PageTransitionColorsStore } from '../../Store';
 
 export default function RewardAnswers(props) {
   //const answers = props.answers;
@@ -33,6 +34,8 @@ export default function RewardAnswers(props) {
       gridRows = "grid-rows-4";
 
   }
+
+  const { pageTransitionColorsState, pageTransitionColorsDispatch} = useContext(PageTransitionColorsStore);
   return (
     <div className="flex flex-cols">
       <div className={`grid ${gridRows} grid-flow-col gap-4`}>
@@ -49,7 +52,7 @@ export default function RewardAnswers(props) {
             <animated.div style={{ height }} className="flex flex-rows items-center">
               <span>{index+1}.</span>
               {
-                userAnswers.length !=0 && userAnswers[index] ==1 ?<Smile size="30px" color="#fff" opacity="1" key={index} />: <Sad size="30px" color="#fff" opacity="1" key={index} />
+                userAnswers.length !=0 && userAnswers[index] ==1 ?<Smile size="30px" color={pageTransitionColorsState.data[0][1]} opacity="1" key={index} />: <Sad size="30px" color={pageTransitionColorsState.data[0][1]} opacity="1" key={index} />
               }
             </animated.div>
           </animated.div>

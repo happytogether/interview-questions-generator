@@ -62,6 +62,7 @@ module.exports = {
         darkest: '#1f2d3d',
         dark: "var(--gray-dark)",
         light: "var(--gray-light)",
+        lightest: "var(--gray-lightest)",
         DEFAULT: "var(--gray)",
         light: '#e0e6ed',
         lightest: '#f9fafc'

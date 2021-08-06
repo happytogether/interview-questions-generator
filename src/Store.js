@@ -22,9 +22,27 @@ export function HomeStoreProvider(props) {
   return <HomeStore.Provider value={value}>{props.children}</HomeStore.Provider>;
 }
 
+export const PageTransitionColorsStore = createContext("");
+function pageTransitionColorsReducer(pageTransitionColorsState, action) {
+  switch (action.type) {
+    case "PAGE_TRANSITION_COLORS":
+      return {...pageTransitionColorsState, data:action.payload};
+    default:
+      return pageTransitionColorsState;
+  }
+}
+
+const pageTransitionColorsInitialState = {
+  data: [["yellow", "var(--gray-dark)"], ["green", "var(--gray-dark)"], ["purple", "white"], ["orange", "var(--gray-dark)"]]
+}
+
+export function PageTransitionColorsStoreProvider(props) {
+  const [pageTransitionColorsState, pageTransitionColorsDispatch] = useReducer(pageTransitionColorsReducer, pageTransitionColorsInitialState);
+  const value = {pageTransitionColorsState, pageTransitionColorsDispatch};
+  return <PageTransitionColorsStore.Provider value={value}>{props.children}</PageTransitionColorsStore.Provider>
+}
+
 export const QuestionsStore = createContext("");
-
-
 
 function questionsReducer(questionsState, action) {
   switch (action.type) {

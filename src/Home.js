@@ -13,13 +13,13 @@ import { downMotion } from './components/AnimationSet';
 import { pageTransition, pageTransition2, pageTransition3, pageVariants } from './ultils/TransitionSet';
 import HamburgerMenu from './components/HamburgerMenu/HamburgerMenu';
 import GetRandomFromArray from './ultils/GetRandomFromArray';
-import { ColorSet } from './components/ColorSet';
+import { ColorSetNoBlue } from './components/ColorSet';
 import TransitionPanels from './components/TransitionPanels';
 
 function Home() {
   const { state, homeDispatch } = useContext(HomeStore);
   const { stepperState, stepperDispatch} = useContext(StepperStore);
-  const bgColorValue = useMemo(() => GetRandomFromArray(ColorSet),[]);
+  const bgColorValue = useMemo(() => GetRandomFromArray(ColorSetNoBlue),[]);
 
   useEffect(() => {
     state.data.length === 0 && fetchHomepageJsonAction(homeDispatch);
@@ -53,8 +53,8 @@ function Home() {
       <DotRing />
       <TransitionPanels bgColorValue={bgColorValue}/>
       <div id="outer-container">
-        <Logo nobackArrow logoTextColor='var(--blue)' arrowColor='var(--blue)' />
-        <HamburgerMenu barColor='var(--blue)' panelBgColor='green' panelTextColor='var(--gray-dark)' crossColor='white' bgColorValue={bgColorValue} />
+        <Logo nobackArrow logoTextColor='var(--blue)' />
+        <HamburgerMenu barColor={bgColorValue[0][1]} panelBgColor={bgColorValue[5][0]} panelTextColor={bgColorValue[5][1]} crossColor={bgColorValue[5][1]} bgColorValue={bgColorValue} />
         <motion.div variants={pageVariants} transition={pageTransition} exit='down' id="page-wrap">
           <HomeHead bgColorValue={bgColorValue} />
           <Items items={state.data} bgColorValue={bgColorValue} />

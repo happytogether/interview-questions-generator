@@ -5,12 +5,15 @@ import {GradeFSet} from '../../components/confettiSet/GradeFSet';
 import Reward from '../../components/Reward/Reward';
 import { HeartBrokenSet, ThunderSet } from "../../components/Reward/MemphisSets";
 import { useParams } from 'react-router-dom';
+import { PageTransitionColorsStore } from '../../Store';
 
 export default function GradeF(props) {
   const index= parseInt(useParams().categoryIndex);
   const gradePercentage = props.gradePercentage;
   const canvasInputF = useRef(null);
   const [imgSrc, setImgSrc] = useState('');
+  const { pageTransitionColorsState, pageTransitionColorsDispatch} = useContext(PageTransitionColorsStore);
+  const primaryTextColor = pageTransitionColorsState.data[0][1];
 
   useEffect(()=> {
     setTimeout(() => {
@@ -23,17 +26,17 @@ export default function GradeF(props) {
   }, [index])
   const randomIndex = Math.random() > .5 ? 0: 1;
   return (
-    <div className="flex items-center justify-center flex-col">
+    <div style={{"color": primaryTextColor}} className="flex items-center justify-center flex-col w-screen">
       <Rain numDrops="25" />
-      <div className="flex flex-rows items-center">
-        <div className="sm:hidden text-8xl mx-4">
-          {
-            <span>{gradePercentage}</span>
-          }
-        </div>
-        <div className="w-96 sm:text-base sm:w-screen sm:px-12 my-6">
+      <div className="w-4/12 flex flex-rows items-center">
+        <div className="sm:text-base sm:w-screen sm:px-12 text-2xl my-6 pr-2 border-r text-right mr-5 w-9/12">
           {
             <div>Oh no, Seems like you don't like Anni's answers that much.</div>
+          }
+        </div>
+        <div className="sm:hidden text-6xl mx-4 w-3/12">
+          {
+            <span>{gradePercentage}</span>
           }
         </div>
       </div>

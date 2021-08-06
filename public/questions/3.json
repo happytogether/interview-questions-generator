@@ -2,11 +2,11 @@
   {
     "title": "If you were an animal, which one would you want to be?",
     "answer": "<p class='mb-5'><img width='50%' src='/img/octopus.svg'></p>",
-    "example": "console.log('I would probably be a octopus - with more than 2 hands.')"
+    "example": "console.log('I would probably be a octopus - so I can have more than 2 hands.')"
   },
   {
     "title": "What are some of your strengths and weaknesses?",
-    "answer": "A closure is the combination of a function and the lexical environment within which that function was declared. i.e, It is an inner function that has access to the outer or enclosing function’s variables. The closure has three scope chains. <p class='my-10'>Own scope where variables defined between its curly brackets Outer function’s variables Global variables Let's take an example of closure concept</p>",
+    "answer": "<p>My strengths is also my weaknesses for some people. Not a pure designer and not a pure engineer. In some projects, pure designer or pure engineers are needed. So I prefer to join or lead a team that has different team culture on creating creative things.</p>",
     "example": "function Welcome(name){\n var greetingInfo = function(message){ \n  console.log(message+' '+name);\n }\n return greetingInfo;\n}\nvar myFunction = Welcome('John');\nmyFunction('Welcome '); //Output: Welcome John\nmyFunction('Hello Mr.'); //output: Hello Mr.John"
   },
   {
@@ -26,22 +26,26 @@
     "title": "Change one thing about your personality, what would it be?"
   },
   {
-    "title": "What makes you unique?"
+    "title": "What makes you unique?",
+    "answer": "EVERYTHING on me makes me unique."
   },
   {
     "title": "Can you tell me about a time when you went above and beyond in your job?"
   },
   {
-    "title": "What drives you in your professional life?"
+    "title": "What drives you in your professional life?",
+    "answer": "Everyday I see a lot of interesting things, beatiful and userful design, amazing and unbelievable technology. Always being part of it drives me the most in my professional life."
   },
   {
     "title": "Describe a time when you dealt with change."
   },
   {
-    "title": "What are you passionate about?"
+    "title": "What are you passionate about?",
+    "answer": "Creative modular web design and development."
   },
   {
-    "title": "Are you easy to talk to? "
+    "title": "Are you easy to talk to? ",
+    "answer": "It depends. Coffee or cocktail might make me eaiser to talk to."
   },
   {
     "title": "What motivates you?"

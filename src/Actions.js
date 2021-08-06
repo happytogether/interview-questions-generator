@@ -79,6 +79,13 @@ export const stepDoneAction = async (state, dispatch) => {
   });
 };
 
+export const pageTransitionColorsAction = async (pageTransitionColorsState, pageTransitionColorsDispatch) => {
+  return pageTransitionColorsDispatch({
+    type: "PAGE_TRANSITION_COLORS",
+    payload: pageTransitionColorsState
+  });
+};
+
 export const stepResetAction = async (state, dispatch) => {
   //const stepDoneInStepper = state.stepper.includes(stepIndex);
   localStorage.setItem('stepperState', JSON.stringify(state));

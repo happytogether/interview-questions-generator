@@ -5,15 +5,15 @@
     "questions": [
       {
         "title": "Part 01. Explain Closure in Javascript.",
-        "answer": "answer"
+        "answer": "A closure is the combination of a function and the lexical environment within which that function was declared. i.e, It is an inner function that has access to the outer or enclosing function’s variables. The closure has three scope chains. <p class='my-10'>Own scope where variables defined between its curly brackets Outer function’s variables Global variables Let's take an example of closure concept</p>"
       },
       {
         "title": "How many object types in Javascript?",
-        "answer": "answer"
+        "answer": "A closure is the combination of a function and the lexical environment within which that function was declared. i.e, It is an inner function that has access to the outer or enclosing function’s variables. The closure has three scope chains. <p class='my-10'>Own scope where variables defined between its curly brackets Outer function’s variables Global variables Let's take an example of closure concept</p>"
       },
       {
         "title": "question03",
-        "answer": "answer"
+        "answer": "A closure is the combination of a function and the lexical environment within which that function was declared. i.e, It is an inner function that has access to the outer or enclosing function’s variables. The closure has three scope chains. <p class='my-10'>Own scope where variables defined between its curly brackets Outer function’s variables Global variables Let's take an example of closure concept</p>"
       },
       {
         "title": "What do you think will be the next big thing in UX design?",
@@ -21,7 +21,7 @@
       },
       {
         "title": "Part 01. Explain Closure in Javascript.",
-        "answer": "answer"
+        "answer": "A closure is the combination of a function and the lexical environment within which that function was declared. i.e, It is an inner function that has access to the outer or enclosing function’s variables. The closure has three scope chains. <p class='my-10'>Own scope where variables defined between its curly brackets Outer function’s variables Global variables Let's take an example of closure concept</p>"
       },
       {
         "title": "What do you think will be the next big thing in UX design?",

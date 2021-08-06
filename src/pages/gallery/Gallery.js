@@ -17,6 +17,8 @@ import { HomeStore, StepperStore } from "../../Store";
 import { fetchHomepageJsonAction, stepDoneAction } from "../../Actions";
 import { isMobile } from "react-device-detect";
 import { DonutSet, IceCreamSet, TwitchSet, DefaultSet, FruitSet, FruitSet2 } from "../../components/Reward/MemphisSets";
+import Arrow from '../../components/shapes/Arrow';
+import DelayLink from '../../ultils/DelayLink';
 const setArray = [TwitchSet(), DefaultSet()];
 
 function Gallery(props) {
@@ -30,9 +32,12 @@ function Gallery(props) {
   const fourthTextColor = props.location.state ? props.location.state.textColor[3]: 'var(--gray-dark)';
 
   const [footer, setFooter] = useState(false);
-  const categoryIndex= parseInt(useParams().categoryIndex);
 
   const { state, homeDispatch } = useContext(HomeStore);
+  const steps = 4;
+  const categoryIndex= parseInt(useParams().categoryIndex);
+  const prePageIndex = (categoryIndex === 0 ? (steps-1): (categoryIndex-1));
+  const nextPageIndex = (categoryIndex === (steps-1)) ? 0: (categoryIndex+1);
 
   useEffect(() => {
     state.data.length === 0 && fetchHomepageJsonAction(homeDispatch);
@@ -96,7 +101,7 @@ function Gallery(props) {
               <div className="clear-both"></div>
             </div>
             <div className="lg:w-full w-11/12 pl-10">
-              <div className="text-2xl border-b mb-10">0{i}. {item.title}</div>
+              <div className="text-2xl border-b mb-10">0{i+1}. {item.title}</div>
               <Highlight innerHTML={true}>{item.answer}</Highlight>
               <Highlight language="javascript">
                 {item.example}
@@ -119,9 +124,36 @@ function Gallery(props) {
         </motion.div>
         ))
       }
+      {
+        jsonLoaded && <div className="flex flex-row gap-40">
+          <div className={`flex flex-col items-center ${categoryIndex === 0 ?' hidden':''}`}>
+            <DelayLink to={{
+              pathname: "./"+prePageIndex,
+              state: {
+                bgColor: [bgColorValue[0][0], bgColorValue[1][0], bgColorValue[2][0], bgColorValue[3][0]],
+                textColor: [bgColorValue[0][1], bgColorValue[1][1], bgColorValue[2][1], bgColorValue[3][1]]
+              }}}>
+              <Arrow rotate="180deg" size="300px" color={secondaryTextColor} />
+            </DelayLink>
+            <span style={{"color": secondaryTextColor}}>{state.data[categoryIndex > 1 ? categoryIndex-1: categoryIndex].cat}</span>
+          </div>
+          <div className={`flex flex-col items-center ${categoryIndex === (steps-1)?' hidden':''}`}>
+            <DelayLink to={{
+              pathname: "./"+nextPageIndex,
+              state: {
+                bgColor: [bgColorValue[0][0], bgColorValue[1][0], bgColorValue[2][0], bgColorValue[3][0]],
+                textColor: [bgColorValue[0][1], bgColorValue[1][1], bgColorValue[2][1], bgColorValue[3][1]]
+              }}}>
+              <Arrow size="300px" color={secondaryTextColor} />
+            </DelayLink>
+            <span style={{"color": secondaryTextColor}} className={`text-sm`}>{state.data[categoryIndex < 3 ? categoryIndex+1: categoryIndex].cat}</span>
+          </div>
+        </div>
+      }
 
     </div>
-    <motion.div variants={pageVariants} transition={pageTransition} exit={`${isMobile?'down': 'leftInitial500'}`}>
+
+    <motion.div variants={pageVariants} transition={pageTransitionShort} exit='down'>
       {
         footer && <Footer bgColor={fourthColor} textColor={fourthTextColor} bgColorValue={bgColorValue} />
       }

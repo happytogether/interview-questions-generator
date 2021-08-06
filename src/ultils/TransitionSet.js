@@ -1,10 +1,10 @@
 const pageVariants = {
   initial: {
-    y: 100,
+    y: '100vh',
     opacity:0
   },
   initialAlpha1: {
-    y: 500
+    y: '100vh'
   },
   rightInitial500: {
     x: 500
@@ -41,7 +41,7 @@ const pageVariants = {
     x: "0"
   },
   down: {
-    y: 300
+    y: '100vh'
   }
 };
 

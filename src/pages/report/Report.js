@@ -235,7 +235,7 @@ function Report(props) {
         </motion.div>
       </div>
 
-      <motion.div variants={pageVariants} transition={pageTransition} exit={`${isMobile?'down': 'leftInitial500'}`}>
+      <motion.div variants={pageVariants} transition={pageTransitionShort} exit='down'>
         {
           footer && <Footer bgColor={fourthColor} textColor={fourthTextColor} bgColorValue={bgColorValue} />
         }
