@@ -25,7 +25,7 @@ import { content, upMotion} from '../../components/AnimationSet';
 import HamburgerMenu from '../../components/HamburgerMenu/HamburgerMenu';
 import GoToTop from '../../ultils/GoToTop';
 import TransitionPanels from '../../components/TransitionPanels';
-import { pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageVariants } from '../../ultils/TransitionSet';
+import { pageTransitionEaseOut, pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageVariants } from '../../ultils/TransitionSet';
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
 import { ColorSet } from '../../components/ColorSet';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -34,7 +34,6 @@ import { fetchHomepageJsonAction } from "../../Actions";
 import { isMobile } from "react-device-detect";
 
 function Report(props) {
-
   const primaryColor = props.location.state ? props.location.state.bgColor[0]: 'pink';
   const secondaryColor = props.location.state ? props.location.state.bgColor[1]: 'green';
   const thirdColor = props.location.state ? props.location.state.bgColor[2]: 'yellow';
@@ -94,13 +93,13 @@ function Report(props) {
     },[interviewDone])
 
   //const fadeIn = useSpring({ to: { y: 0, opacity: 1}, from: { opacity: 0, y:1000 }, config: { duration: 3000, easing: easings.easeCubic } });
-  const setArray = [DonutSet(), IceCreamSet(), TwitchSet(), DefaultSet(), FruitSet(), FruitSet2()];
+  const setArray = [DefaultSet()];
   const set = useMemo(
     () => GetRandomFromArray(setArray)[0],[]);
 
   const CustomToastWithLink = () => (
     <div>
-      <Link to="/interview">You havn't finished the whole interview process. <br /><span className="link">Click to finish the interview.</span></Link>
+      <Link to="/interview/0">You havn't finished the whole interview process. <br /><span className="link">Click to finish the interview.</span></Link>
     </div>
   );
 
@@ -139,12 +138,12 @@ function Report(props) {
 
   function reportDialog() {
       if (interviewDone) {
-        const dialog = (rightAnswerSum/questionsSum).toFixed(2)*100 >=66 ? <p className="block my-3"><span className="link">Click here</span> to redo the interview here.</p>: <p className="block my-3">Based on the statistics, it seems like /// Anni Wang /// might not be a good fit. <p className="block my-3">If you're looking for a UX Engineer, Deisgn Technologist or a prototyper. Feel free not to contact me.</p></p>
+        const dialog = (rightAnswerSum/questionsSum).toFixed(2)*100 >=66 ? <div><p className="block my-3">Based on the statistics, it seems like // Anni Wang ++ might be a good fit.</p><p className="block my-3">You can contact Anni to see if she is available.</p><p><DelayLink to='/interview'>or <span className="link">click here</span></DelayLink> to redo the interview.</p></div>: <div className="block my-3">Based on the statistics, it seems like // Anni Wang ++ might not be a good fit.<p className="block my-3">If you're looking for a UX Engineer, Deisgn Technologist or a prototyper. Feel free not to contact me.</p></div>
         return dialog;
       } else {
         switch(stepperState.data.length) {
           case 0:
-            return <p className="block my-3">You haven't started the interview process. <p className="block my-3">You'll need to finish the 4 steps interview process to see the final report. <span className="link">Click here</span></p></p>
+            return <div className="block my-3">You haven't started the interview process. <p className="block my-3">You'll need to finish the 4 steps interview process to see the final report. <span className="link">Click here</span></p></div>
             break;
           case 1:
             return <p className="block my-3">You haven't finished the whole interview process.</p>
@@ -166,7 +165,7 @@ function Report(props) {
     animate="animate"
     initial="initial" id="outer-container" className={`${primaryColor?primaryColor:'yellow'}-primary-color ${secondaryColor?secondaryColor:'blue'}-secondary-color`}>
       <TransitionPanels bgColorValue={bgColorValue}/>
-      <Logo logoTextColor={primaryTextColor} arrowColor={secondaryTextColor} />
+      <Logo goBackHome={true} logoTextColor={primaryTextColor} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
       <HamburgerMenu barColor={secondaryTextColor} panelBgColor={thirdColor} panelTextColor={thirdTextColor} crossColor={thirdTextColor} bgColorValue={bgColorValue} />
       <ToastContainer position="top-center" draggable={true} draggablePercent={25} autoClose={10000} />
       <div id="page-wrap" className={`w-screen min-h-screen report bg-primary-secondary flex justify-center items-center py-10`}>
@@ -175,7 +174,7 @@ function Report(props) {
             <div className="lg:w-screen w-6/12 h-full">
               <div className="w-6/12 bg-cover bg-center bg-no-repeat" style={{"backgroundImage": `url(${imgSrc})`, "backgroundColor": `var(--${secondaryColor?secondaryColor:'blue'})`, "backgroundSize": "120px auto", "height": "300px"}}></div>
               <div className="text-black lowercase font-semibold text-4xl py-5">statistics<br />report</div>
-              <div class="float-left">
+              <div className="float-left">
                 <ReactStoreIndicator width={150} value={(rightAnswerSum/questionsSum).toFixed(2)*100} maxValue={100} />
               </div>
               <div className="clear-both"></div>
@@ -196,14 +195,14 @@ function Report(props) {
                 </li>
                 <li className="py-10 flex flex-row relative" >
                   {
-                    set.map((item, index) =><div className="mx-1" dangerouslySetInnerHTML={ {__html: item} }></div>)
+                    set.map((item, index) =><div key={index} className="mx-1" dangerouslySetInnerHTML={ {__html: item} }></div>)
                   }
                 </li>
                 <li className="py-10">
                   <ul>
                     {
                       questionsNumState.data && questionsNumState.data.map((item, index) => (
-                        <li className="my-5 flex flex-row items-start">
+                        <li key={index} className="my-5 flex flex-row items-start">
                           {
                             stepperData.includes(index) ? <GreenCheckbox checked='checked' name="checked" />: <GreenCheckbox disabled name="checkbox" />
                           }
@@ -215,7 +214,7 @@ function Report(props) {
                             <ul className="flex flex-row">
                               {
                                 [...Array(parseInt(item)).keys()].map((q, i) => (
-                                  <li>
+                                  <li key={i}>
                                     {
                                       userAnswersState.data && userAnswersState.data[index][i] === 1 ? <Smile size="32px" opacity="1"  />: <Sad size="32px" opacity=".3" />
                                     }
@@ -235,7 +234,7 @@ function Report(props) {
         </motion.div>
       </div>
 
-      <motion.div variants={pageVariants} transition={pageTransitionShort} exit='down'>
+      <motion.div variants={pageVariants} transition={pageTransitionEaseOut} exit='down'>
         {
           footer && <Footer bgColor={fourthColor} textColor={fourthTextColor} bgColorValue={bgColorValue} />
         }

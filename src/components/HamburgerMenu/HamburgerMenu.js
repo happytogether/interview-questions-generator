@@ -110,7 +110,7 @@ export default function HamburgerMenu(props){
           </li>
           <li className="link">
             <DelayLink to={{
-              pathname: "/gallery/0",
+              pathname: "/gallery",
               state: {
                 bgColor: [primaryColor, secondaryColor, thirdColor, fourthColor],
                 textColor: [primaryTextColor, secondaryTextColor, thirdTextColor, fourthTextColor]

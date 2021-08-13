@@ -3,7 +3,8 @@ import { motion } from "framer-motion";
 import { fetchHomepageJsonAction, stepDoneAction, initialInterviewCategoryQuestionsCount } from "./Actions";
 import { HomeStore, StepperStore } from "./Store";
 import { MouseContext } from "./context/mouse-context";
-import HomeHead from './components/HomeHead';
+import HomeHeader from './components/HomeHeader';
+import HomeHeader2 from './components/HomeHeader2';
 import Items from './components/Items';
 import Footer from './components/Footer';
 import DotRing from "./components/DotRing/DotRing";
@@ -15,11 +16,24 @@ import HamburgerMenu from './components/HamburgerMenu/HamburgerMenu';
 import GetRandomFromArray from './ultils/GetRandomFromArray';
 import { ColorSetNoBlue } from './components/ColorSet';
 import TransitionPanels from './components/TransitionPanels';
+import GoToTop from './ultils/GoToTop';
 
-function Home() {
+function Home(props) {
   const { state, homeDispatch } = useContext(HomeStore);
   const { stepperState, stepperDispatch} = useContext(StepperStore);
   const bgColorValue = useMemo(() => GetRandomFromArray(ColorSetNoBlue),[]);
+
+  const primaryColor = props.location.state ? props.location.state.bgColor[0]: 'pink';
+  const secondaryColor = props.location.state ? props.location.state.bgColor[1]: 'green';
+  const thirdColor = props.location.state ? props.location.state.bgColor[2]: 'yellow';
+  const primaryTextColor = props.location.state ? props.location.state.textColor[0]: 'var(--gray-dark)';
+  const secondaryTextColor = props.location.state ? props.location.state.textColor[1]: 'var(--gray-dark)';
+  const thirdTextColor = props.location.state ? props.location.state.textColor[2]: 'var(--gray-dark)';
+  const fourthColor = props.location.state ? props.location.state.bgColor[3]: 'purple';
+  const fourthTextColor = props.location.state ? props.location.state.textColor[3]: 'white';
+  const fifthColor = props.location.state ? props.location.state.bgColor[4]: 'red';
+  //left color for homehead.js left panel
+  const leftColor = bgColorValue[4][0] === primaryColor ? bgColorValue[6][0] : bgColorValue[4][0];
 
   useEffect(() => {
     state.data.length === 0 && fetchHomepageJsonAction(homeDispatch);
@@ -35,33 +49,22 @@ function Home() {
   const { cursorType, cursorChangeHandler } = useContext(MouseContext);
   const [ items,setItems ]=useState([]);
 
-  // deal with category here
-  const [ category,setCategory ]= useState("");
-  const [ categoryIndex, setCategoryIndex ] = useState();
-  const [ categoryQuestions, setCategoryQuestions ] = useState([]);
-  const [ categoryTitle, setCategoryTitle ] = useState();
-
-  function handleCategoryChange(newCategory, index) {
-    setCategory(newCategory);
-    setCategoryIndex(index);
-    setCategoryQuestions(items[index].questions);
-    setCategoryTitle(items[index].cat);
-  }
-
   return (
-    <motion.div>
+    <div>
       <DotRing />
       <TransitionPanels bgColorValue={bgColorValue}/>
-      <div id="outer-container">
-        <Logo nobackArrow logoTextColor='var(--blue)' />
-        <HamburgerMenu barColor={bgColorValue[0][1]} panelBgColor={bgColorValue[5][0]} panelTextColor={bgColorValue[5][1]} crossColor={bgColorValue[5][1]} bgColorValue={bgColorValue} />
-        <motion.div variants={pageVariants} transition={pageTransition} exit='down' id="page-wrap">
-          <HomeHead bgColorValue={bgColorValue} />
+      <div id="outer-container" className={`${primaryColor}-primary-color ${secondaryColor}-secondary-color`}>
+        <Logo nobackArrow logoTextColor={bgColorValue[4][0] === primaryColor?bgColorValue[6][1]:bgColorValue[4][1]} bgColorValue={bgColorValue} prePrimaryColor={primaryColor} preSecondaryColor={secondaryColor} />
+        <HamburgerMenu barColor='var(--gray-dark)' panelBgColor={bgColorValue[5][0]} panelTextColor={bgColorValue[5][1]} crossColor={bgColorValue[5][1]} bgColorValue={bgColorValue} />
+        <motion.div variants={pageVariants} transition={pageTransition} exit='down' id="page-wrap" id="page-wrap" className="bg-primary-secondary">
+          <HomeHeader leftColor={leftColor} bgColorValue={bgColorValue} />
+          <HomeHeader2 bgColorValue={bgColorValue} />
           <Items items={state.data} bgColorValue={bgColorValue} />
           <Footer bgColor='blue' textColor='white' bgColorValue={bgColorValue} />
         </motion.div>
       </div>
-    </motion.div>
+      <GoToTop />
+    </div>
   );
 }
 

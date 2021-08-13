@@ -10,8 +10,8 @@ export default function Memphis16_4(props) {
   return (
     <div className="z-10" style={styles}>
       <svg viewBox="0 0 1197 808" version="1.1" xmlns="http://www.w3.org/2000/svg">
-          <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-              <g id="Group" transform="translate(0.736890, 0.764045)" fill-rule="nonzero">
+          <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+              <g id="Group" transform="translate(0.736890, 0.764045)" fillRule="nonzero">
                   <path d="M1051.33311,744.075955 L1159.66311,763.185955 L1178.76311,654.855955 L1070.43311,635.755955 L1051.33311,744.075955 Z M1171.82311,780.565955 L1033.95311,756.245955 L1058.27311,618.375955 L1196.14311,642.685955 L1171.82311,780.565955 L1171.82311,780.565955 Z" id="Fill-4" fill="#B899CF"></path>
                   <polyline id="Fill-7" fill="#B899CF" points="847.42311 807.005955 483.70211 596.995955 693.71411 233.265955 1057.44311 443.275955 847.42311 807.005955"></polyline>
                   <path d="M19.9961101,267.865955 C0.89111009,256.835955 -5.67788991,232.325955 5.35211009,213.215955 C16.3821101,194.115955 40.8981101,187.545955 60.0031101,198.575955 C79.1091101,209.605955 85.6781101,234.125955 74.6471101,253.225955 C63.6171101,272.335955 39.1011101,278.895955 19.9961101,267.865955" id="Fill-14" fill="#FFCC71"></path>

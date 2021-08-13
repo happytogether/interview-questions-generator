@@ -15,7 +15,7 @@ export const DelayLink = props => {
   let location = useLocation();
   const lastLocation = useLastLocation();
   useEffect(() => {
-    if (lastLocation && lastLocation.pathname === '/' && goBackHome =="true") {
+    if (lastLocation && lastLocation.pathname === '/' && goBackHome === true) {
       to = null;
     }
   }, [lastLocation])
@@ -49,7 +49,7 @@ export const DelayLink = props => {
       }
       onDelayEnd(e, to);
     }, delay);
-    if (lastLocation && lastLocation.pathname === '/' && location?.pathname !=='/' && goBackHome =="true") {
+    if (lastLocation && lastLocation.pathname === '/' && location?.pathname !=='/' && goBackHome === true) {
       history.goBack();
     }
   };
@@ -67,7 +67,6 @@ DelayLink.propTypes = {
   // Replace history or not
   replace: PropTypes.bool,
   // Link to go to
-  to: PropTypes.string
 };
 
 DelayLink.defaultProps = {

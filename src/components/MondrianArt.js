@@ -57,7 +57,7 @@ function MondrianArt(props) {
           },
         }}
       >
-        <div className="z-0 credit-logo" style={{"background-image": `url(${item.imgSrc})`}}></div>
+        <div className="z-0 credit-logo" style={{"backgroundImage": `url(${item.imgSrc})`}}></div>
         <div className="relative z-10">
           <a href={`${item.link}`}>{item.title}</a>
         </div>

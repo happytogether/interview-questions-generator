@@ -4,20 +4,21 @@ import GoToTop from '../../ultils/GoToTop';
 import Logo from '../../components/Logo';
 import HamburgerMenu from '../../components/HamburgerMenu/HamburgerMenu';
 import './Gallery.scss';
-import Fullpage  from './Fullpage';
 import Highlight from 'react-highlight'
 import './Highlight.scss';
 import { useParams } from 'react-router-dom';
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from 'react-intersection-observer';
 import TransitionPanels from '../../components/TransitionPanels';
-import { pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageTransitionShort2, pageVariants } from '../../ultils/TransitionSet';
+import { pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageTransitionShort2, pageTransitionEaseIn, pageVariants } from '../../ultils/TransitionSet';
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
 import { ColorSet } from '../../components/ColorSet';
 import { HomeStore, StepperStore } from "../../Store";
 import { fetchHomepageJsonAction, stepDoneAction } from "../../Actions";
-import { isMobile } from "react-device-detect";
+import { isMobile, isDesktop } from "react-device-detect";
 import { DonutSet, IceCreamSet, TwitchSet, DefaultSet, FruitSet, FruitSet2 } from "../../components/Reward/MemphisSets";
 import Arrow from '../../components/shapes/Arrow';
+import InviewBar from '../../components/inview/InviewBar';
 import DelayLink from '../../ultils/DelayLink';
 const setArray = [TwitchSet(), DefaultSet()];
 
@@ -84,80 +85,85 @@ function Gallery(props) {
     () => GetRandomFromArray(setArray)[0],[]);
 
   return (
-    <div id="outer-container" className={`gallery ${primaryColor?primaryColor:'yellow'}-primary-color ${secondaryColor?secondaryColor:'blue'}-secondary-color`}>
+    <div id="outer-container" className={`gallery ${primaryColor}-primary-color ${secondaryColor}-secondary-color`}>
       <TransitionPanels bgColorValue={bgColorValue}/>
-      <Logo logoTextColor={primaryTextColor} arrowColor={secondaryTextColor} />
+      <Logo logoTextColor={primaryTextColor} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
       <HamburgerMenu barColor={secondaryTextColor} panelBgColor={thirdColor} panelTextColor={thirdTextColor} crossColor={thirdTextColor} bgColorValue={bgColorValue} />
-      <div id="page-wrap" className={`w-screen min-h-screen report bg-primary-secondary flex flex-row flex-wrap justify-center gap-40 items-center py-2 pt-20 pb-40`}>
+      <div id="page-wrap" className={`w-screen min-h-screen report bg-primary-secondary pt-20`}>
+        <div className="min-h-screen flex flex-row flex-wrap justify-center gap-40 items-start pb-40 mt-40 lg:mt-10">
+        {
+          items.map((item, i) => (
+            <motion.div key={i} variants={pageVariants} initial='initialAlpha1' transition={i%2 === 1 ?pageTransitionShort: pageTransitionShort2} exit='down' animate="in" className={`${i%2 === 1 ? 'mt-40 lg:mt-0': null} xl:w-8/12 lg:w-11/12 p-20 lg:p-10 w-4/12 bg-white default-window`}>
+              <div className={`flex ${i%2===0 ? 'flex-row': 'flex-row-reverse'} gap-10 w-full h-full lg:flex-col`}>
+                <div className={`lg:w-screen w-1/12 h-full relative`}>
+                  {
+                    [0,1,2,3,4].map((item, index)=>(
+                      <InviewBar key={index} index={index} />
+                    ))
+                  }
+                  <div className={`text-black lowercase font-semibold text-4xl py-5 ml-1`}>
+                    {state.data && state.data[categoryIndex].cat.split(" ")[0]}
+                  </div>
+                <div className="clear-both"></div>
+              </div>
+              <div className="lg:w-full w-11/12 pl-10">
+                <div className="text-2xl border-b mb-10">0{i+1}. {item.title}</div>
+                <Highlight innerHTML={true}>{item.answer}</Highlight>
+                <Highlight language="javascript">
+                  {item.example}
+                </Highlight>
+                <Highlight language="">
+                  {item.error}
+                </Highlight>
+              </div>
+            </div>
+          </motion.div>
+          ))
+        }
+      </div>
       {
-        items.map((item, i) => (
-          <motion.div variants={pageVariants} initial='initialAlpha1' transition={i%2 === 1 ?pageTransitionShort: pageTransitionShort2} exit='down' animate="in" className="xl:w-8/12 lg:w-11/12 lg:mt-20 p-20 lg:p-10 w-4/12 h-5/6 bg-white default-window mt-20">
-            <div className={`flex ${i%2===0 ? 'flex-row': 'flex-row-reverse'} gap-10 w-full h-full lg:flex-col`}>
-              <div className={`lg:w-screen w-1/12 h-full relative`}>
-                <div className={`w-1/12 bg-cover bg-center bg-no-repeat ${i%2===1?'w-full': ''}`} style={{'border-right':`10px solid var(--${ColorSet[Math.floor(Math.random()*ColorSet.length)][0]})`, "backgroundSize": "120px auto", "height": "300px"}}></div>
-                <div className={`text-black lowercase font-semibold text-4xl py-5 ${i%2===1?'ml-4':''}`}>
-                  {state.data && state.data[categoryIndex].cat.split(" ")[0]}
+        jsonLoaded && <motion.div variants={pageVariants} initial='initial' transition='pageTransitionDelay2' exit='down' animate="in" >
+          <div className="flex w-full">
+            <div className="w-3/5">
+              <div className={`flex flex-col items-end lg:items-center`}>
+                <div className="mr-20 lg:mr-0 mb-20 flex flex-col items-center">
+                  <DelayLink to={{
+                    pathname: "./"+prePageIndex,
+                    state: {
+                      bgColor: [bgColorValue[0][0], bgColorValue[1][0], bgColorValue[2][0], bgColorValue[3][0]],
+                      textColor: [bgColorValue[0][1], bgColorValue[1][1], bgColorValue[2][1], bgColorValue[3][1]]
+                    }}}>
+                    <Arrow rotate="180deg" size={isMobile?'60px': '100px'} color={primaryTextColor} />
+                  </DelayLink>
+                  <span className="block" style={{"color": primaryTextColor}}>{state.data.length!==0 && state.data[categoryIndex > 1 ? categoryIndex-1: state.data.length-1].cat}</span>
                 </div>
-              <div className="clear-both"></div>
+              </div>
             </div>
-            <div className="lg:w-full w-11/12 pl-10">
-              <div className="text-2xl border-b mb-10">0{i+1}. {item.title}</div>
-              <Highlight innerHTML={true}>{item.answer}</Highlight>
-              <Highlight language="javascript">
-                {item.example}
-              </Highlight>
-              <Highlight language="">
-                {item.error}
-              </Highlight>
+            <div className="w-2/5">
+              <div className={`flex flex-col items-start lg:items-center`}>
+                <div className="ml-20 lg:ml-0 mb-20 flex flex-col items-center">
+                  <DelayLink to={{
+                    pathname: "./"+nextPageIndex,
+                    state: {
+                      bgColor: [bgColorValue[0][0], bgColorValue[1][0], bgColorValue[2][0], bgColorValue[3][0]],
+                      textColor: [bgColorValue[0][1], bgColorValue[1][1], bgColorValue[2][1], bgColorValue[3][1]]
+                    }}}>
+                    <Arrow size={isMobile?'60px': '100px'} color={secondaryTextColor} />
+                  </DelayLink>
+                  <span className={`block w-full text-center`} style={{"color": secondaryTextColor}} >{state.data.length!==0 && state.data[categoryIndex < 3 ? categoryIndex+1: 0].cat}</span>
+                </div>
+              </div>
             </div>
           </div>
-
-            <div className={`flex flex-row mt-10 ${i%2===1?'float-right': ''}`}>
-              {
-                /*set.map((s,index) => (
-                  <div style={{'width': '20px'}} className="mx-1" dangerouslySetInnerHTML={ {__html: s} }></div>
-                ))*/
-              }
-
-            </div>
-
         </motion.div>
-        ))
-      }
-      {
-        jsonLoaded && <div className="flex flex-row gap-40">
-          <div className={`flex flex-col items-center ${categoryIndex === 0 ?' hidden':''}`}>
-            <DelayLink to={{
-              pathname: "./"+prePageIndex,
-              state: {
-                bgColor: [bgColorValue[0][0], bgColorValue[1][0], bgColorValue[2][0], bgColorValue[3][0]],
-                textColor: [bgColorValue[0][1], bgColorValue[1][1], bgColorValue[2][1], bgColorValue[3][1]]
-              }}}>
-              <Arrow rotate="180deg" size="300px" color={secondaryTextColor} />
-            </DelayLink>
-            <span style={{"color": secondaryTextColor}}>{state.data[categoryIndex > 1 ? categoryIndex-1: categoryIndex].cat}</span>
-          </div>
-          <div className={`flex flex-col items-center ${categoryIndex === (steps-1)?' hidden':''}`}>
-            <DelayLink to={{
-              pathname: "./"+nextPageIndex,
-              state: {
-                bgColor: [bgColorValue[0][0], bgColorValue[1][0], bgColorValue[2][0], bgColorValue[3][0]],
-                textColor: [bgColorValue[0][1], bgColorValue[1][1], bgColorValue[2][1], bgColorValue[3][1]]
-              }}}>
-              <Arrow size="300px" color={secondaryTextColor} />
-            </DelayLink>
-            <span style={{"color": secondaryTextColor}} className={`text-sm`}>{state.data[categoryIndex < 3 ? categoryIndex+1: categoryIndex].cat}</span>
-          </div>
-        </div>
       }
 
+      <motion.div className="w-full" variants={pageVariants} transition={pageTransitionEaseIn} exit='down'>
+        {
+          footer && <Footer bgColor={fourthColor} textColor={fourthTextColor} bgColorValue={bgColorValue} />
+        }
+      </motion.div>
     </div>
-
-    <motion.div variants={pageVariants} transition={pageTransitionShort} exit='down'>
-      {
-        footer && <Footer bgColor={fourthColor} textColor={fourthTextColor} bgColorValue={bgColorValue} />
-      }
-    </motion.div>
     <GoToTop />
   </div>
   );

@@ -1,12 +1,11 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState } from 'react'
 import { useSpring, useSprings, animated, interpolate } from 'react-spring';
-import { BasicColorSet } from '../ColorSet';
 import getRandomFromInterval from "../../getRandomFromInterval";
-import getRandomDifferent from "../../getRandomDifferent";
 import useSound from 'use-sound';
 import springSfx from '../spring.mp3';
+import { BasicColorSet } from '../ColorSet';
 
-export default function Moon(props) {
+export default function Moon2(props) {
   const styles = {
     width: "100px",
     height: "100px",
@@ -14,12 +13,12 @@ export default function Moon(props) {
     left: "15%",
     zIndex: 9
   }
+  const [open, setOpen] = useState(false)
+  const { f, r } = useSpring({ f: open ? 0 : 1, r: open ? -3 : 3 });
   const bgColor = props.bgColor;
   const colorSet = BasicColorSet.filter((item) => {
     return item !== bgColor
   })
-  const [open, setOpen] = useState(false)
-  const { f, r } = useSpring({ f: open ? 0 : 1, r: open ? -3 : 3 })
   const randomValue = getRandomFromInterval(-200, 200);
   const cards = useSprings(
     5,
@@ -27,7 +26,6 @@ export default function Moon(props) {
   )
 
   const [playSpring, { stop }] = useSound(springSfx);
-
 
   function handleMouseOver() {
     setOpen(true);
@@ -37,7 +35,6 @@ export default function Moon(props) {
     setOpen(false);
     stop();
   }
-
   return (
     <div className="absolute flex items-center justify-center" style={styles} onMouseEnter={() => handleMouseOver()} onMouseLeave={() => handleMouseLeave()}>
       {cards.map(({ x, y, z, opacity, background }, index) => (
@@ -50,14 +47,13 @@ export default function Moon(props) {
               (x, y, z, f, r) => `translate3d(${x}px,${y}px,${z}px) rotateX(${f * r}deg)`
             )
           }}>
-          <svg style={{"width": "100px"}} className={`absolute`} viewBox="0 0 42 39">
-            <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-              <g transform="translate(-553.000000, -175.000000)" fill={`var(--${colorSet[index]})`}>
-                <path
-                  d="M592.066,191.098 C589.641,193.151 586.013,192.849 583.961,190.425 C580.099,185.864 573.247,185.295 568.686,189.157 C564.126,193.018 563.556,199.87 567.419,204.431 C569.47,206.856 569.17,210.484 566.745,212.536 C564.321,214.589 560.693,214.288 558.64,211.863 C550.68,202.462 551.853,188.339 561.254,180.379 C570.655,172.419 584.779,173.592 592.739,182.993 C594.792,185.417 594.49,189.046 592.066,191.098"
-                  id="Fill-247"></path>
+          <svg width="96px" height="96px" viewBox="0 0 96 96" className="absolute">
+              <title>Combined Shape</title>
+              <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+                  <g id="23_502" transform="translate(-168.000000, -154.000000)" fill={`var(--${colorSet[index]})`}>
+                      <path d="M216,154 C242.509668,154 264,175.490332 264,202 C264,228.509668 242.509668,250 216,250 C189.490332,250 168,228.509668 168,202 C168,175.490332 189.490332,154 216,154 Z M216,177 C202.192881,177 191,188.192881 191,202 C191,215.807119 202.192881,227 216,227 C229.807119,227 241,215.807119 241,202 C241,188.192881 229.807119,177 216,177 Z" id="Combined-Shape"></path>
+                  </g>
               </g>
-            </g>
           </svg>
           {index === 4 && <animated.div style={{ transform: f.interpolate([0, 1], ['scale(0.7)', 'scale(1)']) }} />}
         </animated.div>

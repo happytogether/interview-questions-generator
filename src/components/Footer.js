@@ -71,7 +71,7 @@ export default function Footer(props) {
         </li>
       </ul>
       <div className="mt-5 -ml-10">
-        /// @Anni Wang 2021 ///
+        // @Anni Wang {new Date().getFullYear()} ++
       </div>
 
     </footer>

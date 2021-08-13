@@ -12,7 +12,7 @@ import HamburgerMenu from '../../components/HamburgerMenu/HamburgerMenu';
 import { DonutSet, IceCreamSet, TwitchSet, DefaultSet, FruitSet, FruitSet2 } from "../../components/Reward/MemphisSets";
 import GoToTop from '../../ultils/GoToTop';
 import TransitionPanels from '../../components/TransitionPanels';
-import { pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageVariants } from '../../ultils/TransitionSet';
+import { pageTransitionEaseOut, pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageVariants } from '../../ultils/TransitionSet';
 import { ColorSet } from '../../components/ColorSet';
 import { isMobile } from "react-device-detect";
 
@@ -58,7 +58,7 @@ function Credit(props) {
   useEffect(()=>{
     getItems('/credit/credit.json')
   },[])
-  const setArray = [DonutSet(), IceCreamSet(), TwitchSet(), DefaultSet(), FruitSet(), FruitSet2()];
+  const setArray = [DefaultSet()];
   const set = useMemo(
     () => GetRandomFromArray(setArray)[0],[]);
 
@@ -71,10 +71,10 @@ function Credit(props) {
     animate="animate"
     initial="initial" id="outer-container" className={`${primaryColor?primaryColor:'yellow'}-primary-color ${secondaryColor?secondaryColor:'blue'}-secondary-color`}>
       <TransitionPanels bgColorValue={bgColorValue}/>
-      <Logo logoTextColor={primaryTextColor} arrowColor={secondaryTextColor} />
+      <Logo goBackHome={true} logoTextColor={primaryTextColor} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
       <HamburgerMenu barColor={secondaryTextColor} panelBgColor={thirdColor} panelTextColor={thirdTextColor} crossColor={thirdTextColor} bgColorValue={bgColorValue} />
       <div id="page-wrap" className={`w-screen min-h-screen bg-primary-secondary py-10`}>
-        <motion.div variants={pageVariants} initial='initial' transition={pageTransitionShort} exit='down' animate="in" className="flex flex-row justify-center items-center ">
+        <motion.div variants={pageVariants} initial='initial' transition={pageTransition} exit='down' animate="in" className="flex flex-row justify-center items-center ">
           <div className="absolute right-40 top-40 sm:hidden">
             <Wave2 size="150px" />
           </div>
@@ -86,7 +86,7 @@ function Credit(props) {
                   <p><span className="block mb-3">Thanks to:</span>There are many open source resources online. Sperical thanks to the following great projects and tutorials I found online.</p>
                   <div className="flex flex-row mt-10 w-9/12 lg:w-full">
                     {
-                      set.map((item, index) =><div className="mx-1" dangerouslySetInnerHTML={ {__html: item} }></div>)
+                      set.map((item, index) =><div key={index} className="mx-1" dangerouslySetInnerHTML={ {__html: item} }></div>)
                     }
                   </div>
                 </div>
@@ -98,7 +98,7 @@ function Credit(props) {
           </div>
         </motion.div>
       </div>
-      <motion.div variants={pageVariants} transition={pageTransitionShort} exit='down'>
+      <motion.div variants={pageVariants} transition={pageTransitionEaseOut} exit='down'>
         {
           footer && <Footer bgColor={fourthColor} textColor={fourthTextColor} bgColorValue={bgColorValue} />
         }

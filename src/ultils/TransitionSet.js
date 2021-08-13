@@ -44,7 +44,16 @@ const pageVariants = {
     y: '100vh'
   }
 };
-
+const pageTransitionEaseOut = {
+  type: "tween",
+  ease: "easeOut",
+  duration: 1.5
+};
+const pageTransitionEaseIn = {
+  type: "tween",
+  ease: "easeIn",
+  duration: 1.5
+};
 const pageTransition = {
   type: "tween",
   ease: "anticipate",
@@ -72,4 +81,4 @@ const pageTransitionShort2 = {
   ease: "anticipate",
   duration: 1.6
 }
-export { pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageTransitionShort2, pageVariants }
+export { pageTransitionEaseOut, pageTransitionEaseIn, pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageTransitionShort2, pageVariants }

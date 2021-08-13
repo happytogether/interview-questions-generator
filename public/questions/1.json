@@ -1,7 +1,7 @@
 [
   {
     "title": "What is next big trend in UX Design?",
-    "answer": "",
+    "answer": "A closure is the combination of a function and the lexical environment within which that function was declared. i.e, It is an inner function that has access to the outer or enclosing function’s variables. The closure has three scope chains. <p class='my-10'>Own scope where variables defined between its curly brackets Outer function’s variables Global variables Let's take an example of closure concept</p>",
     "example": "function Welcome(name){\n var greetingInfo = function(message){ \n  console.log(message+' '+name);\n }\n return greetingInfo;\n}\nvar myFunction = Welcome('John');\nmyFunction('Welcome '); //Output: Welcome John\nmyFunction('Hello Mr.'); //output: Hello Mr.John"
   },
   {
@@ -21,38 +21,5 @@
   {
     "title": "console.log('🙂' === '🙂');",
     "answer": "<p class='my-10'>True, Emojis are unicodes and the unicode for smile symbol is 'U+1F642'. The unicode comparision of same emojies is equivalent to string comparison. Hence, the output is always true.</p>"
-  },
-  {
-    "title": "What is Closure?"
-  },
-  {
-    "title": "What is Closure?"
-  },
-  {
-    "title": "What is Closure?"
-  },
-  {
-    "title": "What is Closure?"
-  },
-  {
-    "title": "What is Closure?"
-  },
-  {
-    "title": "What is Closure?"
-  },
-  {
-    "title": "What is Closure?"
-  },
-  {
-    "title": "What is Closure?"
-  },
-  {
-    "title": "What is Closure?"
-  },
-  {
-    "title": "What is Closure?"
-  },
-  {
-    "title": "What is Closure?"
   }
 ]

@@ -1,3 +1,6 @@
+const BasicColorSet = [
+  'red', 'pink', 'blue', 'green',  'yellow', 'orange', 'purple'
+]
 const ColorSet = [
   ['orange', 'var(--gray-dark)'], ['red', 'white'], ['pink', 'var(--gray-dark)'], ['blue', 'white'], ['green', 'var(--gray-dark)'], ['purple', 'white'], ['yellow', 'var(--gray-dark)']
 ];
@@ -11,7 +14,11 @@ const ColorSetDarkText = [
 ]
 
 const ColorSetNoBlue = [
-    ['orange', 'var(--gray-dark)'], ['red', 'white'], ['pink', 'var(--gray-dark)'], ['green', 'var(--gray-dark)'], ['purple', 'white'], ['yellow', 'var(--gray-dark)']
+  ['orange', 'var(--gray-dark)'], ['red', 'white'], ['pink', 'var(--gray-dark)'], ['blue', 'white'], ['green', 'var(--gray-dark)'], ['purple', 'white'], ['yellow', 'var(--gray-dark)']
 ]
 
-export { ColorSet, ColorSetDarkText, ColorSetWhiteText, ColorSetNoBlue }
+const ColorSet2 = [
+  ['orange', 'var(--gray-dark)'], ['red', 'white'], ['pink', 'var(--gray-dark)'], ['blue', 'white'], ['green', 'var(--gray-dark)'], ['purple', 'white'], ['yellow', 'var(--gray-dark)']
+]
+
+export { BasicColorSet , ColorSet, ColorSetDarkText, ColorSetWhiteText, ColorSetNoBlue, ColorSet2 }

@@ -4,9 +4,8 @@ import Sun from './shapes/Sun';
 import Sun2 from './shapes/Sun2';
 import Sun3 from './shapes/Sun3';
 import Wave from './shapes/Wave';
-import Square from './shapes/Square';
-import StraightWave from './shapes/StraightWave';
 import Rect from './shapes/Rect';
+import Moon2 from './shapes/Moon2';
 import Circle from './shapes/Circle';
 import { useContext, useState, useEffect } from "react";
 import DotRing from "./DotRing/DotRing";
@@ -22,6 +21,7 @@ import DelayLink from '../ultils/DelayLink';
 import { Link } from "react-router-dom";
 import './Item.scss';
 import { content, upMotion, downMotion, upMotionSlow } from './AnimationSet';
+import InviewBar2 from '../components/inview/InviewBar2';
 
 const calc = (x, y) => [x - window.innerWidth / 2, y - window.innerHeight / 2]
 const piePosX = window.innerWidth - 100;
@@ -51,16 +51,15 @@ export default function Items(props) {
   }
   const [clicked, setClicked] = useState(false);
   const [props1, set] = useSpring(() => ({ xy: [0, 0], config: { mass: 10, tension: 550, friction: 140 } }))
+  let createArray =  Array.from(Array(8), () => {
+    return new Array;
+  })
 
   return (
     <motion.ul onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })}>
       {
         props.items && props.items.length>0 && props.items.map((item, index)=><li key={index} value={props.value}  className={`item relative flex flex-row items-center justify-center lg:h-auto lg:flex-col lg:flex-col-reverse ${flexDirection[index%2]}`}>
-
           <div className={`h-full bg-${bgColorValue[index+1][0]} flex items-center justify-center lg:w-full lg:py-20`}>
-            <div className="lg:hidden">
-              <Rect color={rectPalette[index%4]} index={index}/>
-            </div>
             <motion.div variants={upMotion}>
               <animated.div style={{ transform: props1.xy.interpolate(trans5) }}>
                 <div className={`default-window flex items-center justify-center sm:transform-gpu sm:scale-80 ${randomBgArr[Math.floor(Math.random()*11)]} ${categoryMainShape[index%4]}`}>
@@ -68,33 +67,50 @@ export default function Items(props) {
                 </div>
               </animated.div>
             </motion.div>
-            <motion.div variants={downMotion}>
-              <animated.div className="lg:hidden" style={{ transform: props1.xy.interpolate(trans3) }}>
-                <Sun3 clicked={clicked} />
-              </animated.div>
-              <motion.div variants={downMotion}>
-                <animated.div className="lg:hidden" style={{ transform: props1.xy.interpolate(trans5) }}>
-                  <Moon />
+            {
+              index %2 !==1 ? <motion.div variants={downMotion}>
+                <animated.div className="lg:hidden" style={{ transform: props1.xy.interpolate(trans3) }}>
+                  <Sun3 clicked={clicked} />
                 </animated.div>
-              </motion.div>
-            </motion.div>
+                <motion.div variants={downMotion}>
+                  <animated.div className="lg:hidden" style={{ transform: props1.xy.interpolate(trans5) }}>
+                    <Moon bgColor={bgColorValue[index+1][0]} />
+                  </animated.div>
+                </motion.div>
+              </motion.div> : null
+            }
+
           </div>
-          <div className="flex justify-center items-center h-full lg:w-full lg:py-20" style={{"backgroundColor": "var(--gray-light)"}}>
-          <motion.div variants={upMotion}>
-            <figcaption className={`md:py-14 mx-28 ${textAlign[index%2]}`} style={{maxWidth: "250px"}}>
-              <h3 className="text-5xl">{item.cat}</h3>
-              <div className="my-3">{item.catFigcaption}</div>
-              <button onClick={() => { setClicked(!clicked); cursorChangeHandler( clicked + "-clicked")}} className="text-left border rounded-sm py-3 px-6">
-                <DelayLink to={{
-                  pathname: `/gallery/${index}`,
-                  state: {
-                    bgColor: [bgColorValue[0][0], bgColorValue[1][0], bgColorValue[2][0], bgColorValue[3][0], bgColorValue[4][0], bgColorValue[5][0]],
-                    textColor: [bgColorValue[0][1], bgColorValue[1][1], bgColorValue[2][1], bgColorValue[3][1], bgColorValue[4][1], bgColorValue[5][1]],
-                  }
-                }}>Questions Gallery</DelayLink>
-              </button>
-            </figcaption>
-          </motion.div>
+          <div className="relative overflow-hidden flex justify-center items-center h-full lg:w-full lg:py-20" style={{"backgroundColor": "var(--gray-light)"}}>
+            <div className={`flex flex-col justify-center absolute right-0 top-0 h-full`} style={{width: "25px", zIndex: 0}}>
+                {
+
+                  createArray.map((item, i) => (
+                      <InviewBar2 key={i} index={i} noShowColor={bgColorValue[index+1][0]} />
+                  ))
+
+                }
+            </div>
+            <motion.div variants={upMotion} className="z-10">
+              <figcaption className={`md:py-14 mx-28 ${textAlign[index%2]}`} style={{maxWidth: "250px"}}>
+                <h3 className="text-5xl">{item.cat}</h3>
+                <div className="my-3">{item.catFigcaption}</div>
+                <button onClick={() => { setClicked(!clicked); cursorChangeHandler( clicked + "-clicked")}} className="delay-link-btn text-left border rounded-sm">
+                  <DelayLink to={{
+                    pathname: `/gallery/${index}`,
+                    state: {
+                      bgColor: [bgColorValue[0][0], bgColorValue[1][0], bgColorValue[2][0], bgColorValue[3][0], bgColorValue[4][0], bgColorValue[5][0]],
+                      textColor: [bgColorValue[0][1], bgColorValue[1][1], bgColorValue[2][1], bgColorValue[3][1], bgColorValue[4][1], bgColorValue[5][1]],
+                    }
+                  }}>Questions Gallery</DelayLink>
+                </button>
+              </figcaption>
+              {
+                index%2 === 1 ? <div className="lg:hidden absolute left-2/3 bottom-1/4">
+                  <Rect color={rectPalette[index%4]} index={index} />
+                </div>: null
+              }
+            </motion.div>
           </div>
         </li>)
       }

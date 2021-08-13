@@ -25,7 +25,7 @@ import { DefaultSet } from "../../components/Reward/MemphisSets";
 import { motion } from "framer-motion";
 import { content, upMotion} from '../../components/AnimationSet';
 import GoToTop from '../../ultils/GoToTop';
-import { pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageVariants } from '../../ultils/TransitionSet';
+import { pageTransitionEaseOut, pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageVariants } from '../../ultils/TransitionSet';
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
 import TransitionPanels from '../../components/TransitionPanels';
 import { isMobile } from "react-device-detect";
@@ -153,17 +153,17 @@ return (
     animate="animate"
     initial="initial" id="outer-container" className={`${primaryColor}-primary-color ${secondaryColor}-secondary-color`}>
       <TransitionPanels bgColorValue={bgColorValue}/>
-      <Logo logoTextColor={primaryTextColor} arrowColor={secondaryTextColor} />
+      <Logo goBackHome={true} logoTextColor={primaryTextColor} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
       <HamburgerMenu barColor={secondaryTextColor} panelBgColor={thirdColor} panelTextColor={thirdTextColor} crossColor={thirdTextColor} bgColorValue={bgColorValue} />
       <div id="page-wrap" className={`w-screen min-h-screen bg-primary-secondary flex justify-center items-center py-10`}>
-        <motion.div variants={pageVariants} initial='initial' transition={pageTransitionShort} exit='down' animate="in" className="2xl:w-8/12 xl:w-9/12 lg:w-11/12 lg:mt-20 lg:p-10 w-6/12 h-5/6 bg-white p-20 sm:p-5 default-window mt-20">
+        <motion.div variants={pageVariants} initial='initial' transition={pageTransitionShort} exit='down' animate="in" className="xl:w-9/12 lg:w-11/12 lg:mt-20 lg:p-10 w-7/12 h-5/6 bg-white p-20 sm:p-5 default-window mt-20">
           <div className="flex flex-row w-full h-full lg:flex-col">
             <div className="lg:w-full w-6/12 h-full">
               <div className={`w-9/12 lg:w-full bg-cover bg-center bg-no-repeat bg-${secondaryColor}`} style={{"backgroundImage": `url("/img/interview.svg")`, "backgroundSize": "150px auto", "height": "300px"}}></div>
               <div className="text-black lowercase font-semibold text-4xl my-10">start to<br />interview <br />Anni</div>
-              <div class="float-left w-9/12 flex flex-row">
+              <div className="float-left w-9/12 flex flex-row">
                 {
-                  DefaultSet().map((item, index) =><div className="mx-1" dangerouslySetInnerHTML={ {__html: item} }></div>)
+                  DefaultSet().map((item, index) =><div key={index} className="mx-1" dangerouslySetInnerHTML={ {__html: item} }></div>)
                 }
               </div>
               <div className="clear-both"></div>
@@ -171,17 +171,19 @@ return (
             <div className="lg:w-full w-7/12">
               <ul>
                 <li className="border-3 py-6"><p className="block my-3">Pick your interview prefernces, you can ask min 4 questions or max 36 questions here. Drag the slider or click on the chips.</p></li>
-                <li className="flex flex-row flex-wrap gap-2 w-full relative mb-10">
-                  {
-                    chips.map((chip, i) => {
-                      const isToggled = i === toggledChipId;
-                      return (
-                        <li key={chip.id} onClick={()=> {handleChipsValue(chip.default_questions); toggleChip(i)}} className={`text-xs`}>
-                          <div className={`p-2 mb-3 border ${isToggled ? "selected" : ""}`} style={{"color": `${isToggled ? '#fff': 'var(--blue)'}`, "backgroundColor": `${isToggled ? 'var(--purple)': ''}`}}>{chip.text}</div>
-                        </li>
-                      )
-                    })
-                  }
+                <li className="w-full relative mb-10">
+                  <ul className="flex flex-row flex-wrap gap-2 ">
+                    {
+                      chips.map((chip, i) => {
+                        const isToggled = i === toggledChipId;
+                        return (
+                          <li key={chip.id} onClick={()=> {handleChipsValue(chip.default_questions); toggleChip(i)}} className={`text-xs`}>
+                            <button className={`p-2 mb-3 border ${isToggled ? "selected" : ""}`} style={{"color": `${isToggled ? '#fff': 'var(--blue)'}`, "backgroundColor": `${isToggled ? 'var(--purple)': ''}`}}>{chip.text}</button>
+                          </li>
+                        )
+                      })
+                    }
+                  </ul>
                 </li>
                 <li>
                   <ul className="flex flex-col text-blue">
@@ -205,18 +207,17 @@ return (
                   </ul>
                 </li>
               </ul>
-
             </div>
           </div>
           <div className="flex justify-center mt-10 bg-white">
-            <button onClick={handleDispatchInterviewQuestions} className="border p-3 rounded-sm">
+            <button onClick={handleDispatchInterviewQuestions} className="border rounded-sm">
               <DelayLink to={{
                 pathname: "/interview/0",
                 state: {
                   bgColor: [bgColorValue[0][0], bgColorValue[1][0], bgColorValue[2][0], bgColorValue[3][0]],
                   textColor: [bgColorValue[0][1], bgColorValue[1][1], bgColorValue[2][1], bgColorValue[3][1]]
                 }}}>
-                <div className="flex flex-row justify-center items-center lg:text-sm">
+                <div className="p-3 flex flex-row justify-center items-center lg:text-sm">
                   <span>Generate Interview Questions</span>
                 </div>
               </DelayLink>
@@ -225,7 +226,7 @@ return (
         </motion.div>
       </div>
 
-      <motion.div variants={pageVariants} transition={pageTransitionShort} exit='down'>
+      <motion.div variants={pageVariants} transition={pageTransitionEaseOut} exit='down'>
         {
           footer && <Footer bgColor={fourthColor} textColor={fourthTextColor} bgColorValue={bgColorValue} />
         }

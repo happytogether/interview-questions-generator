@@ -88,11 +88,7 @@ const lottieContainerStyles = { position: 'relative' }
 
 Reward.propTypes = {
   type: PropTypes.string.isRequired,
-  config: PropTypes.object,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]).isRequired
+  config: PropTypes.object
 }
 
 Reward.defaultProps = {

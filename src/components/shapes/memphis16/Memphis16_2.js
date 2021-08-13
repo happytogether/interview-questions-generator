@@ -11,7 +11,7 @@ export default function Memphis16_1(props) {
     <div className="z-10" style={styles}>
       <svg viewBox="0 0 877 1094" version="1.1" xmlns="http://www.w3.org/2000/svg">
           <title>Group</title>
-          <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
               <g id="memphis-16" transform="translate(-1123.000000, -56.000000)">
                   <g id="Group" transform="translate(1123.568296, 56.603367)">
                       <polyline id="Fill-6" fill="#B899CF" points="858.291704 569.783633 498.321704 998.756633 69.3517038 638.780633 429.321704 209.808633 858.291704 569.783633"></polyline>

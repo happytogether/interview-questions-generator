@@ -47,7 +47,7 @@ export default function MainLeft() {
           <div className="text-left">
             <div className="flex mt-2 space-x-4">
               <div className="border rounded-sm py-3 px-6 mt-3">
-                <DelayLink to="./interviewStart" delay="1000">Start Interview Process</DelayLink>
+                <DelayLink to="./interviewStart">Start Interview Process</DelayLink>
               </div>
             </div>
           </div>

@@ -55,7 +55,7 @@ module.exports = {
       },
       pink: {
         light: '#ff7ce5',
-        DEFAULT: '#eaafd0',
+        DEFAULT: 'var(--pink)',
         dark: '#ff16d1',
       },
       gray: {

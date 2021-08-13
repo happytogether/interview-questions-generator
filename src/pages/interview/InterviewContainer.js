@@ -106,7 +106,7 @@ const pageTransition = {
       <motion.div variants={content}
       animate="animate"
       initial="initial" id="outer-container" className={`${primaryColor?primaryColor:'yellow'}-primary-color ${secondaryColor?secondaryColor:'blue'}-secondary-color`}>
-      <Logo logoTextColor={primaryTextColor} arrowColor={secondaryTextColor} />
+      <Logo logoTextColor={primaryTextColor} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
       <HamburgerMenu barColor={secondaryTextColor} panelBgColor={thirdColor} panelTextColor={thirdTextColor} crossColor={thirdTextColor} bgColorValue={bgColorValue} />
         <div id="page-wrap" onClick={()=>handleRandomBg()} className={`static2 bg-primary-secondary`}>
           {

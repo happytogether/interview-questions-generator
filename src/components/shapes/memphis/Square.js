@@ -8,7 +8,7 @@ export default function Square(props) {
   return (
     <div style={styles}>
       <svg viewBox="0 0 38 37">
-          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
               <g transform="translate(-170.000000, -184.000000)" fill="#1343E6">
                   <g transform="translate(170.492000, 184.006000)">
                       <g>
