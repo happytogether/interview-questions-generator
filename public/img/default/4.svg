@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="32px" height="31px" viewBox="0 0 32 31" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>Fill 80</title>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="810" transform="translate(-268.000000, -476.000000)" fill="#EAAFD0">
-            <path d="M273.167,506.09 L298.53,480.727 C299.507,479.751 299.507,478.168 298.53,477.192 C297.554,476.215 295.971,476.215 294.995,477.192 L269.632,502.555 C268.655,503.531 268.655,505.114 269.632,506.09 C270.608,507.067 272.191,507.067 273.167,506.09" id="Fill-80"></path>
+<svg width="32px" height="31px" viewBox="0 0 32 31">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-268.000000, -476.000000)" fill="#EAAFD0">
+            <path d="M273.167,506.09 L298.53,480.727 C299.507,479.751 299.507,478.168 298.53,477.192 C297.554,476.215 295.971,476.215 294.995,477.192 L269.632,502.555 C268.655,503.531 268.655,505.114 269.632,506.09 C270.608,507.067 272.191,507.067 273.167,506.09"></path>
         </g>
     </g>
 </svg>

@@ -3,7 +3,7 @@ import Rain from '../../components/Rain';
 import '../../components/Rain/style.css';
 import {GradeFSet} from '../../components/confettiSet/GradeFSet';
 import Reward from '../../components/Reward/Reward';
-import { HeartBrokenSet, ThunderSet } from "../../components/Reward/MemphisSets";
+import { HeartBrokenSet } from "../../components/Reward/MemphisSets";
 import { useParams } from 'react-router-dom';
 import { PageTransitionColorsStore } from '../../Store';
 
@@ -24,7 +24,6 @@ export default function GradeF(props) {
   useEffect(() => {
     setImgSrc(GradeFSet()[0]);
   }, [index])
-  const randomIndex = Math.random() > .5 ? 0: 1;
   return (
     <div style={{"color": primaryTextColor}} className="flex items-center justify-center flex-col w-screen">
       <Rain numDrops="25" />
@@ -43,7 +42,7 @@ export default function GradeF(props) {
       <div className="relative flex justify-center">
         <img className="my-6 sm:w-8/12" width="200px" src={imgSrc} />
         <div class="absolute left-1/2 top-0">
-          <Reward ref={canvasInputF} type='emoji' config = {{"emoji": randomIndex ?HeartBrokenSet():ThunderSet(), "elementCount": randomIndex?10:5, "elementSize": randomIndex?100: 50, "spread": 150}}></Reward>
+          <Reward ref={canvasInputF} type='emoji' config = {{"emoji": HeartBrokenSet(), "elementCount": 10, "elementSize": 100, "spread": 150}}></Reward>
         </div>
       </div>
     </div>

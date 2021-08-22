@@ -5,13 +5,14 @@ import Logo from '../../components/Logo';
 import HamburgerMenu from '../../components/HamburgerMenu/HamburgerMenu';
 import { motion } from "framer-motion";
 import TransitionPanels from '../../components/TransitionPanels';
-import { pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageTransitionShort2, pageVariants } from '../../ultils/TransitionSet';
+import { pageTransitionEaseOut, pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageVariants } from '../../ultils/TransitionSet';
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
 import { ColorSet2 } from '../../components/ColorSet';
-import InviewBar from '../../components/inview/InviewBar';
 import { HomeStore } from "../../Store";
 import { fetchHomepageJsonAction } from "../../Actions";
 import DelayLink from '../../ultils/DelayLink';
+import List from './List';
+import Marquee from '../../components/Marquee';
 
 function GalleryList(props) {
 
@@ -23,64 +24,61 @@ function GalleryList(props) {
   const thirdTextColor = props.location.state ? props.location.state.textColor[2]: 'var(--gray-dark)';
   const fourthColor = props.location.state ? props.location.state.bgColor[3]: 'pink';
   const fourthTextColor = props.location.state ? props.location.state.textColor[3]: 'var(--gray-dark)';
+  const fifthColor = props.location.state ? props.location.state.bgColor[4]: 'orange';
+  const fifthTextColor = props.location.state ? props.location.state.textColor[4]: 'var(--gray-dark)';
   const { state, homeDispatch } = useContext(HomeStore);
+  const [footer, setFooter] = useState(false);
 
   useEffect(() => {
     state.data.length === 0 && fetchHomepageJsonAction(homeDispatch);
+    setFooter(true);
   },[state.data]);
 
-  const bgColorValue = useMemo(
-    () => GetRandomFromArray(ColorSet2),
-    []
-  );
+  const bgColorValue = useMemo(() => GetRandomFromArray(ColorSet2),[]);
 
   return (
     <div id="outer-container" className={`gallery ${primaryColor?primaryColor:'yellow'}-primary-color ${secondaryColor?secondaryColor:'blue'}-secondary-color`}>
       <TransitionPanels bgColorValue={bgColorValue}/>
-      <Logo goBackHome={true} logoTextColor={primaryTextColor} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
+      <Logo goBackHome={true} noShowColor={primaryColor} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
       <HamburgerMenu barColor={secondaryTextColor} panelBgColor={thirdColor} panelTextColor={thirdTextColor} crossColor={thirdTextColor} bgColorValue={bgColorValue} />
       <div id="page-wrap" className={`w-screen min-h-screen report bg-primary-secondary pt-20`}>
-        <div className="min-h-screen flex flex-row flex-wrap justify-center gap-40 items-start pb-40 mt-40 lg:mt-10">
-          {
-            state.data.map((item, i) => (
-              <motion.div key={i} variants={pageVariants} initial='initialAlpha1' transition={i%2 === 1 ?pageTransitionShort: pageTransitionShort2} exit='down' animate="in" className={`${i%2 === 1 ? 'mt-40 lg:mt-0': null} xl:w-8/12 lg:w-11/12 p-20 lg:p-10 w-4/12 h-5/6 bg-white default-window`}>
-                <div className={`flex ${i%2===0 ? 'flex-row': 'flex-row-reverse'} gap-10 w-full h-full lg:flex-col`}>
-                  <div className={`lg:w-screen w-1/12 h-full relative`}>
-                    {
-                      [0,1,2,3,4].map((item, index)=>(
-                        <InviewBar key={index} index={index} />
-                      ))
-                    }
-                    <div className={`text-black lowercase font-semibold text-4xl py-5 ${i%2===1?'ml-4':''}`}>
-                      {state.data && state.data[i].cat.split(" ")[0]}
-                    </div>
-                  <div className="clear-both"></div>
+        <div className="min-h-screen flex flex-row flex-wrap justify-center gap-24 lg:gap-10 items-start pb-40 mt-40 lg:mt-10">
+          <div className="w-4/12 lg:w-5/12 md:w-10/12 -mt-40">
+            {
+              state.data.map((item, i) => (
+                <div className="mt-40">
+                  {
+                    i%2!==1 && <List i={i} item={item} categoryTitle={item.cat.split(" ")[0]} bgColorValue={bgColorValue} />
+                  }
                 </div>
-                <div className="lg:w-full w-11/12 pl-10">
-                  <div className="text-xl pb-4 mb-10">
-                    {item.catFigcaption}
-                  </div>
-                  <button className="text-left border rounded-sm py-3 px-6">
-                    <DelayLink to={{
-                      pathname: `/gallery/${i}`,
-                      state: {
-                        bgColor: [bgColorValue[0][0], bgColorValue[1][0], bgColorValue[2][0], bgColorValue[3][0], bgColorValue[4][0], bgColorValue[5][0]],
-                        textColor: [bgColorValue[0][1], bgColorValue[1][1], bgColorValue[2][1], bgColorValue[3][1], bgColorValue[4][1], bgColorValue[5][1]],
-                      }
-                    }}>Questions Gallery</DelayLink>
-                  </button>
+              ))
+            }
+
+          </div>
+
+          <div className="w-3/12 lg:w-5/12 md:w-10/12">
+            {
+              state.data.map((item, i) => (
+                <div className="mt-40">
+                  {
+                    i%2!==0 && <List i={i} item={item} categoryTitle={item.cat.split(" ")[0]} bgColorValue={bgColorValue} />
+                  }
                 </div>
-              </div>
-            </motion.div>
-            ))
-          }
+              ))
+            }
+          </div>
         </div>
-        <motion.div className="w-full" variants={pageVariants} transition={pageTransitionShort} exit='down'>
-          {
-            <Footer bgColor={fourthColor} textColor={fourthTextColor} bgColorValue={bgColorValue} />
-          }
-        </motion.div>
       </div>
+      <motion.div variants={pageVariants} transition={pageTransitionEaseOut} exit='down'>
+        {
+          footer && <Marquee bgColor={fifthColor} />
+        }
+      </motion.div>
+      <motion.div variants={pageVariants} transition={pageTransitionEaseOut} exit='down'>
+        {
+          footer && <Footer bgColor={fourthColor} textColor={fourthTextColor} bgColorValue={bgColorValue} />
+        }
+      </motion.div>
       <GoToTop />
     </div>
   )

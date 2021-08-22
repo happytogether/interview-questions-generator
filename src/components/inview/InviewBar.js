@@ -1,6 +1,6 @@
 import { useMemo, useEffect } from "react";
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
-import { ColorSet } from '../../components/ColorSet';
+import { LightColorSet } from '../../components/ColorSet';
 import { useInView } from 'react-intersection-observer';
 import { motion, useAnimation } from "framer-motion";
 
@@ -8,7 +8,6 @@ export default function InviewBar (props) {
   const controls = useAnimation();
   const { ref, inView } = useInView();
   const index = props.index;
-
   useEffect(() => {
     if(inView) {
       controls.start('visible');
@@ -24,7 +23,7 @@ export default function InviewBar (props) {
       y: 0
     },
     visible: {
-      scaleY: 51,
+      scaleY: 50,
       y: index*50,
       transition: {
         duration: .3,
@@ -33,10 +32,12 @@ export default function InviewBar (props) {
     }
   }
   const bgColorValue = useMemo(
-    () => GetRandomFromArray(ColorSet),
+    () => GetRandomFromArray(LightColorSet),
     []
   );
   return (
-    <motion.div ref={ref} initial="hidden" animate={controls} variants={boxVariants} className={`relative w-1/12 bg-cover bg-center bg-no-repeat`} style={{'borderRight':`10px solid var(--${ColorSet[Math.floor(Math.random()*ColorSet.length)][0]})`, "backgroundSize": "120px auto", "height": "1px", "transformOrigin": "top center"}}></motion.div>
+    <motion.div ref={ref} initial="hidden" animate={controls} variants={boxVariants} style={{'borderRight':`10px solid var(--${LightColorSet[Math.floor(Math.random()*LightColorSet.length)%LightColorSet.length]})`, "backgroundSize": "120px auto", "height": "1px", "transformOrigin": "top left"}}>
+      {props.children}
+    </motion.div>
   )
 }

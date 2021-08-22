@@ -33,6 +33,8 @@ import { ColorSet, ColorSetWhiteText, ColorSetDarkText } from '../../components/
 import './NewInterview.scss';
 import { pageTransitionColorsAction } from "../../Actions";
 import { PageTransitionColorsStore } from '../../Store';
+import SegmentsAnimation from '../../components/SegmentsAnimation';
+import Marquee from '../../components/Marquee';
 
 function NewInterview(props) {
   const primaryColor = props.location.state ? props.location.state.bgColor[0]: 'blue';
@@ -43,6 +45,8 @@ function NewInterview(props) {
   const thirdTextColor = props.location.state ? props.location.state.textColor[2]: 'white';
   const fourthColor = props.location.state ? props.location.state.bgColor[3]: 'green';
   const fourthTextColor = props.location.state ? props.location.state.textColor[3]: 'var(--gray-dark)';
+  const fifthColor = props.location.state ? props.location.state.bgColor[4]: 'orange';
+  const fifthTextColor = props.location.state ? props.location.state.textColor[4]: 'var(--gray-dark)';
 
   const defaultValueArray = initialInterviewCategoryQuestionsCount();
   const defaultQuestionsSum = defaultValueArray.reduce((a, b) => a + b, 0);
@@ -153,18 +157,30 @@ return (
     animate="animate"
     initial="initial" id="outer-container" className={`${primaryColor}-primary-color ${secondaryColor}-secondary-color`}>
       <TransitionPanels bgColorValue={bgColorValue}/>
-      <Logo goBackHome={true} logoTextColor={primaryTextColor} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
+      <Logo goBackHome={true} noShowColor={primaryColor} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
       <HamburgerMenu barColor={secondaryTextColor} panelBgColor={thirdColor} panelTextColor={thirdTextColor} crossColor={thirdTextColor} bgColorValue={bgColorValue} />
-      <div id="page-wrap" className={`w-screen min-h-screen bg-primary-secondary flex justify-center items-center py-10`}>
-        <motion.div variants={pageVariants} initial='initial' transition={pageTransitionShort} exit='down' animate="in" className="xl:w-9/12 lg:w-11/12 lg:mt-20 lg:p-10 w-7/12 h-5/6 bg-white p-20 sm:p-5 default-window mt-20">
+      <div id="page-wrap" className={`w-screen min-h-screen bg-primary-secondary flex justify-center items-center py-10 pb-20`}>
+        <motion.div variants={pageVariants} initial='initial' transition={pageTransitionShort} exit='down' animate="in" className="xl:w-9/12 lg:w-11/12 lg:mt-20 lg:p-10 w-6/12 h-5/6 bg-white p-20 sm:p-5 default-window mt-20">
           <div className="flex flex-row w-full h-full lg:flex-col">
             <div className="lg:w-full w-6/12 h-full">
+              <motion.div variants={pageVariants} initial='initial' transition={pageTransition2} exit='down' animate="in" className="absolute -right-40 lg:right-10 top-20">
+                <Sun noShowColor={secondaryColor} />
+              </motion.div>
               <div className={`w-9/12 lg:w-full bg-cover bg-center bg-no-repeat bg-${secondaryColor}`} style={{"backgroundImage": `url("/img/interview.svg")`, "backgroundSize": "150px auto", "height": "300px"}}></div>
-              <div className="text-black lowercase font-semibold text-4xl my-10">start to<br />interview <br />Anni</div>
+              <div className="text-black lowercase font-semibold text-4xl my-10">
+                <SegmentsAnimation segment={5} type="img" x={-5} y={0} zIntervalFrom={-20} zIntervalTo={200} delay={50}>start</SegmentsAnimation>&nbsp;
+                <SegmentsAnimation segment={2} type="img" x={-5} y={0} zIntervalFrom={-20} zIntervalTo={200} delay={50}>to</SegmentsAnimation>
+                <br />
+                <SegmentsAnimation segment={9} type="img" x={-5} y={0} zIntervalFrom={-20} zIntervalTo={200} delay={50}>interview</SegmentsAnimation>
+                 <br />
+                <SegmentsAnimation segment={4} type="img" x={-5} y={0} zIntervalFrom={-20} zIntervalTo={200} delay={50}>Anni</SegmentsAnimation>
+              </div>
               <div className="float-left w-9/12 flex flex-row">
-                {
-                  DefaultSet().map((item, index) =><div key={index} className="mx-1" dangerouslySetInnerHTML={ {__html: item} }></div>)
-                }
+                <SegmentsAnimation segment={DefaultSet().length} type="img" x={-5} y={0} zIntervalFrom={-20} zIntervalTo={200} delay={50}>
+                  {
+                    DefaultSet().map((item, index) =><div key={index} className="mx-1" dangerouslySetInnerHTML={ {__html: item} }></div>)
+                  }
+                </SegmentsAnimation>
               </div>
               <div className="clear-both"></div>
             </div>
@@ -225,7 +241,11 @@ return (
           </div>
         </motion.div>
       </div>
-
+      <motion.div variants={pageVariants} transition={pageTransitionEaseOut} exit='down'>
+        {
+          footer && <Marquee bgColor={fifthColor} />
+        }
+      </motion.div>
       <motion.div variants={pageVariants} transition={pageTransitionEaseOut} exit='down'>
         {
           footer && <Footer bgColor={fourthColor} textColor={fourthTextColor} bgColorValue={bgColorValue} />

@@ -1,7 +1,6 @@
 import { useContext, useRef, useEffect } from "react";
 import Reward from '../Reward/Reward.js';
-import { FruitSet2 } from "../Reward/MemphisSets";
-import handleViewport from 'react-in-viewport';
+import { FruitSet } from '../Reward/MemphisSets';
 import useSound from 'use-sound';
 import fruitnanjiSfx from '../fruitnanji.mp3';
 
@@ -56,7 +55,6 @@ export default function Sun3(props) {
     );
   };
   const randomSize = [1, 5, 2, 10];
-  const ViewportBlock = handleViewport(Block, /** options: {}, config: {} **/);
 
   return (
     <div className="hover-rotate" onClick={()=>handleClick()} style={styles}>
@@ -79,7 +77,7 @@ export default function Sun3(props) {
       }
 
 
-      <Reward ref={canvasInput} type='emoji' config = {{"emoji": FruitSet2(), "elementCount": 1, "spread": 50, "decay": 0.91, "elementSize": 80}}></Reward>
+      <Reward ref={canvasInput} type='emoji' config = {{"emoji": FruitSet(), "elementCount": 1, "spread": 50, "decay": 0.91, "elementSize": 80}}></Reward>
     </div>
   )
 }

@@ -28,7 +28,7 @@ export default function Rect(props) {
   }
 
   return (
-    <div className={`item-rect absolute ${randomPos[props.index%2]} ${props.color}`} onMouseEnter={() => handleMouseOver()} onMouseLeave={() => handleMouseLeave()}>
+    <div className={`item-rect absolute`} onMouseEnter={() => handleMouseOver()} onMouseLeave={() => handleMouseLeave()}>
       {cards.map(({ x, y, z, opacity, background }, index) => (
         <animated.div key={index} className="absolute w-full h-full"
           style={{

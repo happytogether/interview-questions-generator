@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo} from 'react'
 import { useSpring, useSprings, animated, interpolate } from 'react-spring';
 import { BasicColorSet } from '../ColorSet';
 import getRandomFromInterval from "../../getRandomFromInterval";

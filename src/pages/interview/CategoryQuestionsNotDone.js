@@ -3,7 +3,7 @@ import { useSpring, useSprings, useTrail, animated, to as interpolate } from 're
 import { useParams } from 'react-router-dom';
 import { useDrag } from 'react-use-gesture';
 import Restart from '../../components/shapes/Restart';
-import { DefaultSet, TwitchSet, MemphisSet1, MemphisSet2 } from "../../components/Reward/MemphisSets";
+import { DefaultSet, MemphisSet1, MemphisSet2 } from "../../components/Reward/MemphisSets";
 import getRandomDifferent from '../../getRandomDifferent';
 import { stepDoneAction, stepsAddAnswersAction } from "../../Actions";
 import { Store, QuestionsStore, StepperStore, UserAnswersStore, PageTransitionColorsStore } from '../../Store';

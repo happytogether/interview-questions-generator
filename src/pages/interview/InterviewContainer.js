@@ -9,7 +9,6 @@ import MouseLeftRight from "../../components/DotRing/MouseLeftRight";
 import HamburgerMenu from '../../components/HamburgerMenu/HamburgerMenu';
 import Logo from '../../components/Logo';
 import useSound from 'use-sound';
-import clickSfx from '../../components/click.mp3';
 import { motion } from "framer-motion"
 import { QuestionsStore, QuestionsNumStore, UserAnswersStore, PageTransitionColorsStore } from '../../Store';
 import { fetchInterviewCategoryQuestionsJsonAction } from '../../Actions';
@@ -106,7 +105,7 @@ const pageTransition = {
       <motion.div variants={content}
       animate="animate"
       initial="initial" id="outer-container" className={`${primaryColor?primaryColor:'yellow'}-primary-color ${secondaryColor?secondaryColor:'blue'}-secondary-color`}>
-      <Logo logoTextColor={primaryTextColor} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
+      <Logo logoTextColor={primaryTextColor} noShowColor={primaryColor} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
       <HamburgerMenu barColor={secondaryTextColor} panelBgColor={thirdColor} panelTextColor={thirdTextColor} crossColor={thirdTextColor} bgColorValue={bgColorValue} />
         <div id="page-wrap" onClick={()=>handleRandomBg()} className={`static2 bg-primary-secondary`}>
           {

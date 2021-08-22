@@ -1,38 +1,89 @@
-{
-  "title": "Experience Questions",
-  "steps": 4,
-  "questions": [
-    {
-      "title": "Part 01. Explain Closure in Javascript.",
-      "answer": "answer"
-    },
-    {
-      "title": "How many object types in Javascript?",
-      "answer": "answer"
-    },
-    {
-      "title": "question03",
-      "answer": "answer"
-    },
-    {
-      "title": "question04",
-      "answer": "answer"
-    },
-    {
-      "title": "Give an example for the team culture you dislik.",
-      "answer": "Hello, everyone! This is the LONGEST TEXT EVER! I was inspired by the various other 'longest texts ever' on the internet, and I wanted to make my own. So here it is! This is going to be a WORLD RECORD! This is actually my third attempt at doing this. The first time, I didn't save it. The second time, the Neocities editor crashed. Now I'm writing this in Notepad, then copying it into the Neocities editor instead of typing it directly in the Neocities editor to avoid crashing. It sucks that my past two attempts are gone now. Those actually got pretty long. Not the longest, but still pretty long. I hope this one won't get lost somehow. Anyways, let's talk about WAFFLES! I like waffles."
-    },
-    {
-      "title": "Give an example for the team culture you dislik.",
-      "answer": "Hello, everyone! This is the LONGEST TEXT EVER! I was inspired by the various other 'longest texts ever' on the internet, and I wanted to make my own. So here it is! This is going to be a WORLD RECORD! This is actually my third attempt at doing this. The first time, I didn't save it. The second time, the Neocities editor crashed. Now I'm writing this in Notepad, then copying it into the Neocities editor instead of typing it directly in the Neocities editor to avoid crashing. It sucks that my past two attempts are gone now. Those actually got pretty long. Not the longest, but still pretty long. I hope this one won't get lost somehow. Anyways, let's talk about WAFFLES! I like waffles."
-    },
-    {
-      "title": "Give an example for the team culture you dislik.",
-      "answer": "Hello, everyone! This is the LONGEST TEXT EVER! I was inspired by the various other 'longest texts ever' on the internet, let's talk about WAFFLES! I like waffles."
-    },
-    {
-      "title": "How do you love pizza and team work.",
-      "answer": "Anni's Answer"
-    }
-  ]
-}
+[
+  {
+    "title": "If you were an animal, which one would you want to be?",
+    "answer": "<p class='mb-5'><img width='50%' src='/img/octopus.svg'></p>",
+    "example": "console.log('I would probably be a octopus - so I can have more than 2 hands.')"
+  },
+  {
+    "title": "What are some of your strengths and weaknesses?",
+    "answer": "<p>My strengths is also my weaknesses for some people. Not a pure designer and not a pure engineer. In some projects, pure designer or pure engineers are needed. So I prefer to join or lead a team that has different team culture on creating creative things.</p>"
+  },
+  {
+    "title": "Why did you leave your last job?",
+    "answer": "Decided to move back to my hometown.",
+    "error": "TypeError: can't answer such personal questions."
+  },
+  {
+    "title": "Do you work better alone or as part of a team?",
+    "answer": "<p>Depending on the industry and company values, they could be looking for a specific answer. However, the ability to collaborate and compromise are always desirable traits in an employee. If you're unsure, say that you prefer a mixture of the two.</p>"
+  },
+  {
+    "title": "How do you handle stressful situations?",
+    "answer": "<p class='my-10'>You want to highlight your ability to face stressful situations in a manner that is both productive and positive. Try mentioning some of your stress-relieving tactics, and then provide an anecdote about a time that you effectively handled a particularly stressful situation.</p>"
+  },
+  {
+    "title": "Change one thing about your personality, what would it be?",
+    "answer": "<p class='my-10'>Sometimes I'm being too cautious on things and lost chanced to take smart risks.</p>",
+    "example": "console.log('Take smarter risks.')",
+    "horizontalGallery": [
+      {
+        "title": "How many coffee does Anni drink per day?",
+        "answer": "<img width='25%' src='/img/coffee.svg' /><img width='25%' src='/img/coffee.svg' /><img width='25%' src='/img/coffee.svg' />"
+      },
+      {
+        "title": "How many cats do you currently have?",
+        "answer": "<div><img src='/img/cat-white.svg' /><img src='/img/cat-black.svg' /></div><div><img src='/img/cat-black.svg' /><img src='/img/cat-white.svg' /></div>"
+      },
+      {
+        "title": "Which city is your favorite city?",
+        "answer": "<img width='25%' src='/img/coffee.svg' /><img width='25%' src='/img/coffee.svg' /><img width='25%' src='/img/coffee.svg' />"
+      },
+      {
+        "title": "Which city is your favorite city?",
+        "answer": "<img width='25%' src='/img/coffee.svg' /><img width='25%' src='/img/coffee.svg' /><img width='25%' src='/img/coffee.svg' />"
+      }
+    ]
+  },
+  {
+    "title": "What makes you unique?",
+    "answer": "My Beauty...",
+    "example": "console.log('Just Kidding.')"
+
+  },
+  {
+    "title": "Can you tell me about a time when you went above and beyond in your job?",
+    "answer": "<p class='my-10'>You want to highlight your ability to face stressful situations in a manner that is both productive and positive. Try mentioning some of your stress-relieving tactics, and then provide an anecdote about a time that you effectively handled a particularly stressful situation.</p>"
+  },
+  {
+    "title": "What drives you in your professional life?",
+    "answer": "Everyday I see a lot of interesting things, beatiful and userful design, amazing and unbelievable technology. Always being part of it drives me the most in my professional life.",
+    "example": "console.log('Beautifule Things.')"
+
+  },
+  {
+    "title": "Describe a time when you dealt with change.",
+    "answer": "<p class='my-10'>You want to highlight your ability to face stressful situations in a manner that is both productive and positive. Try mentioning some of your stress-relieving tactics, and then provide an anecdote about a time that you effectively handled a particularly stressful situation.</p>"
+  },
+  {
+    "title": "What are you passionate about?",
+    "answer": "<p class='my-10'>You want to highlight your ability to face stressful situations in a manner that is both productive and positive. Try mentioning some of your stress-relieving tactics, and then provide an anecdote about a time that you effectively handled a particularly stressful situation.</p>"
+  },
+  {
+    "title": "Are you easy to talk to? ",
+    "answer": "<p class='my-10'>You want to highlight your ability to face stressful situations in a manner that is both productive and positive. Try mentioning some of your stress-relieving tactics, and then provide an anecdote about a time that you effectively handled a particularly stressful situation.</p>"
+  },
+  {
+    "title": "What motivates you?",
+    "answer": "<p class='my-10'>You want to highlight your ability to face stressful situations in a manner that is both productive and positive. Try mentioning some of your stress-relieving tactics, and then provide an anecdote about a time that you effectively handled a particularly stressful situation.</p>",
+    "example": "<li>Beautiful Things</li>\n<li>High Technology</li>\n<li>Organized Project</li>"
+  },
+  {
+    "title": "When was the last time you were angry? What happened?",
+    "answer": "<p class='my-10'>You want to highlight your ability to face stressful situations in a manner that is both productive and positive. Try mentioning some of your stress-relieving tactics, and then provide an anecdote about a time that you effectively handled a particularly stressful situation.</p>"
+  },
+  {
+    "title": "What do you find are the most difficult decisions to make?",
+    "answer": "<p class='my-10'>Sometimes when you work on design, it is very hard to put away preconceived ideas and bias.</p>",
+    "example": "console.log('solution: use bigger data set.')"
+  }
+]

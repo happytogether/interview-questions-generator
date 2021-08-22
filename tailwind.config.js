@@ -37,7 +37,10 @@ module.exports = {
       'sm': {'max': '639px'},
       // => @media (max-width: 639px) { ... }
 
-      'smup': {'min': '640px'}
+      'smup': {'min': '640px'},
+      'mdup': {'min': '769px'},
+      'lgup': {'min': '1024px'},
+      'xlup': {'min': '1280px'}
     },
     borderWidth: {
       DEFAULT: '1px',
@@ -49,9 +52,13 @@ module.exports = {
       white: 'white',
       current: 'currentColor',
       blue: {
-        light: "var(--blue-light)",
-        DEFAULT: "var(--blue)",
+        light: 'var(--blue-light)',
+        DEFAULT: 'var(--blue)',
         dark: '#009eeb'
+      },
+      orange: {
+        light: "var(--orange-light)",
+        DEFAULT: "var(--orange)"
       },
       pink: {
         light: '#ff7ce5',
@@ -82,17 +89,16 @@ module.exports = {
       red: {
         light: "var(--red-light)",
         DEFAULT: "var(--red)"
-      },
-      orange: {
-        light: "var(--orange-light)",
-        DEFAULT: "var(--orange)"
       }
     },
     textColor: {
       blue: "var(--blue)",
       white: "#FFF",
       gray: "var(--gray)",
+      green: "var(--green)",
+      red: "var(--red)",
       purple: "var(--purple)",
+      yellow: "var(--yellow)",
       graydark: "var(--gray-dark)",
       black: "#000"
     }

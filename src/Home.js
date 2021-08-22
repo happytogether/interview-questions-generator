@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, useMemo } from 'react';
+import { useState, useEffect, useLayoutEffect, useContext, useMemo } from 'react';
 import { motion } from "framer-motion";
 import { fetchHomepageJsonAction, stepDoneAction, initialInterviewCategoryQuestionsCount } from "./Actions";
 import { HomeStore, StepperStore } from "./Store";
@@ -17,29 +17,33 @@ import GetRandomFromArray from './ultils/GetRandomFromArray';
 import { ColorSetNoBlue } from './components/ColorSet';
 import TransitionPanels from './components/TransitionPanels';
 import GoToTop from './ultils/GoToTop';
+import Marquee from './components/Marquee';
+import Sticky from 'react-stickynode';
 
 function Home(props) {
   const { state, homeDispatch } = useContext(HomeStore);
   const { stepperState, stepperDispatch} = useContext(StepperStore);
   const bgColorValue = useMemo(() => GetRandomFromArray(ColorSetNoBlue),[]);
-
   const primaryColor = props.location.state ? props.location.state.bgColor[0]: 'pink';
   const secondaryColor = props.location.state ? props.location.state.bgColor[1]: 'green';
   const thirdColor = props.location.state ? props.location.state.bgColor[2]: 'yellow';
+  const fourthColor = props.location.state ? props.location.state.bgColor[3]: 'purple';
+  const fifthColor = props.location.state ? props.location.state.bgColor[4]: 'red';
+  const sixthColor = props.location.state ? props.location.state.bgColor[5]: 'blue';
   const primaryTextColor = props.location.state ? props.location.state.textColor[0]: 'var(--gray-dark)';
   const secondaryTextColor = props.location.state ? props.location.state.textColor[1]: 'var(--gray-dark)';
   const thirdTextColor = props.location.state ? props.location.state.textColor[2]: 'var(--gray-dark)';
-  const fourthColor = props.location.state ? props.location.state.bgColor[3]: 'purple';
   const fourthTextColor = props.location.state ? props.location.state.textColor[3]: 'white';
-  const fifthColor = props.location.state ? props.location.state.bgColor[4]: 'red';
+  const sixthTextColor = props.location.state ? props.location.state.textColor[5]: 'white';
+
   //left color for homehead.js left panel
   const leftColor = bgColorValue[4][0] === primaryColor ? bgColorValue[6][0] : bgColorValue[4][0];
-
+  const marqueeColor = bgColorValue[6][0];
   useEffect(() => {
     state.data.length === 0 && fetchHomepageJsonAction(homeDispatch);
   },[state]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     //stepDoneAction(0, stepperDispatch);
     document.body.classList = "";
     document.body.classList.add(`${bgColorValue[0][0]}-primary-color`);
@@ -48,19 +52,26 @@ function Home(props) {
 
   const { cursorType, cursorChangeHandler } = useContext(MouseContext);
   const [ items,setItems ]=useState([]);
+  const [sticky, setSticky] = useState(false);
+
+  const handleStateChange = (status) => {
+
+    status.status === Sticky.STATUS_FIXED ? setSticky(true): setSticky(false);
+
+  };
 
   return (
     <div>
       <DotRing />
       <TransitionPanels bgColorValue={bgColorValue}/>
       <div id="outer-container" className={`${primaryColor}-primary-color ${secondaryColor}-secondary-color`}>
-        <Logo nobackArrow logoTextColor={bgColorValue[4][0] === primaryColor?bgColorValue[6][1]:bgColorValue[4][1]} bgColorValue={bgColorValue} prePrimaryColor={primaryColor} preSecondaryColor={secondaryColor} />
+        <Logo nobackArrow noShowColor={leftColor} bgColorValue={bgColorValue} prePrimaryColor={primaryColor} preSecondaryColor={secondaryColor} />
         <HamburgerMenu barColor='var(--gray-dark)' panelBgColor={bgColorValue[5][0]} panelTextColor={bgColorValue[5][1]} crossColor={bgColorValue[5][1]} bgColorValue={bgColorValue} />
         <motion.div variants={pageVariants} transition={pageTransition} exit='down' id="page-wrap" id="page-wrap" className="bg-primary-secondary">
           <HomeHeader leftColor={leftColor} bgColorValue={bgColorValue} />
           <HomeHeader2 bgColorValue={bgColorValue} />
           <Items items={state.data} bgColorValue={bgColorValue} />
-          <Footer bgColor='blue' textColor='white' bgColorValue={bgColorValue} />
+          <Footer bgColor={sixthColor} textColor={sixthTextColor} bgColorValue={bgColorValue} />
         </motion.div>
       </div>
       <GoToTop />

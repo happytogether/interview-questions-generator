@@ -1,15 +1,17 @@
 import { useMemo, useEffect } from "react";
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
-import { BasicColorSet } from '../../components/ColorSet';
+import { BasicColorSet, LightColorSet } from '../../components/ColorSet';
 import { useInView } from 'react-intersection-observer';
 import { motion, useAnimation } from "framer-motion";
+import { pageTransitionEaseOut, pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageVariants } from '../../ultils/TransitionSet';
 
 export default function InviewBar2 (props) {
   const controls = useAnimation();
   const { ref, inView } = useInView();
   const index = props.index;
   const noShowColor = props.noShowColor;
-
+  const barWidth = props.barWidth || 25;
+  const transitionSet = [pageTransition, pageTransition2, pageTransition3, pageTransitionShort];
   useEffect(() => {
     if(inView) {
       controls.start('visible');
@@ -19,7 +21,7 @@ export default function InviewBar2 (props) {
     }
   }, [controls, inView])
 
-  const colorSet = BasicColorSet.filter((item) => {
+  const colorSet = props.colorSet.filter((item) => {
     return item !== noShowColor
   })
 
@@ -28,7 +30,7 @@ export default function InviewBar2 (props) {
       scaleX: 0
     },
     visible: {
-      scaleX: 25,
+      scaleX: barWidth,
       transition: {
         duration: .3,
         delay: .25,

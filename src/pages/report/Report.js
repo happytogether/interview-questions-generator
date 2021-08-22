@@ -10,7 +10,7 @@ import * as easings from 'd3-ease';
 import Smile from '../../components/shapes/Smile';
 import Sad from '../../components/shapes/Sad';
 import Triangle from '../../components/shapes/memphis/Triangle';
-import { DonutSet, IceCreamSet, TwitchSet, DefaultSet, FruitSet, FruitSet2 } from "../../components/Reward/MemphisSets";
+import { DonutSet, IceCreamSet, DefaultSet, FruitSet, FruitSet2 } from "../../components/Reward/MemphisSets";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Arrow from '../../components/shapes/Arrow';
@@ -21,17 +21,19 @@ import { GradeFSet } from '../../components/confettiSet/GradeFSet';
 import { fetchInterviewCategoryQuestionsJsonAction, fetchInterviewCategoryQuestionsCountAction, stepDoneAction, stepsAddAnswersAction, initialInterviewCategoryQuestionsCount } from '../../Actions';
 import { HomeStore, QuestionsStore, QuestionsNumStore, StepperStore, UserAnswersStore } from '../../Store';
 import { motion } from "framer-motion";
+import { pageTransitionEaseOut, pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageVariants } from '../../ultils/TransitionSet';
 import { content, upMotion} from '../../components/AnimationSet';
 import HamburgerMenu from '../../components/HamburgerMenu/HamburgerMenu';
 import GoToTop from '../../ultils/GoToTop';
 import TransitionPanels from '../../components/TransitionPanels';
-import { pageTransitionEaseOut, pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageVariants } from '../../ultils/TransitionSet';
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
 import { ColorSet } from '../../components/ColorSet';
 import Checkbox from '@material-ui/core/Checkbox';
 import { withStyles } from '@material-ui/core/styles';
 import { fetchHomepageJsonAction } from "../../Actions";
 import { isMobile } from "react-device-detect";
+import SegmentsAnimation from '../../components/SegmentsAnimation';
+import Marquee from '../../components/Marquee';
 
 function Report(props) {
   const primaryColor = props.location.state ? props.location.state.bgColor[0]: 'pink';
@@ -42,9 +44,11 @@ function Report(props) {
   const thirdTextColor = props.location.state ? props.location.state.textColor[2]: 'var(--gray-dark)';
   const fourthColor = props.location.state ? props.location.state.bgColor[3]: 'purple';
   const fourthTextColor = props.location.state ? props.location.state.textColor[3]: 'white';
+  const fifthColor = props.location.state ? props.location.state.bgColor[4]: 'orange';
+  const fifthTextColor = props.location.state ? props.location.state.textColor[4]: 'var(--gray-dark)';
   // get homepage json if not in store
   const { state, homeDispatch } = useContext(HomeStore);
-
+  const logoTitle = " Anni Wang ";
   useEffect(() => {
     state.data.length === 0 && fetchHomepageJsonAction(homeDispatch);
   },[state.data]);
@@ -138,7 +142,15 @@ function Report(props) {
 
   function reportDialog() {
       if (interviewDone) {
-        const dialog = (rightAnswerSum/questionsSum).toFixed(2)*100 >=66 ? <div><p className="block my-3">Based on the statistics, it seems like // Anni Wang ++ might be a good fit.</p><p className="block my-3">You can contact Anni to see if she is available.</p><p><DelayLink to='/interview'>or <span className="link">click here</span></DelayLink> to redo the interview.</p></div>: <div className="block my-3">Based on the statistics, it seems like // Anni Wang ++ might not be a good fit.<p className="block my-3">If you're looking for a UX Engineer, Deisgn Technologist or a prototyper. Feel free not to contact me.</p></div>
+        const dialog = (rightAnswerSum/questionsSum).toFixed(2)*100 >=66 ? <div><p className="block my-3">Based on the statistics, it seems like &nbsp;
+        <SegmentsAnimation segment={logoTitle.length} type="text" x={0} y={-5} zIntervalFrom={-20} zIntervalTo={200} delay={50} bgColorValue={bgColorValue}>
+          {logoTitle}
+        </SegmentsAnimation>
+         &nbsp; might be a good fit.</p><p className="block my-3">You can contact Anni to see if she is available.</p><p><DelayLink to='/interview'>or <span className="link">click here</span></DelayLink> to redo the interview.</p></div>: <div className="block my-3">Based on the statistics, it seems like
+         <SegmentsAnimation segment={logoTitle.length} type="text" x={0} y={-5} zIntervalFrom={-20} zIntervalTo={200} delay={50} bgColorValue={bgColorValue}>
+          {logoTitle}
+         </SegmentsAnimation>
+        might not be a good fit.<p className="block my-3">If you're looking for a UX Engineer, Deisgn Technologist or a prototyper. Feel free not to contact me.</p></div>
         return dialog;
       } else {
         switch(stepperState.data.length) {
@@ -165,7 +177,7 @@ function Report(props) {
     animate="animate"
     initial="initial" id="outer-container" className={`${primaryColor?primaryColor:'yellow'}-primary-color ${secondaryColor?secondaryColor:'blue'}-secondary-color`}>
       <TransitionPanels bgColorValue={bgColorValue}/>
-      <Logo goBackHome={true} logoTextColor={primaryTextColor} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
+      <Logo goBackHome={true} noShowColor={primaryColor} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
       <HamburgerMenu barColor={secondaryTextColor} panelBgColor={thirdColor} panelTextColor={thirdTextColor} crossColor={thirdTextColor} bgColorValue={bgColorValue} />
       <ToastContainer position="top-center" draggable={true} draggablePercent={25} autoClose={10000} />
       <div id="page-wrap" className={`w-screen min-h-screen report bg-primary-secondary flex justify-center items-center py-10`}>
@@ -173,7 +185,9 @@ function Report(props) {
           <div className="flex flex-row w-full h-full lg:flex-col">
             <div className="lg:w-screen w-6/12 h-full">
               <div className="w-6/12 bg-cover bg-center bg-no-repeat" style={{"backgroundImage": `url(${imgSrc})`, "backgroundColor": `var(--${secondaryColor?secondaryColor:'blue'})`, "backgroundSize": "120px auto", "height": "300px"}}></div>
-              <div className="text-black lowercase font-semibold text-4xl py-5">statistics<br />report</div>
+              <div className="text-black lowercase font-semibold text-4xl py-5">
+                statistics<br />report
+              </div>
               <div className="float-left">
                 <ReactStoreIndicator width={150} value={(rightAnswerSum/questionsSum).toFixed(2)*100} maxValue={100} />
               </div>
@@ -186,17 +200,21 @@ function Report(props) {
 
             </div>
             <div className="lg:w-full w-6/12">
-              <div className="absolute -right-40 lg:right-10 top-20">
-                <Sun />
-              </div>
+              <motion.div variants={pageVariants} initial='initial' transition={pageTransition2} exit='down' animate="in" className="absolute -right-40 lg:right-10 top-20">
+                <Sun noShowColor={secondaryColor} />
+              </motion.div>
               <ul>
                 <li className="border-3 py-6">
                   {reportDialog()}
                 </li>
                 <li className="py-10 flex flex-row relative" >
-                  {
-                    set.map((item, index) =><div key={index} className="mx-1" dangerouslySetInnerHTML={ {__html: item} }></div>)
-                  }
+
+                  <SegmentsAnimation segment={set.length} type="img" x={-20} y={-20} zIntervalFrom={-20} zIntervalTo={200} delay={50} bgColorValue={bgColorValue}>
+                    {
+                      set.map((item, index) =><div key={index} className="mx-1" dangerouslySetInnerHTML={ {__html: item} }></div>)
+                    }
+                  </SegmentsAnimation>
+
                 </li>
                 <li className="py-10">
                   <ul>
@@ -233,13 +251,16 @@ function Report(props) {
           </div>
         </motion.div>
       </div>
-
+      <motion.div variants={pageVariants} transition={pageTransitionEaseOut} exit='down'>
+        {
+          footer && <Marquee bgColor={fifthColor} />
+        }
+      </motion.div>
       <motion.div variants={pageVariants} transition={pageTransitionEaseOut} exit='down'>
         {
           footer && <Footer bgColor={fourthColor} textColor={fourthTextColor} bgColorValue={bgColorValue} />
         }
       </motion.div>
-
       <GoToTop />
     </motion.div>
   );

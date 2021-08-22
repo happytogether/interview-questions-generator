@@ -1,18 +1,60 @@
-{
-  "title": "UX Questions",
-  "steps": 4,
-  "questions": [
-    {
-      "title": "Tell us through your workflow.",
-      "answer": "<h1 class='py-2'>Being as a half designer and half engineer. My workflow is different.<img class='py-10' width='100px' src='/img/gradeA/1.svg' /></h1> <p>I will mainly focus on Users' need but also think about the newly tech and animations. In order to provide users' better feelings, I focus on micro-interactions.</p> I'm a half designer and half engineer. I will mainly focus on Users' need but also think about the newly tech and animations. In order to provide users' better feelings, I focus on micro-interactions."
-    },
-    {
-      "title": "How many object types in Javascript?",
-      "answer": "answer"
-    },
-    {
-      "title": "question03",
-      "answer": "answer"
-    }
-  ]
-}
+[
+  {
+    "title": "Describe a complex project you completed under a deadline?",
+    "answer": "A closure is the combination of a function and the lexical environment within which that function was declared. i.e, It is an inner function that has access to the outer or enclosing function’s variables. The closure has three scope chains. <p class='my-10'>Own scope where variables defined between its curly brackets Outer function’s variables Global variables Let's take an example of closure concept</p>"
+  },
+  {
+    "title": "Are you still friends with any previous colleagues?"
+  },
+  {
+    "title": "Describe your dream job."
+  },
+  {
+    "title": "How do you give/respond to critique?"
+  },
+  {
+    "title": "Describe a typical work week."
+  },
+  {
+    "title": "Do you take work home with you?"
+  },
+  {
+    "title": "How many hours do you normally work?"
+  },
+  {
+    "title": "How would you describe the pace at which you work?"
+  },
+  {
+    "title": "What type of work environment do you prefer?"
+  },
+  {
+    "title": "What is Closure?"
+  },
+  {
+    "title": "What is Closure?"
+  },
+  {
+    "title": "What is Closure?"
+  },
+  {
+    "title": "What is Closure?"
+  },
+  {
+    "title": "What is Closure?"
+  },
+  {
+    "title": "What is Closure?"
+  },
+  {
+    "title": "What is Closure?"
+  },
+  {
+    "title": "What is Closure?"
+  },
+  {
+    "title": "What is Closure?"
+  },
+  {
+    "title": "What is Closure?"
+  }
+]
