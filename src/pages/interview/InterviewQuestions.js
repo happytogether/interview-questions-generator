@@ -27,6 +27,8 @@ import Stepper from '../../components/Stepper';
 import { QuestionsStore, StepperStore, UserAnswersStore, PageTransitionColorsStore } from '../../Store';
 import { useParams, useHistory, Link } from 'react-router-dom';
 import { stepDoneAction, stepsResetAnswersAction } from "../../Actions";
+import { pageTransitionEaseOut, pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageVariants } from '../../ultils/TransitionSet';
+
 
 export default function Questions(value) {
   const index= parseInt(useParams().categoryIndex);
@@ -175,14 +177,16 @@ export default function Questions(value) {
 
 
         <div className="absolute left-10 top-1/2 -my-14 z-30 xl:hidden">
-          <h1 style={{"color": primaryTextColor}} className="inset-y-1/2 text-4xl w-36 z-20">0{parseInt(index)+1}.{title} / <span className="text-sm">Scores</span></h1>
-          <Arrow size="40px" color={primaryTextColor} />
-          {
-            !done && <SmileSadFace questions={questions} rightWrongNum={userAnswersState.data[index]} rightAnswerNum={rightAnswerNum} wrongAnswerNum={wrongAnswerNum} />
-          }
-          {
-            done && <SmileSadFace questions={questions} rightWrongNum={userAnswersState.data[index]} rightAnswerNum={rightAnswerNumLocalStorage} wrongAnswerNum={wrongAnswerNumLocalStorage} />
-          }
+          <motion.h1 style={{"color": primaryTextColor}} variants={pageVariants} initial='initial' transition={{ duration: 1 + Math.random(), type: "tween", ease: "anticipate" }} exit='down' animate="in" className="inset-y-1/2 text-4xl w-36 z-20">0{parseInt(index)+1}.{title} / <span className="text-sm">Scores</span></motion.h1>
+          <motion.div variants={pageVariants} initial='initial' transition={{ duration: 1.2, type: "tween", ease: "anticipate" }} exit='down' animate="in">
+            <Arrow size="40px" color={primaryTextColor} />
+            {
+              !done && <SmileSadFace questions={questions} rightWrongNum={userAnswersState.data[index]} rightAnswerNum={rightAnswerNum} wrongAnswerNum={wrongAnswerNum} />
+            }
+            {
+              done && <SmileSadFace questions={questions} rightWrongNum={userAnswersState.data[index]} rightAnswerNum={rightAnswerNumLocalStorage} wrongAnswerNum={wrongAnswerNumLocalStorage} />
+            }
+          </motion.div>
         </div>
           {
             !done && <CategoryQuestionsNotDone questions={questions || []} index={index} redo={redo} steps={steps} setDone={setDone} rightWrongNumReset={rightWrongNumReset}/>

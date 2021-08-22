@@ -21,9 +21,9 @@ export default function InviewBar2 (props) {
     }
   }, [controls, inView])
 
-  const colorSet = props.colorSet.filter((item) => {
-    return item !== noShowColor
-  })
+  const colorSet = (props.colorSet === 'light' ? LightColorSet: BasicColorSet).filter((item) => {
+    return item !== noShowColor;
+  });
 
   const boxVariants = {
     hidden: {

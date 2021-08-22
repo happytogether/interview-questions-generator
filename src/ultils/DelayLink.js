@@ -1,13 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { useLastLocation } from 'react-router-last-location';
-import useSound from 'use-sound';
 import clickSfx from '../components/click.mp3';
 
-// Functional link component which delays page navigation
+const audio = new Audio(clickSfx); // useMemo doesn't work, browser will still request serveral times for this mp3 file.
+
 export const DelayLink = props => {
-  const [playClick] = useSound(clickSfx);
   const { delay, onDelayStart, onDelayEnd, replace, goBackHome,...rest } = props;
   let to = props.to;
   let timeout = null;
@@ -29,8 +28,8 @@ export const DelayLink = props => {
   }, [timeout]);
 
   const handleClick = e => {
-    playClick();
-
+    // playClick();
+    audio.play();
     // if trying to navigate to current page stop everything
     if (location?.pathname === to) return;
 

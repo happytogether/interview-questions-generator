@@ -7,8 +7,6 @@ import useBoop from '../hooks/use-boop';
 import { useSpring, useSprings, animated, interpolate } from 'react-spring';
 import FooterList from './FooterList';
 import SegmentsAnimation from '../components/SegmentsAnimation';
-import useSound from 'use-sound';
-import clickSfx from '../components/click.mp3';
 
 export default function Footer(props) {
   const bgColor = props.bgColor;
@@ -39,8 +37,6 @@ export default function Footer(props) {
       })
       .then(function(myJson) {
         setList(myJson);
-        console.log(list);
-
         setJsonLoaded(true);
       });
   }

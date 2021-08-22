@@ -18,7 +18,6 @@ function MondrianArt(props) {
   }, [items]);
 
   function confetti(i){
-    //console.log(elRefs);
     itemsRef.current[i].rewardMe();
   }
 

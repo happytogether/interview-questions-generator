@@ -72,7 +72,7 @@ function Credit(props) {
   );
 
   window.addEventListener("hashchange", function(){
-    console.log('has changed');
+    //console.log('has changed');
   });
 
   return (
@@ -84,7 +84,7 @@ function Credit(props) {
       <HamburgerMenu barColor={secondaryTextColor} panelBgColor={thirdColor} panelTextColor={thirdTextColor} crossColor={thirdTextColor} bgColorValue={bgColorValue} />
       <div id="page-wrap" className={`w-screen min-h-screen bg-primary-secondary py-10`}>
         <motion.div variants={pageVariants} initial='initial' transition={pageTransition} exit='down' animate="in" className="flex flex-row justify-center items-center ">
-          <motion.div variants={pageVariants} initial='initial' transition={pageTransition2} exit='down' animate="in" className="absolute right-40 top-40 sm:hidden">
+          <motion.div variants={pageVariants} initial='initial' transition={pageTransition2} exit='down' animate="in" className="absolute z-20 right-40 top-40 sm:hidden">
             <Sun size="150px" noShowColor={secondaryColor} />
           </motion.div>
           <div className="xl:w-8/12 lg:w-11/12 lg:mt-20 lg:p-10 sm:p-5 w-6/12 h-5/6 bg-white p-20 default-window mt-20">

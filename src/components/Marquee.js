@@ -4,7 +4,6 @@ import { MarqueeColorSet } from './ColorSet';
 export default function Marquee(props) {
   const bgColor = props.bgColor;
   let textColor;
-  console.log(bgColor);
   switch (bgColor) {
     case "pink":
       textColor = 'blue';
@@ -30,7 +29,6 @@ export default function Marquee(props) {
     default:
       textColor = 'blue';
   }
-  console.log(textColor);
   return (
     <div className={`marquee-container py-5 bg-${bgColor} text-${textColor} relative text-3xl md:text-2xl font-bold overflow-hidden`}>
       <div className="marquee">

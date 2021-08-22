@@ -200,7 +200,7 @@ function Report(props) {
 
             </div>
             <div className="lg:w-full w-6/12">
-              <motion.div variants={pageVariants} initial='initial' transition={pageTransition2} exit='down' animate="in" className="absolute -right-40 lg:right-10 top-20">
+              <motion.div variants={pageVariants} initial='initial' transition={pageTransition2} exit='down' animate="in" className="absolute z-20 -right-40 lg:right-10 top-20">
                 <Sun noShowColor={secondaryColor} />
               </motion.div>
               <ul>

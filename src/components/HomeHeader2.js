@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect, useRef, useMemo } from 'react';
 import { useSpring, animated } from 'react-spring';
 import { MouseContext } from "./../context/mouse-context";
-import MainLeft from './MainLeft';
 import Reward from './Reward/Reward.js';
 import DotRing from "./DotRing/DotRing";
 import Logo from '../components/Logo';
@@ -13,8 +12,6 @@ import ColorBarAnimation from '../components/ColorBarAnimation';
 import DelayLinkButton from '../components/DelayLinkButton';
 import getRandomFromArray from '../ultils/GetRandomFromArray';
 import { bgSet } from '../components/BackgroundSet';
-import useSound from 'use-sound';
-import cannonSfx from './cannon.mp3';
 import { motion } from "framer-motion";
 import { content, upMotion, downMotion } from './AnimationSet';
 import { pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageTransitionDelay, pageTransitionDelay2, pageVariants } from '../ultils/TransitionSet';

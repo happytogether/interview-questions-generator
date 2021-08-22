@@ -7,7 +7,6 @@ import InviewBar from '../../components/inview/InviewBar';
 import InviewText from '../../components/inview/InviewText';
 import { fetchHomepageJsonAction, stepDoneAction } from "../../Actions";
 import DelayLink from '../../ultils/DelayLink';
-import { LightColorSet } from '../../components/ColorSet';
 import { SplitText, LetterWrapperProp, WordWrapperProp, LineWrapperProp } from '@cyriacbr/react-split-text';
 import SegmentsAnimation from '../../components/SegmentsAnimation';
 
@@ -18,9 +17,9 @@ export default function List(props){
   const bgColorValue = props.bgColorValue;
   return (
     <motion.div key={i} variants={pageVariants} initial='initialAlpha1' transition={i%2 === 1 ?pageTransitionShort: pageTransitionShort2} exit='down' animate="in" className={`${i%2 === 1 ? 'mt-40 lg:mt-0': null} p-10 pr-5 h-5/6 bg-white default-window`}>
-      <div className={`flex ${i%2===0 ? 'flex-row': 'flex-row-reverse'} items-center w-full h-full lg:flex-col`}>
+      <div className={`flex flex-row items-center w-full h-full lg:flex-col`}>
         <div style={{ width: "25px" }} className="relative flex flex-col justify-center">
-          <SegmentsAnimation segment={5} barWidth={10} type="bar" colorSet={LightColorSet} x={-50} y={-20} zIntervalFrom={-50} zIntervalTo={20} delay={150} bgColorValue={bgColorValue}></SegmentsAnimation>
+          <SegmentsAnimation segment={5} barWidth={10} type="bar-light" x={(Math.random() - 0.5) * 20} y={Math.random()*20} zIntervalFrom={-50} zIntervalTo={20} delay={150} bgColorValue={bgColorValue}></SegmentsAnimation>
           <div style={{left: '35px'}} className={`absolute text-black lowercase font-semibold text-4xl`}>
             <InviewText variants="upReveal">
               {categoryTitle}
@@ -28,7 +27,7 @@ export default function List(props){
           </div>
         <div className="clear-both"></div>
       </div>
-      <div className={`w-full ${ i%2===0 ? 'pl-10': 'pr-5'}`}>
+      <div className={`w-full pl-10`}>
         <div className="text-lg pb-4 mb-5 lg:text-base">
           <SplitText
             WordWrapper={({ wordIndex, countIndex, children }) => (

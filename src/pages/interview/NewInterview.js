@@ -163,7 +163,7 @@ return (
         <motion.div variants={pageVariants} initial='initial' transition={pageTransitionShort} exit='down' animate="in" className="xl:w-9/12 lg:w-11/12 lg:mt-20 lg:p-10 w-6/12 h-5/6 bg-white p-20 sm:p-5 default-window mt-20">
           <div className="flex flex-row w-full h-full lg:flex-col">
             <div className="lg:w-full w-6/12 h-full">
-              <motion.div variants={pageVariants} initial='initial' transition={pageTransition2} exit='down' animate="in" className="absolute -right-40 lg:right-10 top-20">
+              <motion.div variants={pageVariants} initial='initial' transition={pageTransition2} exit='down' animate="in" className="absolute z-20 -right-40 lg:right-10 top-20">
                 <Sun noShowColor={secondaryColor} />
               </motion.div>
               <div className={`w-9/12 lg:w-full bg-cover bg-center bg-no-repeat bg-${secondaryColor}`} style={{"backgroundImage": `url("/img/interview.svg")`, "backgroundSize": "150px auto", "height": "300px"}}></div>

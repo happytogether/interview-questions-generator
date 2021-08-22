@@ -2,7 +2,7 @@ import { useContext, useState, useEffect, useMemo } from "react";
 import { useSpring, useSprings, animated, interpolate } from 'react-spring';
 import getRandomFromInterval from "../getRandomFromInterval";
 import InviewBar2 from './inview/InviewBar2';
-import { ColorSet } from './ColorSet';
+import { ColorSet, LightColorSet } from './ColorSet';
 import { motion } from "framer-motion";
 import { pageTransitionEaseOut, pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageVariants } from '../ultils/TransitionSet';
 
@@ -79,7 +79,20 @@ export default function SegmentsAnimation(props) {
                 (x, y, z, f, r) => `translate3d(${x}px,${y}px,${z}px)`
               )
             }}>
-            <InviewBar2 key={index} index={index} barWidth={barWidth} colorSet={props.colorSet} noShowColor={noShowColor} />
+            <InviewBar2 key={index} index={index} barWidth={barWidth} noShowColor={noShowColor} />
+          </animated.span>
+        )
+      case "bar-light":
+        return (
+          <animated.span className="inline-block animate-block" onMouseEnter={() => handleMouseOver()}
+            key={index} style={{
+              transformOrigin: 'center center',
+              transform: interpolate(
+                [x, y, z, f.interpolate([0, 0.2, 0.6, 1], [0, index, index, 0]), r],
+                (x, y, z, f, r) => `translate3d(${x}px,${y}px,${z}px)`
+              )
+            }}>
+            <InviewBar2 key={index} index={index} barWidth={barWidth} colorSet="light" noShowColor={noShowColor} />
           </animated.span>
         )
       case "img":

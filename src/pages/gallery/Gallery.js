@@ -88,7 +88,7 @@ function Gallery(props) {
       <Logo noShowColor={primaryColor} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
       <HamburgerMenu barColor={secondaryTextColor} panelBgColor={thirdColor} panelTextColor={thirdTextColor} crossColor={thirdTextColor} bgColorValue={bgColorValue} />
       <div id="page-wrap" className={`w-screen min-h-screen report bg-primary-secondary`}>
-        <div className="questions-container gap-x-20 pt-20 w-full flex flex-wrap flex-row col-count-2 justify-center items-center">
+        <div className="questions-container gap-x-20 pt-48 xl:pt-36 w-full flex flex-wrap flex-row col-count-2 justify-center items-center">
           {
             items.map((item, i) => (
               item.horizontalGallery ? <><Questions i={i} item={item} categoryTitle={categoryTitle} />
@@ -134,7 +134,7 @@ function Gallery(props) {
           </div>
           <Marquee bgColor={fifthColor} />
         </motion.div>
-      }    
+      }
     </div>
     <motion.div className="w-full" variants={pageVariants} transition={pageTransitionEaseIn} exit='down'>
       {

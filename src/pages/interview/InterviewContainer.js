@@ -8,7 +8,6 @@ import getRandomDifferent from '../../getRandomDifferent';
 import MouseLeftRight from "../../components/DotRing/MouseLeftRight";
 import HamburgerMenu from '../../components/HamburgerMenu/HamburgerMenu';
 import Logo from '../../components/Logo';
-import useSound from 'use-sound';
 import { motion } from "framer-motion"
 import { QuestionsStore, QuestionsNumStore, UserAnswersStore, PageTransitionColorsStore } from '../../Store';
 import { fetchInterviewCategoryQuestionsJsonAction } from '../../Actions';

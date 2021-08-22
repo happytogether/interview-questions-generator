@@ -41,9 +41,9 @@ function GalleryList(props) {
       <TransitionPanels bgColorValue={bgColorValue}/>
       <Logo goBackHome={true} noShowColor={primaryColor} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
       <HamburgerMenu barColor={secondaryTextColor} panelBgColor={thirdColor} panelTextColor={thirdTextColor} crossColor={thirdTextColor} bgColorValue={bgColorValue} />
-      <div id="page-wrap" className={`w-screen min-h-screen report bg-primary-secondary pt-20`}>
-        <div className="min-h-screen flex flex-row flex-wrap justify-center gap-24 lg:gap-10 items-start pb-40 mt-40 lg:mt-10">
-          <div className="w-4/12 lg:w-5/12 md:w-10/12 -mt-40">
+      <div id="page-wrap" className={`w-screen min-h-screen flex justify-center report bg-primary-secondary pt-20`}>
+        <div className="w-8/12 min-h-screen ml-20 xl:ml-0 flex flex-row flex-wrap gap-24 lg:gap-10 items-start pb-40 mt-40 lg:mt-10">
+          <div className="w-5/12 lg:w-5/12 md:w-10/12 -mt-40">
             {
               state.data.map((item, i) => (
                 <div className="mt-40">
@@ -56,7 +56,7 @@ function GalleryList(props) {
 
           </div>
 
-          <div className="w-3/12 lg:w-5/12 md:w-10/12">
+          <div className="w-5/12 lg:w-5/12 md:w-10/12">
             {
               state.data.map((item, i) => (
                 <div className="mt-40">

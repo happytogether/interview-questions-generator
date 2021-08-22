@@ -26,7 +26,7 @@ export default function Questions(props){
         <div className={`bg-white default-window py-20 px-10 lg:p-10 lg:w-10/12 flex gap-10 w-full h-full lg:flex-col`}>
           <div className={`lg:w-screen h-full relative`}>
             <div style={{ width: "10px" }} className="overflow-hidden flex flex-col justify-center h-full">
-              <SegmentsAnimation colorSet={ColorSet} segment={5} type="bar"></SegmentsAnimation>
+              <SegmentsAnimation segment={5} type="bar-light"></SegmentsAnimation>
             </div>
             <div style={{width: '300px'}} className={`text-black lowercase font-semibold text-4xl py-5 -ml-2`}>
               <SegmentsAnimation segment={categoryTitle.length} type="text" x={0} y={-20} zIntervalFrom={-20} zIntervalTo={-20} delay={50}>{categoryTitle}</SegmentsAnimation>
@@ -34,7 +34,7 @@ export default function Questions(props){
           <div className="clear-both"></div>
         </div>
         <div className={`lg:w-full w-11/12 ${blockIndex%2 === 1 ? 'pl-10': null}`}>
-          <div className="text-2xl border-b mb-10">
+          <div className="text-xl border-b mb-10">
             {
               /*
               <SplitText
@@ -50,7 +50,7 @@ export default function Questions(props){
               </SplitText>
               */
             }
-            • {item.title}
+            0{blockIndex+1}.{item.title}
           </div>
           <div className="absolute right-5 bottom-5 more-answer flex flex-row justify-center items-center bg-green text-sm">
             <span>More</span>

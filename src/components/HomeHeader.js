@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect, useRef, useMemo } from 'react';
 import { useSpring, animated } from 'react-spring';
 import { MouseContext } from "./../context/mouse-context";
-import MainLeft from './MainLeft';
 import DotRing from "./DotRing/DotRing";
 import Logo from '../components/Logo';
 import Moon from '../components/shapes/Moon';
@@ -87,7 +86,7 @@ export default function HomeHeader(props) {
             <Cannon />
           </animated.div>
           <div style={{ width: "50px" }} className="flex flex-col justify-center absolute left-0 top-0 h-full">
-            <SegmentsAnimation colorSet={ColorSet} segment={8} barWidth={25} type="bar" x={-20} y={-20} zIntervalFrom={-20} zIntervalTo={-20} delay={50} bgColorValue={bgColorValue} noShowColor={leftColor}></SegmentsAnimation>
+            <SegmentsAnimation segment={8} barWidth={25} type="bar" x={-20} y={-20} zIntervalFrom={-20} zIntervalTo={-20} delay={50} bgColorValue={bgColorValue} noShowColor={leftColor}></SegmentsAnimation>
           </div>
         </motion.div>
       </div>
