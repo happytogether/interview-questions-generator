@@ -4,13 +4,13 @@ import Logo from "../../components/Logo";
 import Footer from '../../components/Footer';
 import { useSpring, animated } from 'react-spring';
 import { motion } from "framer-motion";
-import * as easings from 'd3-ease'
 import DelayLink from '../../ultils/DelayLink';
 import GoToTop from '../../ultils/GoToTop';
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
 import { ColorSet } from '../../components/ColorSet';
 import TransitionPanels from '../../components/TransitionPanels';
 import HamburgerMenu from '../../components/HamburgerMenu/HamburgerMenu';
+import Navigation from '../../components/Navigation';
 import { pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageVariants } from '../../ultils/TransitionSet';
 
 function Booking(props) {
@@ -49,6 +49,7 @@ function Booking(props) {
         </motion.div>
       </div>
       <GoToTop />
+      <Navigation bgColorValue={bgColorValue}/>
     </div>
   );
 }

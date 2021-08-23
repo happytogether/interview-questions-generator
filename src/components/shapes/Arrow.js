@@ -12,9 +12,13 @@ export default function Arrow(props) {
   }
   return (
     <div className="float-left arrow mx-5 mt-2">
-      <svg style={styles} viewBox="0 0 117.25 86.75">
-        <path style={strokeStyles} className="arrow-cursor__path" d="M111.45,42.5,74.65,5.7l-9.9,9.9,20.6,20.6H6.45v14h78.9L64.75,70.8l9.9,9.9,36.8-36.8A1,1,0,0,0,111.45,42.5Z" />
+      <svg style={styles} viewBox="0 0 106 76">
+          <g stroke="none" stroke-width="2" fill="none" fill-rule="evenodd">
+              <g transform="translate(0.450000, 0.700000)" fill="none" fill-rule="nonzero">
+                  <path style={strokeStyles} d="M105,36.8 L68.2,-2.66453526e-15 L58.3,9.9 L78.9,30.5 L-2.66453526e-15,30.5 L-2.66453526e-15,44.5 L78.9,44.5 L58.3,65.1 L68.2,75 L105,38.2 C105.381143,37.8111565 105.381143,37.1888435 105,36.8 Z"></path>
+              </g>
+          </g>
       </svg>
-    </div>
+      </div>
   )
 }

@@ -15,7 +15,7 @@ export default function DelayLinkButton(props) {
           textColor: [bgColorValue[0][1], bgColorValue[1][1], bgColorValue[2][1], bgColorValue[3][1], bgColorValue[4][1], bgColorValue[5][1]],
         }
       }}>
-        <SegmentsAnimation segment={linkText.length} type="text" x={0} y={0} zIntervalFrom={-20} zIntervalTo={20} delay={50}>{linkText}</SegmentsAnimation>
+        {linkText}
       </DelayLink>
     </button>
   )

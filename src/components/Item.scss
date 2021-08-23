@@ -1,6 +1,7 @@
 .item {
   perspective: 350px;
   perspective-origin: 50% 50%;
+  min-height: 600px;
   @media (min-width: 1024px) {
     height: calc(100vh - 100px);
   }

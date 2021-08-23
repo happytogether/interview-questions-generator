@@ -7,6 +7,9 @@ import { SplitText, LetterWrapperProp, WordWrapperProp, LineWrapperProp } from '
 import { ColorSet } from './ColorSet';
 import { useSpring, useSprings, animated, interpolate } from 'react-spring';
 import SegmentsAnimation from './SegmentsAnimation';
+import pianoSfx from './piano.mp3';
+
+let audio = new Audio(pianoSfx);
 
 export default function Logo(props) {
   const color = props.color;
@@ -61,73 +64,45 @@ export default function Logo(props) {
 
   function handleMouseOver() {
     setOpen(true);
+    audio.play();
   }
 
   return (
-    <div className="logo fixed w-full z-10" >
+    <div className="logo fixed w-full z-10" onMouseEnter={isMobile ? () => { return false; } : handleMouseOver}>
       <div className="fixed text-base px-2 my-5 ml-4 z-30 logo">
-        <DelayLink to={{
-          pathname: "/",
-          state: {
-            bgColor: [primaryColor, secondaryColor, thirdColor, fourthColor, fifthColor, sixthColor],
-            textColor: [primaryTextColor, secondaryTextColor, thirdTextColor, fourthTextColor, fifthTextColor, sixthTextColor]
-          }}}>
-          <span className="xl:hidden">
-            {
-              /*
-              <SplitText
-                LetterWrapper={({ wordIndex, countIndex, children }) => (
-                  <animated.span className={`p-1 bg-${countIndex===4 ? primaryColor: ColorSet[countIndex%6][0]}`} style={{color: ColorSet[countIndex%6][1]}}>
-                    {children}
-                  </animated.span>
-                )}
-
-              >
-                {
-                  open ? 'hired?': 'Anni Wang'
-                }
-              </SplitText>
-              */
-            }
-
-            {
-              /*logoTextAnimation.map(({ x, y, z, opacity, background }, index) => (
-                <animated.span onMouseEnter={() => handleMouseOver()} className={`px-1 inline-block bg-${ColorSet[index%7][0]}`}
-                  key={index} style={{
-                    opacity,
-                    color: ColorSet[index%7][1],
-                    transform: interpolate(
-                      [x, y, z, f.interpolate([0, 0.2, 0.6, 1], [0, index, index, 0]), r],
-                      (x, y, z, f, r) => `translate3d(${x}px,${y}px,${z}px) rotateX(${f * r}deg)`
-                    )
-                  }}> {logoText[index]}
-                </animated.span>
-            ))
-          */}
-            <SegmentsAnimation noShowColor={noShowColor} largeBar={true} segment={logoText.length} type="colorBgText" x={0} y={-20} zIntervalFrom={-20} zIntervalTo={20} delay={50}>{logoText}</SegmentsAnimation>
-          </span>
-        </DelayLink>
-        <DelayLink to={{
-          pathname: `${goBackHome? '/': './'}`,
-          state: {
-            bgColor: [primaryColor, secondaryColor, thirdColor, fourthColor, fifthColor, sixthColor],
-            textColor: [primaryTextColor, secondaryTextColor, thirdTextColor, fourthTextColor, fifthTextColor, sixthTextColor]
-          }}}>
-          <span className="xlup:hidden">A.W.</span>
-        </DelayLink>
-      </div>
-      {
-        !nobackArrow && <span className={`fixed close ${isMobile? 'right-7 -mt-1': 'right-14'} z-30`}>
+        <div>
+          <DelayLink to={{
+            pathname: "/",
+            state: {
+              bgColor: [primaryColor, secondaryColor, thirdColor, fourthColor, fifthColor, sixthColor],
+              textColor: [primaryTextColor, secondaryTextColor, thirdTextColor, fourthTextColor, fifthTextColor, sixthTextColor]
+            }}}>
+            <span className="xl:hidden">
+              <SegmentsAnimation noShowColor={noShowColor} largeBar={true} segment={logoText.length} type="colorBgText" x={0} y={-20} zIntervalFrom={-20} zIntervalTo={20} delay={50}>{logoText}</SegmentsAnimation>
+            </span>
+          </DelayLink>
           <DelayLink to={{
             pathname: `${goBackHome? '/': './'}`,
             state: {
               bgColor: [primaryColor, secondaryColor, thirdColor, fourthColor, fifthColor, sixthColor],
               textColor: [primaryTextColor, secondaryTextColor, thirdTextColor, fourthTextColor, fifthTextColor, sixthTextColor]
             }}}>
-            <Arrow size={isMobile?'40px': '60px'} rotate="180deg" color={arrowColor} />
+            <span className="xlup:hidden">A.W.</span>
           </DelayLink>
-        </span>
-      }
+        </div>
+        {
+          !nobackArrow && <span className={`z-30`}>
+            <DelayLink to={{
+              pathname: `${goBackHome? '/': './'}`,
+              state: {
+                bgColor: [primaryColor, secondaryColor, thirdColor, fourthColor, fifthColor, sixthColor],
+                textColor: [primaryTextColor, secondaryTextColor, thirdTextColor, fourthTextColor, fifthTextColor, sixthTextColor]
+              }}}>
+              <Arrow size={isMobile?'35px': '100px'} rotate="180deg" color={arrowColor} />
+            </DelayLink>
+          </span>
+        }
+      </div>
     </div>
   )
 }

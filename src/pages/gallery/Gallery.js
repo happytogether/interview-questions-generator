@@ -15,6 +15,7 @@ import { HomeStore, StepperStore } from "../../Store";
 import { DonutSet, IceCreamSet, DefaultSet, FruitSet, FruitSet2 } from "../../components/Reward/MemphisSets";
 import Arrow from '../../components/shapes/Arrow';
 import Marquee from '../../components/Marquee';
+import Navigation from '../../components/Navigation';
 import Questions from './Questions';
 import DelayLink from '../../ultils/DelayLink';
 import { fetchHomepageJsonAction, stepDoneAction } from "../../Actions";
@@ -86,7 +87,6 @@ function Gallery(props) {
     <div id="outer-container" className={`gallery ${primaryColor}-primary-color ${secondaryColor}-secondary-color`}>
       <TransitionPanels bgColorValue={bgColorValue}/>
       <Logo noShowColor={primaryColor} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
-      <HamburgerMenu barColor={secondaryTextColor} panelBgColor={thirdColor} panelTextColor={thirdTextColor} crossColor={thirdTextColor} bgColorValue={bgColorValue} />
       <div id="page-wrap" className={`w-screen min-h-screen report bg-primary-secondary`}>
         <div className="questions-container gap-x-20 pt-48 xl:pt-36 w-full flex flex-wrap flex-row col-count-2 justify-center items-center">
           {
@@ -142,6 +142,7 @@ function Gallery(props) {
       }
     </motion.div>
     <GoToTop />
+    <Navigation bgColorValue={bgColorValue}/>
   </div>
   );
 }

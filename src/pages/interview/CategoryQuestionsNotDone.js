@@ -89,7 +89,7 @@ export default function QuestionsNotDone(data) {
             {/* This is the card itself, we're binding our gesture to it (and inject its index so we know which is which) */}
             <animated.div {...bind(i)} className={`bg-${bgColorValue[i][0]} sm:w-full sm:mx-3 w-60vw`} onClick={handleClick}  style={{ transform: interpolate([rot, scale], trans) }}>
               <span style={{"color": bgColorValue[i][1]}} className="p-5 text-xl"><span className="text-5xl">{props.length - i < 10 ? "0"+ (props.length - i): props.length - i}</span>.{questions[i].title}</span>
-              <span style={{"height": "350px", "color": bgColorValue[i][1]}} className="p-5 text-lg overflow-y-scroll" dangerouslySetInnerHTML={ {__html: questions[i].answer} } />
+              <span style={{"height": "350px", "color": bgColorValue[i][1]}} className="p-5 text-base overflow-y-scroll" dangerouslySetInnerHTML={ {__html: questions[i].answer} } />
             </animated.div>
           </animated.div>
         ))}

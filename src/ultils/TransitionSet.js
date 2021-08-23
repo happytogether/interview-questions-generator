@@ -3,8 +3,16 @@ const pageVariants = {
     y: '100vh',
     opacity:0
   },
+  initialYNegative100vh: {
+    y: '-100vh',
+    opacity: 0
+  },
+  initialXNegative100vw: {
+    x: '-100vw',
+    opacity: 0
+  },
   initialAlpha1: {
-    y: '100vh'
+    x: 0
   },
   rightInitial500: {
     x: 500
@@ -32,6 +40,10 @@ const pageVariants = {
   },
   in: {
     y: 0,
+    opacity: 1
+  },
+  xin: {
+    x: 0,
     opacity: 1
   },
   leftOut: {

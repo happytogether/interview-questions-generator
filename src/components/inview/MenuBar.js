@@ -5,7 +5,7 @@ import { useInView } from 'react-intersection-observer';
 import { motion, useAnimation } from "framer-motion";
 import { pageTransitionEaseOut, pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageVariants } from '../../ultils/TransitionSet';
 
-export default function InviewBar2 (props) {
+export default function MenuBar (props) {
   const controls = useAnimation();
   const { ref, inView } = useInView();
   const index = props.index;
@@ -40,6 +40,6 @@ export default function InviewBar2 (props) {
     }
   }
   return (
-    <motion.div ref={ref} initial="hidden" animate={controls} variants={boxVariants} className={`relative bg-cover bg-center bg-no-repeat mb-${gap}`} style={{'backgroundColor':`var(--${colorSet[Math.floor(Math.random()*colorSet.length)]})`, "backgroundSize": "120px auto", "width": "1px", "height": barHeight, "transformOrigin": "left center"}}></motion.div>
+    <motion.div ref={ref} initial="hidden" animate={controls} variants={boxVariants} className={`relative bg-cover bg-center bg-no-repeat mb-${gap}`} style={{'backgroundColor':`var(--${colorSet[index]})`, "width": "1px", "height": barHeight, "transformOrigin": "left center"}}></motion.div>
   )
 }

@@ -11,8 +11,6 @@ import Reward from '../../components/Reward/Reward';
 import Logo from "../../components/Logo";
 import { DefaultSet, MemphisSet1, MemphisSet2 } from "../../components/Reward/MemphisSets";
 import Restart from '../../components/shapes/Restart';
-import ReactRain from 'react-rain-animation';
-import "react-rain-animation/lib/style.css";
 import CategoryQuestionsDone from './CategoryQuestionsDone';
 import CategoryQuestionsNotDone from './CategoryQuestionsNotDone';
 import SmileSadFace from './SmileSadFace';

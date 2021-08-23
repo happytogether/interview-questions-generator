@@ -6,7 +6,6 @@ import "./Report.scss";
 import Logo from "../../components/Logo";
 import Footer from '../../components/Footer';
 import { useSpring, animated } from 'react-spring';
-import * as easings from 'd3-ease';
 import Smile from '../../components/shapes/Smile';
 import Sad from '../../components/shapes/Sad';
 import Triangle from '../../components/shapes/memphis/Triangle';
@@ -24,6 +23,7 @@ import { motion } from "framer-motion";
 import { pageTransitionEaseOut, pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageVariants } from '../../ultils/TransitionSet';
 import { content, upMotion} from '../../components/AnimationSet';
 import HamburgerMenu from '../../components/HamburgerMenu/HamburgerMenu';
+import Navigation from '../../components/Navigation';
 import GoToTop from '../../ultils/GoToTop';
 import TransitionPanels from '../../components/TransitionPanels';
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
@@ -178,7 +178,6 @@ function Report(props) {
     initial="initial" id="outer-container" className={`${primaryColor?primaryColor:'yellow'}-primary-color ${secondaryColor?secondaryColor:'blue'}-secondary-color`}>
       <TransitionPanels bgColorValue={bgColorValue}/>
       <Logo goBackHome={true} noShowColor={primaryColor} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
-      <HamburgerMenu barColor={secondaryTextColor} panelBgColor={thirdColor} panelTextColor={thirdTextColor} crossColor={thirdTextColor} bgColorValue={bgColorValue} />
       <ToastContainer position="top-center" draggable={true} draggablePercent={25} autoClose={10000} />
       <div id="page-wrap" className={`w-screen min-h-screen report bg-primary-secondary flex justify-center items-center py-10`}>
         <motion.div variants={pageVariants} initial='initial' transition={pageTransitionShort} exit='down' animate="in" className="xl:w-8/12 lg:w-11/12 lg:mt-20 p-20 lg:p-10 w-6/12 h-5/6 bg-white default-window mt-20">
@@ -262,6 +261,7 @@ function Report(props) {
         }
       </motion.div>
       <GoToTop />
+      <Navigation bgColorValue={bgColorValue}/>
     </motion.div>
   );
 }

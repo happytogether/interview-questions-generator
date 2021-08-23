@@ -1,5 +1,5 @@
 import { useState, useEffect, useLayoutEffect, useContext, useMemo } from 'react';
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { fetchHomepageJsonAction, stepDoneAction, initialInterviewCategoryQuestionsCount } from "./Actions";
 import { HomeStore, StepperStore } from "./Store";
 import { MouseContext } from "./context/mouse-context";
@@ -15,10 +15,11 @@ import { pageTransition, pageTransition2, pageTransition3, pageVariants } from '
 import HamburgerMenu from './components/HamburgerMenu/HamburgerMenu';
 import GetRandomFromArray from './ultils/GetRandomFromArray';
 import { ColorSetNoBlue } from './components/ColorSet';
+import SegmentsAnimation from './components/SegmentsAnimation';
 import TransitionPanels from './components/TransitionPanels';
 import GoToTop from './ultils/GoToTop';
 import Marquee from './components/Marquee';
-import Sticky from 'react-stickynode';
+import Navigation from './components/Navigation';
 
 function Home(props) {
   const { state, homeDispatch } = useContext(HomeStore);
@@ -52,13 +53,7 @@ function Home(props) {
 
   const { cursorType, cursorChangeHandler } = useContext(MouseContext);
   const [ items,setItems ]=useState([]);
-  const [sticky, setSticky] = useState(false);
 
-  const handleStateChange = (status) => {
-
-    status.status === Sticky.STATUS_FIXED ? setSticky(true): setSticky(false);
-
-  };
 
   return (
     <div>
@@ -66,7 +61,6 @@ function Home(props) {
       <TransitionPanels bgColorValue={bgColorValue}/>
       <div id="outer-container" className={`${primaryColor}-primary-color ${secondaryColor}-secondary-color`}>
         <Logo nobackArrow noShowColor={leftColor} bgColorValue={bgColorValue} prePrimaryColor={primaryColor} preSecondaryColor={secondaryColor} />
-        <HamburgerMenu barColor='var(--gray-dark)' panelBgColor={bgColorValue[5][0]} panelTextColor={bgColorValue[5][1]} crossColor={bgColorValue[5][1]} bgColorValue={bgColorValue} />
         <motion.div variants={pageVariants} transition={pageTransition} exit='down' id="page-wrap" id="page-wrap" className="bg-primary-secondary">
           <HomeHeader leftColor={leftColor} bgColorValue={bgColorValue} />
           <HomeHeader2 bgColorValue={bgColorValue} />
@@ -75,6 +69,7 @@ function Home(props) {
         </motion.div>
       </div>
       <GoToTop />
+      <Navigation bgColorValue={bgColorValue} noShowColor={leftColor} />
     </div>
   );
 }

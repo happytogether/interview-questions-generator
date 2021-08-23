@@ -8,7 +8,7 @@ import Moon2 from '../components/shapes/Moon2';
 import Rect from '../components/shapes/Rect';
 import DelayLink from '../ultils/DelayLink';
 import InviewBar2 from '../components/inview/InviewBar2';
-import ColorBarAnimation from '../components/ColorBarAnimation';
+import SegmentsAnimation from '../components/SegmentsAnimation';
 import DelayLinkButton from '../components/DelayLinkButton';
 import getRandomFromArray from '../ultils/GetRandomFromArray';
 import { bgSet } from '../components/BackgroundSet';
@@ -46,7 +46,7 @@ export default function HomeHeader2(props) {
         <div className={`overflow-hidden flex md:flex-col items-center justify-center w-full h-full lg:h-auto relative`}>
           <div className="relative bg-gray-light w-3/5 lg:w-full lg:h-screen flex items-center justify-center h-full">
             <div className="flex flex-col justify-center absolute right-0 top-0 h-full" style={{"width": "25px"}}>
-              <ColorBarAnimation bgColorValue={bgColorValue} noShowColor={rightColor} />
+              <SegmentsAnimation segment={8} barWidth={25} type="bar" x={-20} y={-20} zIntervalFrom={-20} zIntervalTo={-20} delay={50} bgColorValue={bgColorValue} noShowColor={leftColor}></SegmentsAnimation>
             </div>
             <animated.div style={{ transform: props1.xy.interpolate(trans1) }} className="default-window bg-white p-10 w-6/12 lg:w-9/12 mt-10 lg:text-sm lg:ml-0 lg:mt-20 lg:-ml-12">
               <h2 className="text-2xl lg:text-sm border-b pb-1">Interview<br /><span className="w-6/12 border-b pr-20 sm:w-full">Anni Wang </span> here and get some FUN.</h2>

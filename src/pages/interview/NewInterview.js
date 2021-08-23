@@ -35,6 +35,7 @@ import { pageTransitionColorsAction } from "../../Actions";
 import { PageTransitionColorsStore } from '../../Store';
 import SegmentsAnimation from '../../components/SegmentsAnimation';
 import Marquee from '../../components/Marquee';
+import Navigation from '../../components/Navigation';
 
 function NewInterview(props) {
   const primaryColor = props.location.state ? props.location.state.bgColor[0]: 'blue';
@@ -157,8 +158,7 @@ return (
     animate="animate"
     initial="initial" id="outer-container" className={`${primaryColor}-primary-color ${secondaryColor}-secondary-color`}>
       <TransitionPanels bgColorValue={bgColorValue}/>
-      <Logo goBackHome={true} noShowColor={primaryColor} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
-      <HamburgerMenu barColor={secondaryTextColor} panelBgColor={thirdColor} panelTextColor={thirdTextColor} crossColor={thirdTextColor} bgColorValue={bgColorValue} />
+      <Logo goBackHome={true} noShowColor={primaryColor} arrowColor={primaryTextColor} bgColorValue={bgColorValue} />
       <div id="page-wrap" className={`w-screen min-h-screen bg-primary-secondary flex justify-center items-center py-10 pb-20`}>
         <motion.div variants={pageVariants} initial='initial' transition={pageTransitionShort} exit='down' animate="in" className="xl:w-9/12 lg:w-11/12 lg:mt-20 lg:p-10 w-6/12 h-5/6 bg-white p-20 sm:p-5 default-window mt-20">
           <div className="flex flex-row w-full h-full lg:flex-col">
@@ -253,6 +253,7 @@ return (
       </motion.div>
 
       <GoToTop />
+      <Navigation bgColorValue={bgColorValue} noShowColor={secondaryColor} />
     </motion.div>
   );
 }

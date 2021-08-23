@@ -8,7 +8,6 @@ import Cannon from '../components/shapes/Cannon';
 import Rect from '../components/shapes/Rect';
 import InviewText from '../components/inview/InviewText';
 import InviewText2 from '../components/inview/InviewText2';
-import ColorBarAnimation from '../components/ColorBarAnimation';
 import SegmentsAnimation from '../components/SegmentsAnimation';
 import InviewHorizontalBar from '../components/inview/InviewHorizontalBar';
 import { bgSet } from '../components/BackgroundSet';

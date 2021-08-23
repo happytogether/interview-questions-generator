@@ -17,6 +17,7 @@ import { ColorSet } from '../../components/ColorSet';
 import SegmentsAnimation from '../../components/SegmentsAnimation';
 import { isMobile } from "react-device-detect";
 import Marquee from '../../components/Marquee';
+import Navigation from '../../components/Navigation';
 
 function Credit(props) {
   const primaryColor = props.location.state ? props.location.state.bgColor[0]: 'green';
@@ -81,7 +82,6 @@ function Credit(props) {
     initial="initial" id="outer-container" className={`${primaryColor?primaryColor:'yellow'}-primary-color ${secondaryColor?secondaryColor:'blue'}-secondary-color`}>
       <TransitionPanels bgColorValue={bgColorValue}/>
       <Logo goBackHome={true} noShowColor={primaryColor} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
-      <HamburgerMenu barColor={secondaryTextColor} panelBgColor={thirdColor} panelTextColor={thirdTextColor} crossColor={thirdTextColor} bgColorValue={bgColorValue} />
       <div id="page-wrap" className={`w-screen min-h-screen bg-primary-secondary py-10`}>
         <motion.div variants={pageVariants} initial='initial' transition={pageTransition} exit='down' animate="in" className="flex flex-row justify-center items-center ">
           <motion.div variants={pageVariants} initial='initial' transition={pageTransition2} exit='down' animate="in" className="absolute z-20 right-40 top-40 sm:hidden">
@@ -120,6 +120,7 @@ function Credit(props) {
         }
       </motion.div>
       <GoToTop />
+      <Navigation bgColorValue={bgColorValue}/>
     </motion.div>
 
   );
