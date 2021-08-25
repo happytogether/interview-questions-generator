@@ -16,8 +16,8 @@ import useCookie from "../../hooks/useCookie";
 import Smile from "../../components/shapes/Smile";
 import Sad from "../../components/shapes/Sad";
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
-import { BgColorSet } from '../../components/ColorSet';
-import { content, upMotion} from '../../components/AnimationSet';
+import { BgColorSet } from '../../components/Sets/ColorSet';
+import { content, upMotion} from '../../components/Sets/AnimationSet';
 import Navigation from '../../components/Navigation';
 
 export default function InterviewContainer(props) {

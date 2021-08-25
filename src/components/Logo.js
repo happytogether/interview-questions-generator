@@ -4,10 +4,10 @@ import DelayLink from '../ultils/DelayLink';
 import Arrow from './shapes/Arrow';
 import { isMobile } from "react-device-detect";
 import { SplitText, LetterWrapperProp, WordWrapperProp, LineWrapperProp } from '@cyriacbr/react-split-text';
-import { ColorSet } from './ColorSet';
+import { ColorSet } from './Sets/ColorSet';
 import { useSpring, useSprings, animated, interpolate } from 'react-spring';
 import SegmentsAnimation from './SegmentsAnimation';
-import pianoSfx from './piano.mp3';
+import pianoSfx from '../assets/piano.mp3';
 
 let audio = new Audio(pianoSfx);
 

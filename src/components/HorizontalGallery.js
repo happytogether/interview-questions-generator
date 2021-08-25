@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react'
 import ScrollContainer from 'react-indiana-drag-scroll';
 import { useDrag } from 'react-use-gesture';
 import { useSpring, useSprings, animated, interpolate } from 'react-spring';
-import { ColorSet } from './ColorSet';
+import { ColorSet } from './Sets/ColorSet';
 import getRandomFromArray from '../ultils/GetRandomFromArray';
 
 export default function HorizontalGallery(props) {

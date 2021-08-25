@@ -1,6 +1,6 @@
 import { useMemo, useEffect } from "react";
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
-import { ColorSet } from '../../components/ColorSet';
+import { ColorSet } from '../Sets/ColorSet';
 import { useInView } from 'react-intersection-observer';
 import { motion, useAnimation } from "framer-motion";
 

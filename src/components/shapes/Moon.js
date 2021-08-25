@@ -1,9 +1,9 @@
 import React, { useState, useMemo } from 'react'
 import { useSpring, useSprings, animated, interpolate } from 'react-spring';
-import { BgColorSet } from '../ColorSet';
+import { BgColorSet } from '../Sets/ColorSet';
 import getRandomFromInterval from "../../ultils/getRandomFromInterval";
 import useSound from 'use-sound';
-import springSfx from '../spring.mp3';
+import springSfx from '../../assets/spring.mp3';
 
 export default function Moon(props) {
   const styles = {

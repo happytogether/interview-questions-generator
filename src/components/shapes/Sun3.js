@@ -2,7 +2,7 @@ import { useContext, useRef, useEffect } from "react";
 import Reward from '../Reward/Reward.js';
 import { FruitSet } from '../Reward/MemphisSets';
 import useSound from 'use-sound';
-import fruitnanjiSfx from '../fruitnanji.mp3';
+import fruitnanjiSfx from '../../assets/fruitnanji.mp3';
 
 export default function Sun3(props) {
   const clicked = props.clicked;

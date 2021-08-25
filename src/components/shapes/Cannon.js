@@ -3,7 +3,7 @@ import { useSpring, useSprings, animated, interpolate } from 'react-spring';
 import { BallonSet } from "../Reward/MemphisSets";
 import Reward from '../Reward/Reward.js';
 import { CannonSvg } from '../Sets/SvgSet';
-import cannonSfx from '../cannon.mp3';
+import cannonSfx from '../../assets/cannon.mp3';
 import useSound from 'use-sound';
 
 export default function Cannon(props) {

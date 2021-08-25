@@ -4,10 +4,10 @@ import InviewBar2 from './inview/InviewBar2';
 import MenuBar from './inview/MenuBar';
 import FullScreenBar from './inview/FullScreenBar';
 import getRandomFromArray from '../ultils/GetRandomFromArray';
-import { BgColorSet, LightColorSet } from './ColorSet';
+import { BgColorSet, LightColorSet } from './Sets/ColorSet';
 import { motion } from "framer-motion";
 import { pageTransitionEaseOut, pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageVariants } from '../ultils/TransitionSet';
-import windSfx from './wind.mp3';
+import windSfx from '../assets/wind.mp3';
 import DelayLink from '../ultils/DelayLink';
 import { isMobile } from "react-device-detect";
 

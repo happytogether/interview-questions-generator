@@ -5,15 +5,15 @@ import { HomeStore, StepperStore } from "./Store";
 import { MouseContext } from "./context/mouse-context";
 import HomeHeader from './components/HomeHeader';
 import HomeHeader2 from './components/HomeHeader2';
-import Items from './components/Items';
-import Footer from './components/Footer';
+import Items from './components/Items/Items';
+import Footer from './components/Footer/Footer';
 import DotRing from "./components/DotRing/DotRing";
 import Arrow from "./components/shapes/Arrow";
 import Logo from "./components/Logo";
-import { downMotion } from './components/AnimationSet';
+import { downMotion } from './components/Sets/AnimationSet';
 import { pageTransition, pageTransition2, pageTransition3, pageVariants } from './ultils/TransitionSet';
 import GetRandomFromArray from './ultils/GetRandomFromArray';
-import { BgColorSetHome } from './components/ColorSet';
+import { BgColorSetHome } from './components/Sets/ColorSet';
 import SegmentsAnimation from './components/SegmentsAnimation';
 import TransitionPanels from './components/TransitionPanels';
 import GoToTop from './ultils/GoToTop';
@@ -71,7 +71,7 @@ function Home(props) {
         <motion.div variants={pageVariants} transition={pageTransition} exit='down' id="page-wrap" className="bg-primary-secondary">
           <HomeHeader leftColor={leftColor} bgColorValue={bgColorValue} />
           <HomeHeader2 rightColor={rightColor} bgColorValue={bgColorValue} />
-          <Marquee bgColor={marqueeColor} />
+          <Marquee bgColor={marqueeColor} bgColorValue={bgColorValue} />
           <Items items={state.data} bgColorValue={bgColorValue} />
           <Footer bgColor={sixthColor} textColor={sixthTextColor} bgColorValue={bgColorValue} />
         </motion.div>

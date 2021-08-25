@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useMemo } from 'react';
-import Footer from '../../components/Footer';
+import Footer from '../../components/Footer/Footer';
 import GoToTop from '../../ultils/GoToTop';
 import Logo from '../../components/Logo';
 import './Gallery.scss';
@@ -8,7 +8,7 @@ import { motion, useAnimation } from "framer-motion";
 import TransitionPanels from '../../components/TransitionPanels';
 import { pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageTransitionShort2, pageTransitionEaseIn, pageVariants } from '../../ultils/TransitionSet';
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
-import { BgColorSet2, ColorSetNoBlue } from '../../components/ColorSet';
+import { BgColorSet2, ColorSetNoBlue } from '../../components/Sets/ColorSet';
 import HorizontalGallery from '../../components/HorizontalGallery';
 import { HomeStore, StepperStore } from "../../Store";
 import { DonutSet, IceCreamSet, DefaultSet, FruitSet, FruitSet2 } from "../../components/Reward/MemphisSets";
@@ -93,7 +93,7 @@ function Gallery(props) {
     <div id="outer-container" className={`gallery ${primaryColor}-primary-color ${secondaryColor}-secondary-color`}>
       <TransitionPanels bgColorValue={bgColorValue}/>
       <Logo logoColorSet={logoColorSet} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
-      <GoBackArrow color={primaryTextColor} bgColorValue={bgColorValue} />
+      <GoBackArrow color={secondaryTextColor} bgColorValue={bgColorValue} />
 
       <div id="page-wrap" className={`w-screen min-h-screen bg-primary-secondary`}>
         <div className="flex justify-center">
@@ -156,7 +156,7 @@ function Gallery(props) {
               </div>
             </div>
           </div>
-          <Marquee bgColor={fifthColor} />
+          <Marquee bgColor={fifthColor} bgColorValue={bgColorValue} />
         </motion.div>
       }
     </div>

@@ -1,11 +1,11 @@
 import React, { useContext} from 'react';
-import DelayLink from '../ultils/DelayLink';
+import DelayLink from '../../ultils/DelayLink';
 import { Link } from "react-router-dom";
 import './Footer.scss';
-import GetRandomFromArray from '../ultils/GetRandomFromArray';
-import useBoop from '../hooks/use-boop';
+import GetRandomFromArray from '../../ultils/GetRandomFromArray';
+import useBoop from '../../hooks/use-boop';
 import { useSpring, useSprings, animated, interpolate } from 'react-spring';
-import SegmentsAnimation from '../components/SegmentsAnimation';
+import SegmentsAnimation from '../SegmentsAnimation';
 
 export default function Footer(props) {
   const bgColor = props.bgColor;

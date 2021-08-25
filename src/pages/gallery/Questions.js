@@ -14,7 +14,7 @@ import Parallax from '../../components/Parallax';
 import { useSpring, useSprings, animated, interpolate } from 'react-spring';
 import getRandomFromInterval from "../../ultils/getRandomFromInterval";
 import SegmentsAnimation from '../../components/SegmentsAnimation';
-import { ColorSet } from '../../components/ColorSet';
+import { ColorSet } from '../../components/Sets/ColorSet';
 
 export default function Questions(props){
   const i = props.i;

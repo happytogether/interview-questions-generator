@@ -13,10 +13,10 @@ import InviewHorizontalBar from '../components/inview/InviewHorizontalBar';
 import { bgSet } from '../components/BackgroundSet';
 import getRandomFromArray from '../ultils/GetRandomFromArray';
 import { motion } from "framer-motion";
-import { content, upMotion, downMotion } from './AnimationSet';
+import { content, upMotion, downMotion } from './Sets/AnimationSet';
 import { pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageVariants } from '../ultils/TransitionSet';
 import { SplitText, LetterWrapperProp, WordWrapperProp, LineWrapperProp } from '@cyriacbr/react-split-text';
-import { BgColorSet, ColorSet } from '../components/ColorSet';
+import { BgColorSet, ColorSet } from './Sets/ColorSet';
 
 export default function HomeHeader(props) {
   const prePrimaryColor = props.prePrimaryColor;

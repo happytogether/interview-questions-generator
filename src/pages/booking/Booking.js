@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import "./Booking.scss";
 import Logo from "../../components/Logo";
-import Footer from '../../components/Footer';
+import Footer from '../../components/Footer/Footer';
 import { useSpring, animated } from 'react-spring';
 import { motion } from "framer-motion";
 import DelayLink from '../../ultils/DelayLink';
 import GoToTop from '../../ultils/GoToTop';
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
-import { BgColorSet, ColorSet } from '../../components/ColorSet';
+import { BgColorSet, ColorSet } from '../../components/Sets/ColorSet';
 import TransitionPanels from '../../components/TransitionPanels';
 import Navigation from '../../components/Navigation';
 import { pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageTransitionEaseOut, pageVariants } from '../../ultils/TransitionSet';
@@ -49,7 +49,7 @@ function Booking(props) {
       <div id="page-wrap" className="bg-primary-secondary">
         <iframe className="w-9/12" src="https://react-calendso-interview-production.up.railway.app/anni/30mins" frameborder="0" allowfullscreen></iframe>
         <motion.div variants={pageVariants} transition={pageTransitionEaseOut} exit='down'>
-          <Marquee bgColor={fifthColor} />
+          <Marquee bgColor={fifthColor} bgColorValue={bgColorValue} />
         </motion.div>
         <motion.div variants={pageVariants} initial='initial' transition={pageTransition} exit='rightInitial500' animate='in'>
           {

@@ -1,6 +1,6 @@
 import { useMemo, useEffect } from "react";
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
-import { BasicColorSet, LightColorSet } from '../../components/ColorSet';
+import { BasicColorSet, LightColorSet } from '../Sets/ColorSet';
 import { useInView } from 'react-intersection-observer';
 import { motion, useAnimation } from "framer-motion";
 import { pageTransitionEaseOut, pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageVariants } from '../../ultils/TransitionSet';

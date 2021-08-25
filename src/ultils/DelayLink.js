@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { useLastLocation } from 'react-router-last-location';
-import clickSfx from '../components/click.mp3';
+import clickSfx from '../assets/click.mp3';
 
 const audio = new Audio(clickSfx); // useMemo doesn't work, browser will still request serveral times for this mp3 file.
 

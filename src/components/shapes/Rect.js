@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSpring, useSprings, animated, interpolate } from 'react-spring';
 import getRandomFromInterval from "../../ultils/getRandomFromInterval";
 import useSound from 'use-sound';
-import spring2Sfx from '../spring2.mp3';
+import spring2Sfx from '../../assets/spring2.mp3';
 
 export default function Rect(props) {
   // define right left and position here with index

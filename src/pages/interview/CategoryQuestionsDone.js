@@ -10,7 +10,7 @@ import DelayLink from '../../ultils/DelayLink';
 import { StepperStore, UserAnswersStore, PageTransitionColorsStore } from '../../Store';
 import { stepResetAction } from "../../Actions";
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
-import { ColorSet } from '../../components/ColorSet';
+import { ColorSet } from '../../components/Sets/ColorSet';
 
 export default function QuestionsDone(props) {
   const questions = props.questions;

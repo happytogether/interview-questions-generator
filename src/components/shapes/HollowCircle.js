@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { useSpring, useSprings, animated, interpolate } from 'react-spring';
 import getRandomFromInterval from "../../ultils/getRandomFromInterval";
 import useSound from 'use-sound';
-import springSfx from '../spring.mp3';
-import { BasicColorSet } from '../ColorSet';
+import springSfx from '../../assets/spring.mp3';
+import { BasicColorSet } from '../Sets/ColorSet';
 
 export default function HollowCircle(props) {
   const styles = {

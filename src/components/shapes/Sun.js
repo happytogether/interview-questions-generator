@@ -1,10 +1,10 @@
 import { useContext, useRef, useEffect } from "react";
 import Reward from '../Reward/Reward.js';
 import { IceCreamSet, DonutSet, DefaultSet } from "../Reward/MemphisSets";
-import { BgColorSet, BasicColorSet } from '../ColorSet';
+import { BgColorSet, BasicColorSet } from '../Sets/ColorSet';
 import getRandomFromArray from '../../ultils/GetRandomFromArray';
 import useSound from 'use-sound';
-import foamSfx from '../foam.mp3';
+import foamSfx from '../../assets/foam.mp3';
 
 export default function Sun(props) {
 

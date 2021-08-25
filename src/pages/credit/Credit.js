@@ -1,10 +1,10 @@
 import { useState, useEffect, useMemo, useLayoutEffect } from 'react';
 import MondrianArt from '../../components/MondrianArt';
-import Footer from '../../components/Footer';
+import Footer from '../../components/Footer/Footer';
 import Logo from '../../components/Logo';
 import Sun from '../../components/shapes/Sun';
 import { motion } from "framer-motion";
-import { content, largeUpMotion} from '../../components/AnimationSet';
+import { content, largeUpMotion} from '../../components/Sets/AnimationSet';
 import DelayLink from '../../ultils/DelayLink';
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
 import Arrow from '../../components/shapes/Arrow';
@@ -12,7 +12,7 @@ import { DonutSet, IceCreamSet, DefaultSet, FruitSet, FruitSet2 } from "../../co
 import GoToTop from '../../ultils/GoToTop';
 import TransitionPanels from '../../components/TransitionPanels';
 import { pageTransitionEaseOut, pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageVariants } from '../../ultils/TransitionSet';
-import { BgColorSet, BgColorSetHome } from '../../components/ColorSet';
+import { BgColorSet, BgColorSetHome } from '../../components/Sets/ColorSet';
 import SegmentsAnimation from '../../components/SegmentsAnimation';
 import { isMobile } from "react-device-detect";
 import Marquee from '../../components/Marquee';
@@ -122,7 +122,7 @@ function Credit(props) {
       </div>
       <motion.div variants={pageVariants} transition={pageTransitionEaseOut} exit='down'>
         {
-          jsonLoaded && <Marquee bgColor={fifthColor} />
+          jsonLoaded && <Marquee bgColor={fifthColor} bgColorValue={bgColorValue} />
         }
       </motion.div>
       <motion.div variants={pageVariants} transition={pageTransitionEaseOut} exit='down'>

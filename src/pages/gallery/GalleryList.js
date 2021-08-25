@@ -1,12 +1,12 @@
 import React, { useContext, useState, useEffect, useMemo } from 'react';
-import Footer from '../../components/Footer';
+import Footer from '../../components/Footer/Footer';
 import GoToTop from '../../ultils/GoToTop';
 import Logo from '../../components/Logo';
 import { motion } from "framer-motion";
 import TransitionPanels from '../../components/TransitionPanels';
 import { pageTransitionEaseOut, pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageVariants } from '../../ultils/TransitionSet';
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
-import { BgColorSet, ColorSet2 } from '../../components/ColorSet';
+import { BgColorSet, ColorSet2 } from '../../components/Sets/ColorSet';
 import { HomeStore } from "../../Store";
 import { fetchHomepageJsonAction } from "../../Actions";
 import DelayLink from '../../ultils/DelayLink';
@@ -81,7 +81,7 @@ function GalleryList(props) {
       </div>
       <motion.div variants={pageVariants} transition={pageTransitionEaseOut} exit='down'>
         {
-          footer && <Marquee bgColor={fifthColor} />
+          footer && <Marquee bgColor={fifthColor} bgColorValue={bgColorValue} />
         }
       </motion.div>
       <motion.div variants={pageVariants} transition={pageTransitionEaseOut} exit='down'>

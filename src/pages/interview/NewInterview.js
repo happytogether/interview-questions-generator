@@ -8,7 +8,7 @@ import Chip from '@material-ui/core/Chip';
 import { fetchHomepageJsonAction, fetchInterviewCategoryQuestionsJsonAction, fetchInterviewCategoryQuestionsCountAction, initialInterviewCategoryQuestionsCount, stepResetAction, stepsResetAnswersAction } from '../../Actions';
 import { HomeStore } from '../../Store';
 import DelayLink from '../../ultils/DelayLink';
-import Footer from '../../components/Footer';
+import Footer from '../../components/Footer/Footer';
 import Arrow from '../../components/shapes/Arrow';
 import Sun from '../../components/shapes/Sun';
 import { GradeASet } from '../../components/confettiSet/GradeASet';
@@ -17,13 +17,13 @@ import Wave from '../../components/shapes/Wave';
 import MouseLeftRight from "../../components/DotRing/MouseLeftRight";
 import { DefaultSet } from "../../components/Reward/MemphisSets";
 import { motion } from "framer-motion";
-import { content, upMotion} from '../../components/AnimationSet';
+import { content, upMotion} from '../../components/Sets/AnimationSet';
 import GoToTop from '../../ultils/GoToTop';
 import { pageTransitionEaseOut, pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageVariants } from '../../ultils/TransitionSet';
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
 import TransitionPanels from '../../components/TransitionPanels';
 import { isMobile } from "react-device-detect";
-import { ColorSet, BgColorSet, ColorSetWhiteText, ColorSetDarkText } from '../../components/ColorSet';
+import { ColorSet, BgColorSet, ColorSetWhiteText, ColorSetDarkText } from '../../components/Sets/ColorSet';
 import './NewInterview.scss';
 import { pageTransitionColorsAction } from "../../Actions";
 import { PageTransitionColorsStore } from '../../Store';
@@ -245,7 +245,7 @@ return (
       </div>
       <motion.div variants={pageVariants} transition={pageTransitionEaseOut} exit='down'>
         {
-          footer && <Marquee bgColor={fifthColor} />
+          footer && <Marquee bgColor={fifthColor} bgColorValue={bgColorValue} />
         }
       </motion.div>
       <motion.div variants={pageVariants} transition={pageTransitionEaseOut} exit='down'>

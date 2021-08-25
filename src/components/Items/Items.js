@@ -1,25 +1,25 @@
 import { useContext, useState, useEffect, useMemo } from "react";
 import { useSpring, useSprings, animated, interpolate } from 'react-spring';
 import { motion } from "framer-motion";
-import Moon from './shapes/Moon';
-import Sun3 from './shapes/Sun3';
-import Wave from './shapes/Wave';
-import Rect from './shapes/Rect';
-import DotRing from "./DotRing/DotRing";
-import { MouseContext } from "../context/mouse-context";
-import { Store } from '../Store';
-import DelayLink from '../ultils/DelayLink';
+import Moon from '../shapes/Moon';
+import Sun3 from '../shapes/Sun3';
+import Wave from '../shapes/Wave';
+import Rect from '../shapes/Rect';
+import DotRing from "../DotRing/DotRing";
+import { MouseContext } from "../../context/mouse-context";
+import { Store } from '../../Store';
+import DelayLink from '../../ultils/DelayLink';
 import { Link } from "react-router-dom";
 import './Item.scss';
-import { content, upMotion, downMotion, upMotionSlow } from './AnimationSet';
-import { bgSet } from './BackgroundSet';
-import { BgColorSet } from './ColorSet';
-import getRandomFromArray from '../ultils/GetRandomFromArray';
-import InviewText from '../components/inview/InviewText';
-import DelayLinkButton from '../components/DelayLinkButton';
+import { content, upMotion, downMotion, upMotionSlow } from '../Sets/AnimationSet';
+import { bgSet } from '../BackgroundSet';
+import { BgColorSet } from '../Sets/ColorSet';
+import getRandomFromArray from '../../ultils/GetRandomFromArray';
+import InviewText from '../inview/InviewText';
+import DelayLinkButton from '../DelayLinkButton';
 import { SplitText, LetterWrapperProp, WordWrapperProp, LineWrapperProp } from '@cyriacbr/react-split-text';
-import { pageTransition, pageTransition2, pageTransition3, pageVariants } from '../ultils/TransitionSet';
-import SegmentsAnimation from '../components/SegmentsAnimation';
+import { pageTransition, pageTransition2, pageTransition3, pageVariants } from '../../ultils/TransitionSet';
+import SegmentsAnimation from '../SegmentsAnimation';
 
 
 const calc = (x, y) => [x - window.innerWidth / 2, y - window.innerHeight / 2]

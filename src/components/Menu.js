@@ -1,5 +1,5 @@
 import { useSpring, useSprings, animated, interpolate } from 'react-spring';
-import { MenuColorSet } from './ColorSet';
+import { MenuColorSet } from './Sets/ColorSet';
 import { motion } from "framer-motion";
 import { isMobile } from "react-device-detect";
 

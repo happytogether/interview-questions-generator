@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import ReactStoreIndicator from 'react-score-indicator'
 import "./Report.scss";
 import Logo from "../../components/Logo";
-import Footer from '../../components/Footer';
+import Footer from '../../components/Footer/Footer';
 import { useSpring, animated } from 'react-spring';
 import Smile from '../../components/shapes/Smile';
 import Sad from '../../components/shapes/Sad';
@@ -21,12 +21,12 @@ import { fetchInterviewCategoryQuestionsJsonAction, fetchInterviewCategoryQuesti
 import { HomeStore, QuestionsStore, QuestionsNumStore, StepperStore, UserAnswersStore } from '../../Store';
 import { motion } from "framer-motion";
 import { pageTransitionEaseOut, pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageVariants } from '../../ultils/TransitionSet';
-import { content, upMotion} from '../../components/AnimationSet';
+import { content, upMotion} from '../../components/Sets/AnimationSet';
 import Navigation from '../../components/Navigation';
 import GoToTop from '../../ultils/GoToTop';
 import TransitionPanels from '../../components/TransitionPanels';
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
-import { BgColorSet } from '../../components/ColorSet';
+import { BgColorSet } from '../../components/Sets/ColorSet';
 import Checkbox from '@material-ui/core/Checkbox';
 import { withStyles } from '@material-ui/core/styles';
 import { fetchHomepageJsonAction } from "../../Actions";
@@ -262,7 +262,7 @@ function Report(props) {
       </div>
       <motion.div variants={pageVariants} transition={pageTransitionEaseOut} exit='down'>
         {
-          footer && <Marquee bgColor={fifthColor} />
+          footer && <Marquee bgColor={fifthColor} bgColorValue={bgColorValue} />
         }
       </motion.div>
       <motion.div variants={pageVariants} transition={pageTransitionEaseOut} exit='down'>

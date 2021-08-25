@@ -7,7 +7,7 @@ import { DefaultSet } from "../../components/Reward/MemphisSets";
 import { stepDoneAction, stepsAddAnswersAction } from "../../Actions";
 import { Store, QuestionsStore, StepperStore, UserAnswersStore, PageTransitionColorsStore } from '../../Store';
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
-import { ColorSet, ColorSetWhiteText, ColorSetDarkText } from '../../components/ColorSet';
+import { ColorSet, ColorSetWhiteText, ColorSetDarkText } from '../../components/Sets/ColorSet';
 import {
   isMobile
 } from "react-device-detect";

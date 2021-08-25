@@ -22,7 +22,7 @@ export default function GoBackArrow(props) {
   const goBackHome = props.goBackHome;
 
   return (
-    <motion.div variants={pageVariants} initial='initial' transition={{ duration: .5, type: "tween", ease: "easeIn" }} exit='down' animate="in" className={`fixed right-20 top-1 z-10 lg:hidden`}>
+    <motion.div variants={pageVariants} initial='initial' transition={{ duration: 1, type: "tween", ease: "anticipate" }} exit='down' animate="in" className={`fixed right-20 top-1 z-10 lg:hidden`}>
      <DelayLink to={{
        pathname: `${goBackHome? '/': './'}`,
        state: {
