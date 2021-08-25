@@ -1,6 +1,6 @@
 import { useMemo, useEffect } from "react";
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
-import { BasicColorSet, LightColorSet } from '../../components/ColorSet';
+import { MenuColorSet, LightColorSet } from '../../components/ColorSet';
 import { useInView } from 'react-intersection-observer';
 import { motion, useAnimation } from "framer-motion";
 import { pageTransitionEaseOut, pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageVariants } from '../../ultils/TransitionSet';
@@ -13,6 +13,7 @@ export default function MenuBar (props) {
   const barWidth = props.barWidth || 25;
   const barHeight = props.barHeight || 50;
   const gap = props.gap || 0;
+  const menuOpen = props.menuOpen;
   const transitionSet = [pageTransition, pageTransition2, pageTransition3, pageTransitionShort];
   useEffect(() => {
     if(inView) {
@@ -23,7 +24,7 @@ export default function MenuBar (props) {
     }
   }, [controls, inView])
 
-  const colorSet = (props.colorSet === 'light' ? LightColorSet: BasicColorSet).filter((item) => {
+  const colorSet = (props.colorSet === 'light' ? LightColorSet: MenuColorSet).filter((item) => {
     return item !== noShowColor;
   });
 
@@ -40,6 +41,6 @@ export default function MenuBar (props) {
     }
   }
   return (
-    <motion.div ref={ref} initial="hidden" animate={controls} variants={boxVariants} className={`relative bg-cover bg-center bg-no-repeat mb-${gap}`} style={{'backgroundColor':`var(--${colorSet[index]})`, "width": "1px", "height": barHeight, "transformOrigin": "left center"}}></motion.div>
+    <motion.div ref={ref} initial="hidden" animate={controls} variants={boxVariants} className={`${menuOpen?'absolute':'relative'} left-0 top-0 bg-cover bg-center bg-no-repeat mb-${gap}`} style={{'backgroundColor':`var(--${colorSet[index%6]})`, "width": "1px", "height": barHeight, "transformOrigin": "left center"}}></motion.div>
   )
 }

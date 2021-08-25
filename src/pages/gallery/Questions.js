@@ -12,7 +12,7 @@ import { SplitText, LetterWrapperProp, WordWrapperProp, LineWrapperProp } from '
 import InviewText from '../../components/inview/InviewText';
 import Parallax from '../../components/Parallax';
 import { useSpring, useSprings, animated, interpolate } from 'react-spring';
-import getRandomFromInterval from "../../getRandomFromInterval";
+import getRandomFromInterval from "../../ultils/getRandomFromInterval";
 import SegmentsAnimation from '../../components/SegmentsAnimation';
 import { ColorSet } from '../../components/ColorSet';
 

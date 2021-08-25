@@ -4,9 +4,7 @@ import { MouseContext } from "../../context/mouse-context";
 import useMousePosition from "../../hooks/useMousePosition";
 import InterviewQuestions from './InterviewQuestions';
 import Arrow from '../../components/shapes/Arrow';
-import getRandomDifferent from '../../getRandomDifferent';
 import MouseLeftRight from "../../components/DotRing/MouseLeftRight";
-import HamburgerMenu from '../../components/HamburgerMenu/HamburgerMenu';
 import Logo from '../../components/Logo';
 import { motion } from "framer-motion"
 import { QuestionsStore, QuestionsNumStore, UserAnswersStore, PageTransitionColorsStore } from '../../Store';
@@ -18,8 +16,9 @@ import useCookie from "../../hooks/useCookie";
 import Smile from "../../components/shapes/Smile";
 import Sad from "../../components/shapes/Sad";
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
-import { ColorSet } from '../../components/ColorSet';
+import { BgColorSet } from '../../components/ColorSet';
 import { content, upMotion} from '../../components/AnimationSet';
+import Navigation from '../../components/Navigation';
 
 export default function InterviewContainer(props) {
   const { pageTransitionColorsState, pageTransitionColorsDispatch} = useContext(PageTransitionColorsStore);
@@ -53,23 +52,25 @@ export default function InterviewContainer(props) {
     document.body.classList.add('new-interview');
   }, [])
 
-  useEffect(() => {
-    setBg(getRandomDifferent(bgArr, bg));
-  }, [data])
-
   const [bg, setBg] = useState("box-bg");
   const bgArr = ["honey-comb-bg", "pie-bg", "equilateral-triangles-bg","rect-bg", "triangle-bg", "wave-bg", "line-bg", "box-bg", "skew-dot-bg", "cross-bg", "line-h-bg","paper-bg", "diagonal-bg"];
   const history = useHistory();
 
-  function handleRandomBg() {
-    setBg(getRandomDifferent(bgArr, bg));
-  }
   const randomIndex = Math.random() > .5 ? 0: 1;
 
   const bgColorValue = useMemo(
-    () => GetRandomFromArray(ColorSet),
+    () => GetRandomFromArray(BgColorSet),
     []
   );
+  const logoColorSet = useMemo(
+    () => GetRandomFromArray(BgColorSet.filter((color, index) => {
+      return color[0]!== primaryColor;
+  })),[]);
+
+  const menuColorSet = useMemo(() => GetRandomFromArray(BgColorSet.filter((color, index) => {
+    return color[0]!== secondaryColor;
+  })),[])
+
   const pageVariants = {
   initial: {
     x: "-100vw"
@@ -104,9 +105,8 @@ const pageTransition = {
       <motion.div variants={content}
       animate="animate"
       initial="initial" id="outer-container" className={`${primaryColor?primaryColor:'yellow'}-primary-color ${secondaryColor?secondaryColor:'blue'}-secondary-color`}>
-      <Logo logoTextColor={primaryTextColor} noShowColor={primaryColor} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
-      <HamburgerMenu barColor={secondaryTextColor} panelBgColor={thirdColor} panelTextColor={thirdTextColor} crossColor={thirdTextColor} bgColorValue={bgColorValue} />
-        <div id="page-wrap" onClick={()=>handleRandomBg()} className={`static2 bg-primary-secondary`}>
+      <Logo logoColorSet={logoColorSet} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
+        <div id="page-wrap" className={`static2 bg-primary-secondary`}>
           {
             cookie && <div onClick={() => {updateCookie("hidden")}} className={`${cookie} onboarding absolute w-full h-full z-50 bg-white flex flex-col items-center justify-center`}>
 
@@ -128,6 +128,7 @@ const pageTransition = {
           }
         </div>
       </motion.div>
+      <Navigation menuColorSet={menuColorSet} bgColorValue={bgColorValue} />
     </motion.div>
   )
 }

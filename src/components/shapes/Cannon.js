@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { useSpring, useSprings, animated, interpolate } from 'react-spring';
 import { BallonSet } from "../Reward/MemphisSets";
 import Reward from '../Reward/Reward.js';
-import { CannonSvg } from '../SvgSet';
+import { CannonSvg } from '../Sets/SvgSet';
 import cannonSfx from '../cannon.mp3';
 import useSound from 'use-sound';
 

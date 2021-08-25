@@ -4,7 +4,6 @@ import { useDrag } from 'react-use-gesture';
 import { useSpring, useSprings, animated, interpolate } from 'react-spring';
 import { ColorSet } from './ColorSet';
 import getRandomFromArray from '../ultils/GetRandomFromArray';
-import getRandomFromInterval from "../getRandomFromInterval";
 
 export default function HorizontalGallery(props) {
   const item = props.item;

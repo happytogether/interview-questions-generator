@@ -4,14 +4,14 @@ import { MouseContext } from "./../context/mouse-context";
 import Reward from './Reward/Reward.js';
 import DotRing from "./DotRing/DotRing";
 import Logo from '../components/Logo';
-import Moon2 from '../components/shapes/Moon2';
+import HollowCircle from '../components/shapes/HollowCircle';
 import Rect from '../components/shapes/Rect';
 import DelayLink from '../ultils/DelayLink';
-import InviewBar2 from '../components/inview/InviewBar2';
 import SegmentsAnimation from '../components/SegmentsAnimation';
 import DelayLinkButton from '../components/DelayLinkButton';
 import getRandomFromArray from '../ultils/GetRandomFromArray';
 import { bgSet } from '../components/BackgroundSet';
+import { BgColorSet } from '../components/ColorSet';
 import { motion } from "framer-motion";
 import { content, upMotion, downMotion } from './AnimationSet';
 import { pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageTransitionDelay, pageTransitionDelay2, pageVariants } from '../ultils/TransitionSet';
@@ -33,6 +33,10 @@ export default function HomeHeader2(props) {
   const fourthTextColor = bgColorValue[3][1];
   const [props1, set] = useSpring(() => ({ xy: [0, 0], config: { mass: 10, tension: 550, friction: 140 } }))
   const randomBg = useMemo(()=> getRandomFromArray(bgSet), []);
+  const barColorSet = useMemo(
+    () => getRandomFromArray(BgColorSet.filter((color, index) => {
+      return color[0]!== rightColor;
+  })),[]);
   const calc = (x, y) => [x - window.innerWidth / 2, y - window.innerHeight / 2]
   const trans1 = (x, y) => `translate3d(${-x / 30}px, ${y / 60}px,0)`
   const trans2 = (x, y) => `translate3d(${x / 30}px, ${-y / 60}px,0)`
@@ -46,7 +50,7 @@ export default function HomeHeader2(props) {
         <div className={`overflow-hidden flex md:flex-col items-center justify-center w-full h-full lg:h-auto relative`}>
           <div className="relative bg-gray-light w-3/5 lg:w-full lg:h-screen flex items-center justify-center h-full">
             <div className="flex flex-col justify-center absolute right-0 top-0 h-full" style={{"width": "25px"}}>
-              <SegmentsAnimation segment={8} barWidth={25} type="bar" x={-20} y={-20} zIntervalFrom={-20} zIntervalTo={-20} delay={50} bgColorValue={bgColorValue} noShowColor={leftColor}></SegmentsAnimation>
+              <SegmentsAnimation barColorSet={barColorSet} segment={8} barWidth={25} type="bar" x={-20} y={-20} zIntervalFrom={-20} zIntervalTo={-20} delay={50} bgColorValue={bgColorValue} noShowColor={leftColor}></SegmentsAnimation>
             </div>
             <animated.div style={{ transform: props1.xy.interpolate(trans1) }} className="default-window bg-white p-10 w-6/12 lg:w-9/12 mt-10 lg:text-sm lg:ml-0 lg:mt-20 lg:-ml-12">
               <h2 className="text-2xl lg:text-sm border-b pb-1">Interview<br /><span className="w-6/12 border-b pr-20 sm:w-full">Anni Wang </span> here and get some FUN.</h2>
@@ -58,11 +62,11 @@ export default function HomeHeader2(props) {
               </div>
             </animated.div>
             <div className="lg:hidden absolute" style={{right: '35%', bottom: "20%"}}>
-              <Moon2 bgColor="leftColor" />
+              <HollowCircle />
             </div>
           </div>
           <div className={`w-2/5 overflow-hidden relative h-full lg:w-full lg:h-screen`}>
-            <div className={`bg-${rightColor} flex items-center justify-center w-full h-full`}>
+            <div className={`${rightColor} flex items-center justify-center w-full h-full`}>
               <div className="transform rotate-45">
                 <animated.div style={{"width": "300px", "height": "300px", transform: props1.xy.interpolate(trans2)}} className={`${randomBg[0]} flex items-center justify-center large-rect w-8/12 sm:w-11/12 md:w-9/12 bg-gray-lightest text-blue p-10 default-window border`}>
                   <span className={`w-24 h-24 ${randomBg[1]} block`}></span>

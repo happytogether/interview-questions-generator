@@ -9,7 +9,7 @@ export default function InviewBar2 (props) {
   const controls = useAnimation();
   const { ref, inView } = useInView();
   const index = props.index;
-  const noShowColor = props.noShowColor;
+  const barColorSet = props.barColorSet;
   const barWidth = props.barWidth || 25;
   const barHeight = props.barHeight || 50;
   const gap = props.gap || 0;
@@ -23,9 +23,11 @@ export default function InviewBar2 (props) {
     }
   }, [controls, inView])
 
+  /*
   const colorSet = (props.colorSet === 'light' ? LightColorSet: BasicColorSet).filter((item) => {
     return item !== noShowColor;
   });
+  */
 
   const boxVariants = {
     hidden: {
@@ -40,6 +42,6 @@ export default function InviewBar2 (props) {
     }
   }
   return (
-    <motion.div ref={ref} initial="hidden" animate={controls} variants={boxVariants} className={`relative bg-cover bg-center bg-no-repeat mb-${gap}`} style={{'backgroundColor':`var(--${colorSet[Math.floor(Math.random()*colorSet.length)]})`, "backgroundSize": "120px auto", "width": "1px", "height": barHeight, "transformOrigin": "left center"}}></motion.div>
+    <motion.div ref={ref} initial="hidden" animate={controls} variants={boxVariants} className={`${barColorSet && barColorSet[Math.floor(Math.random()*barColorSet.length)][0]} relative bg-cover bg-center bg-no-repeat mb-${gap}`} style={{"backgroundSize": "120px auto", "width": "1px", "height": barHeight, "transformOrigin": "left center"}}></motion.div>
   )
 }

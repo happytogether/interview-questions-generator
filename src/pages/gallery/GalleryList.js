@@ -2,31 +2,32 @@ import React, { useContext, useState, useEffect, useMemo } from 'react';
 import Footer from '../../components/Footer';
 import GoToTop from '../../ultils/GoToTop';
 import Logo from '../../components/Logo';
-import HamburgerMenu from '../../components/HamburgerMenu/HamburgerMenu';
 import { motion } from "framer-motion";
 import TransitionPanels from '../../components/TransitionPanels';
 import { pageTransitionEaseOut, pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageVariants } from '../../ultils/TransitionSet';
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
-import { ColorSet2 } from '../../components/ColorSet';
+import { BgColorSet, ColorSet2 } from '../../components/ColorSet';
 import { HomeStore } from "../../Store";
 import { fetchHomepageJsonAction } from "../../Actions";
 import DelayLink from '../../ultils/DelayLink';
 import List from './List';
 import Marquee from '../../components/Marquee';
+import GoBackArrow from '../../components/GoBackArrow';
 import Navigation from '../../components/Navigation';
 
 function GalleryList(props) {
 
-  const primaryColor = props.location.state ? props.location.state.bgColor[0]: 'green';
-  const secondaryColor = props.location.state ? props.location.state.bgColor[1]: 'purple';
-  const thirdColor = props.location.state ? props.location.state.bgColor[2]: 'yellow';
+  const primaryColor = props.location.state ? props.location.state.bgColor[0]: 'bg-pink';
+  const secondaryColor = props.location.state ? props.location.state.bgColor[1]: 'bg-green';
+  const thirdColor = props.location.state ? props.location.state.bgColor[2]: 'bg-yellow';
+  const fourthColor = props.location.state ? props.location.state.bgColor[3]: 'bg-purple';
+  const fifthColor = props.location.state ? props.location.state.bgColor[4]: 'bg-red';
+  const sixthColor = props.location.state ? props.location.state.bgColor[5]: 'bg-blue';
   const primaryTextColor = props.location.state ? props.location.state.textColor[0]: 'var(--gray-dark)';
-  const secondaryTextColor = props.location.state ? props.location.state.textColor[1]: 'white';
+  const secondaryTextColor = props.location.state ? props.location.state.textColor[1]: 'var(--gray-dark)';
   const thirdTextColor = props.location.state ? props.location.state.textColor[2]: 'var(--gray-dark)';
-  const fourthColor = props.location.state ? props.location.state.bgColor[3]: 'pink';
-  const fourthTextColor = props.location.state ? props.location.state.textColor[3]: 'var(--gray-dark)';
-  const fifthColor = props.location.state ? props.location.state.bgColor[4]: 'orange';
-  const fifthTextColor = props.location.state ? props.location.state.textColor[4]: 'var(--gray-dark)';
+  const fourthTextColor = props.location.state ? props.location.state.textColor[3]: 'white';
+  const sixthTextColor = props.location.state ? props.location.state.textColor[5]: 'white';
   const { state, homeDispatch } = useContext(HomeStore);
   const [footer, setFooter] = useState(false);
 
@@ -35,12 +36,21 @@ function GalleryList(props) {
     setFooter(true);
   },[state.data]);
 
-  const bgColorValue = useMemo(() => GetRandomFromArray(ColorSet2),[]);
+  const bgColorValue = useMemo(() => GetRandomFromArray(BgColorSet),[]);
+  const logoColorSet = useMemo(
+    () => GetRandomFromArray(BgColorSet.filter((color, index) => {
+      return color[0]!== primaryColor;
+  })),[]);
+
+  const menuColorSet = useMemo(() => GetRandomFromArray(BgColorSet.filter((color, index) => {
+    return color[0]!== secondaryColor;
+  })),[])
 
   return (
     <div id="outer-container" className={`gallery ${primaryColor?primaryColor:'yellow'}-primary-color ${secondaryColor?secondaryColor:'blue'}-secondary-color`}>
       <TransitionPanels bgColorValue={bgColorValue}/>
-      <Logo goBackHome={true} noShowColor={primaryColor} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
+      <Logo logoColorSet={logoColorSet} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
+      <GoBackArrow color={primaryTextColor} bgColorValue={bgColorValue} goBackHome={true} />
       <div id="page-wrap" className={`w-screen min-h-screen flex justify-center report bg-primary-secondary pt-20`}>
         <div className="w-8/12 min-h-screen ml-20 xl:ml-0 flex flex-row flex-wrap gap-24 lg:gap-10 items-start pb-40 mt-40 lg:mt-10">
           <div className="w-5/12 lg:w-5/12 md:w-10/12 -mt-40">
@@ -80,7 +90,7 @@ function GalleryList(props) {
         }
       </motion.div>
       <GoToTop />
-      <Navigation bgColorValue={bgColorValue} />
+      <Navigation menuColorSet={menuColorSet} bgColorValue={bgColorValue} />
     </div>
   )
 }

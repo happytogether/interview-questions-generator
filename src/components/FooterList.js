@@ -35,7 +35,7 @@ export default function Footer(props) {
           bgColor: [primaryColor, secondaryColor, thirdColor, fourthColor, fifthColor, sixthColor],
           textColor: [primaryTextColor, secondaryTextColor, thirdTextColor, fourthTextColor, fifthTextColor, sixthTextColor]
         }}}>
-        <animated.svg style={style} className="inline-block mr-4" width="24" height="24" viewBox="0 0 24 24"><path fill={textColor} d={item.path} /></animated.svg>
+        <animated.svg style={style} className="inline-block mr-4" width="1.5rem" height="1.5rem" viewBox="0 0 24 24"><path fill={textColor} d={item.path} /></animated.svg>
         <span className="px-1">
             {item.title}
         </span>

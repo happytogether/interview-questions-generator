@@ -12,9 +12,8 @@ import Arrow from "./components/shapes/Arrow";
 import Logo from "./components/Logo";
 import { downMotion } from './components/AnimationSet';
 import { pageTransition, pageTransition2, pageTransition3, pageVariants } from './ultils/TransitionSet';
-import HamburgerMenu from './components/HamburgerMenu/HamburgerMenu';
 import GetRandomFromArray from './ultils/GetRandomFromArray';
-import { ColorSetNoBlue } from './components/ColorSet';
+import { BgColorSetHome } from './components/ColorSet';
 import SegmentsAnimation from './components/SegmentsAnimation';
 import TransitionPanels from './components/TransitionPanels';
 import GoToTop from './ultils/GoToTop';
@@ -24,13 +23,13 @@ import Navigation from './components/Navigation';
 function Home(props) {
   const { state, homeDispatch } = useContext(HomeStore);
   const { stepperState, stepperDispatch} = useContext(StepperStore);
-  const bgColorValue = useMemo(() => GetRandomFromArray(ColorSetNoBlue),[]);
-  const primaryColor = props.location.state ? props.location.state.bgColor[0]: 'pink';
-  const secondaryColor = props.location.state ? props.location.state.bgColor[1]: 'green';
-  const thirdColor = props.location.state ? props.location.state.bgColor[2]: 'yellow';
-  const fourthColor = props.location.state ? props.location.state.bgColor[3]: 'purple';
-  const fifthColor = props.location.state ? props.location.state.bgColor[4]: 'red';
-  const sixthColor = props.location.state ? props.location.state.bgColor[5]: 'blue';
+  const bgColorValue = useMemo(() => GetRandomFromArray(BgColorSetHome),[]);
+  const primaryColor = props.location.state ? props.location.state.bgColor[0]: 'bg-pink';
+  const secondaryColor = props.location.state ? props.location.state.bgColor[1]: 'bg-green';
+  const thirdColor = props.location.state ? props.location.state.bgColor[2]: 'bg-yellow';
+  const fourthColor = props.location.state ? props.location.state.bgColor[3]: 'bg-purple';
+  const fifthColor = props.location.state ? props.location.state.bgColor[4]: 'bg-red';
+  const sixthColor = props.location.state ? props.location.state.bgColor[5]: 'bg-blue';
   const primaryTextColor = props.location.state ? props.location.state.textColor[0]: 'var(--gray-dark)';
   const secondaryTextColor = props.location.state ? props.location.state.textColor[1]: 'var(--gray-dark)';
   const thirdTextColor = props.location.state ? props.location.state.textColor[2]: 'var(--gray-dark)';
@@ -39,7 +38,15 @@ function Home(props) {
 
   //left color for homehead.js left panel
   const leftColor = bgColorValue[4][0] === primaryColor ? bgColorValue[6][0] : bgColorValue[4][0];
+  const rightColor = bgColorValue[5][0];
   const marqueeColor = bgColorValue[6][0];
+  const logoColorSet = useMemo(
+    () => GetRandomFromArray(BgColorSetHome.filter((color, index) => {
+      return color[0]!== leftColor;
+  })),[]);
+  const menuColorSet = useMemo(() => GetRandomFromArray(BgColorSetHome.filter((color, index) => {
+    return color[0]!== secondaryColor;
+  })),[])
   useEffect(() => {
     state.data.length === 0 && fetchHomepageJsonAction(homeDispatch);
   },[state]);
@@ -60,16 +67,17 @@ function Home(props) {
       <DotRing />
       <TransitionPanels bgColorValue={bgColorValue}/>
       <div id="outer-container" className={`${primaryColor}-primary-color ${secondaryColor}-secondary-color`}>
-        <Logo nobackArrow noShowColor={leftColor} bgColorValue={bgColorValue} prePrimaryColor={primaryColor} preSecondaryColor={secondaryColor} />
-        <motion.div variants={pageVariants} transition={pageTransition} exit='down' id="page-wrap" id="page-wrap" className="bg-primary-secondary">
+        <Logo nobackArrow logoColorSet={logoColorSet} bgColorValue={bgColorValue} prePrimaryColor={primaryColor} preSecondaryColor={secondaryColor} />
+        <motion.div variants={pageVariants} transition={pageTransition} exit='down' id="page-wrap" className="bg-primary-secondary">
           <HomeHeader leftColor={leftColor} bgColorValue={bgColorValue} />
-          <HomeHeader2 bgColorValue={bgColorValue} />
+          <HomeHeader2 rightColor={rightColor} bgColorValue={bgColorValue} />
+          <Marquee bgColor={marqueeColor} />
           <Items items={state.data} bgColorValue={bgColorValue} />
           <Footer bgColor={sixthColor} textColor={sixthTextColor} bgColorValue={bgColorValue} />
         </motion.div>
       </div>
       <GoToTop />
-      <Navigation bgColorValue={bgColorValue} noShowColor={leftColor} />
+      <Navigation menuColorSet={menuColorSet}  bgColorValue={bgColorValue} />
     </div>
   );
 }

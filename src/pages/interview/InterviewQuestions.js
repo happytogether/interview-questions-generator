@@ -6,19 +6,13 @@ import Arrow from '../../components/shapes/Arrow';
 import FlickHand from '../../components/shapes/FlickHand';
 import { MouseContext } from "../../context/mouse-context";
 import useMousePosition from "../../hooks/useMousePosition";
-import getRandomDifferent from '../../getRandomDifferent';
 import Reward from '../../components/Reward/Reward';
 import Logo from "../../components/Logo";
-import { DefaultSet, MemphisSet1, MemphisSet2 } from "../../components/Reward/MemphisSets";
+import { DefaultSet } from "../../components/Reward/MemphisSets";
 import Restart from '../../components/shapes/Restart';
 import CategoryQuestionsDone from './CategoryQuestionsDone';
 import CategoryQuestionsNotDone from './CategoryQuestionsNotDone';
 import SmileSadFace from './SmileSadFace';
-import Memphis16_1 from '../../components/shapes/memphis16/Memphis16_1';
-import Memphis16_2 from '../../components/shapes/memphis16/Memphis16_2';
-import Memphis16_3 from '../../components/shapes/memphis16/Memphis16_3';
-import Memphis16_4 from '../../components/shapes/memphis16/Memphis16_4';
-import Memphis16_5 from '../../components/shapes/memphis16/Memphis16_5';
 import Sun3 from '../../components/shapes/Sun3';
 import MouseLeftRight from "../../components/DotRing/MouseLeftRight";
 import Stepper from '../../components/Stepper';
@@ -156,24 +150,6 @@ export default function Questions(value) {
         {
           <Stepper steps={steps} activeStep={index} completedSteps={completedSteps} />
         }
-
-        {
-          /*<animated.div className={`absolute left-10 top-3/4 xl:hidden ${ done?'opacity-15': 'opacity-50' }`} style={{ transform: props1.xy.interpolate(trans5) }}>
-            <Memphis16_1 size="200px" />
-          </animated.div>
-          <animated.div className={`absolute left-60 top-1/2 xl:hidden ${ done?'opacity-15': 'opacity-50' }`} style={{ transform: props1.xy.interpolate(trans5) }}>
-            <Memphis16_3 size="600px" />
-          </animated.div>
-          <animated.div className={`absolute right-1/4 bottom-0 xl:hidden ${ done?'opacity-15': 'opacity-50' }`} style={{ transform: props1.xy.interpolate(trans1) }}>
-            <Memphis16_4 size="400px" />
-          </animated.div>
-          */
-
-        }
-
-
-
-
         <div className="absolute left-10 top-1/2 -my-14 z-30 xl:hidden">
           <motion.h1 style={{"color": primaryTextColor}} variants={pageVariants} initial='initial' transition={{ duration: 1 + Math.random(), type: "tween", ease: "anticipate" }} exit='down' animate="in" className="inset-y-1/2 text-4xl w-36 z-20">0{parseInt(index)+1}.{title} / <span className="text-sm">Scores</span></motion.h1>
           <motion.div variants={pageVariants} initial='initial' transition={{ duration: 1.2, type: "tween", ease: "anticipate" }} exit='down' animate="in">

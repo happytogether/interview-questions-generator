@@ -5,7 +5,6 @@ import Moon from './shapes/Moon';
 import Sun3 from './shapes/Sun3';
 import Wave from './shapes/Wave';
 import Rect from './shapes/Rect';
-import Circle from './shapes/Circle';
 import DotRing from "./DotRing/DotRing";
 import { MouseContext } from "../context/mouse-context";
 import { Store } from '../Store';
@@ -14,13 +13,12 @@ import { Link } from "react-router-dom";
 import './Item.scss';
 import { content, upMotion, downMotion, upMotionSlow } from './AnimationSet';
 import { bgSet } from './BackgroundSet';
+import { BgColorSet } from './ColorSet';
 import getRandomFromArray from '../ultils/GetRandomFromArray';
-import InviewBar2 from '../components/inview/InviewBar2';
 import InviewText from '../components/inview/InviewText';
 import DelayLinkButton from '../components/DelayLinkButton';
 import { SplitText, LetterWrapperProp, WordWrapperProp, LineWrapperProp } from '@cyriacbr/react-split-text';
 import { pageTransition, pageTransition2, pageTransition3, pageVariants } from '../ultils/TransitionSet';
-import getRandomFromInterval from "../getRandomFromInterval";
 import SegmentsAnimation from '../components/SegmentsAnimation';
 
 
@@ -49,13 +47,13 @@ export default function Items(props) {
   }
   const [clicked, setClicked] = useState(false);
   const [props1, set] = useSpring(() => ({ xy: [0, 0], config: { mass: 10, tension: 550, friction: 140 } }))
-
+  const barColorSet = BgColorSet;
 
   return (
     <motion.ul onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })}>
       {
         props.items && props.items.length>0 && props.items.map((item, index)=><li key={index} value={props.value}  className={`item relative flex flex-row items-center min-h-screen justify-center lg:h-auto lg:flex-col lg:flex-col-reverse ${flexDirection[index%2]}`}>
-          <div className={`h-full bg-${bgColorValue[index+1][0]} flex items-center justify-center lg:w-full lg:py-20`}>
+          <div className={`h-full ${bgColorValue[index+1][0]} flex items-center justify-center lg:w-full lg:py-20`}>
             <motion.div variants={upMotion}>
               <animated.div style={{ transform: props1.xy.interpolate(trans5) }}>
                 <div className={`default-window flex items-center justify-center sm:transform-gpu sm:scale-80 ${randomBg[0]} ${categoryMainShape[index%4]}`}>
@@ -79,7 +77,7 @@ export default function Items(props) {
           </div>
           <div className="relative overflow-hidden flex justify-center items-center h-full lg:w-full lg:py-20" style={{"backgroundColor": "var(--gray-light)"}}>
             <div className={`flex flex-col justify-center absolute right-0 top-0 h-full`} style={{width: "25px", zIndex: 0}}>
-              <SegmentsAnimation segment={8} barWidth={25} type="bar" x={-20} y={-20} zIntervalFrom={-20} zIntervalTo={-20} delay={50} bgColorValue={bgColorValue} noShowColor={bgColorValue[index+1][0]}></SegmentsAnimation>
+              <SegmentsAnimation barColorSet={barColorSet} segment={8} barWidth={25} type="bar" x={-20} y={-20} zIntervalFrom={-20} zIntervalTo={-20} delay={50} bgColorValue={bgColorValue} noShowColor={bgColorValue[index+1][0]}></SegmentsAnimation>
             </div>
             <motion.div variants={pageVariants} transition={pageTransition} exit='down' className="z-10">
               <figcaption className={`md:py-14 mx-28 ${textAlign[index%2]}`} style={{maxWidth: "250px"}}>

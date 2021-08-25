@@ -49,7 +49,7 @@ export default function Footer(props) {
   const [style, trigger] = useBoop({ rotation: '10deg', scale: 1.2 });
 
   return (
-    <footer className={`flex flex-col items-center py-10 z-0 bg-${bgColor}-gray`} style={{"color": textColor}}>
+    <footer className={`flex flex-col items-center py-10 z-0 ${bgColor}-gray`} style={{"color": textColor}}>
       <ul className="relative flex flex-col w-3/5">
         {
           jsonLoaded && list.map((item, index) => (

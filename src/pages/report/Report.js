@@ -22,12 +22,11 @@ import { HomeStore, QuestionsStore, QuestionsNumStore, StepperStore, UserAnswers
 import { motion } from "framer-motion";
 import { pageTransitionEaseOut, pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageVariants } from '../../ultils/TransitionSet';
 import { content, upMotion} from '../../components/AnimationSet';
-import HamburgerMenu from '../../components/HamburgerMenu/HamburgerMenu';
 import Navigation from '../../components/Navigation';
 import GoToTop from '../../ultils/GoToTop';
 import TransitionPanels from '../../components/TransitionPanels';
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
-import { ColorSet } from '../../components/ColorSet';
+import { BgColorSet } from '../../components/ColorSet';
 import Checkbox from '@material-ui/core/Checkbox';
 import { withStyles } from '@material-ui/core/styles';
 import { fetchHomepageJsonAction } from "../../Actions";
@@ -36,16 +35,17 @@ import SegmentsAnimation from '../../components/SegmentsAnimation';
 import Marquee from '../../components/Marquee';
 
 function Report(props) {
-  const primaryColor = props.location.state ? props.location.state.bgColor[0]: 'pink';
-  const secondaryColor = props.location.state ? props.location.state.bgColor[1]: 'green';
-  const thirdColor = props.location.state ? props.location.state.bgColor[2]: 'yellow';
+  const primaryColor = props.location.state ? props.location.state.bgColor[0]: 'bg-pink';
+  const secondaryColor = props.location.state ? props.location.state.bgColor[1]: 'bg-green';
+  const thirdColor = props.location.state ? props.location.state.bgColor[2]: 'bg-yellow';
+  const fourthColor = props.location.state ? props.location.state.bgColor[3]: 'bg-purple';
+  const fifthColor = props.location.state ? props.location.state.bgColor[4]: 'bg-red';
+  const sixthColor = props.location.state ? props.location.state.bgColor[5]: 'bg-blue';
   const primaryTextColor = props.location.state ? props.location.state.textColor[0]: 'var(--gray-dark)';
   const secondaryTextColor = props.location.state ? props.location.state.textColor[1]: 'var(--gray-dark)';
   const thirdTextColor = props.location.state ? props.location.state.textColor[2]: 'var(--gray-dark)';
-  const fourthColor = props.location.state ? props.location.state.bgColor[3]: 'purple';
   const fourthTextColor = props.location.state ? props.location.state.textColor[3]: 'white';
-  const fifthColor = props.location.state ? props.location.state.bgColor[4]: 'orange';
-  const fifthTextColor = props.location.state ? props.location.state.textColor[4]: 'var(--gray-dark)';
+  const sixthTextColor = props.location.state ? props.location.state.textColor[5]: 'white';
   // get homepage json if not in store
   const { state, homeDispatch } = useContext(HomeStore);
   const logoTitle = " Anni Wang ";
@@ -67,7 +67,7 @@ function Report(props) {
   useEffect(() => {
     //stepDoneAction(0, stepperDispatch);
     document.body.classList = "";
-    document.body.classList.add(`bg-${thirdColor}`);
+    document.body.classList.add(`${thirdColor}`);
     setFooter(true);
   },[])
 
@@ -126,9 +126,19 @@ function Report(props) {
 
 
   const bgColorValue = useMemo(
-    () => GetRandomFromArray(ColorSet),
+    () => GetRandomFromArray(BgColorSet),
     []
   );
+
+  const logoColorSet = useMemo(
+    () => GetRandomFromArray(BgColorSet.filter((color, index) => {
+      return color[0]!== primaryColor;
+  })),[]);
+
+  const menuColorSet = useMemo(() => GetRandomFromArray(BgColorSet.filter((color, index) => {
+    return color[0]!== secondaryColor;
+  })),[])
+
 
   const GreenCheckbox = withStyles({
     root: {
@@ -177,13 +187,13 @@ function Report(props) {
     animate="animate"
     initial="initial" id="outer-container" className={`${primaryColor?primaryColor:'yellow'}-primary-color ${secondaryColor?secondaryColor:'blue'}-secondary-color`}>
       <TransitionPanels bgColorValue={bgColorValue}/>
-      <Logo goBackHome={true} noShowColor={primaryColor} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
+      <Logo goBackHome={true} logoColorSet={logoColorSet} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
       <ToastContainer position="top-center" draggable={true} draggablePercent={25} autoClose={10000} />
       <div id="page-wrap" className={`w-screen min-h-screen report bg-primary-secondary flex justify-center items-center py-10`}>
         <motion.div variants={pageVariants} initial='initial' transition={pageTransitionShort} exit='down' animate="in" className="xl:w-8/12 lg:w-11/12 lg:mt-20 p-20 lg:p-10 w-6/12 h-5/6 bg-white default-window mt-20">
           <div className="flex flex-row w-full h-full lg:flex-col">
             <div className="lg:w-screen w-6/12 h-full">
-              <div className="w-6/12 bg-cover bg-center bg-no-repeat" style={{"backgroundImage": `url(${imgSrc})`, "backgroundColor": `var(--${secondaryColor?secondaryColor:'blue'})`, "backgroundSize": "120px auto", "height": "300px"}}></div>
+              <div className={`w-6/12 bg-cover bg-center bg-no-repeat ${secondaryColor?secondaryColor:'bg-blue'}`} style={{"backgroundImage": `url(${imgSrc})`, "backgroundSize": "120px auto", "height": "300px"}}></div>
               <div className="text-black lowercase font-semibold text-4xl py-5">
                 statistics<br />report
               </div>
@@ -261,7 +271,7 @@ function Report(props) {
         }
       </motion.div>
       <GoToTop />
-      <Navigation bgColorValue={bgColorValue}/>
+      <Navigation menuColorSet={menuColorSet} bgColorValue={bgColorValue}/>
     </motion.div>
   );
 }

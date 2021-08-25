@@ -1,7 +1,6 @@
 const PI = Math.PI
 const defaultEmoji = [
-  '<img src="img/pie.png" />',
-  '<img src="img/pipe.png" />'
+  '<img src="img/coffee.svg" />'
 ]
 
 const createElements = (root, elementCount, elementSize, zIndex, emoji) => (

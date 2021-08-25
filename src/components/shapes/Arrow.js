@@ -11,7 +11,7 @@ export default function Arrow(props) {
     "stroke": color
   }
   return (
-    <div className="float-left arrow mx-5 mt-2">
+    <div className="arrow mx-5 mt-2">
       <svg style={styles} viewBox="0 0 106 76">
           <g stroke="none" stroke-width="2" fill="none" fill-rule="evenodd">
               <g transform="translate(0.450000, 0.700000)" fill="none" fill-rule="nonzero">

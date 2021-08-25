@@ -16,7 +16,7 @@ export default function List(props){
   const categoryTitle = props.categoryTitle;
   const bgColorValue = props.bgColorValue;
   return (
-    <motion.div key={i} variants={pageVariants} initial='initialAlpha1' transition={i%2 === 1 ?pageTransitionShort: pageTransitionShort2} exit='down' animate="in" className={`${i%2 === 1 ? 'mt-40 lg:mt-0': null} p-10 pr-5 h-5/6 bg-white default-window`}>
+    <motion.div key={i} variants={pageVariants} initial='initial' transition={i%2 === 1 ?pageTransitionShort: pageTransitionShort2} exit='down' animate="in" className={`${i%2 === 1 ? 'mt-40 lg:mt-0': null} p-10 pr-5 h-5/6 bg-white default-window`}>
       <div className={`flex flex-row items-center w-full h-full lg:flex-col`}>
         <div style={{ width: "25px" }} className="relative flex flex-col justify-center">
           <SegmentsAnimation segment={5} barWidth={10} type="bar-light" x={(Math.random() - 0.5) * 20} y={Math.random()*20} zIntervalFrom={-50} zIntervalTo={20} delay={150} bgColorValue={bgColorValue}></SegmentsAnimation>

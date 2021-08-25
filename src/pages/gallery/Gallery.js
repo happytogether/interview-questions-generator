@@ -2,36 +2,37 @@ import React, { useContext, useState, useEffect, useMemo } from 'react';
 import Footer from '../../components/Footer';
 import GoToTop from '../../ultils/GoToTop';
 import Logo from '../../components/Logo';
-import HamburgerMenu from '../../components/HamburgerMenu/HamburgerMenu';
 import './Gallery.scss';
 import { useParams } from 'react-router-dom';
 import { motion, useAnimation } from "framer-motion";
 import TransitionPanels from '../../components/TransitionPanels';
 import { pageTransition, pageTransition2, pageTransition3, pageTransitionShort, pageTransitionShort2, pageTransitionEaseIn, pageVariants } from '../../ultils/TransitionSet';
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
-import { ColorSetNoBlue } from '../../components/ColorSet';
+import { BgColorSet2, ColorSetNoBlue } from '../../components/ColorSet';
 import HorizontalGallery from '../../components/HorizontalGallery';
 import { HomeStore, StepperStore } from "../../Store";
 import { DonutSet, IceCreamSet, DefaultSet, FruitSet, FruitSet2 } from "../../components/Reward/MemphisSets";
 import Arrow from '../../components/shapes/Arrow';
 import Marquee from '../../components/Marquee';
 import Navigation from '../../components/Navigation';
+import GoBackArrow from '../../components/GoBackArrow';
 import Questions from './Questions';
 import DelayLink from '../../ultils/DelayLink';
 import { fetchHomepageJsonAction, stepDoneAction } from "../../Actions";
 import { isMobile, isDesktop } from "react-device-detect";
 
 function Gallery(props) {
-  const primaryColor = props.location.state ? props.location.state.bgColor[0]: 'green';
-  const secondaryColor = props.location.state ? props.location.state.bgColor[1]: 'purple';
-  const thirdColor = props.location.state ? props.location.state.bgColor[2]: 'yellow';
+  const primaryColor = props.location.state ? props.location.state.bgColor[0]: 'bg-pink';
+  const secondaryColor = props.location.state ? props.location.state.bgColor[1]: 'bg-green';
+  const thirdColor = props.location.state ? props.location.state.bgColor[2]: 'bg-yellow';
+  const fourthColor = props.location.state ? props.location.state.bgColor[3]: 'bg-purple';
+  const fifthColor = props.location.state ? props.location.state.bgColor[4]: 'bg-red';
+  const sixthColor = props.location.state ? props.location.state.bgColor[5]: 'bg-blue';
   const primaryTextColor = props.location.state ? props.location.state.textColor[0]: 'var(--gray-dark)';
-  const secondaryTextColor = props.location.state ? props.location.state.textColor[1]: 'white';
+  const secondaryTextColor = props.location.state ? props.location.state.textColor[1]: 'var(--gray-dark)';
   const thirdTextColor = props.location.state ? props.location.state.textColor[2]: 'var(--gray-dark)';
-  const fourthColor = props.location.state ? props.location.state.bgColor[3]: 'pink';
-  const fourthTextColor = props.location.state ? props.location.state.textColor[3]: 'var(--gray-dark)';
-  const fifthColor = props.location.state ? props.location.state.bgColor[4]: 'orange';
-  const fifthTextColor = props.location.state ? props.location.state.textColor[4]: 'var(--gray-dark)';
+  const fourthTextColor = props.location.state ? props.location.state.textColor[3]: 'white';
+  const sixthTextColor = props.location.state ? props.location.state.textColor[5]: 'white';
 
 
   const [footer, setFooter] = useState(false);
@@ -49,14 +50,19 @@ function Gallery(props) {
   useEffect(() => {
     //stepDoneAction(0, stepperDispatch);
     document.body.classList = "";
-    document.body.classList.add(`bg-${thirdColor}`);
+    document.body.classList.add(`${thirdColor}`);
     setFooter(true);
   },[])
 
-  const bgColorValue = useMemo(
-    () => GetRandomFromArray(ColorSetNoBlue),
-    []
-  );
+  const bgColorValue = useMemo(() => GetRandomFromArray(BgColorSet2),[]);
+  const logoColorSet = useMemo(
+    () => GetRandomFromArray(BgColorSet2.filter((color, index) => {
+      return color[0]!== primaryColor;
+  })),[]);
+
+  const menuColorSet = useMemo(() => GetRandomFromArray(BgColorSet2.filter((color, index) => {
+    return color[0]!== secondaryColor;
+  })),[])
 
   const [items,setItems]=useState([]);
   const [jsonLoaded, setJsonLoaded] = useState(false);
@@ -86,17 +92,35 @@ function Gallery(props) {
   return (
     <div id="outer-container" className={`gallery ${primaryColor}-primary-color ${secondaryColor}-secondary-color`}>
       <TransitionPanels bgColorValue={bgColorValue}/>
-      <Logo noShowColor={primaryColor} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
-      <div id="page-wrap" className={`w-screen min-h-screen report bg-primary-secondary`}>
-        <div className="questions-container gap-x-20 pt-48 xl:pt-36 w-full flex flex-wrap flex-row col-count-2 justify-center items-center">
-          {
-            items.map((item, i) => (
-              item.horizontalGallery ? <><Questions i={i} item={item} categoryTitle={categoryTitle} />
-              <HorizontalGallery item={item} secondaryColor={secondaryColor} />
-              </>: <><Questions i={i} item={item} categoryTitle={categoryTitle} />
-              </>
-            ))
-          }
+      <Logo logoColorSet={logoColorSet} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
+      <GoBackArrow color={primaryTextColor} bgColorValue={bgColorValue} />
+
+      <div id="page-wrap" className={`w-screen min-h-screen bg-primary-secondary`}>
+        <div className="flex justify-center">
+          <div className="w-8/12 min-h-screen pt-40 flex flex-row flex-wrap gap-20 lg:gap-10 items-start pb-40">
+            <div className="w-6/12 lg:w-5/12 md:w-10/12 -mt-20">
+              {
+                items.map((item, i) => (
+                  <div className="mt-40">
+                    {
+                      i%2!==1 && <Questions i={i} item={item} categoryTitle={categoryTitle} />
+                    }
+                  </div>
+                ))
+              }
+            </div>
+            <div className="w-5/12 lg:w-5/12 md:w-10/12">
+              {
+                items.map((item, i) => (
+                  <div className="mt-40">
+                    {
+                      i%2!==0 && <Questions i={i} item={item} categoryTitle={categoryTitle} />
+                    }
+                  </div>
+                ))
+              }
+            </div>
+          </div>
         </div>
       {
         jsonLoaded && <motion.div variants={pageVariants} initial='initial' transition='pageTransitionDelay2' exit='down' animate="in" >
@@ -142,7 +166,7 @@ function Gallery(props) {
       }
     </motion.div>
     <GoToTop />
-    <Navigation bgColorValue={bgColorValue}/>
+    <Navigation menuColorSet={menuColorSet} bgColorValue={bgColorValue}/>
   </div>
   );
 }

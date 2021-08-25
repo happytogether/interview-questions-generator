@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSpring, useSprings, animated, interpolate } from 'react-spring';
-import getRandomFromInterval from "../../getRandomFromInterval";
+import getRandomFromInterval from "../../ultils/getRandomFromInterval";
 import useSound from 'use-sound';
 import spring2Sfx from '../spring2.mp3';
 

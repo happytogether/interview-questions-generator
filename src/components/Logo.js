@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react'
-import getRandomFromInterval from "../getRandomFromInterval";
+import getRandomFromInterval from "../ultils/getRandomFromInterval";
 import DelayLink from '../ultils/DelayLink';
 import Arrow from './shapes/Arrow';
 import { isMobile } from "react-device-detect";
@@ -14,6 +14,7 @@ let audio = new Audio(pianoSfx);
 export default function Logo(props) {
   const color = props.color;
   const bgColorValue = props.bgColorValue;
+  const logoColorSet = props.logoColorSet;
   const primaryColor = bgColorValue[0][0];
   const primaryTextColor = bgColorValue[0][1];
   const secondaryColor = bgColorValue[1][0];
@@ -68,7 +69,7 @@ export default function Logo(props) {
   }
 
   return (
-    <div className="logo fixed w-full z-10" onMouseEnter={isMobile ? () => { return false; } : handleMouseOver}>
+    <div className="logo fixed w-full z-20" onMouseEnter={isMobile ? () => { return false; } : handleMouseOver}>
       <div className="fixed text-base px-2 my-5 ml-4 z-30 logo">
         <div>
           <DelayLink to={{
@@ -78,7 +79,7 @@ export default function Logo(props) {
               textColor: [primaryTextColor, secondaryTextColor, thirdTextColor, fourthTextColor, fifthTextColor, sixthTextColor]
             }}}>
             <span className="xl:hidden">
-              <SegmentsAnimation noShowColor={noShowColor} largeBar={true} segment={logoText.length} type="colorBgText" x={0} y={-20} zIntervalFrom={-20} zIntervalTo={20} delay={50}>{logoText}</SegmentsAnimation>
+              <SegmentsAnimation logoColorSet={logoColorSet} largeBar={true} segment={logoText.length} type="colorBgText" x={0} y={-20} zIntervalFrom={-20} zIntervalTo={20} delay={50}>{logoText}</SegmentsAnimation>
             </span>
           </DelayLink>
           <DelayLink to={{
@@ -91,7 +92,8 @@ export default function Logo(props) {
           </DelayLink>
         </div>
         {
-          !nobackArrow && <span className={`z-30`}>
+          /*
+          !nobackArrow && <span className={`absolute right-0 top-0 z-30`}>
             <DelayLink to={{
               pathname: `${goBackHome? '/': './'}`,
               state: {
@@ -101,6 +103,7 @@ export default function Logo(props) {
               <Arrow size={isMobile?'35px': '100px'} rotate="180deg" color={arrowColor} />
             </DelayLink>
           </span>
+          */
         }
       </div>
     </div>

@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { useSpring, useSprings, animated, interpolate } from 'react-spring';
-import getRandomFromInterval from "../../getRandomFromInterval";
+import getRandomFromInterval from "../../ultils/getRandomFromInterval";
 import useSound from 'use-sound';
 import springSfx from '../spring.mp3';
 import { BasicColorSet } from '../ColorSet';
 
-export default function Moon2(props) {
+export default function HollowCircle(props) {
   const styles = {
     width: "100px",
     height: "100px",
@@ -15,10 +15,7 @@ export default function Moon2(props) {
   }
   const [open, setOpen] = useState(false)
   const { f, r } = useSpring({ f: open ? 0 : 1, r: open ? -3 : 3 });
-  const bgColor = props.bgColor;
-  const colorSet = BasicColorSet.filter((item) => {
-    return item !== bgColor
-  })
+  const colorSet = BasicColorSet;
   const randomValue = getRandomFromInterval(-200, 200);
   const cards = useSprings(
     5,

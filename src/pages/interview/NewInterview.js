@@ -13,12 +13,6 @@ import Arrow from '../../components/shapes/Arrow';
 import Sun from '../../components/shapes/Sun';
 import { GradeASet } from '../../components/confettiSet/GradeASet';
 import { StepperStore, UserAnswersStore, QuestionsNumStore } from '../../Store';
-import HamburgerMenu from '../../components/HamburgerMenu/HamburgerMenu';
-import Memphis16_1 from '../../components/shapes/memphis16/Memphis16_1';
-import Memphis16_2 from '../../components/shapes/memphis16/Memphis16_2';
-import Memphis16_3 from '../../components/shapes/memphis16/Memphis16_3';
-import Memphis16_4 from '../../components/shapes/memphis16/Memphis16_4';
-import Memphis16_5 from '../../components/shapes/memphis16/Memphis16_5';
 import Wave from '../../components/shapes/Wave';
 import MouseLeftRight from "../../components/DotRing/MouseLeftRight";
 import { DefaultSet } from "../../components/Reward/MemphisSets";
@@ -29,7 +23,7 @@ import { pageTransitionEaseOut, pageTransition, pageTransition2, pageTransition3
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
 import TransitionPanels from '../../components/TransitionPanels';
 import { isMobile } from "react-device-detect";
-import { ColorSet, ColorSetWhiteText, ColorSetDarkText } from '../../components/ColorSet';
+import { ColorSet, BgColorSet, ColorSetWhiteText, ColorSetDarkText } from '../../components/ColorSet';
 import './NewInterview.scss';
 import { pageTransitionColorsAction } from "../../Actions";
 import { PageTransitionColorsStore } from '../../Store';
@@ -38,16 +32,17 @@ import Marquee from '../../components/Marquee';
 import Navigation from '../../components/Navigation';
 
 function NewInterview(props) {
-  const primaryColor = props.location.state ? props.location.state.bgColor[0]: 'blue';
-  const secondaryColor = props.location.state ? props.location.state.bgColor[1]: 'yellow';
-  const thirdColor = props.location.state ? props.location.state.bgColor[2]: 'purple';
-  const primaryTextColor = props.location.state ? props.location.state.textColor[0]: 'white';
+  const primaryColor = props.location.state ? props.location.state.bgColor[0]: 'bg-pink';
+  const secondaryColor = props.location.state ? props.location.state.bgColor[1]: 'bg-green';
+  const thirdColor = props.location.state ? props.location.state.bgColor[2]: 'bg-yellow';
+  const fourthColor = props.location.state ? props.location.state.bgColor[3]: 'bg-purple';
+  const fifthColor = props.location.state ? props.location.state.bgColor[4]: 'bg-red';
+  const sixthColor = props.location.state ? props.location.state.bgColor[5]: 'bg-blue';
+  const primaryTextColor = props.location.state ? props.location.state.textColor[0]: 'var(--gray-dark)';
   const secondaryTextColor = props.location.state ? props.location.state.textColor[1]: 'var(--gray-dark)';
-  const thirdTextColor = props.location.state ? props.location.state.textColor[2]: 'white';
-  const fourthColor = props.location.state ? props.location.state.bgColor[3]: 'green';
-  const fourthTextColor = props.location.state ? props.location.state.textColor[3]: 'var(--gray-dark)';
-  const fifthColor = props.location.state ? props.location.state.bgColor[4]: 'orange';
-  const fifthTextColor = props.location.state ? props.location.state.textColor[4]: 'var(--gray-dark)';
+  const thirdTextColor = props.location.state ? props.location.state.textColor[2]: 'var(--gray-dark)';
+  const fourthTextColor = props.location.state ? props.location.state.textColor[3]: 'white';
+  const sixthTextColor = props.location.state ? props.location.state.textColor[5]: 'white';
 
   const defaultValueArray = initialInterviewCategoryQuestionsCount();
   const defaultQuestionsSum = defaultValueArray.reduce((a, b) => a + b, 0);
@@ -61,13 +56,20 @@ function NewInterview(props) {
   const [footer, setFooter] = useState(false);
 
   const bgColorValue = useMemo(
-    () => GetRandomFromArray(Math.random() > .5 ? ColorSetDarkText: ColorSetWhiteText),
-    []
-  );
+    () => GetRandomFromArray(BgColorSet),[]);
+
+  const logoColorSet = useMemo(
+    () => GetRandomFromArray(BgColorSet.filter((color, index) => {
+      return color[0]!== primaryColor;
+  })),[]);
+
+  const menuColorSet = useMemo(() => GetRandomFromArray(BgColorSet.filter((color, index) => {
+    return color[0]!== secondaryColor;
+  })),[])
 
   useEffect(() => {
     document.body.classList = ""; // remove classes from other pages
-    document.body.classList.add(`bg-${thirdColor}`); // to cover the white space when open hamburger menu
+    document.body.classList.add(`${thirdColor}`); // to cover the white space when open hamburger menu
     if (pathname == '/newInterview') {
       document.body.classList.add('new-interview');
     }
@@ -158,7 +160,7 @@ return (
     animate="animate"
     initial="initial" id="outer-container" className={`${primaryColor}-primary-color ${secondaryColor}-secondary-color`}>
       <TransitionPanels bgColorValue={bgColorValue}/>
-      <Logo goBackHome={true} noShowColor={primaryColor} arrowColor={primaryTextColor} bgColorValue={bgColorValue} />
+      <Logo goBackHome={true} logoColorSet={logoColorSet} arrowColor={primaryTextColor} bgColorValue={bgColorValue} />
       <div id="page-wrap" className={`w-screen min-h-screen bg-primary-secondary flex justify-center items-center py-10 pb-20`}>
         <motion.div variants={pageVariants} initial='initial' transition={pageTransitionShort} exit='down' animate="in" className="xl:w-9/12 lg:w-11/12 lg:mt-20 lg:p-10 w-6/12 h-5/6 bg-white p-20 sm:p-5 default-window mt-20">
           <div className="flex flex-row w-full h-full lg:flex-col">
@@ -166,7 +168,7 @@ return (
               <motion.div variants={pageVariants} initial='initial' transition={pageTransition2} exit='down' animate="in" className="absolute z-20 -right-40 lg:right-10 top-20">
                 <Sun noShowColor={secondaryColor} />
               </motion.div>
-              <div className={`w-9/12 lg:w-full bg-cover bg-center bg-no-repeat bg-${secondaryColor}`} style={{"backgroundImage": `url("/img/interview.svg")`, "backgroundSize": "150px auto", "height": "300px"}}></div>
+              <div className={`w-9/12 lg:w-full bg-cover bg-center bg-no-repeat ${secondaryColor}`} style={{"backgroundImage": `url("/img/interview.svg")`, "backgroundSize": "150px auto", "height": "300px"}}></div>
               <div className="text-black lowercase font-semibold text-4xl my-10">
                 <SegmentsAnimation segment={5} type="img" x={-5} y={0} zIntervalFrom={-20} zIntervalTo={200} delay={50}>start</SegmentsAnimation>&nbsp;
                 <SegmentsAnimation segment={2} type="img" x={-5} y={0} zIntervalFrom={-20} zIntervalTo={200} delay={50}>to</SegmentsAnimation>
@@ -253,7 +255,7 @@ return (
       </motion.div>
 
       <GoToTop />
-      <Navigation bgColorValue={bgColorValue} noShowColor={secondaryColor} />
+      <Navigation menuColorSet={menuColorSet} bgColorValue={bgColorValue} />
     </motion.div>
   );
 }

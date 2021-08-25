@@ -1,8 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import { useSpring, useSprings, animated, interpolate } from 'react-spring';
-import { BasicColorSet } from '../ColorSet';
-import getRandomFromInterval from "../../getRandomFromInterval";
-import getRandomDifferent from "../../getRandomDifferent";
+import { BgColorSet } from '../ColorSet';
+import getRandomFromInterval from "../../ultils/getRandomFromInterval";
 import useSound from 'use-sound';
 import springSfx from '../spring.mp3';
 
@@ -15,8 +14,8 @@ export default function Moon(props) {
     zIndex: 9
   }
   const bgColor = props.bgColor;
-  const colorSet = BasicColorSet.filter((item) => {
-    return item !== bgColor
+  const colorSet = BgColorSet.filter((item) => {
+    return item[0] !== bgColor
   })
   const [open, setOpen] = useState(false)
   const { f, r } = useSpring({ f: open ? 0 : 1, r: open ? -3 : 3 })
@@ -52,10 +51,9 @@ export default function Moon(props) {
           }}>
           <svg style={{"width": "100px"}} className={`absolute`} viewBox="0 0 42 39">
             <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-              <g transform="translate(-553.000000, -175.000000)" fill={`var(--${colorSet[index]})`}>
+              <g transform="translate(-553.000000, -175.000000)" fill={`var(--${colorSet[index][0].substring(3)})`}>
                 <path
-                  d="M592.066,191.098 C589.641,193.151 586.013,192.849 583.961,190.425 C580.099,185.864 573.247,185.295 568.686,189.157 C564.126,193.018 563.556,199.87 567.419,204.431 C569.47,206.856 569.17,210.484 566.745,212.536 C564.321,214.589 560.693,214.288 558.64,211.863 C550.68,202.462 551.853,188.339 561.254,180.379 C570.655,172.419 584.779,173.592 592.739,182.993 C594.792,185.417 594.49,189.046 592.066,191.098"
-                  id="Fill-247"></path>
+                  d="M592.066,191.098 C589.641,193.151 586.013,192.849 583.961,190.425 C580.099,185.864 573.247,185.295 568.686,189.157 C564.126,193.018 563.556,199.87 567.419,204.431 C569.47,206.856 569.17,210.484 566.745,212.536 C564.321,214.589 560.693,214.288 558.64,211.863 C550.68,202.462 551.853,188.339 561.254,180.379 C570.655,172.419 584.779,173.592 592.739,182.993 C594.792,185.417 594.49,189.046 592.066,191.098"></path>
               </g>
             </g>
           </svg>
