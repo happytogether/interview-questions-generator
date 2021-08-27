@@ -23,13 +23,13 @@ import { pageTransitionEaseOut, pageTransition, pageTransition2, pageTransition3
 import GetRandomFromArray from '../../ultils/GetRandomFromArray';
 import TransitionPanels from '../../components/TransitionPanels';
 import { isMobile } from "react-device-detect";
-import { ColorSet, BgColorSet, ColorSetWhiteText, ColorSetDarkText } from '../../components/Sets/ColorSet';
+import { ColorSet, BgColorSet, BgColorSetInterview, WhiteText, ColorSetDarkText } from '../../components/Sets/ColorSet';
 import './NewInterview.scss';
 import { pageTransitionColorsAction } from "../../Actions";
 import { PageTransitionColorsStore } from '../../Store';
 import SegmentsAnimation from '../../components/SegmentsAnimation';
-import Marquee from '../../components/Marquee';
 import Navigation from '../../components/Navigation';
+import GoBackArrow from '../../components/GoBackArrow';
 
 function NewInterview(props) {
   const primaryColor = props.location.state ? props.location.state.bgColor[0]: 'bg-pink';
@@ -56,7 +56,7 @@ function NewInterview(props) {
   const [footer, setFooter] = useState(false);
 
   const bgColorValue = useMemo(
-    () => GetRandomFromArray(BgColorSet),[]);
+    () => GetRandomFromArray(BgColorSetInterview),[]);
 
   const logoColorSet = useMemo(
     () => GetRandomFromArray(BgColorSet.filter((color, index) => {
@@ -161,6 +161,7 @@ return (
     initial="initial" id="outer-container" className={`${primaryColor}-primary-color ${secondaryColor}-secondary-color`}>
       <TransitionPanels bgColorValue={bgColorValue}/>
       <Logo goBackHome={true} logoColorSet={logoColorSet} arrowColor={primaryTextColor} bgColorValue={bgColorValue} />
+      <GoBackArrow noShowColor={secondaryColor} color={secondaryTextColor} bgColorValue={bgColorValue} />
       <div id="page-wrap" className={`w-screen min-h-screen bg-primary-secondary flex justify-center items-center py-10 pb-20`}>
         <motion.div variants={pageVariants} initial='initial' transition={pageTransitionShort} exit='down' animate="in" className="xl:w-9/12 lg:w-11/12 lg:mt-20 lg:p-10 w-6/12 h-5/6 bg-white p-20 sm:p-5 default-window mt-20">
           <div className="flex flex-row w-full h-full lg:flex-col">
@@ -232,8 +233,8 @@ return (
               <DelayLink to={{
                 pathname: "/interview/0",
                 state: {
-                  bgColor: [bgColorValue[0][0], bgColorValue[1][0], bgColorValue[2][0], bgColorValue[3][0]],
-                  textColor: [bgColorValue[0][1], bgColorValue[1][1], bgColorValue[2][1], bgColorValue[3][1]]
+                  bgColor: [bgColorValue[0][0], bgColorValue[1][0], bgColorValue[2][0], bgColorValue[3][0], bgColorValue[4][0], bgColorValue[5][0], bgColorValue[6][0]],
+                  textColor: [bgColorValue[0][1], bgColorValue[1][1], bgColorValue[2][1], bgColorValue[3][1], bgColorValue[4][1], bgColorValue[5][1], bgColorValue[6][1]]
                 }}}>
                 <div className="p-3 flex flex-row justify-center items-center lg:text-sm">
                   <span>Generate Interview Questions</span>
@@ -243,11 +244,6 @@ return (
           </div>
         </motion.div>
       </div>
-      <motion.div variants={pageVariants} transition={pageTransitionEaseOut} exit='down'>
-        {
-          footer && <Marquee bgColor={fifthColor} bgColorValue={bgColorValue} />
-        }
-      </motion.div>
       <motion.div variants={pageVariants} transition={pageTransitionEaseOut} exit='down'>
         {
           footer && <Footer bgColor={fourthColor} textColor={fourthTextColor} bgColorValue={bgColorValue} />

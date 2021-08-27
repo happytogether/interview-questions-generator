@@ -19,7 +19,6 @@ import GetRandomFromArray from '../../ultils/GetRandomFromArray';
 import { BgColorSet } from '../../components/Sets/ColorSet';
 import { content, upMotion} from '../../components/Sets/AnimationSet';
 import Navigation from '../../components/Navigation';
-import TransitionPanelsInterview from '../../components/TransitionPanelsInterview';
 
 export default function InterviewContainer(props) {
   /*
@@ -119,7 +118,6 @@ const pageTransition = {
       <motion.div variants={content}
       animate="animate"
       initial="initial" id="outer-container" className={`${primaryColor?primaryColor:'yellow'}-primary-color ${secondaryColor?secondaryColor:'blue'}-secondary-color`}>
-      <TransitionPanelsInterview bgColorValue={bgColorValue} />
       <Logo logoColorSet={logoColorSet} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
         <div id="page-wrap" className={`static2 bg-primary-secondary`}>
           {

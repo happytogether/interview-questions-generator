@@ -11,19 +11,23 @@ const ColorSet = [
 ];
 
 const BgColorSet = [
-  ['bg-purple', 'white'], ['bg-red', 'white'], ['bg-pink', 'var(--gray-dark)'], ['bg-orange', 'var(--gray-dark)'], ['bg-yellow', 'var(--gray-dark)'], ['bg-green', 'var(--gray-dark)'], ['bg-blue', 'white']
+  ['bg-purple', 'white', 'yellow'], ['bg-red', 'white', 'yellow'], ['bg-pink', 'var(--gray-dark)', 'purple'], ['bg-orange', 'var(--gray-dark)', 'purple'], ['bg-yellow', 'var(--gray-dark)', 'blue'], ['bg-green', 'var(--gray-dark)', 'purple'], ['bg-blue', 'white', 'yellow']
 ];
 
 const BgColorSet2 = [
-  ['bg-purple', 'white'], ['bg-red', 'white'], ['bg-pink', 'var(--gray-dark)'], ['bg-orange', 'var(--gray-dark)'], ['bg-yellow', 'var(--gray-dark)'], ['bg-green', 'var(--gray-dark)'], ['bg-blue', 'white']
+  ['bg-purple', 'white', 'yellow'], ['bg-red', 'white', 'yellow'], ['bg-pink', 'var(--gray-dark)', 'purple'], ['bg-orange', 'var(--gray-dark)', 'purple'], ['bg-yellow', 'var(--gray-dark)', 'blue'], ['bg-green', 'var(--gray-dark)', 'purple'], ['bg-blue', 'white', 'yellow']
 ];
 
 const BgColorSetHome = [
+  ['bg-purple', 'white', 'yellow'], ['bg-red', 'white', 'yellow'], ['bg-pink', 'var(--gray-dark)', 'purple'], ['bg-orange', 'var(--gray-dark)', 'purple'], ['bg-yellow', 'var(--gray-dark)', 'blue'], ['bg-green', 'var(--gray-dark)', 'purple'], ['bg-blue', 'white', 'yellow']
+];
+
+const BgColorSetInterview = [
   ['bg-purple', 'white'], ['bg-red', 'white'], ['bg-pink', 'var(--gray-dark)'], ['bg-orange', 'var(--gray-dark)'], ['bg-yellow', 'var(--gray-dark)'], ['bg-green', 'var(--gray-dark)'], ['bg-blue', 'white']
 ];
 
 const LightColorSet = [
-  'pink', 'green', 'yellow', 'orange'
+  ['bg-orange', 'var(--gray-dark)'], ['bg-pink', 'var(--gray-dark)'], ['bg-green', 'var(--gray-dark)'], ['bg-yellow', 'var(--gray-dark)']
 ]
 
 const ColorSetWhiteText = [
@@ -42,4 +46,4 @@ const ColorSet2 = [
   ['orange', 'var(--gray-dark)'], ['red', 'white'], ['pink', 'var(--gray-dark)'], ['blue', 'white'], ['green', 'var(--gray-dark)'], ['purple', 'white'], ['yellow', 'var(--gray-dark)']
 ]
 
-export { BasicColorSet , MenuColorSet, BgColorSet, BgColorSet2, BgColorSetHome, ColorSet, ColorSetDarkText, ColorSetWhiteText, ColorSetNoBlue, ColorSet2, LightColorSet }
+export { BasicColorSet , MenuColorSet, BgColorSet, BgColorSet2, BgColorSetHome, BgColorSetInterview, ColorSet, ColorSetDarkText, ColorSetWhiteText, ColorSetNoBlue, ColorSet2, LightColorSet }

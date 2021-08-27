@@ -58,47 +58,47 @@ export default function Marquee(props) {
         bgColor: [primaryColor, secondaryColor, thirdColor, fourthColor, fifthColor, sixthColor],
         textColor: [primaryTextColor, secondaryTextColor, thirdTextColor, fourthTextColor, fifthTextColor, sixthTextColor]
       }}}>
-      <div className={`marquee-container py-5 ${bgColor} text-${textColor} relative text-3xl md:text-2xl font-bold overflow-hidden`}>
+      <div className={`marquee-container py-10 ${bgColor} text-${textColor} relative text-3xl md:text-2xl font-bold overflow-hidden`}>
         <div className="marquee">
           <span>
-            <SegmentsAnimation logoColorSet={marqueeColorSet} segment={9} type="colorBgText" x={-15} y={0} zIntervalFrom={-20} zIntervalTo={200} delay={50} noShowColor={bgColor}>
+            <SegmentsAnimation logoColorSet={marqueeColorSet} segment={9} type="text" x={-15} y={0} zIntervalFrom={-20} zIntervalTo={200} delay={50} noShowColor={bgColor}>
               Interview
             </SegmentsAnimation>
           </span>
           <span className="px-10">
-            <SegmentsAnimation logoColorSet={marqueeColorSet} segment={4} type="colorBgText" x={-15} y={0} zIntervalFrom={-20} zIntervalTo={200} delay={50} noShowColor={bgColor}>
+            <SegmentsAnimation logoColorSet={marqueeColorSet} segment={4} type="text" x={-15} y={0} zIntervalFrom={-20} zIntervalTo={200} delay={50} noShowColor={bgColor}>
               Anni
             </SegmentsAnimation>
           </span>
           <span>
-            <SegmentsAnimation logoColorSet={marqueeColorSet} segment={9} type="colorBgText" x={-15} y={0} zIntervalFrom={-20} zIntervalTo={200} delay={50} noShowColor={bgColor}>
+            <SegmentsAnimation logoColorSet={marqueeColorSet} segment={9} type="text" x={-15} y={0} zIntervalFrom={-20} zIntervalTo={200} delay={50} noShowColor={bgColor}>
               Interview
             </SegmentsAnimation>
           </span>
           <span className="px-10">
-            <SegmentsAnimation logoColorSet={marqueeColorSet} segment={4} type="colorBgText" x={-15} y={0} zIntervalFrom={-20} zIntervalTo={200} delay={50} noShowColor={bgColor}>
+            <SegmentsAnimation logoColorSet={marqueeColorSet} segment={4} type="text" x={-15} y={0} zIntervalFrom={-20} zIntervalTo={200} delay={50} noShowColor={bgColor}>
               Anni
             </SegmentsAnimation>
           </span>
         </div>
         <div className="marquee">
           <span>
-            <SegmentsAnimation logoColorSet={marqueeColorSet} segment={9} type="colorBgText" x={-15} y={0} zIntervalFrom={-20} zIntervalTo={200} delay={50} noShowColor={bgColor}>
+            <SegmentsAnimation logoColorSet={marqueeColorSet} segment={9} type="text" x={-15} y={0} zIntervalFrom={-20} zIntervalTo={200} delay={50} noShowColor={bgColor}>
               Interview
             </SegmentsAnimation>
           </span>
           <span className="px-10">
-            <SegmentsAnimation logoColorSet={marqueeColorSet} segment={4} type="colorBgText" x={-15} y={0} zIntervalFrom={-20} zIntervalTo={200} delay={50} noShowColor={bgColor}>
+            <SegmentsAnimation logoColorSet={marqueeColorSet} segment={4} type="text" x={-15} y={0} zIntervalFrom={-20} zIntervalTo={200} delay={50} noShowColor={bgColor}>
               Anni
             </SegmentsAnimation>
           </span>
           <span>
-            <SegmentsAnimation logoColorSet={marqueeColorSet} segment={9} type="colorBgText" x={-15} y={0} zIntervalFrom={-20} zIntervalTo={200} delay={50} noShowColor={bgColor}>
+            <SegmentsAnimation logoColorSet={marqueeColorSet} segment={9} type="text" x={-15} y={0} zIntervalFrom={-20} zIntervalTo={200} delay={50} noShowColor={bgColor}>
               Interview
             </SegmentsAnimation>
           </span>
           <span className="px-10">
-            <SegmentsAnimation logoColorSet={marqueeColorSet} segment={4} type="colorBgText" x={-15} y={0} zIntervalFrom={-20} zIntervalTo={200} delay={50} noShowColor={bgColor}>
+            <SegmentsAnimation logoColorSet={marqueeColorSet} segment={4} type="text" x={-15} y={0} zIntervalFrom={-20} zIntervalTo={200} delay={50} noShowColor={bgColor}>
               Anni
             </SegmentsAnimation>
           </span>

@@ -38,7 +38,7 @@ export default function Moon(props) {
   }
 
   return (
-    <div className="absolute flex items-center justify-center" style={styles} onMouseEnter={() => handleMouseOver()} onMouseLeave={() => handleMouseLeave()}>
+    <div className="absolute flex items-center justify-center animate-block" style={styles} onMouseEnter={() => handleMouseOver()} onMouseLeave={() => handleMouseLeave()}>
       {cards.map(({ x, y, z, opacity, background }, index) => (
         <animated.div
           key={index} style={{

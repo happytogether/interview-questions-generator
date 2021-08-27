@@ -109,7 +109,7 @@ export default function Questions(props){
   }
 
   return (
-    <motion.div key={i} variants={pageVariants} initial='initialAlpha1' transition={i%2 === 1 ?pageTransitionShort: pageTransitionShort2} exit='down' animate="in" className={`${i%2===1 ? 'my-20': 'my-10'} list`}>
+    <motion.div key={i} variants={pageVariants} initial='initial' transition={i%2 === 1 ?pageTransitionShort: pageTransitionShort2} exit='down' animate="in" className={`${i%2===1 ? 'my-20': 'my-10'} list`}>
 
         {
           generateQuestionBlock(i)

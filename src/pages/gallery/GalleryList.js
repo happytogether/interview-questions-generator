@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useMemo } from 'react';
+import React, { useContext, useState, useEffect, useMemo, useRef } from 'react';
 import Footer from '../../components/Footer/Footer';
 import GoToTop from '../../ultils/GoToTop';
 import Logo from '../../components/Logo';
@@ -14,6 +14,8 @@ import List from './List';
 import Marquee from '../../components/Marquee';
 import GoBackArrow from '../../components/GoBackArrow';
 import Navigation from '../../components/Navigation';
+import Sticky from 'react-stickynode';
+import useResizeObserver from '../../hooks/useResizeObserver.js';
 
 function GalleryList(props) {
 
@@ -46,17 +48,26 @@ function GalleryList(props) {
     return color[0]!== secondaryColor;
   })),[])
 
+  const [height, setHeight] = useState(0);
+  const pageWrapRef = useRef(null);
+  const doHeightAdjustment = () => {
+    setHeight(pageWrapRef.current && pageWrapRef.current.clientHeight);
+  };
+  useResizeObserver({callback: doHeightAdjustment, element: pageWrapRef});
+
   return (
     <div id="outer-container" className={`gallery ${primaryColor?primaryColor:'yellow'}-primary-color ${secondaryColor?secondaryColor:'blue'}-secondary-color`}>
       <TransitionPanels bgColorValue={bgColorValue}/>
       <Logo logoColorSet={logoColorSet} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
-      <GoBackArrow color={primaryTextColor} bgColorValue={bgColorValue} goBackHome={true} />
-      <div id="page-wrap" className={`w-screen min-h-screen flex justify-center report bg-primary-secondary pt-20`}>
-        <div className="w-8/12 min-h-screen ml-20 xl:ml-0 flex flex-row flex-wrap gap-24 lg:gap-10 items-start pb-40 mt-40 lg:mt-10">
+      <Sticky enabled={true} top={window.innerHeight / 2} bottomBoundary={height - 200}>
+        <GoBackArrow color={primaryTextColor} noShowColor={primaryColor} bgColorValue={bgColorValue} goBackHome={true} />
+      </Sticky>
+      <div id="page-wrap" ref={pageWrapRef} className={`w-screen min-h-screen flex justify-center report bg-primary-secondary`}>
+        <div className="w-8/12 min-h-screen ml-40 lg:ml-0 flex flex-row flex-wrap gap-24 lg:gap-10 items-start pb-40 mt-40 lg:mt-10">
           <div className="w-5/12 lg:w-5/12 md:w-10/12 -mt-40">
             {
               state.data.map((item, i) => (
-                <div className="mt-40">
+                <div className="mt-80">
                   {
                     i%2!==1 && <List i={i} item={item} categoryTitle={item.cat.split(" ")[0]} bgColorValue={bgColorValue} />
                   }
@@ -69,7 +80,7 @@ function GalleryList(props) {
           <div className="w-5/12 lg:w-5/12 md:w-10/12">
             {
               state.data.map((item, i) => (
-                <div className="mt-40">
+                <div className="mt-80">
                   {
                     i%2!==0 && <List i={i} item={item} categoryTitle={item.cat.split(" ")[0]} bgColorValue={bgColorValue} />
                   }
@@ -84,7 +95,7 @@ function GalleryList(props) {
           footer && <Marquee bgColor={fifthColor} bgColorValue={bgColorValue} />
         }
       </motion.div>
-      <motion.div variants={pageVariants} transition={pageTransitionEaseOut} exit='down'>
+      <motion.div id="footer" variants={pageVariants} transition={pageTransitionEaseOut} exit='down'>
         {
           footer && <Footer bgColor={fourthColor} textColor={fourthTextColor} bgColorValue={bgColorValue} />
         }

@@ -76,9 +76,14 @@ export default function Items(props) {
 
           </div>
           <div className="relative overflow-hidden flex justify-center items-center h-full lg:w-full lg:py-20" style={{"backgroundColor": "var(--gray-light)"}}>
-            <div className={`flex flex-col justify-center absolute right-0 top-0 h-full`} style={{width: "25px", zIndex: 0}}>
-              <SegmentsAnimation barColorSet={barColorSet} segment={8} barWidth={25} type="bar" x={-20} y={-20} zIntervalFrom={-20} zIntervalTo={-20} delay={50} bgColorValue={bgColorValue} noShowColor={bgColorValue[index+1][0]}></SegmentsAnimation>
-            </div>
+            {
+              /*
+              <div className={`flex flex-col justify-center absolute right-0 top-0 h-full`} style={{width: "25px", zIndex: 0}}>
+                <SegmentsAnimation barColorSet={barColorSet} segment={8} barWidth={25} type="bar" x={-20} y={-20} zIntervalFrom={-20} zIntervalTo={-20} delay={50} bgColorValue={bgColorValue} noShowColor={bgColorValue[index+1][0]}></SegmentsAnimation>
+              </div>
+              */
+
+            }
             <motion.div variants={pageVariants} transition={pageTransition} exit='down' className="z-10">
               <figcaption className={`md:py-14 mx-28 ${textAlign[index%2]}`} style={{maxWidth: "250px"}}>
                 <h3 className="text-5xl">

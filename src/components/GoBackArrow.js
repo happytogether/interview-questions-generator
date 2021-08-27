@@ -6,7 +6,9 @@ import { pageTransitionEaseOut, pageTransition, pageTransition2, pageTransition3
 
 export default function GoBackArrow(props) {
   const color = props.color;
+  const fillColor = props.fillColor;
   const bgColorValue = props.bgColorValue;
+  const noShowColor = props.noShowColor;
   const primaryColor = bgColorValue[0][0];
   const primaryTextColor = bgColorValue[0][1];
   const secondaryColor = bgColorValue[1][0];
@@ -20,16 +22,19 @@ export default function GoBackArrow(props) {
   const sixthColor = bgColorValue[5][0];
   const sixthTextColor = bgColorValue[5][1];
   const goBackHome = props.goBackHome;
-
+  const footerInView = props.footerInView;
   return (
-    <motion.div variants={pageVariants} initial='initial' transition={{ duration: 1, type: "tween", ease: "anticipate" }} exit='down' animate="in" className={`fixed right-20 top-1 z-10 lg:hidden`}>
+    <motion.div variants={pageVariants} initial='initial' transition={{ duration: 2, type: "tween", ease: "anticipate" }} exit='down' animate="in" layout className={`fixed go-back-arrow right-20 top-0 z-10 lg:hidden z-9999`}>
      <DelayLink to={{
        pathname: `${goBackHome? '/': './'}`,
        state: {
          bgColor: [primaryColor, secondaryColor, thirdColor, fourthColor, fifthColor, sixthColor],
          textColor: [primaryTextColor, secondaryTextColor, thirdTextColor, fourthTextColor, fifthTextColor, sixthTextColor]
        }}}>
-       <Arrow size={isMobile?'35px': '50px'} rotate="180deg" color={color} />
+       <div className="flex flex-col items-center justify-center text-sm">
+         <Arrow size={isMobile?'2rem': '4rem'} rotate="180deg" color={color} noShowColor={noShowColor} fillColor={fillColor} />
+         <span style={{color: primaryTextColor}}>Go Back</span>
+       </div>
      </DelayLink>
     </motion.div>
   )

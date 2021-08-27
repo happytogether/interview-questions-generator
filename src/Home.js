@@ -24,13 +24,13 @@ function Home(props) {
   const { state, homeDispatch } = useContext(HomeStore);
   const { stepperState, stepperDispatch} = useContext(StepperStore);
   const bgColorValue = useMemo(() => GetRandomFromArray(BgColorSetHome),[]);
-  const primaryColor = props.location.state ? props.location.state.bgColor[0]: 'bg-pink';
-  const secondaryColor = props.location.state ? props.location.state.bgColor[1]: 'bg-green';
+  const primaryColor = props.location.state ? props.location.state.bgColor[0]: 'bg-purple';
+  const secondaryColor = props.location.state ? props.location.state.bgColor[1]: 'bg-yellow';
   const thirdColor = props.location.state ? props.location.state.bgColor[2]: 'bg-yellow';
   const fourthColor = props.location.state ? props.location.state.bgColor[3]: 'bg-purple';
   const fifthColor = props.location.state ? props.location.state.bgColor[4]: 'bg-red';
   const sixthColor = props.location.state ? props.location.state.bgColor[5]: 'bg-blue';
-  const primaryTextColor = props.location.state ? props.location.state.textColor[0]: 'var(--gray-dark)';
+  const primaryTextColor = props.location.state ? props.location.state.textColor[0]: 'white';
   const secondaryTextColor = props.location.state ? props.location.state.textColor[1]: 'var(--gray-dark)';
   const thirdTextColor = props.location.state ? props.location.state.textColor[2]: 'var(--gray-dark)';
   const fourthTextColor = props.location.state ? props.location.state.textColor[3]: 'white';

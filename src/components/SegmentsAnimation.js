@@ -111,7 +111,7 @@ export default function SegmentsAnimation(props) {
       break;
       case "fullscreen-h-bar": // menu navigation primary link section
         return (
-          <motion.div className={`flex-1 flex items-center ${bgColorValue[index][0]}`} style={{color: bgColorValue[index][1]}} variants={pageVariants} initial='initialXNegative100vw' transition={{ duration: .5+.2*index, type: "tween", ease: "circOut"}} exit='leftInitial' animate="xin">
+          <motion.div className={`flex-1 flex items-center ${bgColorValue[index][0]} hover:${menuColorSet[1][0]}`} style={{color: bgColorValue[index][1]}} variants={pageVariants} initial='initialXNegative100vw' transition={{ duration: .5+.2*index, type: "tween", ease: "circOut"}} exit='leftInitial' animate="xin">
             <animated.div className="pl-10"
               key={index} style={{
                 transformOrigin: 'center center',
@@ -147,7 +147,7 @@ export default function SegmentsAnimation(props) {
                 (x, y, z, f, r) => `translate3d(${x}px,${y}px,${z}px)`
               )
             }}>
-            <InviewBar2 key={index} index={index} barWidth={barWidth} barColorSet={props.barColorSet} />
+            <InviewBar2 key={index} index={index} barWidth={barWidth} noShowColor={props.noShowColor} />
           </animated.span>
         )
       break;

@@ -91,7 +91,7 @@ function Credit(props) {
     <motion.div variants={content}
     animate="animate"
     initial="initial" id="outer-container" className={`${primaryColor?primaryColor:'yellow'}-primary-color ${secondaryColor?secondaryColor:'blue'}-secondary-color`}>
-      <TransitionPanels bgColorValue={bgColorValue}/>
+      <TransitionPanels bgColorValue={bgColorValue} />
       <Logo goBackHome={true} arrowColor={secondaryTextColor} logoColorSet={logoColorSet} bgColorValue={bgColorValue} />
       <div id="page-wrap" className={`w-screen min-h-screen bg-primary-secondary py-10`}>
         <motion.div variants={pageVariants} initial='initial' transition={pageTransition} exit='down' animate="in" className="flex flex-row justify-center items-center ">

@@ -33,7 +33,7 @@ function pageTransitionColorsReducer(pageTransitionColorsState, action) {
 }
 
 const pageTransitionColorsInitialState = {
-  data: [["yellow", "var(--gray-dark)"], ["green", "var(--gray-dark)"], ["purple", "white"], ["orange", "var(--gray-dark)"]]
+  data: [["bg-yellow", "var(--gray-dark)"], ["bg-green", "var(--gray-dark)"], ["bg-purple", "white"], ["bg-orange", "var(--gray-dark)"]]
 }
 
 export function PageTransitionColorsStoreProvider(props) {

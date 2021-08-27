@@ -1,4 +1,4 @@
-import { useContext, useRef, useEffect } from "react";
+import { useContext, useRef, useEffect, useMemo } from "react";
 import Reward from '../Reward/Reward.js';
 import { IceCreamSet, DonutSet, DefaultSet } from "../Reward/MemphisSets";
 import { BgColorSet, BasicColorSet } from '../Sets/ColorSet';
@@ -8,9 +8,10 @@ import foamSfx from '../../assets/foam.mp3';
 
 export default function Sun(props) {
 
-  const colorSet = getRandomFromArray(BgColorSet.filter((item) => {
+  const colorSet = useMemo(() => getRandomFromArray(BgColorSet.filter((item) => {
     return item[0]!==props.noShowColor;
-  }));
+  })), []);
+
   const set = getRandomFromArray([[IceCreamSet(), '80'], [DonutSet(), '50'], [DefaultSet(), '80']]);
 
   const styles = {

@@ -88,7 +88,7 @@ export default function HomeHeader(props) {
             <Cannon />
           </animated.div>
           <div style={{ width: "50px" }} className="flex flex-col justify-center absolute left-0 top-0 h-full">
-            <SegmentsAnimation segment={8} barWidth={25} type="bar" x={-20} y={-20} zIntervalFrom={-20} zIntervalTo={-20} delay={50} bgColorValue={bgColorValue} barColorSet={barColorSet}></SegmentsAnimation>
+            <SegmentsAnimation segment={8} barWidth={25} type="bar" noShowColor={leftColor} x={-20} y={-20} zIntervalFrom={-20} zIntervalTo={-20} delay={50} bgColorValue={bgColorValue}></SegmentsAnimation>
           </div>
         </motion.div>
       </div>

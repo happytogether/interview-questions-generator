@@ -66,7 +66,7 @@ export default function Navigation(props) {
               <div className="w-3/5 lg:w-full h-full z-20 text-white flex justify-center">
                 <ul className="flex flex-col h-full w-full xl:w-full text-left text-2xl">
                   {
-                    jsonLoaded && <SegmentsAnimation segment={filteredList.length} data={filteredList} type="fullscreen-h-bar" x={-20} y={-20} zIntervalFrom={-20} zIntervalTo={-20} delay={50} bgColorValue={bgColorValue}></SegmentsAnimation>
+                    jsonLoaded && <SegmentsAnimation segment={filteredList.length} data={filteredList} type="fullscreen-h-bar" x={-20} y={-20} zIntervalFrom={-20} zIntervalTo={-20} delay={50} bgColorValue={bgColorValue} menuColorSet={menuColorSet}></SegmentsAnimation>
                   }
                 </ul>
               </div>

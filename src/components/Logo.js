@@ -7,6 +7,7 @@ import { SplitText, LetterWrapperProp, WordWrapperProp, LineWrapperProp } from '
 import { ColorSet } from './Sets/ColorSet';
 import { useSpring, useSprings, animated, interpolate } from 'react-spring';
 import SegmentsAnimation from './SegmentsAnimation';
+import GoBackArrow from './GoBackArrow';
 import pianoSfx from '../assets/piano.mp3';
 
 let audio = new Audio(pianoSfx);

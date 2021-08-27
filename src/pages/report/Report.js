@@ -93,7 +93,8 @@ function Report(props) {
   },[stepperState.data])
 
     useEffect(() => {
-      !interviewDone && toast(CustomToastWithLink)
+      !interviewDone && toast(customToastWithLink);
+      interviewDone && toast(interviewToastDone);
     },[interviewDone])
 
   //const fadeIn = useSpring({ to: { y: 0, opacity: 1}, from: { opacity: 0, y:1000 }, config: { duration: 3000, easing: easings.easeCubic } });
@@ -101,18 +102,17 @@ function Report(props) {
   const set = useMemo(
     () => GetRandomFromArray(setArray)[0],[]);
 
-  const CustomToastWithLink = () => (
+  const customToastWithLink = () => (
     <div>
       <Link to="/interview/0">You havn't finished the whole interview process. <br /><span className="link">Click to finish the interview.</span></Link>
     </div>
   );
 
-  const notify = () => toast(CustomToastWithLink);
-  useEffect(() => {
-    setTimeout(() => {
-      //notify();
-    }, 1000)
-  }, [])
+  const interviewToastDone = () => (
+    <div>
+      Nice done!<br />See the Final Report below.
+    </div>
+  )
 
   const [imgSrc, setImgSrc] = useState('');
 
@@ -165,16 +165,16 @@ function Report(props) {
       } else {
         switch(stepperState.data.length) {
           case 0:
-            return <div className="block my-3">You haven't started the interview process. <p className="block my-3">You'll need to finish the 4 steps interview process to see the final report. <span className="link">Click here</span></p></div>
+            return <div className="block my-3">You haven't started the interview process. <p className="block my-3">You'll need to finish the 4 steps interview process to see the final report. <DelayLink to='/interview/0'>or <span className="link">Click here</span></DelayLink></p></div>
             break;
           case 1:
-            return <p className="block my-3">You haven't finished the whole interview process.</p>
+            return <div><p className="block my-3">You haven't finished the whole interview process.</p> <p><DelayLink to='/interview/0'>or <span className="link">click here</span></DelayLink> to finish the interview process and see the final report.</p></div>
             break;
           case 2:
-            return <div><p className="block my-3">You haven't finished the whole interview process.</p> <p><span className="link">Click here</span> to finish the interview process and see the final report.</p></div>
+            return <div><p className="block my-3">You haven't finished the whole interview process.</p> <p><DelayLink to='/interview/0'>or <span className="link">click here</span></DelayLink> to finish the interview process and see the final report.</p></div>
             break;
           case 3:
-            return <p className="block my-3">You haven't finished the whole interview process. Go back to the interview process to see the final report.</p>
+            return <p className="block my-3">Only one step left! <DelayLink to='/interview/0'><span className="link">Resume the interview process to see the final report.</span></DelayLink></p>
             break;
           default:
             return <p>You haven't started the interview process.</p>

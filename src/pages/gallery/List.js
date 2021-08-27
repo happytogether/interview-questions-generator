@@ -9,17 +9,21 @@ import { fetchHomepageJsonAction, stepDoneAction } from "../../Actions";
 import DelayLink from '../../ultils/DelayLink';
 import { SplitText, LetterWrapperProp, WordWrapperProp, LineWrapperProp } from '@cyriacbr/react-split-text';
 import SegmentsAnimation from '../../components/SegmentsAnimation';
+import getRandomFromArray from '../../ultils/GetRandomFromArray';
+import { BgColorSet } from '../../components/Sets/ColorSet';
 
 export default function List(props){
   const i = props.i;
   const item = props.item;
   const categoryTitle = props.categoryTitle;
   const bgColorValue = props.bgColorValue;
+  const barColorSet = useMemo(
+    () => getRandomFromArray(BgColorSet),[]);
   return (
     <motion.div key={i} variants={pageVariants} initial='initial' transition={i%2 === 1 ?pageTransitionShort: pageTransitionShort2} exit='down' animate="in" className={`${i%2 === 1 ? 'mt-40 lg:mt-0': null} p-10 pr-5 h-5/6 bg-white default-window`}>
       <div className={`flex flex-row items-center w-full h-full lg:flex-col`}>
         <div style={{ width: "25px" }} className="relative flex flex-col justify-center">
-          <SegmentsAnimation segment={5} barWidth={10} type="bar-light" x={(Math.random() - 0.5) * 20} y={Math.random()*20} zIntervalFrom={-50} zIntervalTo={20} delay={150} bgColorValue={bgColorValue}></SegmentsAnimation>
+          <SegmentsAnimation segment={5} barWidth={10} type="bar-light" x={10} y={10} zIntervalFrom={-50} zIntervalTo={20} delay={150} bgColorValue={bgColorValue}></SegmentsAnimation>
           <div style={{left: '35px'}} className={`absolute text-black lowercase font-semibold text-4xl`}>
             <InviewText variants="upReveal">
               {categoryTitle}

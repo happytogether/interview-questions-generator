@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useMemo } from 'react';
+import React, { useContext, useState, useEffect, useMemo, useRef } from 'react';
 import Footer from '../../components/Footer/Footer';
 import GoToTop from '../../ultils/GoToTop';
 import Logo from '../../components/Logo';
@@ -20,6 +20,9 @@ import Questions from './Questions';
 import DelayLink from '../../ultils/DelayLink';
 import { fetchHomepageJsonAction, stepDoneAction } from "../../Actions";
 import { isMobile, isDesktop } from "react-device-detect";
+import { useInView } from 'react-intersection-observer';
+import Sticky from 'react-stickynode';
+import useResizeObserver from '../../hooks/useResizeObserver.js';
 
 function Gallery(props) {
   const primaryColor = props.location.state ? props.location.state.bgColor[0]: 'bg-pink';
@@ -89,16 +92,24 @@ function Gallery(props) {
     getItems('/questions/'+categoryIndex+'.json')
   },[])
 
+  const [height, setHeight] = useState(0);
+  const pageWrapRef = useRef(null);
+  const doHeightAdjustment = () => {
+    setHeight(pageWrapRef.current && pageWrapRef.current.clientHeight);
+  };
+  useResizeObserver({callback: doHeightAdjustment, element: pageWrapRef});
+
   return (
     <div id="outer-container" className={`gallery ${primaryColor}-primary-color ${secondaryColor}-secondary-color`}>
       <TransitionPanels bgColorValue={bgColorValue}/>
       <Logo logoColorSet={logoColorSet} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
-      <GoBackArrow color={secondaryTextColor} bgColorValue={bgColorValue} />
-
-      <div id="page-wrap" className={`w-screen min-h-screen bg-primary-secondary`}>
+      <Sticky enabled={true} top={window.innerHeight / 2} bottomBoundary={height - 200}>
+        <GoBackArrow color={primaryTextColor} noShowColor={primaryColor} bgColorValue={bgColorValue} goBackHome={true} />
+      </Sticky>
+      <div id="page-wrap" ref={pageWrapRef} className={`w-screen min-h-screen bg-primary-secondary`}>
         <div className="flex justify-center">
-          <div className="w-8/12 min-h-screen pt-40 flex flex-row flex-wrap gap-20 lg:gap-10 items-start pb-40">
-            <div className="w-6/12 lg:w-5/12 md:w-10/12 -mt-20">
+          <div className="w-8/12 min-h-screen pt-40 flex flex-row ml-20 lg:ml-0 flex-wrap gap-20 lg:gap-10 items-start pb-40">
+            <div className="w-9/12 lg:w-5/12 md:w-10/12 -mt-20">
               {
                 items.map((item, i) => (
                   <div className="mt-40">
@@ -126,19 +137,25 @@ function Gallery(props) {
         jsonLoaded && <motion.div variants={pageVariants} initial='initial' transition='pageTransitionDelay2' exit='down' animate="in" >
           <div className="flex w-full">
             <div className="w-3/5">
+            {
+              /*
               <div className={`flex flex-col items-end lg:items-center`}>
                 <div className="mr-20 lg:mr-0 mb-20 flex flex-col items-center">
                   <DelayLink to={{
                     pathname: "./"+prePageIndex,
                     state: {
                       bgColor: [bgColorValue[0][0], bgColorValue[1][0], bgColorValue[2][0], bgColorValue[3][0], bgColorValue[4][0], bgColorValue[5][0], bgColorValue[6][0]],
-                      textColor: [bgColorValue[0][1], bgColorValue[1][1], bgColorValue[2][1], bgColorValue[3][1], bgColorValue[4][1], bgColorValue[5][1], bgColorValue[6][1]]
+                      textColor: [bgColorValue[0][1], bgColorValue[1][1], bgColorValue[2][1], bgColorValue[3][1], bgColorValue[4][1], bgColorValue[5][1], bgColorValue[6][1]],
+                      supplementColor: [bgColorValue[1][2]]
                     }}}>
-                    <Arrow rotate="180deg" size={isMobile?'60px': '100px'} color={primaryTextColor} />
+                    <Arrow rotate="180deg" size={isMobile?'2rem': '5rem'} color={primaryTextColor} />
                   </DelayLink>
                   <span className="block" style={{"color": primaryTextColor}}>{state.data.length!==0 && state.data[categoryIndex > 1 ? categoryIndex-1: state.data.length-1].cat}</span>
                 </div>
               </div>
+              */
+            }
+
             </div>
             <div className="w-2/5">
               <div className={`flex flex-col items-start lg:items-center`}>
@@ -149,7 +166,7 @@ function Gallery(props) {
                       bgColor: [bgColorValue[0][0], bgColorValue[1][0], bgColorValue[2][0], bgColorValue[3][0], bgColorValue[4][0], bgColorValue[5][0], bgColorValue[6][0]],
                       textColor: [bgColorValue[0][1], bgColorValue[1][1], bgColorValue[2][1], bgColorValue[3][1], bgColorValue[4][1], bgColorValue[5][1], bgColorValue[6][1]]
                     }}}>
-                    <Arrow size={isMobile?'60px': '100px'} color={secondaryTextColor} />
+                    <Arrow size={isMobile?'2rem': '6rem'} color={secondaryTextColor} />
                   </DelayLink>
                   <span className={`block w-full text-center`} style={{"color": secondaryTextColor}} >{state.data.length!==0 && state.data[categoryIndex < 3 ? categoryIndex+1: 0].cat}</span>
                 </div>

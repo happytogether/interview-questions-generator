@@ -36,9 +36,6 @@ body {
 body.open-list {
   --background-color: black;
 }
-body.new-interview {
-  --background-color: var(--blue);
-}
 .bg-red-primary-color {
   --primary: var(--red);
   --textColor: white;
@@ -152,7 +149,7 @@ body.credit-page {
 }
 div.static2 {
   width: 100vw!important;
-  height: 100vh!important;
+  height:100vh!important;
 }
 .h-gallery, .logo, .report {
   perspective: 350px;
@@ -182,8 +179,7 @@ div.static2 {
         background-repeat: no-repeat;
         background-position: center center;
         max-width: 500px;
-        height: 85vh;
-        max-height: 570px;
+        min-height: 85vh;
         will-change: transform;
         border: 7px solid var(--gray-dark);
         display: flex;
@@ -658,10 +654,6 @@ iframe {height: 90vh; width: 60%; box-sizing: border-box;}
   background: linear-gradient(90deg, var(--gray-light) 60%, var(--purple) 40%);
 }
 
-
-
-
-
 .bg-blue-gray {
   background: linear-gradient(90deg, var(--blue) 60%, var(--gray-light) 40%);
 }
@@ -715,6 +707,8 @@ iframe {height: 90vh; width: 60%; box-sizing: border-box;}
 
 .animate-block {
   backface-visibility: hidden;
+  perspective: 350px;
+  perspective-origin: 50% 50%;
 }
 
 .delay-link-btn {
@@ -780,4 +774,7 @@ iframe {height: 90vh; width: 60%; box-sizing: border-box;}
 
 svg {
   transform-origin: center center;
+}
+.sticky-inner-wrapper  {
+  z-index: 10;
 }
