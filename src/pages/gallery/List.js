@@ -20,7 +20,8 @@ export default function List(props){
   const barColorSet = useMemo(
     () => getRandomFromArray(BgColorSet),[]);
   return (
-    <motion.div key={i} variants={pageVariants} initial='initial' transition={i%2 === 1 ?pageTransitionShort: pageTransitionShort2} exit='down' animate="in" className={`${i%2 === 1 ? 'mt-40 lg:mt-0': null} p-10 pr-5 h-5/6 bg-white default-window`}>
+    <div>
+    <motion.div key={i} variants={pageVariants} initial='initial' transition={i%2 === 1 ?pageTransitionShort: pageTransitionShort2} exit='down' animate="in" className={`${i%2 === 1 ? 'lg:mt-0 float-right': 'float-left'} w-4/12 p-10 pr-5 py-20 h-5/6 bg-white default-window`}>
       <div className={`flex flex-row items-center w-full h-full lg:flex-col`}>
         <div style={{ width: "25px" }} className="relative flex flex-col justify-center">
           <SegmentsAnimation segment={5} barWidth={10} type="bar-light" x={10} y={10} zIntervalFrom={-50} zIntervalTo={20} delay={150} bgColorValue={bgColorValue}></SegmentsAnimation>
@@ -57,5 +58,7 @@ export default function List(props){
       </div>
     </div>
   </motion.div>
+  <hr style={{borderTop: '2px solid white'}} className={`${i%2===0 ? 'hidden': null} mt-20 text-white transform -rotate-45`} />
+  </div>
   )
 }

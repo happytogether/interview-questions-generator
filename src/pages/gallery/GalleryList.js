@@ -14,19 +14,21 @@ import List from './List';
 import Marquee from '../../components/Marquee';
 import GoBackArrow from '../../components/GoBackArrow';
 import Navigation from '../../components/Navigation';
+import Moon from '../../components/shapes/Moon';
+import Rect from '../../components/shapes/Rect';
 import Sticky from 'react-stickynode';
 import useResizeObserver from '../../hooks/useResizeObserver.js';
 
 function GalleryList(props) {
 
-  const primaryColor = props.location.state ? props.location.state.bgColor[0]: 'bg-pink';
-  const secondaryColor = props.location.state ? props.location.state.bgColor[1]: 'bg-green';
+  const primaryColor = props.location.state ? props.location.state.bgColor[0]: 'bg-yellow';
+  const secondaryColor = props.location.state ? props.location.state.bgColor[1]: 'bg-purple';
   const thirdColor = props.location.state ? props.location.state.bgColor[2]: 'bg-yellow';
   const fourthColor = props.location.state ? props.location.state.bgColor[3]: 'bg-purple';
   const fifthColor = props.location.state ? props.location.state.bgColor[4]: 'bg-red';
   const sixthColor = props.location.state ? props.location.state.bgColor[5]: 'bg-blue';
   const primaryTextColor = props.location.state ? props.location.state.textColor[0]: 'var(--gray-dark)';
-  const secondaryTextColor = props.location.state ? props.location.state.textColor[1]: 'var(--gray-dark)';
+  const secondaryTextColor = props.location.state ? props.location.state.textColor[1]: 'white';
   const thirdTextColor = props.location.state ? props.location.state.textColor[2]: 'var(--gray-dark)';
   const fourthTextColor = props.location.state ? props.location.state.textColor[3]: 'white';
   const sixthTextColor = props.location.state ? props.location.state.textColor[5]: 'white';
@@ -54,7 +56,7 @@ function GalleryList(props) {
     setHeight(pageWrapRef.current && pageWrapRef.current.clientHeight);
   };
   useResizeObserver({callback: doHeightAdjustment, element: pageWrapRef});
-
+  const heroText = "Interview";
   return (
     <div id="outer-container" className={`gallery ${primaryColor?primaryColor:'yellow'}-primary-color ${secondaryColor?secondaryColor:'blue'}-secondary-color`}>
       <TransitionPanels bgColorValue={bgColorValue}/>
@@ -62,31 +64,38 @@ function GalleryList(props) {
       <Sticky enabled={true} top={window.innerHeight / 2} bottomBoundary={height - 200}>
         <GoBackArrow color={primaryTextColor} noShowColor={primaryColor} bgColorValue={bgColorValue} goBackHome={true} />
       </Sticky>
-      <div id="page-wrap" ref={pageWrapRef} className={`w-screen min-h-screen flex justify-center report bg-primary-secondary`}>
-        <div className="w-8/12 min-h-screen ml-40 lg:ml-0 flex flex-row flex-wrap gap-24 lg:gap-10 items-start pb-40 mt-40 lg:mt-10">
-          <div className="w-5/12 lg:w-5/12 md:w-10/12 -mt-40">
+      <div id="page-wrap" ref={pageWrapRef} className={`w-screen min-h-screen flex flex-col justify-center report bg-primary-secondary`}>
+        <div style={{height: "34rem", color: primaryTextColor}} className={`relative m-10 mt-20 ${primaryColor} flex flex-col justify-center items-center`}>
+          <span className="text-9xl lg:text-6xl sm:text-5xl inline-block text-white" style={{transform: 'rotate(-8deg)'}}>
             {
-              state.data.map((item, i) => (
-                <div className="mt-80">
-                  {
-                    i%2!==1 && <List i={i} item={item} categoryTitle={item.cat.split(" ")[0]} bgColorValue={bgColorValue} />
-                  }
-                </div>
+              heroText.length!==0 && [...Array(heroText.length).keys()].map((text, index) => (
+                <span className={`${BgColorSet[index%6][0]}`} style={{color: BgColorSet[index%6][1]}}>{heroText[index]}</span>
               ))
             }
-
+            <br />Questions<br />Gallery
+          </span>
+          <span className="w-4/12 inline-block mt-20 pl-40">
+            HTML, CSS, Javascript, Framework Questions and other Front End Questions are included.
+          </span>
+          <div className="absolute right-1/3 bottom-0 z-20">
+            <Moon bgColor={thirdColor} />
+            <Rect bgColor={fourthColor} />
           </div>
+        </div>
+        <div className="flex justify-center">
+          <div className="w-8/12 min-h-screen ml-20 lg:ml-0 flex flex-row flex-wrap gap-24 lg:gap-10 items-start pb-40 mt-80 lg:mt-10">
+            <div className="w-full">
+              {
+                state.data.map((item, i) => (
+                  <div className={`w-full float-left`}>
+                    {
+                      <List i={i} item={item} categoryTitle={item.cat.split(" ")[0]} categoryExample={item.example} bgColorValue={bgColorValue} />
+                    }
+                  </div>
+                ))
+              }
 
-          <div className="w-5/12 lg:w-5/12 md:w-10/12">
-            {
-              state.data.map((item, i) => (
-                <div className="mt-80">
-                  {
-                    i%2!==0 && <List i={i} item={item} categoryTitle={item.cat.split(" ")[0]} bgColorValue={bgColorValue} />
-                  }
-                </div>
-              ))
-            }
+            </div>
           </div>
         </div>
       </div>

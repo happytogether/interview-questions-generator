@@ -8,6 +8,8 @@ import Footer from '../../components/Footer/Footer';
 import { useSpring, animated } from 'react-spring';
 import Smile from '../../components/shapes/Smile';
 import Sad from '../../components/shapes/Sad';
+import Moon from '../../components/shapes/Moon';
+import Rect from '../../components/shapes/Rect';
 import Triangle from '../../components/shapes/memphis/Triangle';
 import { DonutSet, IceCreamSet, DefaultSet, FruitSet, FruitSet2 } from "../../components/Reward/MemphisSets";
 import { ToastContainer, toast } from 'react-toastify';
@@ -181,6 +183,7 @@ function Report(props) {
       }
     }
   }
+  const heroText = "Report"
 
   return (
     <motion.div variants={content}
@@ -189,7 +192,24 @@ function Report(props) {
       <TransitionPanels bgColorValue={bgColorValue}/>
       <Logo goBackHome={true} logoColorSet={logoColorSet} arrowColor={secondaryTextColor} bgColorValue={bgColorValue} />
       <ToastContainer position="top-center" draggable={true} draggablePercent={25} autoClose={10000} />
-      <div id="page-wrap" className={`w-screen min-h-screen report bg-primary-secondary flex justify-center items-center py-10`}>
+      <div id="page-wrap" className={`w-screen min-h-screen report bg-primary-secondary flex flex-col justify-center items-center py-10`}>
+        <div style={{height: "34rem", color: `var(--${primaryTextColor})`}} className={`relative m-10 mt-20 ${primaryColor} flex flex-col justify-center items-center`}>
+          <span className="text-9xl lg:text-6xl sm:text-5xl inline-block text-white" style={{transform: 'rotate(-8deg)'}}>
+            {
+              heroText.length!==0 && [...Array(heroText.length).keys()].map((text, index) => (
+                <span className={`${BgColorSet[index%6][0]}`} style={{color: `var(--${BgColorSet[index%6][1]})`}}>{heroText[index]}</span>
+              ))
+            }
+            <br />Page
+          </span>
+          <span className="w-4/12 text-white inline-block mt-20 pl-40">
+            HTML, CSS, Javascript, Framework Questions and other Front End Questions are included.
+          </span>
+          <div className="absolute right-1/3 bottom-0 z-20">
+            <Moon bgColor={thirdColor} />
+            <Rect bgColor={fourthColor} />
+          </div>
+        </div>
         <motion.div variants={pageVariants} initial='initial' transition={pageTransitionShort} exit='down' animate="in" className="xl:w-8/12 lg:w-11/12 lg:mt-20 p-20 lg:p-10 w-6/12 h-5/6 bg-white default-window mt-20">
           <div className="flex flex-row w-full h-full lg:flex-col">
             <div className="lg:w-screen w-6/12 h-full">

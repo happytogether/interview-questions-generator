@@ -1,18 +1,22 @@
 [
   {
     "cat": "Tech Questions",
-    "catFigcaption": "HTML, CSS, Javascript, Framework Questions and other Front End Questions are included."
+    "catFigcaption": "HTML, CSS, Javascript, Framework Questions and other Front End Questions are included.",
+    "example": "function Welcome(name){\n var greetingInfo = function(message){ \n  console.log(message+' '+name);\n }\n return greetingInfo;\n}\nvar myFunction = Welcome('John');\nmyFunction('Welcome '); //Output: Welcome John\nmyFunction('Hello Mr.'); //output: Hello Mr.John"
   },
   {
     "cat": "UX Questions",
-    "catFigcaption": "User Experience Questions are included"
+    "catFigcaption": "User Experience Questions are included",
+    "example": "function Welcome(name){\n var greetingInfo = function(message){ \n  console.log(message+' '+name);\n }\n return greetingInfo;\n}\nvar myFunction = Welcome('John');\nmyFunction('Welcome '); //Output: Welcome John\nmyFunction('Hello Mr.'); //output: Hello Mr.John"
   },
   {
     "cat": "Experience Questions",
-    "catFigcaption": "Team Culture, 10 year development questions are included "
+    "catFigcaption": "Team Culture, 10 year development questions are included ",
+    "example": "function Welcome(name){\n var greetingInfo = function(message){ \n  console.log(message+' '+name);\n }\n return greetingInfo;\n}\nvar myFunction = Welcome('John');\nmyFunction('Welcome '); //Output: Welcome John\nmyFunction('Hello Mr.'); //output: Hello Mr.John"
   },
   {
     "cat": "Personal Questions",
-    "catFigcaption": "Questions to know more about Anni are included."
+    "catFigcaption": "Questions to know more about Anni are included.",
+    "example": "function Welcome(name){\n var greetingInfo = function(message){ \n  console.log(message+' '+name);\n }\n return greetingInfo;\n}\nvar myFunction = Welcome('John');\nmyFunction('Welcome '); //Output: Welcome John\nmyFunction('Hello Mr.'); //output: Hello Mr.John"
   }
 ]

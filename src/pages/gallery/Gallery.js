@@ -23,16 +23,19 @@ import { isMobile, isDesktop } from "react-device-detect";
 import { useInView } from 'react-intersection-observer';
 import Sticky from 'react-stickynode';
 import useResizeObserver from '../../hooks/useResizeObserver.js';
+import Moon from '../../components/shapes/Moon';
+import Rect from '../../components/shapes/Rect';
+
 
 function Gallery(props) {
-  const primaryColor = props.location.state ? props.location.state.bgColor[0]: 'bg-pink';
-  const secondaryColor = props.location.state ? props.location.state.bgColor[1]: 'bg-green';
+  const primaryColor = props.location.state ? props.location.state.bgColor[0]: 'bg-green';
+  const secondaryColor = props.location.state ? props.location.state.bgColor[1]: 'bg-purple';
   const thirdColor = props.location.state ? props.location.state.bgColor[2]: 'bg-yellow';
   const fourthColor = props.location.state ? props.location.state.bgColor[3]: 'bg-purple';
   const fifthColor = props.location.state ? props.location.state.bgColor[4]: 'bg-red';
   const sixthColor = props.location.state ? props.location.state.bgColor[5]: 'bg-blue';
   const primaryTextColor = props.location.state ? props.location.state.textColor[0]: 'var(--gray-dark)';
-  const secondaryTextColor = props.location.state ? props.location.state.textColor[1]: 'var(--gray-dark)';
+  const secondaryTextColor = props.location.state ? props.location.state.textColor[1]: 'white';
   const thirdTextColor = props.location.state ? props.location.state.textColor[2]: 'var(--gray-dark)';
   const fourthTextColor = props.location.state ? props.location.state.textColor[3]: 'white';
   const sixthTextColor = props.location.state ? props.location.state.textColor[5]: 'white';
@@ -41,7 +44,7 @@ function Gallery(props) {
   const [footer, setFooter] = useState(false);
   const { state, homeDispatch } = useContext(HomeStore);
   const categoryIndex= parseInt(useParams().categoryIndex);
-  const categoryTitle= state.data.length!==0 && state.data[categoryIndex].cat.split(" ")[0];
+  const categoryTitle = state.data.length!==0 && state.data[categoryIndex].cat.split(" ")[0];
   const steps = state.data.length!==0 && state.data.length;
   const prePageIndex = (categoryIndex === 0 ? (steps-1): (categoryIndex-1));
   const nextPageIndex = (categoryIndex === (steps-1)) ? 0: (categoryIndex+1);
@@ -106,7 +109,24 @@ function Gallery(props) {
       <Sticky enabled={true} top={window.innerHeight / 2} bottomBoundary={height - 200}>
         <GoBackArrow color={primaryTextColor} noShowColor={primaryColor} bgColorValue={bgColorValue} goBackHome={true} />
       </Sticky>
-      <div id="page-wrap" ref={pageWrapRef} className={`w-screen min-h-screen bg-primary-secondary`}>
+      <div id="page-wrap" ref={pageWrapRef} className={`w-screen min-h-screen flex flex-col justify-center report bg-primary-secondary`}>
+        <div style={{height: "34rem", color: `var(--${categoryIndex%2 === 1 ? primaryTextColor: secondaryTextColor})`}} className={`relative m-10 mt-20 ${categoryIndex%2 === 1 ? primaryColor: secondaryColor} flex flex-col justify-center items-center`}>
+          <span className="text-9xl inline-block text-white" style={{transform: 'rotate(-8deg)'}}>
+            {
+              categoryTitle.length!==0 && [...Array(categoryTitle.length).keys()].map((text, index) => (
+                <span className={`${BgColorSet2[index%6][0]}`} style={{color: `var(--${BgColorSet2[index%6][1]})`}}>{categoryTitle[index]}</span>
+              ))
+            }
+            <br />Questions
+          </span>
+          <span className="w-4/12 text-white inline-block mt-20 pl-40">
+            HTML, CSS, Javascript, Framework Questions and other Front End Questions are included.
+          </span>
+          <div style={{width: '10rem', height: '10rem', borderRadius: '50%'}} className="absolute right-0 top-0 radial-bg2 z-20"></div>
+          <div className={`absolute ${categoryIndex%2 === 1 ? 'right-1/3': 'left-1/4'} bottom-0 z-20`}>
+            <Rect bgColor={fourthColor} />
+          </div>
+        </div>
         <div className="flex justify-center">
           <div className="w-8/12 min-h-screen pt-40 flex flex-row ml-20 lg:ml-0 flex-wrap gap-20 lg:gap-10 items-start pb-40">
             <div className="w-9/12 lg:w-5/12 md:w-10/12 -mt-20">

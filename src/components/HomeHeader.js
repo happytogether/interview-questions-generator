@@ -69,7 +69,7 @@ export default function HomeHeader(props) {
       <div className={`w-2/5 flex lg:w-full lg:h-auto relative`}>
         <motion.div className="bg-gray-light flex items-center justify-center w-full h-full lg:h-screen" variants={pageVariants} transition={pageTransition} initial='initial' animate='in' exit='leftOut'>
           <div className="w-9/12 mt-10 text-2xl lg:text-xl items-center justify-center homehead-right">
-            <motion.div variants={pageVariants} transition={pageTransition} initial='initial' animate='in' exit='leftOut' className={`text-left p-8`}>
+            <motion.div variants={pageVariants} transition={pageTransition} initial='initial' animate='in' exit='leftOut' className={`text-left p-8 leading-10`}>
               <SplitText
                 WordWrapper={({ wordIndex, countIndex, children }) => (
                   <span>

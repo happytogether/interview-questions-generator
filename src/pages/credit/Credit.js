@@ -18,15 +18,17 @@ import { isMobile } from "react-device-detect";
 import Marquee from '../../components/Marquee';
 import Navigation from '../../components/Navigation';
 import Menu from '../../components/Menu';
+import Moon from '../../components/shapes/Moon';
+import Rect from '../../components/shapes/Rect';
 
 function Credit(props) {
-  const primaryColor = props.location.state ? props.location.state.bgColor[0]: 'bg-pink';
-  const secondaryColor = props.location.state ? props.location.state.bgColor[1]: 'bg-green';
+  const primaryColor = props.location.state ? props.location.state.bgColor[0]: 'bg-blue';
+  const secondaryColor = props.location.state ? props.location.state.bgColor[1]: 'bg-yellow';
   const thirdColor = props.location.state ? props.location.state.bgColor[2]: 'bg-yellow';
   const fourthColor = props.location.state ? props.location.state.bgColor[3]: 'bg-purple';
   const fifthColor = props.location.state ? props.location.state.bgColor[4]: 'bg-red';
   const sixthColor = props.location.state ? props.location.state.bgColor[5]: 'bg-blue';
-  const primaryTextColor = props.location.state ? props.location.state.textColor[0]: 'var(--gray-dark)';
+  const primaryTextColor = props.location.state ? props.location.state.textColor[0]: 'white';
   const secondaryTextColor = props.location.state ? props.location.state.textColor[1]: 'var(--gray-dark)';
   const thirdTextColor = props.location.state ? props.location.state.textColor[2]: 'var(--gray-dark)';
   const fourthTextColor = props.location.state ? props.location.state.textColor[3]: 'white';
@@ -86,7 +88,7 @@ function Credit(props) {
   function handleClick() {
     setMenuOpen(!menuOpen);
   }
-
+  const heroText ="Credit";
   return (
     <motion.div variants={content}
     animate="animate"
@@ -94,6 +96,23 @@ function Credit(props) {
       <TransitionPanels bgColorValue={bgColorValue} />
       <Logo goBackHome={true} arrowColor={secondaryTextColor} logoColorSet={logoColorSet} bgColorValue={bgColorValue} />
       <div id="page-wrap" className={`w-screen min-h-screen bg-primary-secondary py-10`}>
+        <div style={{height: "34rem", color: primaryTextColor}} className={`relative m-10 mt-20 ${primaryColor} flex flex-col justify-center items-center`}>
+          <span className="text-9xl lg:text-6xl sm:text-5xl inline-block" style={{transform: 'rotate(-8deg)'}}>
+            {
+              heroText.length!==0 && [...Array(heroText.length).keys()].map((text, index) => (
+                <span className={`${BgColorSet[index%6][0]}`} style={{color: BgColorSet[index%6][1]}}>{heroText[index]}</span>
+              ))
+            }
+            <br />Page
+          </span>
+          <span className="w-4/12 inline-block mt-20 pl-40">
+            HTML, CSS, Javascript, Framework Questions and other Front End Questions are included.
+          </span>
+          <div className="absolute right-1/3 bottom-0 z-20">
+            <Moon bgColor={thirdColor} />
+            <Rect bgColor={fourthColor} />
+          </div>
+        </div>
         <motion.div variants={pageVariants} initial='initial' transition={pageTransition} exit='down' animate="in" className="flex flex-row justify-center items-center ">
           <motion.div variants={pageVariants} initial='initial' transition={pageTransition2} exit='down' animate="in" className="absolute z-20 right-40 top-40 sm:hidden">
             <Sun size="150px" noShowColor={secondaryColor} />

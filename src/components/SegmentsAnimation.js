@@ -16,6 +16,7 @@ let audio = new Audio(windSfx);
 export default function SegmentsAnimation(props) {
   const bgColorValue = props.bgColorValue;
   const barColorSet = BgColorSet;
+  const logoColorSet = props.logoColorSet || BgColorSet;
   const logoNoShowColor = props.logoNoShowColor;
   const barWidth = props.barWidth;
   const barHeight = props.barHeight;
@@ -194,9 +195,9 @@ export default function SegmentsAnimation(props) {
       case "colorBgText":
         return (
           <motion.span className="inline-block" variants={pageVariants} initial='initial' transition={{ duration: 1 + Math.random(), type: "tween", ease: "anticipate" }} exit='down' animate="in">
-            <animated.span onMouseEnter={() => handleMouseOver()} className={`px-1 ${props.largeBar ? 'py-20': 'py-1'} inline-block animate-block ${props.logoColorSet[index%props.logoColorSet.length][0]}`}
+            <animated.span onMouseEnter={() => handleMouseOver()} className={`px-1 ${props.largeBar ? 'py-20': 'py-1'} inline-block animate-block ${logoColorSet[index%logoColorSet.length][0]}`}
               key={index} style={{
-                color: props.logoColorSet[index%props.logoColorSet.length][1],
+                color: logoColorSet[index%logoColorSet.length][1],
                 transform: interpolate(
                   [x, y, z, f.interpolate([0, 0.2, 0.6, 1], [0, index, index, 0]), r],
                   (x, y, z, f, r) => `translate3d(${x}px,${y}px,${z}px) rotateX(${f * r}deg)`
